@@ -207,6 +207,28 @@
             }
         }
     }
+
+    ul {
+        display: flex;
+        justify-content: center;
+
+        li {
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: white;
+
+            &:hover {
+                background-color: $btn-color;
+                color: white;
+            }
+        }
+    }
 }
 
 @keyframes dropdownSlider {

@@ -13,9 +13,30 @@ import Shop from "../../Components/Shop/Shop";
 import "./page.scss";
 
 import { allShops } from "../../../Assets/js/assets";
+import ReactPaginate from "react-paginate";
 
 const Shops = () => {
     const [shops, setShops] = useState(allShops);
+
+    const [itemOffset, setItemOffset] = useState(0);
+
+    // ---------------------------------------------------
+    const itemsPerPage = 12;
+    const endOffset = itemOffset + itemsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    const currentItems = shops.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(shops.length / itemsPerPage);
+
+    // Invoke when user click to request another page.
+    const handlePageClick = (e: any) => {
+        const newOffset = (e.selected * itemsPerPage) % shops.length;
+        console.log(
+            `User requested page number ${e.selected}, which is offset ${newOffset}`
+        );
+        setItemOffset(newOffset);
+    };
+    // ---------------------------------------------------
+
     const [categories, setCategories] = useState([
         {
             category: "Խանութներ",
@@ -186,8 +207,13 @@ const Shops = () => {
                         </div>
                     </div>
                     <div className="shops-container">
-                        {shops.map((shop, index) => {
+                        {/* {shops.map((shop, index) => {
                             return (
+                                
+                            );
+                        })} */}
+                        {currentItems &&
+                            currentItems.map((shop, index) => (
                                 <Shop
                                     key={index}
                                     categoryIcon={shop.categoryIcon}
@@ -196,10 +222,18 @@ const Shops = () => {
                                     shopInstaName={shop.shopInstaName}
                                     shopDescription={shop.shopDescription}
                                 ></Shop>
-                            );
-                        })}
+                            ))}
                     </div>
                 </div>
+                <ReactPaginate
+                    breakLabel="..."
+                    nextLabel=">"
+                    onPageChange={(e) => handlePageClick(e)}
+                    pageRangeDisplayed={3}
+                    pageCount={pageCount}
+                    previousLabel="<"
+                    renderOnZeroPageCount={null}
+                />
             </section>
             <Footer></Footer>
         </div>
