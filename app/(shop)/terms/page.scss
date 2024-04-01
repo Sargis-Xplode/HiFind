@@ -30,12 +30,13 @@
                 &:hover {
                     background-color: $btn-color-hover;
                     color: white;
+                    font-weight: bold;
                 }
             }
 
-            & > div:first-child {
-                background-color: $btn-color;
-                color: $btn-color-text;
+            .selected {
+                background-color: $btn-color-hover;
+                color: white;
                 font-weight: bold;
             }
         }

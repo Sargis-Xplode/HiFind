@@ -1,16 +1,18 @@
 @import "../../constants.scss";
 
-a {
+a.shop-link {
     width: 22%;
     text-decoration: none;
     color: black;
+    margin-bottom: 40px;
+    margin-right: 20px;
+    border-radius: 20px;
 
     .suggested-pages-box {
-        border-radius: 10px;
         background-color: $bg-white;
-        width: 20vw;
-        margin: 10px;
+        width: 100%;
         position: relative;
+        border-radius: 25px;
 
         &:hover .hover-box {
             opacity: 1;
@@ -99,9 +101,15 @@ a {
     }
 }
 
+@media only screen and (max-width: 1200px) {
+    a.shop-link {
+        width: 47%;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
-    a {
-        width: 60%;
+    a.shop-link {
+        width: 45%;
         .suggested-pages-box {
             width: 100%;
             .hover-box {
@@ -110,7 +118,7 @@ a {
                 opacity: 1;
                 height: 50px;
 
-                &:hover{
+                &:hover {
                     background-color: $btn-color-hover;
                 }
 
@@ -123,8 +131,8 @@ a {
 }
 
 @media only screen and (max-width: 769px) {
-    a {
-        width: 22%;
+    a.shop-link {
+        width: 100%;
         .suggested-pages-box {
             .hover-box {
                 flex-direction: row;

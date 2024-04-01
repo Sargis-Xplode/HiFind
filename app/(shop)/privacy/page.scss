@@ -22,6 +22,7 @@
                 min-width: 250px;
                 margin-right: 40px;
                 border-radius: 25px;
+                cursor: pointer;
 
                 & > div {
                     background-color: $bg-white;
@@ -39,12 +40,12 @@
                         border-left: 3px solid $btn-color;
                         font-weight: bold;
                     }
-                }
 
-                & > div:first-child p {
-                    color: $btn-color;
-                    border-left: 3px solid $btn-color;
-                    font-weight: bold;
+                    .selected {
+                        color: $btn-color;
+                        border-left: 3px solid $btn-color;
+                        font-weight: bold;
+                    }
                 }
 
                 & > div:first-child {
@@ -57,6 +58,8 @@
             }
 
             .users-text-container {
+                white-space: pre-line;
+
                 .users-name {
                     font-size: 24px;
                     font-weight: bold;

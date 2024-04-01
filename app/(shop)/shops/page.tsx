@@ -1,16 +1,104 @@
-"use client"
-import { useState } from "react"
-import { faFilter, faPlus } from "@fortawesome/free-solid-svg-icons"
-import Footer from "../../Components/Footer/Footer"
-import Header from "../../Components/Header/Header"
-import "./page.scss"
-import { allShops } from "../../../Assets/js/assets"
+"use client";
+import { useState } from "react";
+import {
+    faCheckCircle,
+    faFilter,
+    faMinus,
+    faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Footer from "../../Components/Footer/Footer";
+import Header from "../../Components/Header/Header";
+import Shop from "../../Components/Shop/Shop";
+import "./page.scss";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Shop from "../../Components/Shop/Shop"
+import { allShops } from "../../../Assets/js/assets";
 
 const Shops = () => {
-    const [shops, setShops] = useState(allShops)
+    const [shops, setShops] = useState(allShops);
+    const [categories, setCategories] = useState([
+        {
+            category: "Խանութներ",
+            clicked: false,
+        },
+        {
+            category: "Ծառայություններ",
+            clicked: false,
+        },
+        {
+            category: "Ժամանց",
+            clicked: false,
+        },
+        {
+            category: "Գեղեցկություն",
+            clicked: false,
+        },
+        {
+            category: "Առողջություն/Խնամք",
+            clicked: false,
+        },
+    ]);
+
+    const [variants, setVariants] = useState([
+        {
+            variant: "Տարբերակ",
+            selected: false,
+        },
+        {
+            variant: "Տարբերակ",
+            selected: false,
+        },
+        {
+            variant: "Տարբերակ",
+            selected: false,
+        },
+        {
+            variant: "Տարբերակ",
+            selected: false,
+        },
+        {
+            variant: "Տարբերակ",
+            selected: false,
+        },
+        {
+            variant: "Տարբերակ",
+            selected: false,
+        },
+        {
+            variant: "Տարբերակ",
+            selected: false,
+        },
+    ]);
+
+    const toggleCheck = (index: number) => {
+        const arr = variants.map((vari, ind) => {
+            if (ind === index) {
+                vari.selected = !vari.selected;
+            }
+            return vari;
+        });
+
+        setVariants(arr);
+    };
+
+    const handleOpenDropDown = (index: number) => {
+        const arr = categories.map((categ, ind) => {
+            if (index === ind) {
+                categ.clicked = !categ.clicked;
+            }
+            return categ;
+        });
+        setCategories(arr);
+    };
+
+    const clearFilters = () => {
+        const arr = variants.map((vari, ind) => {
+            vari.selected = false;
+            return vari;
+        });
+
+        setVariants(arr);
+    };
 
     return (
         <div>
@@ -24,33 +112,98 @@ const Shops = () => {
                             <FontAwesomeIcon icon={faFilter} />
                         </div>
 
-                        <div className="categories">Խանութներ <FontAwesomeIcon icon={faPlus} /></div>
-                        <div className="categories">Ծառայություններ <FontAwesomeIcon icon={faPlus} /></div>
-                        <div className="categories">Ժամանց <FontAwesomeIcon icon={faPlus} /></div>
-                        <div className="categories">Գեղեցկություն <FontAwesomeIcon icon={faPlus} /></div>
-                        <div className="categories">Առողջություն/Խնամք <FontAwesomeIcon icon={faPlus} /></div>
-                        <div className="clear-filters">
+                        {categories.length
+                            ? categories.map((category, index) => {
+                                  return (
+                                      <div className="categories" key={index}>
+                                          <div
+                                              className="categories-with-plus "
+                                              onClick={() =>
+                                                  handleOpenDropDown(index)
+                                              }
+                                          >
+                                              {category.category}
+                                              {category.clicked ? (
+                                                  <FontAwesomeIcon
+                                                      icon={faMinus}
+                                                  />
+                                              ) : (
+                                                  <FontAwesomeIcon
+                                                      icon={faPlus}
+                                                  />
+                                              )}
+                                          </div>
+                                          <div
+                                              className={
+                                                  (category.clicked
+                                                      ? "clicked "
+                                                      : "") + "dropdown-slider"
+                                              }
+                                          >
+                                              {variants.length
+                                                  ? variants.map(
+                                                        (variant, index) => {
+                                                            return (
+                                                                <div
+                                                                    className="variant"
+                                                                    key={index}
+                                                                >
+                                                                    <div
+                                                                        onClick={() =>
+                                                                            toggleCheck(
+                                                                                index
+                                                                            )
+                                                                        }
+                                                                        className="checkbox-round"
+                                                                    >
+                                                                        {variant.selected ? (
+                                                                            <FontAwesomeIcon
+                                                                                icon={
+                                                                                    faCheckCircle
+                                                                                }
+                                                                            ></FontAwesomeIcon>
+                                                                        ) : (
+                                                                            ""
+                                                                        )}
+                                                                    </div>
+                                                                    {
+                                                                        variant.variant
+                                                                    }{" "}
+                                                                    {index}
+                                                                </div>
+                                                            );
+                                                        }
+                                                    )
+                                                  : ""}
+                                          </div>
+                                      </div>
+                                  );
+                              })
+                            : ""}
+
+                        <div className="clear-filters" onClick={clearFilters}>
                             Մաքրել Ֆիլտրերը
                         </div>
                     </div>
                     <div className="shops-container">
-                        {
-                            shops.map((shop, index) => {
-                                return (<Shop key={index}
+                        {shops.map((shop, index) => {
+                            return (
+                                <Shop
+                                    key={index}
                                     categoryIcon={shop.categoryIcon}
                                     brandLogo={shop.brandLogo}
                                     shopName={shop.shopName}
                                     shopInstaName={shop.shopInstaName}
-                                    shopDescription={shop.shopDescription}>
-                                </Shop>)
-                            })
-                        }
+                                    shopDescription={shop.shopDescription}
+                                ></Shop>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
             <Footer></Footer>
         </div>
-    )
-}
+    );
+};
 
-export default Shops
+export default Shops;

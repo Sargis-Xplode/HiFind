@@ -1,26 +1,26 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import Image from "next/image"
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
 
-import "./shop.scss"
-import ShopInteface from "../../../types/types"
-import Link from "next/link"
+import "./shop.scss";
+import ShopInteface from "../../../types/types";
+import Link from "next/link";
 
-const Shop = ({ categoryIcon, brandLogo, shopName, shopInstaName, shopDescription }: ShopInteface) => {
+const Shop = ({
+    categoryIcon,
+    brandLogo,
+    shopName,
+    shopInstaName,
+    shopDescription,
+}: ShopInteface) => {
     return (
-        <Link href={"https://www.instagram.com/rodeni_shop/"} target="_blank">
+        <Link href={"https://www.instagram.com/rodeni_shop/"} className="shop-link" target="_blank">
             <div className="suggested-pages-box">
                 <div className="box-little-icon">
-                    <Image
-                        src={categoryIcon}
-                        alt="Picture of the author"
-                    />
+                    <Image src={categoryIcon} alt="Picture of the author" />
                 </div>
                 <div className="box-image-container">
-                    <Image
-                        src={brandLogo}
-                        alt="Picture of the author"
-                    />
+                    <Image src={brandLogo} alt="Picture of the author" />
                 </div>
                 <div className="box-text-container">
                     <p>{shopName}</p>
@@ -34,7 +34,7 @@ const Shop = ({ categoryIcon, brandLogo, shopName, shopInstaName, shopDescriptio
                 </div>
             </div>
         </Link>
-    )
-}
+    );
+};
 
-export default Shop
+export default Shop;
