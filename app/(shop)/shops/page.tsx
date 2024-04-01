@@ -20,22 +20,16 @@ const Shops = () => {
 
     const [itemOffset, setItemOffset] = useState(0);
 
-    // ---------------------------------------------------
     const itemsPerPage = 12;
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     const currentItems = shops.slice(itemOffset, endOffset);
     const pageCount = Math.ceil(shops.length / itemsPerPage);
 
     // Invoke when user click to request another page.
     const handlePageClick = (e: any) => {
         const newOffset = (e.selected * itemsPerPage) % shops.length;
-        console.log(
-            `User requested page number ${e.selected}, which is offset ${newOffset}`
-        );
         setItemOffset(newOffset);
     };
-    // ---------------------------------------------------
 
     const [categories, setCategories] = useState([
         {
@@ -233,6 +227,7 @@ const Shops = () => {
                     pageCount={pageCount}
                     previousLabel="<"
                     renderOnZeroPageCount={null}
+                    activeClassName={"selected-page"}
                 />
             </section>
             <Footer></Footer>
