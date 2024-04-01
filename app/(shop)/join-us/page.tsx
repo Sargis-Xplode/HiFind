@@ -29,7 +29,7 @@ const JoinUs = () => {
     const [descriptionArm, setDescriptionArm] = useState("");
     const [descriptionEng, setDescriptionEng] = useState("");
     const [instaPfp, setInstaPfp] = useState("");
-    const [validPfp, setValidPfp] = useState(true); // CHANGE TO FALSE
+    const [validPfp, setValidPfp] = useState(false);
     const [selectedCategoryCount, setSelectedCategoryCount] = useState(2);
 
     const toggleCheck = () => {
@@ -85,7 +85,11 @@ const JoinUs = () => {
 
     const handlePfpChange = (e: any) => {
         setInstaPfp(e.target.value);
-        console.log(e.target.files);
+        if (e.target.files[0].size / 1024000 <= 2) {
+            setValidPfp(true);
+        } else {
+            setValidPfp(false);
+        }
     };
 
     const handleSubmitJoinUs = () => {
@@ -243,9 +247,7 @@ const JoinUs = () => {
                             </div>
                             <p
                                 className={
-                                    (validationCheck &&
-                                    !validPfp &&
-                                    instaPfp.length === 0
+                                    (validationCheck && !validPfp
                                         ? "error "
                                         : "") + "error-text"
                                 }
