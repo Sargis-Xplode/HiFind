@@ -29,6 +29,7 @@ const JoinUs = () => {
     const [descriptionArm, setDescriptionArm] = useState("");
     const [descriptionEng, setDescriptionEng] = useState("");
     const [instaPfp, setInstaPfp] = useState("");
+    const [instaPfpPreview, setInstaPfpPreview] = useState("");
     const [validPfp, setValidPfp] = useState(false);
     const [selectedCategoryCount, setSelectedCategoryCount] = useState(2);
 
@@ -85,6 +86,7 @@ const JoinUs = () => {
 
     const handlePfpChange = (e: any) => {
         setInstaPfp(e.target.value);
+        setInstaPfpPreview(URL.createObjectURL(e.target.files[0]));
         if (e.target.files[0].size / 1024000 <= 2) {
             setValidPfp(true);
         } else {
@@ -145,15 +147,27 @@ const JoinUs = () => {
                                 value={email}
                                 onChange={(e) => handleEmailChange(e)}
                             />
-                            <p
-                                className={
-                                    (validationCheck && !validEmail
-                                        ? "error "
-                                        : "") + "error-text"
-                                }
-                            >
-                                Էլ․ հասցեն անվավեր է
-                            </p>
+                            {email.length === 0 ? (
+                                <p
+                                    className={
+                                        (validationCheck && !validEmail
+                                            ? "error "
+                                            : "") + "error-text"
+                                    }
+                                >
+                                    Մուտքագրեք Ձեր Էլ․ հասցեն
+                                </p>
+                            ) : (
+                                <p
+                                    className={
+                                        (validationCheck && !validEmail
+                                            ? "error "
+                                            : "") + "error-text"
+                                    }
+                                >
+                                    Էլ․ հասցեն անվավեր է
+                                </p>
+                            )}
 
                             <p>Instagram-յան էջի հղում</p>
                             <input
@@ -162,15 +176,27 @@ const JoinUs = () => {
                                 value={instaPageLink}
                                 onChange={(e) => handleInstaLinkChange(e)}
                             />
-                            <p
-                                className={
-                                    (validationCheck && !validInstaPageLink
-                                        ? "error "
-                                        : "") + "error-text"
-                                }
-                            >
-                                Հղումը անվավեր է
-                            </p>
+                            {instaPageLink.length === 0 ? (
+                                <p
+                                    className={
+                                        (validationCheck && !validInstaPageLink
+                                            ? "error "
+                                            : "") + "error-text"
+                                    }
+                                >
+                                    Մուտքագրեք Ձեր էջի հղումը
+                                </p>
+                            ) : (
+                                <p
+                                    className={
+                                        (validationCheck && !validInstaPageLink
+                                            ? "error "
+                                            : "") + "error-text"
+                                    }
+                                >
+                                    Հղումն անվավեր է
+                                </p>
+                            )}
 
                             <p>Նկարագրություն</p>
                             <div className="description-textarea">
@@ -228,32 +254,54 @@ const JoinUs = () => {
                             </div>
 
                             <p>Նկար</p>
-                            <div className="add-photo">
-                                <Image
-                                    src={uploadIcon}
-                                    alt="Upload Icon"
-                                ></Image>
-                                {instaPfp.length > 0 ? (
-                                    <p>Նկարն ավելացված է</p>
-                                ) : (
+                            {instaPfp.length === 0 ? (
+                                <div className="add-photo">
+                                    <Image
+                                        src={uploadIcon}
+                                        alt="Upload Icon"
+                                    ></Image>
                                     <p>Ավելացնել նկար (jpg,png)</p>
-                                )}
-                                <input
-                                    type="file"
-                                    name="logo"
-                                    onChange={(e) => handlePfpChange(e)}
-                                    className="brand-logo"
-                                />
-                            </div>
-                            <p
-                                className={
-                                    (validationCheck && !validPfp
-                                        ? "error "
-                                        : "") + "error-text"
-                                }
-                            >
-                                Դուք կարող եք վերբեռնել առնվազն 2 mb
-                            </p>
+                                    <input
+                                        type="file"
+                                        name="logo"
+                                        onChange={(e) => handlePfpChange(e)}
+                                        className="brand-logo"
+                                    />
+                                </div>
+                            ) : (
+                                <div className="photo-loaded">
+                                    <img src={instaPfpPreview} alt="Preview" />
+                                    <input
+                                        type="file"
+                                        name="logo"
+                                        onChange={(e) => handlePfpChange(e)}
+                                        className="brand-logo"
+                                    />
+                                </div>
+                            )}
+
+                            {instaPfp.length === 0 ? (
+                                <p
+                                    className={
+                                        (validationCheck && !validPfp
+                                            ? "error "
+                                            : "") + "error-text"
+                                    }
+                                >
+                                    Վերբեռնեք ձեր էջի նկարը
+                                </p>
+                            ) : (
+                                <p
+                                    className={
+                                        (validationCheck && !validPfp
+                                            ? "error "
+                                            : "") + "error-text"
+                                    }
+                                >
+                                    Դուք կարող եք վերբեռնել առնվազն 2 mb
+                                </p>
+                            )}
+
                             <ul>
                                 <li>
                                     Ձեր բիզնեսն ամենալավը բնութագրող կատեգորիան

@@ -1,7 +1,7 @@
 @import "../../constants.scss";
 
 a.shop-link {
-    width: 22%;
+    width: 20vw;
     text-decoration: none;
     color: black;
     margin-bottom: 40px;
@@ -30,7 +30,7 @@ a.shop-link {
             height: 90px;
             bottom: 0;
             padding: 10px 0;
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 25px 25px;
             background-color: #ff3aae;
             cursor: pointer;
             width: 100%;
@@ -91,7 +91,7 @@ a.shop-link {
             height: 90px;
 
             p {
-                padding: 0 10px;
+                padding: 0 20px;
 
                 &:first-child {
                     font-weight: bold;
@@ -103,13 +103,13 @@ a.shop-link {
 
 @media only screen and (max-width: 1200px) {
     a.shop-link {
-        width: 47%;
+        width: 40vw;
     }
 }
 
 @media only screen and (max-width: 1024px) {
     a.shop-link {
-        width: 45%;
+        width: 40vw;
         .suggested-pages-box {
             width: 100%;
             .hover-box {

@@ -1,10 +1,10 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 
 import "./shop.scss";
 import ShopInteface from "../../../types/types";
 import Link from "next/link";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const Shop = ({
     categoryIcon,
@@ -28,7 +28,7 @@ const Shop = ({
                 </div>
                 <div className="hover-box">
                     <div>
-                        <FontAwesomeIcon icon={faSearch} />
+                        <FontAwesomeIcon icon={faInstagram} />
                     </div>
                     <p>{shopInstaName}</p>
                 </div>

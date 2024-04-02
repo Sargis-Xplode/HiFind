@@ -267,4 +267,20 @@
 }
 
 @media only screen and (max-width: 480px) {
+    .main {
+        .homepage-banner {
+            height: 40vw;
+            background-position: -200px;
+
+            .container {
+                p {
+                    font-size: 14px;
+                }
+
+                button {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
 }

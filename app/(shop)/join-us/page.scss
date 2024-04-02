@@ -30,6 +30,8 @@
                 .error-text {
                     visibility: hidden;
                     display: none;
+                    margin-top: 5px;
+                    font-size: 12px;
                 }
 
                 .error {
@@ -115,6 +117,36 @@
                     }
                 }
 
+                .photo-loaded {
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    border: 2px solid #ec008b;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+
+                    .brand-logo {
+                        padding: 0;
+                        width: 90%;
+                        height: 90%;
+                        border-radius: 50%;
+                        border: none;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        opacity: 0;
+                        cursor: pointer;
+                    }
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                    }
+                }
+
                 ul {
                     padding: 0;
                     list-style: none;
@@ -150,11 +182,16 @@
                             color: $btn-color;
                         }
                     }
+
+                    a {
+                        color: black;
+                    }
                 }
 
                 button {
                     width: 100%;
                     margin-top: 20px;
+                    font-weight: bold;
                 }
 
                 span {
@@ -193,6 +230,14 @@
             .join-us-modal-container {
                 .join-us-modal {
                     width: 100%;
+
+                    h3 {
+                        font-size: 20px;
+                    }
+
+                    input {
+                        font-size: 14px;
+                    }
                 }
             }
         }
@@ -206,7 +251,7 @@
             width: 100%;
             .join-us-modal-container {
                 .join-us-modal {
-                    padding: 60px 20px;
+                    padding: 30px 20px;
                     width: 100%;
                     border-radius: 0;
                 }

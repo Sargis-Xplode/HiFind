@@ -19,6 +19,7 @@ const Shops = () => {
     const [shops, setShops] = useState(allShops);
 
     const [itemOffset, setItemOffset] = useState(0);
+    const [mobileFilterMenu, setMobileFilterMenu] = useState(false);
 
     const itemsPerPage = 12;
     const endOffset = itemOffset + itemsPerPage;
@@ -115,10 +116,113 @@ const Shops = () => {
         setVariants(arr);
     };
 
+    const openMobileFilter = () => {
+        setMobileFilterMenu(true);
+    };
+
+    const closeMobileFilter = () => {
+        setMobileFilterMenu(false);
+    };
+
     return (
         <div>
             <Header></Header>
             <section className="shops-section">
+                {mobileFilterMenu && (
+                    <div className="filters-container-mobile">
+                        <div className="filter-heading-container-mobile">
+                            <h3>Ֆիլտրեր</h3>
+                            <FontAwesomeIcon icon={faFilter} />
+                        </div>
+
+                        {categories.length
+                            ? categories.map((category, index) => {
+                                  return (
+                                      <div
+                                          className="categories-mobile"
+                                          key={index}
+                                      >
+                                          <div
+                                              className="categories-with-plus-mobile"
+                                              onClick={() =>
+                                                  handleOpenDropDown(index)
+                                              }
+                                          >
+                                              {category.category}
+                                              {category.clicked ? (
+                                                  <FontAwesomeIcon
+                                                      icon={faMinus}
+                                                  />
+                                              ) : (
+                                                  <FontAwesomeIcon
+                                                      icon={faPlus}
+                                                  />
+                                              )}
+                                          </div>
+                                          <div
+                                              className={
+                                                  (category.clicked
+                                                      ? "clicked "
+                                                      : "") + "dropdown-slider"
+                                              }
+                                          >
+                                              {variants.length
+                                                  ? variants.map(
+                                                        (variant, index) => {
+                                                            return (
+                                                                <div
+                                                                    className="variant"
+                                                                    key={index}
+                                                                >
+                                                                    <div
+                                                                        onClick={() =>
+                                                                            toggleCheck(
+                                                                                index
+                                                                            )
+                                                                        }
+                                                                        className="checkbox-round"
+                                                                    >
+                                                                        {variant.selected ? (
+                                                                            <FontAwesomeIcon
+                                                                                icon={
+                                                                                    faCheckCircle
+                                                                                }
+                                                                            ></FontAwesomeIcon>
+                                                                        ) : (
+                                                                            ""
+                                                                        )}
+                                                                    </div>
+                                                                    {
+                                                                        variant.variant
+                                                                    }{" "}
+                                                                    {index}
+                                                                </div>
+                                                            );
+                                                        }
+                                                    )
+                                                  : ""}
+                                          </div>
+                                      </div>
+                                  );
+                              })
+                            : ""}
+
+                        <div>
+                            <div
+                                className="clear-filters-mobile"
+                                onClick={clearFilters}
+                            >
+                                Մաքրել Ֆիլտրերը
+                            </div>
+                            <div
+                                className="filter-check-mobile"
+                                onClick={clearFilters}
+                            >
+                                Ֆիլտրել
+                            </div>
+                        </div>
+                    </div>
+                )}
                 <h2>Խանութներ</h2>
                 <div className="container">
                     <div className="filters-container">
@@ -200,12 +304,20 @@ const Shops = () => {
                             Մաքրել Ֆիլտրերը
                         </div>
                     </div>
+
                     <div className="shops-container">
                         {/* {shops.map((shop, index) => {
                             return (
                                 
                             );
                         })} */}
+                        <div
+                            className="filters-btn-mobile"
+                            onClick={openMobileFilter}
+                        >
+                            Ֆիլտրեր
+                            <FontAwesomeIcon icon={faFilter} />
+                        </div>
                         {currentItems &&
                             currentItems.map((shop, index) => (
                                 <Shop

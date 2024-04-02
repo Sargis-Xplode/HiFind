@@ -91,3 +91,22 @@
         }
     }
 }
+
+@media only screen and (max-width: 480px) {
+    .header {
+        .container {
+            .search {
+                font-size: 14px;
+
+                .search-icon-container {
+                    width: 20%;
+                    
+                    svg {
+                        width: 25px;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
