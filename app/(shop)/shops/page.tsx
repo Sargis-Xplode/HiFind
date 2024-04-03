@@ -14,6 +14,7 @@ const Shops = () => {
     const [shops, setShops] = useState(allShops);
     const [filteredShops, setFilteredShops] = useState<any>(allFilteredShops);
     const [currentItems, setCurrentItems] = useState(shops);
+    const [heading, setHeading] = useState("Խանութներ");
 
     const [itemOffSet, setItemOffSet] = useState(0);
     const [endOffSet, setEndOffSet] = useState(0);
@@ -228,8 +229,10 @@ const Shops = () => {
         setCategories([...categories]);
     };
 
-    const handleOpenDropDown = (index: number) => {
+    const handleOpenDropDown = (index: number, categoryName: string) => {
         clearFilters();
+        setHeading(categoryName);
+
         const arr = categories.map((categ, ind) => {
             if (index === ind) {
                 categ.clicked = true;
@@ -273,14 +276,14 @@ const Shops = () => {
                 allShops={allShops}
             ></Header>
             <section className="shops-section">
-                <h2>Խանութներ</h2>
+                <h2>{heading}</h2>
                 <div className="container">
                     {mobileFilterMenu && (
                         <div className="filters-container-mobile">
                             <div className="container">
                                 <div className="filter-heading-container-mobile">
                                     <div>
-                                        <h3>Ֆիլտրեր</h3>
+                                        <h3>{heading}</h3>
                                         <FontAwesomeIcon icon={faFilter} />
                                     </div>
                                     <FontAwesomeIcon
@@ -298,7 +301,7 @@ const Shops = () => {
                                               >
                                                   <div
                                                       className="categories-with-plus-mobile"
-                                                      onClick={() => handleOpenDropDown(index)}
+                                                      onClick={() => handleOpenDropDown(index, category.category)}
                                                   >
                                                       {category.category}
                                                       {category.clicked ? (
@@ -379,7 +382,7 @@ const Shops = () => {
                                       >
                                           <div
                                               className="categories-with-plus "
-                                              onClick={() => handleOpenDropDown(index)}
+                                              onClick={() => handleOpenDropDown(index, category.category)}
                                           >
                                               {category.category}
                                               {category.clicked ? (
