@@ -3,9 +3,120 @@
 .shops-section {
     background-color: $bg-grey;
     padding: 40px 0;
+    position: relative;
 
     h2 {
         text-align: center;
+    }
+
+    .filters-container-mobile {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        z-index: 10;
+        background-color: white;
+
+        .container {
+            display: block;
+
+            .filter-heading-container-mobile {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                & > div {
+                    display: flex;
+                    align-items: center;
+                }
+
+                & > svg {
+                    cursor: pointer;
+                }
+            }
+
+            .categories-mobile {
+                border-bottom: 1px solid $bg-grey;
+
+                .categories-with-plus-mobile {
+                    display: flex;
+                    justify-content: space-between;
+                    cursor: pointer;
+                    padding: 15px 5px;
+
+                    &:hover {
+                        background-color: #f4f4f4;
+                    }
+
+                    &:hover svg {
+                        transform: rotate(180deg);
+                        transition: 0.5s;
+                    }
+
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+
+                .dropdown-slider {
+                    height: 0px;
+                    visibility: hidden;
+
+                    .variant {
+                        height: 35px;
+                        padding: 0 5px;
+                        display: flex;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $bg-grey;
+                        }
+
+                        .checkbox-round {
+                            width: 20px;
+                            height: 20px;
+                            background-color: white;
+                            border: 1px solid #ddd;
+                            border-radius: 50%;
+                            margin-right: 10px;
+                            // background-color: $btn-color;
+
+                            & > svg {
+                                width: 100%;
+                                height: 100%;
+                                color: $btn-color;
+                            }
+                        }
+                    }
+                }
+
+                .clicked {
+                    overflow: hidden;
+                    animation: dropdownSlider 0.5s ease-in-out;
+                    animation-iteration-count: 1;
+                    animation-fill-mode: forwards;
+                }
+            }
+
+            .buttons-container-mobile {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                padding: 30px 0;
+
+                .clear-filters-mobile {
+                    cursor: pointer;
+                    text-align: center;
+                    text-decoration: underline;
+                }
+
+                .filter-check-mobile {
+                    font-size: 16px;
+                    padding: 10px 30px;
+                }
+            }
+        }
     }
 
     .container {
@@ -222,27 +333,6 @@
                             }
                         }
                     }
-                }
-            }
-
-            .filters-container-mobile {
-                position: static;
-                width: 100%;
-                height: 100%;
-                background-color: white;
-
-                .filter-heading-container-mobile {
-                }
-
-                .categories-mobile {
-                    .categories-with-plus-mobile {
-                    }
-                }
-
-                .clear-filters-mobile {
-                }
-
-                .filter-check-mobile {
                 }
             }
         }

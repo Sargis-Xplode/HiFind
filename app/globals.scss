@@ -20,8 +20,13 @@ body {
     border: 0;
     border-radius: 25px;
     cursor: pointer;
+    font-weight: bold;
 
-    &:hover{
+    &:hover {
         background-color: $btn-color-hover;
     }
+}
+
+.display-none {
+    display: none !important;
 }

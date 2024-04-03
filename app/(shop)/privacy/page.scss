@@ -29,6 +29,11 @@
                     border-bottom: 1px solid $bg-grey;
                     padding-left: 0;
 
+                    &:hover {
+                        font-weight: bold;
+                        background-color: $bg-grey !important;
+                    }
+
                     p {
                         width: 100%;
                         padding: 5px;
@@ -41,12 +46,6 @@
                         padding: 20px;
                         border-top: 1px solid $bg-grey;
                         color: $secondary-text-color;
-                    }
-
-                    &:hover > p {
-                        color: $btn-color;
-                        border-left: 3px solid $btn-color;
-                        font-weight: bold;
                     }
 
                     p.selected {
