@@ -16,25 +16,38 @@
             justify-content: space-between;
             margin: 40px 0;
 
-            & > div {
+            .user-container {
                 border-radius: 50%;
-                width: 12vw;
-                height: 12vw;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: rgb(200, 200, 200);
                 font-size: 24px;
                 cursor: pointer;
 
-                &:hover {
-                    background-color: $btn-color-hover;
-                    color: white;
-                    font-weight: bold;
+                .user-circle {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 12vw;
+                    height: 12vw;
+                    background-color: rgb(200, 200, 200);
+
+                    &:hover {
+                        background-color: $btn-color-hover;
+                        color: white;
+                        font-weight: bold;
+                    }
+                }
+
+                .users-text-mobile {
+                    display: none;
+                    padding: 20px;
+                    border-top: 1px solid $bg-grey;
+                    color: $secondary-text-color;
                 }
             }
 
-            .selected {
+            & > div .selected.user-circle {
                 background-color: $btn-color-hover;
                 color: white;
                 font-weight: bold;
@@ -78,11 +91,21 @@
                 align-items: center;
                 margin-top: 20px;
 
-                & > div {
-                    width: 30vw;
-                    height: 30vw;
-                    margin-bottom: 20px;
-                    font-size: 24px;
+                .user-container {
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+
+                    .user-circle {
+                        width: 30vw;
+                        height: 30vw;
+                        margin-bottom: 20px;
+                        font-size: 24px;
+                    }
+
+                    .users-text-mobile.selected {
+                        display: block;
+                    }
                 }
             }
 
@@ -106,9 +129,11 @@
     .terms-section {
         .container {
             .users-container {
-                & > div {
-                    width: 50vw;
-                    height: 50vw;
+                .user-container {
+                    .user-circle {
+                        width: 50vw;
+                        height: 50vw;
+                    }
                 }
             }
         }

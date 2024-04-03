@@ -175,12 +175,17 @@
                         border-radius: 50%;
                         margin-right: 10px;
                         // background-color: $btn-color;
+                        box-sizing: border-box;
 
                         & > svg {
                             width: 100%;
                             height: 100%;
                             color: $btn-color;
                         }
+                    }
+
+                    .checked {
+                        border: none;
                     }
 
                     a {

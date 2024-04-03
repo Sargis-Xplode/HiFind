@@ -252,6 +252,10 @@
 
                 .img-container {
                     width: 100%;
+
+                    img {
+                        height: 100%;
+                    }
                 }
 
                 .about-us-container {
@@ -269,7 +273,7 @@
 @media only screen and (max-width: 480px) {
     .main {
         .homepage-banner {
-            height: 40vw;
+            height: 50vw;
             background-position: -200px;
 
             .container {
@@ -279,6 +283,14 @@
 
                 button {
                     font-size: 16px;
+                }
+            }
+        }
+
+        .container {
+            .first-section {
+                h3 {
+                    margin-top: 30px;
                 }
             }
         }

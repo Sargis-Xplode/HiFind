@@ -33,6 +33,14 @@
                         width: 100%;
                         padding: 5px;
                         padding-left: 20px;
+                        box-sizing: border-box;
+                    }
+
+                    .users-text-mobile {
+                        display: none;
+                        padding: 20px;
+                        border-top: 1px solid $bg-grey;
+                        color: $secondary-text-color;
                     }
 
                     &:hover > p {
@@ -41,7 +49,7 @@
                         font-weight: bold;
                     }
 
-                    .selected {
+                    p.selected {
                         color: $btn-color;
                         border-left: 3px solid $btn-color;
                         font-weight: bold;
@@ -87,10 +95,17 @@
                     width: 80%;
                     margin-right: 0;
                     margin-bottom: 30px;
+
+                    & > div {
+                        .users-text-mobile.selected {
+                            display: block;
+                        }
+                    }
                 }
 
                 .users-text-container {
                     width: 80%;
+                    display: none;
                 }
             }
         }

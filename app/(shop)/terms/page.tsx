@@ -97,16 +97,30 @@ const Terms = () => {
                         {users.length
                             ? users.map((user, index) => {
                                   return (
-                                      <div
-                                          className={
-                                              user.selected ? "selected" : ""
-                                          }
-                                          key={index}
-                                          onClick={() =>
-                                              handleChangeText(user, index)
-                                          }
-                                      >
-                                          {user.name}
+                                      <div className="user-container">
+                                          <div
+                                              className={
+                                                  (user.selected
+                                                      ? "selected"
+                                                      : "") + " user-circle"
+                                              }
+                                              key={index}
+                                              onClick={() =>
+                                                  handleChangeText(user, index)
+                                              }
+                                          >
+                                              {user.name}
+                                          </div>
+                                          <div
+                                              className={
+                                                  (user.selected
+                                                      ? "selected"
+                                                      : "") +
+                                                  " users-text-mobile"
+                                              }
+                                          >
+                                              {userText}
+                                          </div>
                                       </div>
                                   );
                               })

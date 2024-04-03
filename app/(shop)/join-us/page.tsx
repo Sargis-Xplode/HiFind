@@ -342,7 +342,10 @@ const JoinUs = () => {
                             <div className="agreed">
                                 <div
                                     onClick={toggleCheck}
-                                    className="checkbox-round"
+                                    className={
+                                        (checked ? "checked " : "") +
+                                        "checkbox-round"
+                                    }
                                 >
                                     {checked ? (
                                         <FontAwesomeIcon

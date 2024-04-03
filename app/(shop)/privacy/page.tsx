@@ -197,6 +197,17 @@ const Terms = () => {
                                               >
                                                   {user.name}
                                               </p>
+
+                                              <div
+                                                  className={
+                                                      (user.selected
+                                                          ? "selected"
+                                                          : "") +
+                                                      " users-text-mobile"
+                                                  }
+                                              >
+                                                  {userText}
+                                              </div>
                                           </div>
                                       );
                                   })
