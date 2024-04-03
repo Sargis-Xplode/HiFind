@@ -1,13 +1,18 @@
 import Image from "next/image";
+import { useState } from "react";
 import "./header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
 import logo from "../../../Assets/logo.svg";
-import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
-export default function Header() {
+export default function Header(props: any) {
+    const router = useRouter();
+    const path = usePathname();
+
+    const { allShops, setFilteredShops } = props;
     const [selectedLanguage, setSelectedLanguage] = useState("Հայ");
     const [languages, setLanguages] = useState([
         {
@@ -19,6 +24,28 @@ export default function Header() {
             selected: false,
         },
     ]);
+
+    const [searchText, setSearchText] = useState("");
+
+    const changeSearchText = (e: any) => {
+        setSearchText(e.target.value);
+    };
+
+    const searchShops = () => {
+        if (path !== "/shops") {
+            router.push("/shops");
+            return;
+        }
+        const filteredShops = allShops.filter((shop: any, index: number) => {
+            if (
+                shop.shopName.includes(searchText) ||
+                shop.shopDescription.includes(searchText)
+            ) {
+                return shop;
+            }
+        });
+        setFilteredShops(filteredShops);
+    };
 
     const changeLanguage = (ind: number) => {
         const arr = languages.map((lang, index) => {
@@ -44,9 +71,17 @@ export default function Header() {
                 </div>
                 <div className="search">
                     <div className="search-input-container">
-                        <input type="text" placeholder="Որոնել" />
+                        <input
+                            type="text"
+                            placeholder="Որոնել"
+                            value={searchText}
+                            onChange={(e) => changeSearchText(e)}
+                        />
                     </div>
-                    <div className="search-icon-container">
+                    <div
+                        className="search-icon-container"
+                        onClick={searchShops}
+                    >
                         <FontAwesomeIcon icon={faSearch} />
                     </div>
                 </div>
