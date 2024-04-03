@@ -1,12 +1,13 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import "./header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-import logo from "../../../Assets/logo.svg";
-import { useRouter, usePathname } from "next/navigation";
+import logo from "../../../../Assets/logo.svg";
+import { useRouter, usePathname, useParams } from "next/navigation";
+import { useLocale } from "next-intl";
 
 export default function Header(props: any) {
     const router = useRouter();
@@ -17,13 +18,18 @@ export default function Header(props: any) {
     const [languages, setLanguages] = useState([
         {
             text: "Հայ",
+            value: "hy",
             selected: true,
         },
         {
             text: "Eng",
+            value: "en",
             selected: false,
         },
     ]);
+
+    const [isPending, startTransition] = useTransition();
+    const localActive = useLocale();
 
     const [searchText, setSearchText] = useState("");
 
@@ -37,10 +43,7 @@ export default function Header(props: any) {
             return;
         }
         const filteredShops = allShops.filter((shop: any, index: number) => {
-            if (
-                shop.shopName.includes(searchText) ||
-                shop.shopDescription.includes(searchText)
-            ) {
+            if (shop.shopName.includes(searchText) || shop.shopDescription.includes(searchText)) {
                 return shop;
             }
         });
@@ -48,10 +51,16 @@ export default function Header(props: any) {
     };
 
     const changeLanguage = (ind: number) => {
+        let nextLocale: string;
         const arr = languages.map((lang, index) => {
             if (ind === index) {
                 lang.selected = true;
                 setSelectedLanguage(lang.text);
+                nextLocale = lang.value;
+
+                startTransition(() => {
+                    router.replace(`/${nextLocale}`);
+                });
             } else {
                 lang.selected = false;
             }
@@ -61,12 +70,28 @@ export default function Header(props: any) {
         setLanguages(arr);
     };
 
+    useEffect(() => {
+        const arr = languages.map((lang) => {
+            if (localActive === lang.value) {
+                lang.selected = true;
+                setSelectedLanguage(lang.text);
+            } else {
+                lang.selected = false;
+            }
+            return lang;
+        });
+        setLanguages(arr);
+    }, []);
+
     return (
         <header className="header">
             <div className="container">
                 <div className="logo-container">
                     <Link href={"/"}>
-                        <Image src={logo} alt="Picture of the author" />
+                        <Image
+                            src={logo}
+                            alt="Picture of the author"
+                        />
                     </Link>
                 </div>
                 <div className="search">
@@ -97,12 +122,8 @@ export default function Header(props: any) {
                                     return (
                                         <li
                                             key={index}
-                                            className={
-                                                lang.selected ? "selected" : ""
-                                            }
-                                            onClick={() =>
-                                                changeLanguage(index)
-                                            }
+                                            className={lang.selected ? "selected" : ""}
+                                            onClick={() => changeLanguage(index)}
                                         >
                                             {lang.text}
                                         </li>

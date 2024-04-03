@@ -4,8 +4,8 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-import logo from "../../../Assets/logo.svg"
-import emailIcon from "../../../Assets/mail.svg"
+import logo from "../../../../Assets/logo.svg"
+import emailIcon from "../../../../Assets/mail.svg"
 
 export default function Footer() {
     return (

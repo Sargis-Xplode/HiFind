@@ -7,7 +7,7 @@ import Header from "../../Components/Header/Header";
 import Shop from "../../Components/Shop/Shop";
 import "./page.scss";
 
-import { allShops, allFilteredShops } from "../../../Assets/js/assets";
+import { allShops, allFilteredShops } from "../../../../Assets/js/assets";
 import ReactPaginate from "react-paginate";
 
 const Shops = () => {

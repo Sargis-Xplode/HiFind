@@ -1,24 +1,26 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import "./page.scss";
-import { recentShopsFile } from "../../Assets/js/assets"
+import { recentShopsFile } from "../../../Assets/js/assets";
 
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import Shop from "../Components/Shop/Shop";
 
-import shoppingBagIcon from "../../Assets/shopping-bag.svg";
-import gearsIcon from "../../Assets/gears.svg";
-import dishesIcon from "../../Assets/dishes.svg";
-import brushIcon from "../../Assets/brush.svg";
-import heartPlusIcon from "../../Assets/heart-plus.svg";
-import aboutUsImg from "../../Assets/about-us-img.svg";
+import shoppingBagIcon from "../../../Assets/shopping-bag.svg";
+import gearsIcon from "../../../Assets/gears.svg";
+import dishesIcon from "../../../Assets/dishes.svg";
+import brushIcon from "../../../Assets/brush.svg";
+import heartPlusIcon from "../../../Assets/heart-plus.svg";
+import aboutUsImg from "../../../Assets/about-us-img.svg";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
-    const [recentShops, setRecentShops] = useState(recentShopsFile)
+    const [recentShops, setRecentShops] = useState(recentShopsFile);
+    const t = useTranslations("homepageBanner");
 
     return (
         <main className="main">
@@ -26,10 +28,18 @@ export default function Home() {
             <div className="homepage-banner">
                 <div className="container">
                     <p>
-                        Ընդլայնեք Ձեր Instagram-յան բիզնեսը, ապահովեք ավելի բարձր տեսանելիություն, ձեռք բերեք նոր հաճախորդներ, բացահայտեք նոր հնարավորություններ
+                        {t("homepage_banner_heading")}
+                        {/* Ընդլայնեք Ձեր Instagram-յան բիզնեսը, ապահովեք ավելի բարձր տեսանելիություն, ձեռք բերեք նոր
+                        հաճախորդներ, բացահայտեք նոր հնարավորություններ */}
                     </p>
                     <Link href={"/join-us"}>
-                        <button type="button" className="button">Միացիր մեզ</button>
+                        <button
+                            type="button"
+                            className="button"
+                        >
+                            {t("join_us_btn")}
+                            {/* Միացիր մեզ */}
+                        </button>
                     </Link>
                 </div>
             </div>
@@ -98,17 +108,18 @@ export default function Home() {
                 <section className="second-section">
                     <h3>Առաջարկվող Էջեր</h3>
                     <div className="boxes-container">
-                        {
-                            recentShops.map((shop, index) => {
-                                return (<Shop key={index}
+                        {recentShops.map((shop, index) => {
+                            return (
+                                <Shop
+                                    key={index}
                                     categoryIcon={shop.categoryIcon}
                                     brandLogo={shop.brandLogo}
                                     shopName={shop.shopName}
                                     shopInstaName={shop.shopInstaName}
-                                    shopDescription={shop.shopDescription}>
-                                </Shop>)
-                            })
-                        }
+                                    shopDescription={shop.shopDescription}
+                                ></Shop>
+                            );
+                        })}
                     </div>
                 </section>
 
@@ -124,18 +135,20 @@ export default function Home() {
                         <h3>Մեր Մասին</h3>
                         <div className="about-us-text">
                             Բարի գալուստ ․․․․․ : <br />
-                            Մենք նվիրված ենք Instagram-ի պրոֆիլների ձեր որոնումը պարզեցնելուն, որոնք առաջարկում են եզակի ծառայություններ և ապրանքներ: <br />
-                            Մեր առաքելությունն է ձեզ կապել տարբեր կատեգորիաների համապատասխան պրոֆիլների հետ՝ հեշտացնելով ոգեշնչում գտնելը և նոր ընտրյալներ հայտնաբերելը:<br />
-                            Միացե՛ք մեզ, երբ մենք աջակցում ենք ստեղծողներին և բիզնեսներին՝ միաժամանակ զարգացնելով բովանդակալից կապերը օգտատերերի և բովանդակության միջև:<br />
+                            Մենք նվիրված ենք Instagram-ի պրոֆիլների ձեր որոնումը պարզեցնելուն, որոնք առաջարկում են եզակի
+                            ծառայություններ և ապրանքներ: <br />
+                            Մեր առաքելությունն է ձեզ կապել տարբեր կատեգորիաների համապատասխան պրոֆիլների հետ՝ հեշտացնելով
+                            ոգեշնչում գտնելը և նոր ընտրյալներ հայտնաբերելը:
+                            <br />
+                            Միացե՛ք մեզ, երբ մենք աջակցում ենք ստեղծողներին և բիզնեսներին՝ միաժամանակ զարգացնելով
+                            բովանդակալից կապերը օգտատերերի և բովանդակության միջև:
+                            <br />
                             Շնորհակալություն մեզ ընտրել որպես ձեր նպատակակետ Instagram-ի լավագույնը բացահայտելու համար:
                         </div>
                     </div>
-
                 </section>
-            </div >
+            </div>
             <Footer></Footer>
-
-        </main >
+        </main>
     );
 }
-
