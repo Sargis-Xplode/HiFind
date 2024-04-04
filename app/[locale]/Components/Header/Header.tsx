@@ -7,7 +7,7 @@ import Link from "next/link";
 
 import logo from "../../../../Assets/logo.svg";
 import { useRouter, usePathname, useParams } from "next/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function Header(props: any) {
     const router = useRouter();
@@ -27,6 +27,7 @@ export default function Header(props: any) {
             selected: false,
         },
     ]);
+    const t = useTranslations("header");
 
     const [isPending, startTransition] = useTransition();
     const localActive = useLocale();
@@ -98,7 +99,7 @@ export default function Header(props: any) {
                     <div className="search-input-container">
                         <input
                             type="text"
-                            placeholder="Որոնել"
+                            placeholder={t("search_placeholder")}
                             value={searchText}
                             onChange={(e) => changeSearchText(e)}
                         />

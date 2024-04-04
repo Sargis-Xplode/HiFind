@@ -9,12 +9,16 @@ import "./page.scss";
 
 import { allShops, allFilteredShops } from "../../../../Assets/js/assets";
 import ReactPaginate from "react-paginate";
+import { useTranslations } from "next-intl";
 
 const Shops = () => {
+    const t = useTranslations("shopsPage");
+    const t2 = useTranslations("homePage");
+
     const [shops, setShops] = useState(allShops);
     const [filteredShops, setFilteredShops] = useState<any>(allFilteredShops);
     const [currentItems, setCurrentItems] = useState(shops);
-    const [heading, setHeading] = useState("Խանութներ");
+    const [heading, setHeading] = useState("shops");
 
     const [itemOffSet, setItemOffSet] = useState(0);
     const [endOffSet, setEndOffSet] = useState(0);
@@ -46,7 +50,7 @@ const Shops = () => {
 
     const [categories, setCategories] = useState([
         {
-            category: "Խանութներ",
+            category: "shops",
             clicked: false,
             variants: [
                 {
@@ -80,7 +84,7 @@ const Shops = () => {
             ],
         },
         {
-            category: "Ծառայություններ",
+            category: "services",
             clicked: false,
             variants: [
                 {
@@ -114,7 +118,7 @@ const Shops = () => {
             ],
         },
         {
-            category: "Ժամանց",
+            category: "entertainment",
             clicked: false,
             variants: [
                 {
@@ -148,7 +152,7 @@ const Shops = () => {
             ],
         },
         {
-            category: "Գեղեցկություն",
+            category: "beauty",
             clicked: false,
             variants: [
                 {
@@ -182,7 +186,7 @@ const Shops = () => {
             ],
         },
         {
-            category: "Առողջություն/Խնամք",
+            category: "healthCare",
             clicked: false,
             variants: [
                 {
@@ -276,14 +280,14 @@ const Shops = () => {
                 allShops={allShops}
             ></Header>
             <section className="shops-section">
-                <h2>{heading}</h2>
+                <h2>{t2(heading)}</h2>
                 <div className="container">
                     {mobileFilterMenu && (
                         <div className="filters-container-mobile">
                             <div className="container">
                                 <div className="filter-heading-container-mobile">
                                     <div>
-                                        <h3>{heading}</h3>
+                                        <h3>{t2(heading)}</h3>
                                         <FontAwesomeIcon icon={faFilter} />
                                     </div>
                                     <FontAwesomeIcon
@@ -303,7 +307,7 @@ const Shops = () => {
                                                       className="categories-with-plus-mobile"
                                                       onClick={() => handleOpenDropDown(index, category.category)}
                                                   >
-                                                      {category.category}
+                                                      {t2(category.category)}
                                                       {category.clicked ? (
                                                           <FontAwesomeIcon icon={faMinus} />
                                                       ) : (
@@ -355,13 +359,13 @@ const Shops = () => {
                                         }
                                         onClick={clearFilters}
                                     >
-                                        Մաքրել Ֆիլտրերը
+                                        {t("clearFilters")}
                                     </div>
                                     <button
                                         className="filter-check-mobile button"
                                         onClick={filter}
                                     >
-                                        Ֆիլտրել
+                                        {t("filter")}
                                     </button>
                                 </div>
                             </div>
@@ -369,7 +373,7 @@ const Shops = () => {
                     )}
                     <div className="filters-container">
                         <div className="filter-heading-container">
-                            <h3>Ֆիլտրեր</h3>
+                            <h3>{t("filters")}</h3>
                             <FontAwesomeIcon icon={faFilter} />
                         </div>
 
@@ -384,7 +388,7 @@ const Shops = () => {
                                               className="categories-with-plus "
                                               onClick={() => handleOpenDropDown(index, category.category)}
                                           >
-                                              {category.category}
+                                              {t2(category.category)}
                                               {category.clicked ? (
                                                   <FontAwesomeIcon icon={faMinus} />
                                               ) : (
@@ -429,7 +433,7 @@ const Shops = () => {
                             className={(atLeastOneVariantSelected ? "" : "display-none") + " clear-filters"}
                             onClick={clearFilters}
                         >
-                            Մաքրել Ֆիլտրերը
+                            {t("clearFilters")}
                         </div>
                     </div>
 
@@ -438,7 +442,7 @@ const Shops = () => {
                             className="filters-btn-mobile"
                             onClick={openMobileFilter}
                         >
-                            Ֆիլտրեր
+                            {t("filters")}
                             <FontAwesomeIcon icon={faFilter} />
                         </div>
 

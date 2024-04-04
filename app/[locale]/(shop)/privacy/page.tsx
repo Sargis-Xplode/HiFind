@@ -4,8 +4,11 @@ import { useState } from "react";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import "./page.scss";
+import { useTranslations } from "next-intl";
 
 const Terms = () => {
+    const t = useTranslations("footer");
+
     const [users, setUsers] = useState([
         {
             name: "Օգտատեր",
@@ -176,7 +179,7 @@ const Terms = () => {
             <Header></Header>
             <section className="privacy-section">
                 <div className="container">
-                    <h2>Գաղտնիության քաղաքականություն</h2>
+                    <h2>{t("privacy")}</h2>
                     <div className="section-container">
                         <div className="users-name-container">
                             {users.length
@@ -184,28 +187,11 @@ const Terms = () => {
                                       return (
                                           <div
                                               key={index}
-                                              onClick={() =>
-                                                  handleChangeText(user, index)
-                                              }
+                                              onClick={() => handleChangeText(user, index)}
                                           >
-                                              <p
-                                                  className={
-                                                      user.selected
-                                                          ? "selected"
-                                                          : ""
-                                                  }
-                                              >
-                                                  {user.name}
-                                              </p>
+                                              <p className={user.selected ? "selected" : ""}>{user.name}</p>
 
-                                              <div
-                                                  className={
-                                                      (user.selected
-                                                          ? "selected"
-                                                          : "") +
-                                                      " users-text-mobile"
-                                                  }
-                                              >
+                                              <div className={(user.selected ? "selected" : "") + " users-text-mobile"}>
                                                   {userText}
                                               </div>
                                           </div>

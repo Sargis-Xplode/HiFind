@@ -2,8 +2,66 @@
     "header": {
         "search_placeholder": "Search"
     },
+    "footer": {
+        "privacy": "Privacy Policy",
+        "terms": "Terms of use",
+        "contactUs": "Contact us",
+        "developed": "Developed by ",
+        "xPlodeLLC": "Xplode LLC",
+        "by": "",
+        "allRightsReserved": "All rights reserved ©2024"
+    },
     "homepageBanner": {
         "join_us_btn": "Join Us",
-        "homepage_banner_heading": "Enhance Your Instagram buisness, provide, get new customers, explore new opportunities"
-    } 
+        "homepage_banner_heading": "Expand your Instagram business, get higher visibility, get new customers, discover new opportunities"
+    },
+    "homePage": {
+        "discover": "Explore the world of Instagram business accounts",
+        "shops": "Shops",
+        "services": "Services",
+        "entertainment": "Entertainment",
+        "beauty": "Beauty",
+        "healthCare": "Health/Care",
+        "recommendedPages": "Recommended pages",
+        "aboutUs": "About us",
+        "welcome": "Welcome .....: We are dedicated to simplifying your search for Instagram profiles that offer unique services and products. Our mission is to connect you with relevant profiles across categories, making it easy to find inspiration and discover new favorites. Join us as we support creators and businesses while fostering meaningful connections between users and content. Thank you for choosing us as your destination to discover the best of Instagram."
+    },
+    "shopsPage": {
+        "filters": "Filters",
+        "filter": "Filter",
+        "clearFilters": "Clear Filters",
+        "noResults": "No search results found",
+        "trySearchingSmthElse": "Try searching for something else"
+    },
+    "joinUsModalPage": {
+        "registration": "Registration",
+        "buissnessNameLabel": "Business page name (as registered on Instagram)",
+        "buissnessName": "Business Name",
+        "emailAddr": "E-mail address",
+        "instaPageLink": "Instagram page link",
+        "description": "Description",
+        "descriptionArm": "Description in Armenian",
+        "descriptionEng": "Description in English",
+        "image": "Image",
+        "addImage": "Add image",
+        "chooseCategory": "Choose the category, that best describes your business",
+        "agreed": "I agree to the",
+        "and": "and",
+        "register": "Register"
+    },
+    "success": {
+        "requestSuccessful": "Your registration request has been successfully completed.",
+        "approvalOrRejection": "You will receive a letter to your e-mail address about the approval or rejection of your page in the system."
+    },
+    "errors": {
+        "buisnessNameError": "Enter your business name",
+        "emailInvalidError": "E-mail address is invalid",
+        "emailEmptyError": "Enter your E-mail address",
+        "instaPageLinkInvalidError": "The link is invalid",
+        "instaPageLinkEmptyError": "Enter your Instagram Page Link",
+        "imageExceedsLimitError": "You can upload maximum 2 mb",
+        "imageEmptyError": "Upload an Image",
+        "onlyJPGorPNG": "You can upload only jpg, png, svg files",
+        "chooseCategoryError": "Choose a category, so that customers can find you more easily"
+    }
 }

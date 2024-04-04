@@ -5,6 +5,7 @@ import Link from "next/link";
 
 import "./page.scss";
 import { recentShopsFile } from "../../../Assets/js/assets";
+import shopBox from "../../../types/shopBox";
 
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
@@ -16,29 +17,26 @@ import dishesIcon from "../../../Assets/dishes.svg";
 import brushIcon from "../../../Assets/brush.svg";
 import heartPlusIcon from "../../../Assets/heart-plus.svg";
 import aboutUsImg from "../../../Assets/about-us-img.svg";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function Home() {
     const [recentShops, setRecentShops] = useState(recentShopsFile);
-    const t = useTranslations("homepageBanner");
+    const t = useTranslations("homePage");
+    const t2 = useTranslations("homepageBanner");
+    const localActive = useLocale();
 
     return (
         <main className="main">
             <Header></Header>
             <div className="homepage-banner">
                 <div className="container">
-                    <p>
-                        {t("homepage_banner_heading")}
-                        {/* Ընդլայնեք Ձեր Instagram-յան բիզնեսը, ապահովեք ավելի բարձր տեսանելիություն, ձեռք բերեք նոր
-                        հաճախորդներ, բացահայտեք նոր հնարավորություններ */}
-                    </p>
-                    <Link href={"/join-us"}>
+                    <p>{t2("homepage_banner_heading")}</p>
+                    <Link href={`${localActive}/join-us`}>
                         <button
                             type="button"
                             className="button"
                         >
-                            {t("join_us_btn")}
-                            {/* Միացիր մեզ */}
+                            {t2("join_us_btn")}
                         </button>
                     </Link>
                 </div>
@@ -46,58 +44,58 @@ export default function Home() {
             <div className="container">
                 {/* ////////////////////  Explore Instagram Section ////////////////////////// */}
                 <section className="first-section">
-                    <h3>Բացահայտեք Instagram-ի բիզնես հաշիվների աշխարհը</h3>
+                    <h3>{t("discover")}</h3>
                     <div className="instagram-boxes-container">
                         <div className="first-box">
-                            <Link href={"/shops"}>
+                            <Link href={`${localActive}/shops`}>
                                 <div>
                                     <Image
                                         src={shoppingBagIcon}
                                         alt="Picture of the author"
                                     />
-                                    <p>Խանութներ</p>
+                                    <p>{t("shops")}</p>
                                 </div>
                             </Link>
 
-                            <Link href={"/shops"}>
+                            <Link href={`${localActive}/shops`}>
                                 <div>
                                     <Image
                                         src={gearsIcon}
                                         alt="Picture of the author"
                                     />
-                                    <p>Ծառայություններ</p>
+                                    <p>{t("services")}</p>
                                 </div>
                             </Link>
                         </div>
 
-                        <Link href={"/shops"}>
+                        <Link href={`${localActive}/shops`}>
                             <div className="second-box">
                                 <Image
                                     src={dishesIcon}
                                     alt="Picture of the author"
                                 />
-                                <p>Ժամանց</p>
+                                <p>{t("entertainment")}</p>
                             </div>
                         </Link>
 
                         <div className="third-box">
-                            <Link href={"/shops"}>
+                            <Link href={`${localActive}/shops`}>
                                 <div>
                                     <Image
                                         src={brushIcon}
                                         alt="Picture of the author"
                                     />
-                                    <p>Գեղեցկություն</p>
+                                    <p>{t("beauty")}</p>
                                 </div>
                             </Link>
 
-                            <Link href={"/shops"}>
+                            <Link href={`${localActive}/shops`}>
                                 <div>
                                     <Image
                                         src={heartPlusIcon}
                                         alt="Picture of the author"
                                     />
-                                    <p>Առողջություն/Խնամք</p>
+                                    <p>{t("healthCare")}</p>
                                 </div>
                             </Link>
                         </div>
@@ -106,7 +104,7 @@ export default function Home() {
 
                 {/* Suggested Pages Section */}
                 <section className="second-section">
-                    <h3>Առաջարկվող Էջեր</h3>
+                    <h3>{t("recommendedPages")}</h3>
                     <div className="boxes-container">
                         {recentShops.map((shop, index) => {
                             return (
@@ -132,19 +130,8 @@ export default function Home() {
                         />
                     </div>
                     <div className="about-us-container">
-                        <h3>Մեր Մասին</h3>
-                        <div className="about-us-text">
-                            Բարի գալուստ ․․․․․ : <br />
-                            Մենք նվիրված ենք Instagram-ի պրոֆիլների ձեր որոնումը պարզեցնելուն, որոնք առաջարկում են եզակի
-                            ծառայություններ և ապրանքներ: <br />
-                            Մեր առաքելությունն է ձեզ կապել տարբեր կատեգորիաների համապատասխան պրոֆիլների հետ՝ հեշտացնելով
-                            ոգեշնչում գտնելը և նոր ընտրյալներ հայտնաբերելը:
-                            <br />
-                            Միացե՛ք մեզ, երբ մենք աջակցում ենք ստեղծողներին և բիզնեսներին՝ միաժամանակ զարգացնելով
-                            բովանդակալից կապերը օգտատերերի և բովանդակության միջև:
-                            <br />
-                            Շնորհակալություն մեզ ընտրել որպես ձեր նպատակակետ Instagram-ի լավագույնը բացահայտելու համար:
-                        </div>
+                        <h3>{t("aboutUs")}</h3>
+                        <div className="about-us-text">{t("welcome")}</div>
                     </div>
                 </section>
             </div>

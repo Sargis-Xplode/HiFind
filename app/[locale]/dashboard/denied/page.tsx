@@ -17,6 +17,7 @@ import brandLogo from "../../../Assets/brand-logo.svg";
 import sortLogo from "../../../Assets/sort-icon.svg";
 import sendIcon from "../../../Assets/send-icon.svg";
 import deleteIcon from "../../../Assets/delete-icon.svg";
+import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 
 const Denied = () => {
     // const [email, setEmail] = useState("")
@@ -34,42 +35,7 @@ const Denied = () => {
 
     return (
         <section>
-            <aside>
-                <div className="top-part">
-                    <Image src={logo} alt="logo"></Image>
-                    <nav>
-                        <div>
-                            <Link href="/dashboard/notifications">
-                                <Image src={bellIcon} alt="Bell Icon"></Image>
-                                <div>Ծանուցումներ</div>
-                                <span>3</span>
-                            </Link>
-                        </div>
-                        <div>
-                            <Link href="/dashboard/approved">
-                                <Image src={userCheckIcon} alt="Bell Icon"></Image>
-                                <div>Հաստատված հաշիվներ</div>
-                            </Link>
-                        </div>
-                        <div className="selected">
-                            <Link href="/dashboard/denied">
-                                <Image src={userMinusIcon} alt="Bell Icon"></Image>
-                                <div>Մերժված հայտեր</div>
-                            </Link>
-                        </div>
-                        <div>
-                            <Link href="/dashboard/categories-list">
-                                <Image src={filterIcon} alt="Bell Icon"></Image>
-                                <div>Ընտրացանկ</div>
-                            </Link>
-                        </div>
-                    </nav>
-                </div>
-                <div>
-                    <Image src={signOutIcon} alt="Sign Out Icon"></Image>
-                    <p>Դուրս գալ</p>
-                </div>
-            </aside>
+            <AdminAsidePanel></AdminAsidePanel>
             <main>
                 <h2>Մերժված հայտեր</h2>
                 <div className="search">

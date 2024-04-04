@@ -4,10 +4,15 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
-import logo from "../../../../Assets/logo.svg"
-import emailIcon from "../../../../Assets/mail.svg"
+import logo from "../../../../Assets/logo.svg";
+import emailIcon from "../../../../Assets/mail.svg";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function Footer() {
+    const t = useTranslations("footer");
+
+    const localActive = useLocale();
+
     return (
         <footer className="footer">
             <div className="container">
@@ -18,37 +23,38 @@ export default function Footer() {
                     />
                 </div>
                 <div className="footer-links-container">
-                    <Link href={"/privacy"}>
-                        <p>
-                            Գաղտնիության քաղաքականություն
-                        </p>
+                    <Link href={`${localActive}/privacy`}>
+                        <p>{t("privacy")}</p>
                     </Link>
 
-                    <Link href={"/terms"}>
-                        <p>
-                            Օգտագործման պայմաններ
-                        </p>
+                    <Link href={`${localActive}/terms`}>
+                        <p>{t("terms")}</p>
                     </Link>
-                    <p>
-                        Կապ մեզ հետ
-                    </p>
+                    <p>{t("contactUs")}</p>
                     <div>
                         <div className="mail-icon-container">
                             <Image
                                 src={emailIcon}
                                 alt="Picture of the author"
                             />
-                        </div> info@xplode.am
+                        </div>{" "}
+                        info@xplode.am
                     </div>
                 </div>
                 <div className="footer-info-container">
                     <p>
-
-                        Մշակված <span><Link href={"https://xplode.am/"} target="_blank">Էքսփլոուդ ՍՊԸ</Link></span>-ի կողմից
+                        {t("developed")}
+                        <span>
+                            <Link
+                                href={"https://xplode.am/"}
+                                target="_blank"
+                            >
+                                {t("xPlodeLLC")}
+                            </Link>
+                        </span>
+                        {t("by")}
                     </p>
-                    <p className="all-rights-reserved">
-                        Բոլոր իրավունքները պաշտպանված են 2024
-                    </p>
+                    <p className="all-rights-reserved">{t("allRightsReserved")}</p>
                 </div>
             </div>
         </footer>

@@ -99,6 +99,16 @@
                         .users-text-mobile.selected {
                             display: block;
                         }
+
+                        &:hover{
+                            font-weight: 400;
+                            background-color: $bg-white !important;
+                        }
+                        
+                        &:hover p{
+                            font-weight: bold;
+                            background-color: $bg-grey !important;
+                        }
                     }
                 }
 

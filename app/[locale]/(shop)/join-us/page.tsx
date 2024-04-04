@@ -4,20 +4,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import "./page.scss";
-import {
-    faCheckCircle,
-    faChevronDown,
-    faUpload,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faChevronDown, faUpload } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 
-import uploadIcon from "../../../Assets/upload-icon.svg";
+import uploadIcon from "../../../../Assets/upload-icon.svg";
 import { useRouter } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 const JoinUs = () => {
     const router = useRouter();
+
+    const t = useTranslations("joinUsModalPage");
+    const t2 = useTranslations("errors");
+    const t3 = useTranslations("homePage");
+    const t4 = useTranslations("footer");
+
+    const localActive = useLocale();
 
     const [checked, setChecked] = useState(false);
     const [validationCheck, setValidationCheck] = useState(false);
@@ -30,7 +34,8 @@ const JoinUs = () => {
     const [descriptionEng, setDescriptionEng] = useState("");
     const [instaPfp, setInstaPfp] = useState("");
     const [instaPfpPreview, setInstaPfpPreview] = useState("");
-    const [validPfp, setValidPfp] = useState(false);
+    const [validSizePfp, setValidSizePfp] = useState(false);
+    const [validExtensionPfp, setValidExtensionPfp] = useState(false);
     const [selectedCategoryCount, setSelectedCategoryCount] = useState(2);
 
     const toggleCheck = () => {
@@ -62,8 +67,7 @@ const JoinUs = () => {
             setValidInstaPageLink(false);
             return;
         }
-        const regex =
-            /^\s*(https\:\/\/)?www\.instagram\.com\/[a-z\A-Z\d\-_.\/]{1,255}\s*$/;
+        const regex = /^\s*(https\:\/\/)?www\.instagram\.com\/[a-z\A-Z\d\-_.\/]{1,255}\s*$/;
         if (regex.test(e.target.value)) {
             setValidInstaPageLink(true);
         } else {
@@ -85,12 +89,20 @@ const JoinUs = () => {
     };
 
     const handlePfpChange = (e: any) => {
+        const fileName = e.target.value;
+        const extension = fileName.split(".").pop();
         setInstaPfp(e.target.value);
         setInstaPfpPreview(URL.createObjectURL(e.target.files[0]));
         if (e.target.files[0].size / 1024000 <= 2) {
-            setValidPfp(true);
+            setValidSizePfp(true);
         } else {
-            setValidPfp(false);
+            setValidSizePfp(false);
+        }
+
+        if (extension === "jpg" || extension === "png" || extension === "svg") {
+            setValidExtensionPfp(true);
+        } else {
+            setValidExtensionPfp(false);
         }
     };
 
@@ -102,7 +114,8 @@ const JoinUs = () => {
             !validInstaPageLink ||
             descriptionArm.length < 3 ||
             descriptionEng.length < 3 ||
-            !validPfp ||
+            !validSizePfp ||
+            !validExtensionPfp ||
             selectedCategoryCount === 0 ||
             !checked
         ) {
@@ -119,107 +132,64 @@ const JoinUs = () => {
                 <div className="container">
                     <div className="join-us-modal-container">
                         <div className="join-us-modal">
-                            <h3>Գրանցում</h3>
-                            <p>
-                                Բիզնես էջի անուն (ինչպես գրանցված եք
-                                Instagram-ում)
-                            </p>
+                            <h3>{t("registration")}</h3>
+                            <p>{t("buissnessNameLabel")}</p>
                             <input
                                 type="text"
-                                placeholder="Բիզնեսի անուն"
+                                placeholder={t("buissnessName")}
                                 value={buisnessName}
                                 onChange={(e) => handleBuisnessNameChange(e)}
                             />
-                            <p
-                                className={
-                                    (validationCheck && buisnessName.length < 4
-                                        ? "error "
-                                        : "") + "error-text"
-                                }
-                            >
-                                Մուտքագրեք Ձեր բիզնեսի անունը
+                            <p className={(validationCheck && buisnessName.length < 4 ? "error " : "") + "error-text"}>
+                                {t2("buisnessNameError")}
                             </p>
 
-                            <p>Էլ. հասցե</p>
+                            <p>{t("emailAddr")}</p>
                             <input
                                 type="text"
-                                placeholder="Էլ. հասցե"
+                                placeholder={t("emailAddr")}
                                 value={email}
                                 onChange={(e) => handleEmailChange(e)}
                             />
                             {email.length === 0 ? (
-                                <p
-                                    className={
-                                        (validationCheck && !validEmail
-                                            ? "error "
-                                            : "") + "error-text"
-                                    }
-                                >
-                                    Մուտքագրեք Ձեր Էլ․ հասցեն
+                                <p className={(validationCheck && !validEmail ? "error " : "") + "error-text"}>
+                                    {t2("emailEmptyError")}
                                 </p>
                             ) : (
-                                <p
-                                    className={
-                                        (validationCheck && !validEmail
-                                            ? "error "
-                                            : "") + "error-text"
-                                    }
-                                >
-                                    Էլ․ հասցեն անվավեր է
+                                <p className={(validationCheck && !validEmail ? "error " : "") + "error-text"}>
+                                    {t2("emailInvalidError")}
                                 </p>
                             )}
 
-                            <p>Instagram-յան էջի հղում</p>
+                            <p>{t("instaPageLink")}</p>
                             <input
                                 type="text"
-                                placeholder="Instagram-յան էջի հղում"
+                                placeholder={t("instaPageLink")}
                                 value={instaPageLink}
                                 onChange={(e) => handleInstaLinkChange(e)}
                             />
                             {instaPageLink.length === 0 ? (
-                                <p
-                                    className={
-                                        (validationCheck && !validInstaPageLink
-                                            ? "error "
-                                            : "") + "error-text"
-                                    }
-                                >
-                                    Մուտքագրեք Ձեր էջի հղումը
+                                <p className={(validationCheck && !validInstaPageLink ? "error " : "") + "error-text"}>
+                                    {t2("instaPageLinkEmptyError")}
                                 </p>
                             ) : (
-                                <p
-                                    className={
-                                        (validationCheck && !validInstaPageLink
-                                            ? "error "
-                                            : "") + "error-text"
-                                    }
-                                >
-                                    Հղումն անվավեր է
+                                <p className={(validationCheck && !validInstaPageLink ? "error " : "") + "error-text"}>
+                                    {t2("instaPageLinkInvalidError")}
                                 </p>
                             )}
 
-                            <p>Նկարագրություն</p>
+                            <p>{t("description")}</p>
                             <div className="description-textarea">
                                 <textarea
                                     maxLength={150}
-                                    placeholder="Նկարագրությունը հայերեն"
+                                    placeholder={t("descriptionArm")}
                                     value={descriptionArm}
-                                    onChange={(e) =>
-                                        handleDescriptionArmChange(e)
-                                    }
-                                    className={
-                                        validationCheck &&
-                                        descriptionArm.length < 4
-                                            ? "error-input"
-                                            : ""
-                                    }
+                                    onChange={(e) => handleDescriptionArmChange(e)}
+                                    className={validationCheck && descriptionArm.length < 4 ? "error-input" : ""}
                                 ></textarea>
                                 <span
                                     className={
-                                        validationCheck &&
-                                        descriptionArm.length < 4
-                                            ? "error-textarea-span"
-                                            : ""
+                                        validationCheck && descriptionArm.length < 4 ? "error-textarea-span" : ""
                                     }
                                 >
                                     {descriptionArm.length}/150
@@ -229,38 +199,28 @@ const JoinUs = () => {
                             <div className="description-textarea">
                                 <textarea
                                     maxLength={150}
-                                    placeholder="Նկարագրությունը անգլերեն"
+                                    placeholder={t("descriptionArm")}
                                     value={descriptionEng}
-                                    onChange={(e) =>
-                                        handleDescriptionEngChange(e)
-                                    }
-                                    className={
-                                        validationCheck &&
-                                        descriptionEng.length < 4
-                                            ? "error-input"
-                                            : ""
-                                    }
+                                    onChange={(e) => handleDescriptionEngChange(e)}
+                                    className={validationCheck && descriptionEng.length < 4 ? "error-input" : ""}
                                 ></textarea>
                                 <span
                                     className={
-                                        validationCheck &&
-                                        descriptionEng.length < 4
-                                            ? "error-textarea-span"
-                                            : ""
+                                        validationCheck && descriptionEng.length < 4 ? "error-textarea-span" : ""
                                     }
                                 >
                                     {descriptionEng.length}/150
                                 </span>
                             </div>
 
-                            <p>Նկար</p>
+                            <p>{t("image")}</p>
                             {instaPfp.length === 0 ? (
                                 <div className="add-photo">
                                     <Image
                                         src={uploadIcon}
                                         alt="Upload Icon"
                                     ></Image>
-                                    <p>Ավելացնել նկար (jpg,png)</p>
+                                    <p>{t("addImage")} (jpg,png)</p>
                                     <input
                                         type="file"
                                         name="logo"
@@ -270,7 +230,10 @@ const JoinUs = () => {
                                 </div>
                             ) : (
                                 <div className="photo-loaded">
-                                    <img src={instaPfpPreview} alt="Preview" />
+                                    <img
+                                        src={instaPfpPreview}
+                                        alt="Preview"
+                                    />
                                     <input
                                         type="file"
                                         name="logo"
@@ -283,101 +246,69 @@ const JoinUs = () => {
                             {instaPfp.length === 0 ? (
                                 <p
                                     className={
-                                        (validationCheck && !validPfp
-                                            ? "error "
-                                            : "") + "error-text"
+                                        (validationCheck && (!validSizePfp || !validExtensionPfp) ? "error " : "") +
+                                        "error-text"
                                     }
                                 >
-                                    Վերբեռնեք ձեր էջի նկարը
+                                    {t2("imageEmptyError")}
+                                </p>
+                            ) : !validExtensionPfp ? (
+                                <p className={(validationCheck ? "error " : "") + "error-text"}>
+                                    {t2("onlyJPGorPNG")}
                                 </p>
                             ) : (
-                                <p
-                                    className={
-                                        (validationCheck && !validPfp
-                                            ? "error "
-                                            : "") + "error-text"
-                                    }
-                                >
-                                    Դուք կարող եք վերբեռնել առնվազն 2 mb
+                                <p className={(validationCheck && !validSizePfp ? "error " : "") + "error-text"}>
+                                    {t2("imageExceedsLimitError")}
                                 </p>
                             )}
 
                             <ul>
+                                <li>{t("chooseCategory")}</li>
                                 <li>
-                                    Ձեր բիզնեսն ամենալավը բնութագրող կատեգորիան
+                                    {t3("shops")} <FontAwesomeIcon icon={faChevronDown} />
                                 </li>
                                 <li>
-                                    Խանութ{" "}
-                                    <FontAwesomeIcon icon={faChevronDown} />
+                                    {t3("services")} <FontAwesomeIcon icon={faChevronDown} />
                                 </li>
                                 <li>
-                                    Ծառայություն{" "}
-                                    <FontAwesomeIcon icon={faChevronDown} />
+                                    {t3("entertainment")} <FontAwesomeIcon icon={faChevronDown} />
                                 </li>
                                 <li>
-                                    Ժամանց{" "}
-                                    <FontAwesomeIcon icon={faChevronDown} />
+                                    {t3("beauty")} <FontAwesomeIcon icon={faChevronDown} />
                                 </li>
                                 <li>
-                                    Գեղեցկություն{" "}
-                                    <FontAwesomeIcon icon={faChevronDown} />
-                                </li>
-                                <li>
-                                    Առողջություն/Խնամք{" "}
-                                    <FontAwesomeIcon icon={faChevronDown} />
+                                    {t3("healthCare")} <FontAwesomeIcon icon={faChevronDown} />
                                 </li>
                             </ul>
                             <p
                                 className={
-                                    (validationCheck &&
-                                    selectedCategoryCount === 0
-                                        ? "error "
-                                        : "") + "error-text"
+                                    (validationCheck && selectedCategoryCount === 0 ? "error " : "") + "error-text"
                                 }
                             >
-                                Ընտրեք որևէ կատեգորիա, որ հաճախորդները կարողանան
-                                Ձեզ ավելի հեշտ գտնել
+                                {t2("chooseCategoryError")}
                             </p>
 
                             <div className="agreed">
                                 <div
                                     onClick={toggleCheck}
-                                    className={
-                                        (checked ? "checked " : "") +
-                                        "checkbox-round"
-                                    }
+                                    className={(checked ? "checked " : "") + "checkbox-round"}
                                 >
-                                    {checked ? (
-                                        <FontAwesomeIcon
-                                            icon={faCheckCircle}
-                                        ></FontAwesomeIcon>
-                                    ) : (
-                                        ""
-                                    )}
+                                    {checked ? <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon> : ""}
                                 </div>
                                 <span>
-                                    Համաձայն եմ &nbsp;
-                                    <Link href={"/privacy"}>
-                                        {" "}
-                                        գաղտնիության քաղաքականությանը{" "}
-                                    </Link>
-                                    &nbsp; և &nbsp;
-                                    <Link href={"/terms"}>
-                                        {" "}
-                                        օգտագործման պայմաններին
-                                    </Link>
-                                    :
+                                    {t("agreed")} &nbsp;
+                                    <Link href={`${localActive}/privacy`}> {t4("privacy")} </Link>
+                                    &nbsp; {t("and")}&nbsp;
+                                    <Link href={`${localActive}/terms`}>{t4("terms")} </Link>:
                                 </span>
                             </div>
 
                             <button
                                 type="submit"
-                                className={
-                                    "button" + (checked ? "" : " disabled")
-                                }
+                                className={"button" + (checked ? "" : " disabled")}
                                 onClick={handleSubmitJoinUs}
                             >
-                                Գրանցվել
+                                {t("register")}
                             </button>
                         </div>
                     </div>

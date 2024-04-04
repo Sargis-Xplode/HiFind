@@ -6,8 +6,11 @@ import "./page.scss";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const SuccessfulSubmition = () => {
+    const t = useTranslations("success");
+
     const router = useRouter();
     useEffect(() => {
         setTimeout(() => {
@@ -22,11 +25,8 @@ const SuccessfulSubmition = () => {
                 <div className="container">
                     <div className="modal">
                         <FontAwesomeIcon icon={faCheckCircle} />
-                        <h4>Ձեր գրանցման հայտը հաջողությամբ կատարված է։</h4>
-                        <p>
-                            Համակարգում Ձեր էջի հաստատման կամ մերժման մասին
-                            կստանաք նամակ Ձեր էլ.հասցեին:
-                        </p>
+                        <h4>{t("requestSuccessful")}</h4>
+                        <p>{t("approvalOrRejection")}</p>
                     </div>
                 </div>
             </section>

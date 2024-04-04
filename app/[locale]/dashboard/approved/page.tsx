@@ -1,23 +1,17 @@
-"use client"
+"use client";
 // import { useEffect, useState } from "react"
-import "./page.scss"
+import "./page.scss";
 // import axios from "axios"
-import Image from "next/image"
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faSearch, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-import logo from "../../../Assets/logo.svg";
-import signOutIcon from "../../../Assets/sign-out-icon.svg";
-import bellIcon from "../../../Assets/bell-icon.svg";
-import userCheckIcon from "../../../Assets/user-check-icon.svg";
-import userMinusIcon from "../../../Assets/user-minus-icon.svg";
-import filterIcon from "../../../Assets/filter-icon.svg";
 import brandLogo from "../../../Assets/brand-logo.svg";
 import sortLogo from "../../../Assets/sort-icon.svg";
 import editIcon from "../../../Assets/edit-icon.svg";
 import deleteIcon from "../../../Assets/delete-icon.svg";
-
+import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 
 const Approved = () => {
     // const [email, setEmail] = useState("")
@@ -35,47 +29,15 @@ const Approved = () => {
 
     return (
         <section>
-            <aside>
-                <div className="top-part">
-                    <Image src={logo} alt="logo"></Image>
-                    <nav>
-                        <div>
-                            <Link href="/dashboard/notifications">
-                                <Image src={bellIcon} alt="Bell Icon"></Image>
-                                <div>Ծանուցումներ</div>
-                                <span>3</span>
-                            </Link>
-                        </div>
-                        <div className="selected">
-                            <Link href="/dashboard/approved">
-                                <Image src={userCheckIcon} alt="Bell Icon"></Image>
-                                <div>Հաստատված հաշիվներ</div>
-                            </Link>
-                        </div>
-                        <div>
-                            <Link href="/dashboard/denied">
-                                <Image src={userMinusIcon} alt="Bell Icon"></Image>
-                                <div>Մերժված հայտեր</div>
-                            </Link>
-                        </div>
-                        <div>
-                            <Link href="/dashboard/categories-list">
-                                <Image src={filterIcon} alt="Bell Icon"></Image>
-                                <div>Ընտրացանկ</div>
-                            </Link>
-                        </div>
-                    </nav>
-                </div>
-                <div>
-                    <Image src={signOutIcon} alt="Sign Out Icon"></Image>
-                    <p>Դուրս գալ</p>
-                </div>
-            </aside>
+            <AdminAsidePanel></AdminAsidePanel>
             <main>
                 <h2>Հաստատված հաշիվներ</h2>
                 <div className="search">
                     <div className="search-input-container">
-                        <input type="text" placeholder="Որոնել" />
+                        <input
+                            type="text"
+                            placeholder="Որոնել"
+                        />
                     </div>
                     <div className="search-icon-container">
                         <FontAwesomeIcon icon={faSearch} />
@@ -88,7 +50,13 @@ const Approved = () => {
                         <p>Ինստագրամ</p>
                         <p>Նկարագրություն</p>
                         <p>Ընտրացանկ</p>
-                        <p>Օրը <Image src={sortLogo} alt="Sort"></Image></p>
+                        <p>
+                            Օրը{" "}
+                            <Image
+                                src={sortLogo}
+                                alt="Sort"
+                            ></Image>
+                        </p>
                     </div>
                     <TableRow
                         newNotification={true}
@@ -101,8 +69,7 @@ const Approved = () => {
                         categories={["Կոշիկ", "Պայուսակ", "Աքսեսուարներ"]}
                         date={"05.07.2023"}
                         active={true}
-                    >
-                    </TableRow>
+                    ></TableRow>
                     <TableRow
                         newNotification={true}
                         brandLogo={brandLogo}
@@ -114,8 +81,7 @@ const Approved = () => {
                         categories={["Կոշիկ", "Պայուսակ", "Աքսեսուարներ"]}
                         date={"05.07.2023"}
                         active={true}
-                    >
-                    </TableRow>
+                    ></TableRow>
                     <TableRow
                         newNotification={false}
                         brandLogo={brandLogo}
@@ -127,8 +93,7 @@ const Approved = () => {
                         categories={["Կոշիկ", "Պայուսակ", "Աքսեսուարներ"]}
                         date={"05.07.2023"}
                         active={true}
-                    >
-                    </TableRow>
+                    ></TableRow>
                     <TableRow
                         newNotification={false}
                         brandLogo={brandLogo}
@@ -140,8 +105,7 @@ const Approved = () => {
                         categories={["Կոշիկ", "Պայուսակ", "Աքսեսուարներ"]}
                         date={"05.07.2023"}
                         active={true}
-                    >
-                    </TableRow>
+                    ></TableRow>
                     <TableRow
                         newNotification={false}
                         brandLogo={brandLogo}
@@ -153,22 +117,24 @@ const Approved = () => {
                         categories={["Կոշիկ", "Պայուսակ", "Աքսեսուարներ"]}
                         date={"05.07.2023"}
                         active={false}
-                    >
-                    </TableRow>
+                    ></TableRow>
                 </div>
             </main>
         </section>
-    )
-}
+    );
+};
 
-export default Approved
+export default Approved;
 
 const TableRow = (props: any) => {
-    const { newNotification, brandName, email, link, descriptionArm, descriptionEng, categories, date, active } = props
+    const { newNotification, brandName, email, link, descriptionArm, descriptionEng, categories, date, active } = props;
     return (
         <div className={newNotification ? "new" : ""}>
             <div className="brand-logo-name">
-                <Image src={brandLogo} alt="Brand Logo"></Image>
+                <Image
+                    src={brandLogo}
+                    alt="Brand Logo"
+                ></Image>
                 <p>{brandName}</p>
             </div>
             <div className="email">
@@ -182,33 +148,44 @@ const TableRow = (props: any) => {
                 <p>{descriptionEng}</p>
             </div>
             <div className="categories">
-                {
-                    categories.length && categories.map((category: any, index: number) => {
-                        return <div key={index} className="category">{category}</div>
-                    })
-                }
+                {categories.length &&
+                    categories.map((category: any, index: number) => {
+                        return (
+                            <div
+                                key={index}
+                                className="category"
+                            >
+                                {category}
+                            </div>
+                        );
+                    })}
             </div>
             <div className="date">
                 <p>{date}</p>
             </div>
             <div className="approve-reject-icons">
                 <div>
-                    <Image src={editIcon} alt="Edit Icon"></Image>
+                    <Image
+                        src={editIcon}
+                        alt="Edit Icon"
+                    ></Image>
                 </div>
                 <div>
-                    <Image src={deleteIcon} alt="Edit Icon"></Image>
+                    <Image
+                        src={deleteIcon}
+                        alt="Edit Icon"
+                    ></Image>
                 </div>
-                {
-                    active ? (<div className="activate-btn">
-                        <div className="active-indicator">
-                        </div>
-                    </div>) : (<div className="activate-btn inactive">
-                        <div className="active-indicator">
-                        </div>
-                    </div>)
-                }
-
+                {active ? (
+                    <div className="activate-btn">
+                        <div className="active-indicator"></div>
+                    </div>
+                ) : (
+                    <div className="activate-btn inactive">
+                        <div className="active-indicator"></div>
+                    </div>
+                )}
             </div>
         </div>
     );
-}
+};

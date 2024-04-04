@@ -2,14 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 
 import "./shop.scss";
-import ShopInteface from "../../../../types/types";
+import ShopInteface from "../../../../types/shopBox";
 import Link from "next/link";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 const Shop = ({ categoryIcon, brandLogo, shopName, shopInstaName, shopDescription }: ShopInteface) => {
+    const link = "https://www.instagram.com/rodeni_shop/";
     return (
         <Link
-            href={"https://www.instagram.com/rodeni_shop/"}
+            href={link}
             className="shop-link"
             target="_blank"
         >

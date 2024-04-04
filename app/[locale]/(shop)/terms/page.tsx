@@ -4,8 +4,11 @@ import { useState } from "react";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import "./page.scss";
+import { useTranslations } from "next-intl";
 
 const Terms = () => {
+    const t = useTranslations("footer");
+
     const [users, setUsers] = useState([
         {
             name: "Օգտատեր",
@@ -92,33 +95,20 @@ const Terms = () => {
             <Header></Header>
             <section className="terms-section">
                 <div className="container">
-                    <h2>Օգտագործման պայմաններ</h2>
+                    <h2>{t("terms")}</h2>
                     <div className="users-container">
                         {users.length
                             ? users.map((user, index) => {
                                   return (
                                       <div className="user-container">
                                           <div
-                                              className={
-                                                  (user.selected
-                                                      ? "selected"
-                                                      : "") + " user-circle"
-                                              }
+                                              className={(user.selected ? "selected" : "") + " user-circle"}
                                               key={index}
-                                              onClick={() =>
-                                                  handleChangeText(user, index)
-                                              }
+                                              onClick={() => handleChangeText(user, index)}
                                           >
                                               {user.name}
                                           </div>
-                                          <div
-                                              className={
-                                                  (user.selected
-                                                      ? "selected"
-                                                      : "") +
-                                                  " users-text-mobile"
-                                              }
-                                          >
+                                          <div className={(user.selected ? "selected" : "") + " users-text-mobile"}>
                                               {userText}
                                           </div>
                                       </div>
