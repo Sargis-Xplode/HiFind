@@ -20,15 +20,14 @@
             box-sizing: border-box;
 
             img {
-                width: 100%;
+                width: 70%;
                 height: 25%;
             }
         }
 
         .footer-links-container {
             height: 100%;
-            padding-top: 20px;
-            padding-left: 50px;
+            padding: 20px 20px 0 20px;
             box-sizing: border-box;
 
             .something {
@@ -41,7 +40,7 @@
 
                     p {
                         margin: 0;
-                        margin-bottom: 10px;
+                        margin-bottom: 20px;
                     }
                 }
             }
@@ -49,7 +48,7 @@
             p {
                 margin: 0;
                 font-weight: bold;
-                margin-bottom: 10px;
+                margin-bottom: 20px;
             }
 
             & > div {
@@ -59,6 +58,9 @@
 
                 .mail-icon-container {
                     margin-right: 15px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
 
                     svg {
                         width: 50px;
@@ -69,7 +71,6 @@
 
         .footer-links-container.english-format {
             box-sizing: border-box;
-            padding-left: 130px;
             width: 300px;
         }
 
@@ -110,6 +111,10 @@
         .container {
             .footer-logo-container {
                 width: 20%;
+            }
+
+            .footer-links-container.english-format {
+                padding-left: 20px;
             }
         }
     }
@@ -163,6 +168,10 @@
 @media only screen and (max-width: 768px) {
     .footer {
         .container {
+            .footer-links-container {
+                padding: 0;
+            }
+
             .footer-links-container.english-format {
                 padding-left: 0;
                 flex-direction: column;
