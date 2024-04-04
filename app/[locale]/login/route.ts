@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
-import Admin from "../../../(models)/Admin";
+import Admin from "../(models)/Admin";
 
 export async function POST(req: any, res: NextApiResponse) {
     try {
