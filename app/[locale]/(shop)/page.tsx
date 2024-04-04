@@ -31,7 +31,7 @@ export default function Home() {
             <div className="homepage-banner">
                 <div className="container">
                     <p>{t2("homepage_banner_heading")}</p>
-                    <Link href={`${localActive}/join-us`}>
+                    <Link href={`/${localActive}/join-us`}>
                         <button
                             type="button"
                             className="button"
@@ -47,7 +47,7 @@ export default function Home() {
                     <h3>{t("discover")}</h3>
                     <div className="instagram-boxes-container">
                         <div className="first-box">
-                            <Link href={`${localActive}/shops`}>
+                            <Link href={`/${localActive}/shops`}>
                                 <div>
                                     <Image
                                         src={shoppingBagIcon}
@@ -57,7 +57,7 @@ export default function Home() {
                                 </div>
                             </Link>
 
-                            <Link href={`${localActive}/shops`}>
+                            <Link href={`/${localActive}/shops`}>
                                 <div>
                                     <Image
                                         src={gearsIcon}
@@ -68,7 +68,7 @@ export default function Home() {
                             </Link>
                         </div>
 
-                        <Link href={`${localActive}/shops`}>
+                        <Link href={`/${localActive}/shops`}>
                             <div className="second-box">
                                 <Image
                                     src={dishesIcon}
@@ -79,7 +79,7 @@ export default function Home() {
                         </Link>
 
                         <div className="third-box">
-                            <Link href={`${localActive}/shops`}>
+                            <Link href={`/${localActive}/shops`}>
                                 <div>
                                     <Image
                                         src={brushIcon}
@@ -89,7 +89,7 @@ export default function Home() {
                                 </div>
                             </Link>
 
-                            <Link href={`${localActive}/shops`}>
+                            <Link href={`/${localActive}/shops`}>
                                 <div>
                                     <Image
                                         src={heartPlusIcon}

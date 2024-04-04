@@ -38,7 +38,7 @@ export default function Login() {
                 });
             // const { token } = res.data;
             // localStorage.setItem('token', token);
-            router.push(`${localActive}/dashboard/notifications`);
+            router.push(`/${localActive}/dashboard/notifications`);
         } catch (error) {
             console.error(error);
             setError("Something went wrong");

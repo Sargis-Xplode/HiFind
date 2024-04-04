@@ -24,7 +24,7 @@ const AdminAsidePanel = () => {
                 </Link>
                 <nav>
                     <div>
-                        <Link href={`${localActive}/dashboard/notifications`}>
+                        <Link href={`/${localActive}/dashboard/notifications`}>
                             <Image
                                 src={bellIcon}
                                 alt="Bell Icon"
@@ -34,7 +34,7 @@ const AdminAsidePanel = () => {
                         </Link>
                     </div>
                     <div className="selected">
-                        <Link href={`${localActive}/dashboard/approved`}>
+                        <Link href={`/${localActive}/dashboard/approved`}>
                             <Image
                                 src={userCheckIcon}
                                 alt="Bell Icon"
@@ -43,7 +43,7 @@ const AdminAsidePanel = () => {
                         </Link>
                     </div>
                     <div>
-                        <Link href={`${localActive}/dashboard/denied`}>
+                        <Link href={`/${localActive}/dashboard/denied`}>
                             <Image
                                 src={userMinusIcon}
                                 alt="Bell Icon"
@@ -52,7 +52,7 @@ const AdminAsidePanel = () => {
                         </Link>
                     </div>
                     <div>
-                        <Link href={`${localActive}/dashboard/categories-list`}>
+                        <Link href={`/${localActive}/dashboard/categories-list`}>
                             <Image
                                 src={filterIcon}
                                 alt="Bell Icon"

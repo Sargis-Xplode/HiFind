@@ -297,9 +297,9 @@ const JoinUs = () => {
                                 </div>
                                 <span>
                                     {t("agreed")} &nbsp;
-                                    <Link href={`${localActive}/privacy`}> {t4("privacy")} </Link>
+                                    <Link href={`/${localActive}/privacy`}> {t4("privacy")} </Link>
                                     &nbsp; {t("and")}&nbsp;
-                                    <Link href={`${localActive}/terms`}>{t4("terms")} </Link>:
+                                    <Link href={`/${localActive}/terms`}>{t4("terms")} </Link>:
                                 </span>
                             </div>
 
