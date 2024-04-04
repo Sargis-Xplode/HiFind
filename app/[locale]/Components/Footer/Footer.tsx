@@ -21,13 +21,19 @@ export default function Footer() {
                     />
                 </div>
                 <div className={(localActive === "en" ? "english-format" : "") + " footer-links-container"}>
-                    <Link href={`/${localActive}/privacy`}>
-                        <p>{t("privacy")}</p>
-                    </Link>
+                    <div className="something">
+                        <Link href={`/${localActive}/privacy`}>
+                            <p>{t("privacy")}</p>
+                        </Link>
+                        <div></div>
+                    </div>
 
-                    <Link href={`/${localActive}/terms`}>
-                        <p>{t("terms")}</p>
-                    </Link>
+                    <div className="something">
+                        <Link href={`/${localActive}/terms`}>
+                            <p>{t("terms")}</p>
+                        </Link>
+                    </div>
+
                     <p>{t("contactUs")}</p>
                     <div>
                         <div className="mail-icon-container">
