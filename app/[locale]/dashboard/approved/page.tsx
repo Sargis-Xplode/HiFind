@@ -7,10 +7,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 
-import brandLogo from "../../../Assets/brand-logo.svg";
-import sortLogo from "../../../Assets/sort-icon.svg";
-import editIcon from "../../../Assets/edit-icon.svg";
-import deleteIcon from "../../../Assets/delete-icon.svg";
+import brandLogo from "../../../../Assets/brand-logo.svg";
+import sortLogo from "../../../../Assets/sort-icon.svg";
+import editIcon from "../../../../Assets/edit-icon.svg";
+import deleteIcon from "../../../../Assets/delete-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 
 const Approved = () => {

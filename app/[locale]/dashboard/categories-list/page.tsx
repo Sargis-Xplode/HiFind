@@ -4,17 +4,10 @@ import "./page.scss"
 // import axios from "axios"
 import Image from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 
-import logo from "../../../Assets/logo.svg";
-import signOutIcon from "../../../Assets/sign-out-icon.svg";
-import bellIcon from "../../../Assets/bell-icon.svg";
-import userCheckIcon from "../../../Assets/user-check-icon.svg";
-import userMinusIcon from "../../../Assets/user-minus-icon.svg";
-import filterIcon from "../../../Assets/filter-icon.svg";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import editIcon from "../../../Assets/edit-icon.svg";
-import deleteIcon from "../../../Assets/delete-icon.svg";
+import editIcon from "../../../../Assets/edit-icon.svg";
+import deleteIcon from "../../../../Assets/delete-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 
 const CategoriesList = () => {
