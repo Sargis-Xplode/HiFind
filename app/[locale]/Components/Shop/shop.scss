@@ -134,8 +134,9 @@ a.shop-link {
     a.shop-link {
         width: 100%;
         .suggested-pages-box {
-            .hover-box {
-                flex-direction: row;
+            &:hover .box-image-container img {
+                transform: none !important;
+                transition: 0s;
             }
         }
     }

@@ -1,8 +1,6 @@
 import Image from "next/image";
 import "./footer.scss";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import logo from "../../../../Assets/logo.svg";
 import emailIcon from "../../../../Assets/mail.svg";
@@ -22,12 +20,12 @@ export default function Footer() {
                         alt="Picture of the author"
                     />
                 </div>
-                <div className="footer-links-container">
-                    <Link href={`${localActive}/privacy`}>
+                <div className={(localActive === "en" ? "english-format" : "") + " footer-links-container"}>
+                    <Link href={`/${localActive}/privacy`}>
                         <p>{t("privacy")}</p>
                     </Link>
 
-                    <Link href={`${localActive}/terms`}>
+                    <Link href={`/${localActive}/terms`}>
                         <p>{t("terms")}</p>
                     </Link>
                     <p>{t("contactUs")}</p>

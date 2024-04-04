@@ -54,31 +54,31 @@ const Shops = () => {
             clicked: false,
             variants: [
                 {
-                    variant: "Խանութ",
+                    variant: "shops",
                     selected: false,
                 },
                 {
-                    variant: "Խանութ",
+                    variant: "shops",
                     selected: false,
                 },
                 {
-                    variant: "Խանութ",
+                    variant: "shops",
                     selected: false,
                 },
                 {
-                    variant: "Խանութ",
+                    variant: "shops",
                     selected: false,
                 },
                 {
-                    variant: "Խանութ",
+                    variant: "shops",
                     selected: false,
                 },
                 {
-                    variant: "Խանութ",
+                    variant: "shops",
                     selected: false,
                 },
                 {
-                    variant: "Խանութ",
+                    variant: "shops",
                     selected: false,
                 },
             ],
@@ -88,31 +88,31 @@ const Shops = () => {
             clicked: false,
             variants: [
                 {
-                    variant: "Ծառայություններ",
+                    variant: "services",
                     selected: false,
                 },
                 {
-                    variant: "Ծառայություններ",
+                    variant: "services",
                     selected: false,
                 },
                 {
-                    variant: "Ծառայություններ",
+                    variant: "services",
                     selected: false,
                 },
                 {
-                    variant: "Ծառայություններ",
+                    variant: "services",
                     selected: false,
                 },
                 {
-                    variant: "Ծառայություններ",
+                    variant: "services",
                     selected: false,
                 },
                 {
-                    variant: "Ծառայություններ",
+                    variant: "services",
                     selected: false,
                 },
                 {
-                    variant: "Ծառայություններ",
+                    variant: "services",
                     selected: false,
                 },
             ],
@@ -122,31 +122,31 @@ const Shops = () => {
             clicked: false,
             variants: [
                 {
-                    variant: "Ժամանց",
+                    variant: "entertainment",
                     selected: false,
                 },
                 {
-                    variant: "Ժամանց",
+                    variant: "entertainment",
                     selected: false,
                 },
                 {
-                    variant: "Ժամանց",
+                    variant: "entertainment",
                     selected: false,
                 },
                 {
-                    variant: "Ժամանց",
+                    variant: "entertainment",
                     selected: false,
                 },
                 {
-                    variant: "Ժամանց",
+                    variant: "entertainment",
                     selected: false,
                 },
                 {
-                    variant: "Ժամանց",
+                    variant: "entertainment",
                     selected: false,
                 },
                 {
-                    variant: "Ժամանց",
+                    variant: "entertainment",
                     selected: false,
                 },
             ],
@@ -156,31 +156,31 @@ const Shops = () => {
             clicked: false,
             variants: [
                 {
-                    variant: "Գեղեցկություն",
+                    variant: "beauty",
                     selected: false,
                 },
                 {
-                    variant: "Գեղեցկություն",
+                    variant: "beauty",
                     selected: false,
                 },
                 {
-                    variant: "Գեղեցկություն",
+                    variant: "beauty",
                     selected: false,
                 },
                 {
-                    variant: "Գեղեցկություն",
+                    variant: "beauty",
                     selected: false,
                 },
                 {
-                    variant: "Գեղեցկություն",
+                    variant: "beauty",
                     selected: false,
                 },
                 {
-                    variant: "Գեղեցկություն",
+                    variant: "beauty",
                     selected: false,
                 },
                 {
-                    variant: "Գեղեցկություն",
+                    variant: "beauty",
                     selected: false,
                 },
             ],
@@ -190,31 +190,31 @@ const Shops = () => {
             clicked: false,
             variants: [
                 {
-                    variant: "Առողջություն/Խնամք",
+                    variant: "healthCare",
                     selected: false,
                 },
                 {
-                    variant: "Առողջություն/Խնամք",
+                    variant: "healthCare",
                     selected: false,
                 },
                 {
-                    variant: "Առողջություն/Խնամք",
+                    variant: "healthCare",
                     selected: false,
                 },
                 {
-                    variant: "Առողջություն/Խնամք",
+                    variant: "healthCare",
                     selected: false,
                 },
                 {
-                    variant: "Առողջություն/Խնամք",
+                    variant: "healthCare",
                     selected: false,
                 },
                 {
-                    variant: "Առողջություն/Խնամք",
+                    variant: "healthCare",
                     selected: false,
                 },
                 {
-                    variant: "Առողջություն/Խնամք",
+                    variant: "healthCare",
                     selected: false,
                 },
             ],
@@ -341,7 +341,7 @@ const Shops = () => {
                                                                                 ""
                                                                             )}
                                                                         </div>
-                                                                        {variant.variant} {index}
+                                                                        {t2(variant.variant)} {index}
                                                                     </div>
                                                                 );
                                                             })
@@ -418,7 +418,7 @@ const Shops = () => {
                                                                         ""
                                                                     )}
                                                                 </div>
-                                                                {variant.variant} {index}
+                                                                {t2(variant.variant)} {index}
                                                             </div>
                                                         );
                                                     })

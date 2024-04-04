@@ -352,6 +352,7 @@
             margin: 0 5px;
             border-radius: 50%;
             background-color: white;
+            list-style-type: none;
 
             &::marker {
                 content: "";
@@ -459,6 +460,20 @@
                 a.shop-link {
                     .suggested-pages-box {
                         width: 100%;
+                        .hover-box {
+                            flex-direction: row;
+                            position: static;
+                            opacity: 1;
+                            height: 50px;
+
+                            &:hover {
+                                background-color: $btn-color-hover;
+                            }
+
+                            & > div {
+                                width: 10%;
+                            }
+                        }
                     }
                 }
             }

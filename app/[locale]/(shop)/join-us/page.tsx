@@ -199,7 +199,7 @@ const JoinUs = () => {
                             <div className="description-textarea">
                                 <textarea
                                     maxLength={150}
-                                    placeholder={t("descriptionArm")}
+                                    placeholder={t("descriptionEng")}
                                     value={descriptionEng}
                                     onChange={(e) => handleDescriptionEngChange(e)}
                                     className={validationCheck && descriptionEng.length < 4 ? "error-input" : ""}
@@ -220,7 +220,9 @@ const JoinUs = () => {
                                         src={uploadIcon}
                                         alt="Upload Icon"
                                     ></Image>
-                                    <p>{t("addImage")} (jpg,png)</p>
+                                    <p>
+                                        {t("addImage")} <br /> (jpg,png,svg)
+                                    </p>
                                     <input
                                         type="file"
                                         name="logo"
@@ -253,9 +255,7 @@ const JoinUs = () => {
                                     {t2("imageEmptyError")}
                                 </p>
                             ) : !validExtensionPfp ? (
-                                <p className={(validationCheck ? "error " : "") + "error-text"}>
-                                    {t2("onlyJPGorPNG")}
-                                </p>
+                                <p className={(validationCheck ? "error " : "") + "error-text"}>{t2("onlyJPGorPNG")}</p>
                             ) : (
                                 <p className={(validationCheck && !validSizePfp ? "error " : "") + "error-text"}>
                                     {t2("imageExceedsLimitError")}

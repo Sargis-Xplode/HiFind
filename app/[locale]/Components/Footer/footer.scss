@@ -53,6 +53,11 @@
             }
         }
 
+        .footer-links-container.english-format {
+            box-sizing: border-box;
+            padding-left: 130px;
+        }
+
         .footer-info-container {
             height: 100%;
             display: flex;
@@ -120,6 +125,10 @@
                 div {
                     justify-content: center;
                 }
+            }
+
+            .footer-links-container.english-format {
+                padding-left: 0;
             }
         }
     }

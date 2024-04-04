@@ -117,7 +117,7 @@ const Terms = () => {
                             : ""}
                     </div>
 
-                    <div className="users-text-container">
+                    <div className="users-text-container mobile-display-none">
                         <div className="users-name">{userName}</div>
                         <div className="users-text">{userText}</div>
                     </div>
