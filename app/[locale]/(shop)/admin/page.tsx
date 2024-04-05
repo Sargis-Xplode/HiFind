@@ -16,7 +16,6 @@ export default function Login() {
     const [validation, setValidation] = useState(false);
 
     const router = useRouter();
-
     const localActive = useLocale();
 
     const handleSubmit = async (e: any) => {
@@ -29,7 +28,7 @@ export default function Login() {
                 password,
             };
             const res = await axios
-                .post("/api/admin/login/", JSON.stringify(body))
+                .post("api/admin/login", JSON.stringify(body))
                 .then((data) => {
                     console.log(data);
                 })
