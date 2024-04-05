@@ -1,28 +1,29 @@
-"use client"
-// import { useEffect, useState } from "react"
-import "./page.scss"
-// import axios from "axios"
-import Image from "next/image"
+"use client";
+import { useEffect, useState } from "react";
+import "./page.scss";
+import axios from "axios";
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import editIcon from "../../../../Assets/edit-icon.svg";
 import deleteIcon from "../../../../Assets/delete-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
+import { useRouter } from "next/navigation";
+import { checkAuth } from "../../utils/auth";
 
 const CategoriesList = () => {
-    // const [email, setEmail] = useState("")
+    const router = useRouter();
 
-    // useEffect(() => {
-    //     axios.get('/api/admin/login/')
-    //         .then((data: any) => {
-    //             console.log(data.data.data[0].email)
-    //             setEmail(data.data.data[0].email)
-    //         })
-    //         .catch((error) => {
-    //             console.error(error);
-    //         });
-    // }, [])
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            router.push("/");
+        } else {
+            checkAuth(token);
+        }
+    }, []);
 
     return (
         <section>
@@ -39,10 +40,10 @@ const CategoriesList = () => {
                 </div>
             </main>
         </section>
-    )
-}
+    );
+};
 
-export default CategoriesList
+export default CategoriesList;
 
 const CategoryItem: any = (props: any) => {
     return (
@@ -53,12 +54,18 @@ const CategoryItem: any = (props: any) => {
             </div>
             <div className="edit-delete-icons">
                 <div>
-                    <Image src={editIcon} alt="Edit Icon"></Image>
+                    <Image
+                        src={editIcon}
+                        alt="Edit Icon"
+                    ></Image>
                 </div>
                 <div>
-                    <Image src={deleteIcon} alt="Edit Icon"></Image>
+                    <Image
+                        src={deleteIcon}
+                        alt="Edit Icon"
+                    ></Image>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

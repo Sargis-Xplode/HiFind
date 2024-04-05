@@ -9,9 +9,16 @@ import userMinusIcon from "../../../../Assets/user-minus-icon.svg";
 import filterIcon from "../../../../Assets/filter-icon.svg";
 import Link from "next/link";
 import { useLocale } from "next-intl";
+import { useRouter } from "next/navigation";
 
 const AdminAsidePanel = () => {
     const localActive = useLocale();
+    const router = useRouter();
+
+    const logOut = () => {
+        localStorage.removeItem("token");
+        router.push("/");
+    };
 
     return (
         <aside>
@@ -62,7 +69,7 @@ const AdminAsidePanel = () => {
                     </div>
                 </nav>
             </div>
-            <div>
+            <div onClick={logOut}>
                 <Image
                     src={signOutIcon}
                     alt="Sign Out Icon"

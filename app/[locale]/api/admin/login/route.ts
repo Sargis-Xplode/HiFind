@@ -1,23 +1,51 @@
 import { NextResponse } from "next/server";
 import { NextApiRequest, NextApiResponse } from "next";
-
 import Admin from "../../../(models)/Admin";
+import jwt from "jsonwebtoken";
+import crypto from "crypto";
 
-export async function POST(req: any, res: NextApiResponse) {
-    try {
-        const body = await req.json();
-        await Admin.create(body);
-        return NextResponse.json({ message: "Admin Created" }, { status: 201 });
-    } catch (error) {
-        return NextResponse.json({ message: "Error", error }, { status: 500 });
-    }
+const secretKey = crypto.randomBytes(32).toString("hex");
+const JWT_SECRET = secretKey;
+
+function generateToken(userId: string) {
+    return jwt.sign({ userId }, JWT_SECRET, { expiresIn: "1h" });
 }
 
-export async function GET(req: any, res: NextApiResponse) {
+export async function POST(req: any, res: NextApiResponse) {
+    const body = await req.json();
+    const { email, password } = body;
+
     try {
-        const data = await Admin.find();
-        return NextResponse.json({ data }, { status: 201 });
+        const user = await Admin.findOne({ email });
+
+        if (!user) {
+            return NextResponse.json({
+                message: "Invalid Email",
+                success: false,
+                user: {},
+            });
+        }
+
+        if (password !== user.password) {
+            return NextResponse.json({
+                message: "Invalid Password",
+                success: false,
+                user: { email },
+            });
+        }
+
+        const token = generateToken(user._id);
+        return NextResponse.json(
+            {
+                message: "Login Successful",
+                success: true,
+                user: { email },
+                token,
+            },
+            { status: 200 }
+        );
     } catch (error) {
+        console.error(error);
         return NextResponse.json({ message: "Error", error }, { status: 500 });
     }
 }

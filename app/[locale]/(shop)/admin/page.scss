@@ -44,10 +44,20 @@ section {
                     font-size: 16px;
                 }
 
-                .button.disabled{
-                    background-color: #F5F5F5;
-                    color: #D4D4D8;
+                .button.disabled {
+                    background-color: #f5f5f5;
+                    color: #d4d4d8;
                 }
+            }
+
+            .error {
+                border-color: red;
+            }
+
+            .error {
+                color: red;
+                font-size: 12px;
+                margin-top: 5px;
             }
         }
     }

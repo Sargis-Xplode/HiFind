@@ -1,27 +1,31 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import "./page.scss";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import logo from "../../../../Assets/logo.svg";
 import { useLocale } from "next-intl";
 
 export default function Login() {
     const [email, setEmail] = useState("");
+    const [emailValid, setEmailValid] = useState(false);
     const [password, setPassword] = useState("");
+    const [passwordValid, setPasswordValid] = useState(false);
     const [error, setError] = useState("");
     const [validation, setValidation] = useState(false);
-
+    const [loginClicked, setLoginClicked] = useState(false);
     const router = useRouter();
     const localActive = useLocale();
 
     const handleSubmit = async (e: any) => {
-        // TODO add token validation from local storage, also check if DB already has that user or not
         if (!validation) return;
         e.preventDefault();
+        setLoginClicked(true);
         try {
             const body = {
                 email,
@@ -30,14 +34,30 @@ export default function Login() {
             const res = await axios
                 .post("api/admin/login", JSON.stringify(body))
                 .then((data) => {
-                    console.log(data);
+                    const Data = data.data;
+                    console.log(Data);
+
+                    if (Data.success) {
+                        const token = Data.token;
+                        localStorage.setItem("token", token);
+                        toast("Succesful Login", {
+                            type: "success",
+                        });
+
+                        router.push(`/${localActive}/dashboard/notifications`);
+                    } else {
+                        setError(Data.message);
+                        toast("You have entered incorrect email or password.", {
+                            type: "error",
+                        });
+                    }
                 })
                 .catch((error) => {
-                    console.error(error);
+                    setError(error.message);
+                    toast("Server Side Error", {
+                        type: "error",
+                    });
                 });
-            // const { token } = res.data;
-            // localStorage.setItem('token', token);
-            router.push(`/${localActive}/dashboard/notifications`);
         } catch (error) {
             console.error(error);
             setError("Something went wrong");
@@ -45,19 +65,23 @@ export default function Login() {
     };
 
     useEffect(() => {
-        let emailValid = false;
-        let passValid = false;
         const regex: any =
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         if (regex.test(email)) {
-            emailValid = true;
-        }
-        if (Number(password.length) > 7) {
-            passValid = true;
+            setEmailValid(true);
+        }else{
+            setEmailValid(false);
         }
 
-        if (emailValid && passValid) {
+        if (Number(password.length) > 7) {
+            setPasswordValid(true);
+        }else{
+            setPasswordValid(false);
+
+        }
+
+        if (emailValid && passwordValid) {
             setValidation(true);
         } else {
             setValidation(false);
@@ -66,6 +90,19 @@ export default function Login() {
 
     return (
         <section>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+
             <div className="container">
                 <div className="modal">
                     <Image
@@ -78,22 +115,27 @@ export default function Login() {
                     >
                         <p>Էլ. հասցե</p>
                         <input
-                            className="input"
+                            className={(emailValid ? "" : "input-error ") + "input"}
                             type="email"
                             placeholder="Էլ. հասցե"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
                         />
+                        {!emailValid && loginClicked && <p className="error">Invalid email</p>}
+
                         <p>Գաղտնաբառ</p>
                         <input
-                            className="input"
+                            className={(passwordValid ? "" : "input-error ") + "input"}
                             type="password"
                             placeholder="Գաղտնաբառ"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
+                            autoComplete="false"
                         />
+                        {!passwordValid && loginClicked && <p className="error">Invalid password</p>}
+
                         {validation ? (
                             <button
                                 type="submit"
@@ -111,7 +153,6 @@ export default function Login() {
                             </button>
                         )}
                     </form>
-                    {error && <p className="error">{error}</p>}
                 </div>
             </div>
         </section>

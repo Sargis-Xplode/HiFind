@@ -1,7 +1,7 @@
 "use client";
-// import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import "./page.scss";
-// import axios from "axios"
+import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -12,20 +12,21 @@ import sortLogo from "../../../../Assets/sort-icon.svg";
 import sendIcon from "../../../../Assets/send-icon.svg";
 import deleteIcon from "../../../../Assets/delete-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
+import { useRouter } from "next/navigation";
+import { checkAuth } from "../../utils/auth";
 
 const Denied = () => {
-    // const [email, setEmail] = useState("")
+    const router = useRouter();
 
-    // useEffect(() => {
-    //     axios.get('/api/admin/login/')
-    //         .then((data: any) => {
-    //             console.log(data.data.data[0].email)
-    //             setEmail(data.data.data[0].email)
-    //         })
-    //         .catch((error) => {
-    //             console.error(error);
-    //         });
-    // }, [])
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            router.push("/");
+        } else {
+            checkAuth(token);
+        }
+    }, []);
 
     return (
         <section>
