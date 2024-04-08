@@ -61,8 +61,10 @@ export default function Header(props: any) {
                 lang.selected = true;
                 setSelectedLanguage(lang.text);
                 nextLocale = lang.value;
-                const newPath = path.replace(`/${localActive}/`, `/${lang.value}/`);
+                const newPath = path.replace(`/${localActive}`, `/${nextLocale}`);
 
+                console.log(newPath);
+                console.log(localActive, nextLocale);
                 startTransition(() => {
                     push(newPath);
                 });
