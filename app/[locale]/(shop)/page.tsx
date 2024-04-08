@@ -1,10 +1,9 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 import "./page.scss";
-import { recentShopsFile } from "../../../Assets/js/assets";
 import shopBox from "../../../types/shopBox";
 
 import Header from "../Components/Header/Header";
@@ -18,12 +17,31 @@ import brushIcon from "../../../Assets/brush.svg";
 import heartPlusIcon from "../../../Assets/heart-plus.svg";
 import aboutUsImg from "../../../Assets/about-us-img.svg";
 import { useLocale, useTranslations } from "next-intl";
+import axios from "axios";
 
 export default function Home() {
-    const [recentShops, setRecentShops] = useState(recentShopsFile);
     const t = useTranslations("homePage");
     const t2 = useTranslations("homepageBanner");
     const localActive = useLocale();
+
+    const [recentShops, setRecentShops] = useState([]);
+
+    useEffect(() => {
+        axios
+            .get(`${localActive}/api/shop/all`)
+            .then((res) => {
+                const shops = res.data.shops;
+                const arr: any = [];
+
+                for (let i = shops.length - 1; i >= shops.length - 8; i--) {
+                    arr.push(shops[i]);
+                }
+                setRecentShops(arr);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     return (
         <main className="main">
@@ -107,14 +125,24 @@ export default function Home() {
                     <h3>{t("recommendedPages")}</h3>
                     <div className="boxes-container">
                         {recentShops.map((shop, index) => {
+                            const {
+                                buisnessName,
+                                descriptionArm,
+                                descriptionEng,
+                                instaPageLink,
+                                instaPfpPreview,
+                                subCategories,
+                            } = shop;
+
                             return (
                                 <Shop
                                     key={index}
-                                    categoryIcon={shop.categoryIcon}
-                                    brandLogo={shop.brandLogo}
-                                    shopName={shop.shopName}
-                                    shopInstaName={shop.shopInstaName}
-                                    shopDescription={shop.shopDescription}
+                                    buisnessName={buisnessName}
+                                    descriptionArm={descriptionArm}
+                                    descriptionEng={descriptionEng}
+                                    instaPageLink={instaPageLink}
+                                    instaPfpPreview={""}
+                                    subCategories={subCategories}
                                 ></Shop>
                             );
                         })}
@@ -125,6 +153,7 @@ export default function Home() {
                 <section className="third-section">
                     <div className="img-container">
                         <Image
+                            priority
                             src={aboutUsImg}
                             alt="Picture of the author"
                         />

@@ -10,20 +10,19 @@ import editIcon from "../../../../Assets/edit-icon.svg";
 import deleteIcon from "../../../../Assets/delete-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import { useRouter } from "next/navigation";
-import { checkAuth } from "../../utils/auth";
 
 const CategoriesList = () => {
     const router = useRouter();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
+    // useEffect(() => {
+    //     const token = localStorage.getItem("token");
 
-        if (!token) {
-            router.push("/");
-        } else {
-            checkAuth(token);
-        }
-    }, []);
+    //     if (!token) {
+    //         router.push("/");
+    //     } else {
+    //         checkAuth(token);
+    //     }
+    // }, []);
 
     return (
         <section>

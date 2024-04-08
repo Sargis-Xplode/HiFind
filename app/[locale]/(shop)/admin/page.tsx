@@ -31,36 +31,33 @@ export default function Login() {
                 email,
                 password,
             };
-            const res = await axios
+            await axios
                 .post("api/admin/login", JSON.stringify(body))
-                .then((data) => {
-                    const Data = data.data;
-                    console.log(Data);
+                .then((res) => {
+                    const data = res.data;
+                    console.log(data);
 
-                    if (Data.success) {
-                        const token = Data.token;
-                        localStorage.setItem("token", token);
-                        toast("Succesful Login", {
+                    if (data.success) {
+                        toast(data.message, {
                             type: "success",
                         });
-
+                        localStorage.setItem("token", data.token);
                         router.push(`/${localActive}/dashboard/notifications`);
                     } else {
-                        setError(Data.message);
-                        toast("You have entered incorrect email or password.", {
+                        setError(data.message);
+                        toast(data.message, {
                             type: "error",
                         });
                     }
                 })
                 .catch((error) => {
                     setError(error.message);
-                    toast("Server Side Error", {
+                    toast(error.message, {
                         type: "error",
                     });
                 });
         } catch (error) {
             console.error(error);
-            setError("Something went wrong");
         }
     };
 
@@ -70,15 +67,14 @@ export default function Login() {
 
         if (regex.test(email)) {
             setEmailValid(true);
-        }else{
+        } else {
             setEmailValid(false);
         }
 
-        if (Number(password.length) > 7) {
+        if (Number(password.length) > 6) {
             setPasswordValid(true);
-        }else{
+        } else {
             setPasswordValid(false);
-
         }
 
         if (emailValid && passwordValid) {
@@ -86,7 +82,7 @@ export default function Login() {
         } else {
             setValidation(false);
         }
-    }, [email, password]);
+    }, [email, password, validation]);
 
     return (
         <section>
@@ -102,7 +98,6 @@ export default function Login() {
                 pauseOnHover
                 theme="light"
             />
-
             <div className="container">
                 <div className="modal">
                     <Image
@@ -112,11 +107,15 @@ export default function Login() {
                     <form
                         onSubmit={handleSubmit}
                         className="form"
+                        name="login"
                     >
                         <p>Էլ. հասցե</p>
                         <input
                             className={(emailValid ? "" : "input-error ") + "input"}
                             type="email"
+                            name="email"
+                            id="email"
+                            autoComplete="true"
                             placeholder="Էլ. հասցե"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -128,6 +127,8 @@ export default function Login() {
                         <input
                             className={(passwordValid ? "" : "input-error ") + "input"}
                             type="password"
+                            name="password"
+                            id="password"
                             placeholder="Գաղտնաբառ"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
@@ -146,7 +147,6 @@ export default function Login() {
                         ) : (
                             <button
                                 type="submit"
-                                disabled
                                 className={"button disabled"}
                             >
                                 Մուտք

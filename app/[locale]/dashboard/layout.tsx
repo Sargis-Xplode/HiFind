@@ -1,22 +1,38 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "../globals.scss";
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import checkAuth from "../middleware/auth";
+import { useLocale } from "next-intl";
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-    title: "HiFind",
-    description: "Developed By Xplode LLC",
-};
-
-export default function RootLayout({
+export default function DashboardLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const { push } = useRouter();
+    const localActive = useLocale();
+
+    const [isPending, setIsPending] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            push(`/${localActive}/admin`);
+        } else {
+            const res = checkAuth(token);
+            console.log(res);
+
+            if (!res.success) {
+                // push(`/${localActive}/admin`);
+            }
+        }
+    }, []);
     return (
         <html lang="en">
-            <body className={inter.className}>{children}</body>
+            <body>
+                {isPending && <p>Loading</p>}
+                {!isPending && children}
+            </body>
         </html>
     );
 }

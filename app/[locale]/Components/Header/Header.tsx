@@ -10,10 +10,10 @@ import { useRouter, usePathname, useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
 export default function Header(props: any) {
-    const router = useRouter();
+    const { push } = useRouter();
     const path = usePathname();
 
-    const { allShops, setFilteredShops } = props;
+    const { allShops, setFilteredShops, setSearchActive } = props;
     const [selectedLanguage, setSelectedLanguage] = useState("Հայ");
     const [languages, setLanguages] = useState([
         {
@@ -27,6 +27,7 @@ export default function Header(props: any) {
             selected: false,
         },
     ]);
+
     const t = useTranslations("header");
 
     const [isPending, startTransition] = useTransition();
@@ -36,19 +37,21 @@ export default function Header(props: any) {
 
     const changeSearchText = (e: any) => {
         setSearchText(e.target.value);
+        if (!e.target.value.length) setSearchActive(false);
     };
 
     const searchShops = () => {
-        if (path !== "/shops") {
-            router.push("/shops");
+        if (path !== `/${localActive}/shops`) {
+            push(`/${localActive}/shops`);
             return;
         }
         const filteredShops = allShops.filter((shop: any, index: number) => {
-            if (shop.shopName.includes(searchText) || shop.shopDescription.includes(searchText)) {
+            if (shop.buisnessName.includes(searchText) || shop.descriptionArm.includes(searchText)) {
                 return shop;
             }
         });
         setFilteredShops(filteredShops);
+        setSearchActive(true);
     };
 
     const changeLanguage = (ind: number) => {
@@ -58,9 +61,10 @@ export default function Header(props: any) {
                 lang.selected = true;
                 setSelectedLanguage(lang.text);
                 nextLocale = lang.value;
+                const newPath = path.replace(`/${localActive}/`, `/${lang.value}/`);
 
                 startTransition(() => {
-                    router.replace(`/${nextLocale}`);
+                    push(newPath);
                 });
             } else {
                 lang.selected = false;
@@ -91,7 +95,7 @@ export default function Header(props: any) {
                     <Link href={"/"}>
                         <Image
                             src={logo}
-                            alt="Picture of the author"
+                            alt="Logo"
                         />
                     </Link>
                 </div>
@@ -101,6 +105,7 @@ export default function Header(props: any) {
                             type="text"
                             placeholder={t("search_placeholder")}
                             value={searchText}
+                            name="search"
                             onChange={(e) => changeSearchText(e)}
                         />
                     </div>

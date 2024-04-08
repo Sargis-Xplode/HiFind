@@ -13,20 +13,19 @@ import editIcon from "../../../../Assets/edit-icon.svg";
 import deleteIcon from "../../../../Assets/delete-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import { useRouter } from "next/navigation";
-import { checkAuth } from "../../utils/auth";
 
 const Approved = () => {
     const router = useRouter();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
+    // useEffect(() => {
+    //     const token = localStorage.getItem("token");
 
-        if (!token) {
-            router.push("/");
-        } else {
-            checkAuth(token);
-        }
-    }, []);
+    //     if (!token) {
+    //         router.push("/");
+    //     } else {
+    //         checkAuth(token);
+    //     }
+    // }, []);
 
     return (
         <section>
@@ -36,6 +35,7 @@ const Approved = () => {
                 <div className="search">
                     <div className="search-input-container">
                         <input
+                            name="searchApproved"
                             type="text"
                             placeholder="Որոնել"
                         />
@@ -133,6 +133,7 @@ const TableRow = (props: any) => {
         <div className={newNotification ? "new" : ""}>
             <div className="brand-logo-name">
                 <Image
+                    priority
                     src={brandLogo}
                     alt="Brand Logo"
                 ></Image>

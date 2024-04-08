@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import "./page.scss";
-import { faCheckCircle, faChevronDown, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faChevronDown, faChevronUp, faUpload } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
@@ -12,9 +12,10 @@ import Image from "next/image";
 import uploadIcon from "../../../../Assets/upload-icon.svg";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import axios from "axios";
 
 const JoinUs = () => {
-    const router = useRouter();
+    const { push } = useRouter();
 
     const t = useTranslations("joinUsModalPage");
     const t2 = useTranslations("errors");
@@ -36,7 +37,181 @@ const JoinUs = () => {
     const [instaPfpPreview, setInstaPfpPreview] = useState("");
     const [validSizePfp, setValidSizePfp] = useState(false);
     const [validExtensionPfp, setValidExtensionPfp] = useState(false);
-    const [selectedCategoryCount, setSelectedCategoryCount] = useState(2);
+
+    const [categories, setCategories] = useState([
+        {
+            category: "shops",
+            clicked: false,
+            variants: [
+                {
+                    variant: "shops",
+                    selected: false,
+                },
+                {
+                    variant: "shops",
+                    selected: false,
+                },
+                {
+                    variant: "shops",
+                    selected: false,
+                },
+                {
+                    variant: "shops",
+                    selected: false,
+                },
+                {
+                    variant: "shops",
+                    selected: false,
+                },
+                {
+                    variant: "shops",
+                    selected: false,
+                },
+                {
+                    variant: "shops",
+                    selected: false,
+                },
+            ],
+        },
+        {
+            category: "services",
+            clicked: false,
+            variants: [
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+            ],
+        },
+        {
+            category: "entertainment",
+            clicked: false,
+            variants: [
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+            ],
+        },
+        {
+            category: "beauty",
+            clicked: false,
+            variants: [
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
+            ],
+        },
+        {
+            category: "healthCare",
+            clicked: false,
+            variants: [
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+            ],
+        },
+    ]);
+
+    const [subCategories, setSubCategories] = useState<any>([]);
 
     const toggleCheck = () => {
         setChecked(!checked);
@@ -106,7 +281,46 @@ const JoinUs = () => {
         }
     };
 
-    const handleSubmitJoinUs = () => {
+    const handleOpenDropDown = (index: number, categoryName: string) => {
+        clearFilters();
+        const arr = categories.map((categ, ind) => {
+            if (index === ind) {
+                categ.clicked = true;
+            } else {
+                categ.clicked = false;
+            }
+            return categ;
+        });
+        setCategories(arr);
+    };
+
+    const toggleCheckCategories = (categ: any, index: number) => {
+        categ.variants.map((vari: any, ind: number) => {
+            if (ind === index) {
+                vari.selected = !vari.selected;
+                const arr = [...subCategories, vari.variant];
+                setSubCategories(arr);
+                console.log(arr);
+            }
+            return vari;
+        });
+        setCategories([...categories]);
+    };
+
+    const clearFilters = () => {
+        const arr = categories.map((categ) => {
+            categ?.variants?.map((vari) => {
+                vari.selected = false;
+                return vari;
+            });
+            return categ;
+        });
+
+        setCategories(arr);
+        setSubCategories([]);
+    };
+
+    const handleSubmitJoinUs = async () => {
         setValidationCheck(true);
         if (
             buisnessName.length < 3 ||
@@ -116,12 +330,39 @@ const JoinUs = () => {
             descriptionEng.length < 3 ||
             !validSizePfp ||
             !validExtensionPfp ||
-            selectedCategoryCount === 0 ||
+            subCategories.length === 0 ||
             !checked
         ) {
             return;
         } else {
-            router.push("/success");
+            try {
+                const body = {
+                    buisnessName,
+                    email,
+                    instaPageLink,
+                    descriptionArm,
+                    descriptionEng,
+                    instaPfpPreview,
+                    subCategories,
+                };
+
+                console.log(typeof subCategories);
+                const res = await axios
+                    .post("api/shop/single", JSON.stringify(body))
+                    .then((res) => {
+                        const data = res.data;
+                        console.log(data);
+
+                        if (data.success) {
+                            push("success");
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
@@ -137,6 +378,7 @@ const JoinUs = () => {
                             <input
                                 type="text"
                                 placeholder={t("buissnessName")}
+                                name="buissnessName"
                                 value={buisnessName}
                                 onChange={(e) => handleBuisnessNameChange(e)}
                             />
@@ -148,6 +390,7 @@ const JoinUs = () => {
                             <input
                                 type="text"
                                 placeholder={t("emailAddr")}
+                                name="emailAddr"
                                 value={email}
                                 onChange={(e) => handleEmailChange(e)}
                             />
@@ -165,6 +408,7 @@ const JoinUs = () => {
                             <input
                                 type="text"
                                 placeholder={t("instaPageLink")}
+                                name="instaPageLink"
                                 value={instaPageLink}
                                 onChange={(e) => handleInstaLinkChange(e)}
                             />
@@ -183,6 +427,7 @@ const JoinUs = () => {
                                 <textarea
                                     maxLength={150}
                                     placeholder={t("descriptionArm")}
+                                    name="descriptionArm"
                                     value={descriptionArm}
                                     onChange={(e) => handleDescriptionArmChange(e)}
                                     className={validationCheck && descriptionArm.length < 4 ? "error-input" : ""}
@@ -200,6 +445,7 @@ const JoinUs = () => {
                                 <textarea
                                     maxLength={150}
                                     placeholder={t("descriptionEng")}
+                                    name="descriptionEng"
                                     value={descriptionEng}
                                     onChange={(e) => handleDescriptionEngChange(e)}
                                     className={validationCheck && descriptionEng.length < 4 ? "error-input" : ""}
@@ -264,7 +510,7 @@ const JoinUs = () => {
 
                             <ul>
                                 <li>{t("chooseCategory")}</li>
-                                <li>
+                                {/* <li>
                                     {t3("shops")} <FontAwesomeIcon icon={faChevronDown} />
                                 </li>
                                 <li>
@@ -278,11 +524,68 @@ const JoinUs = () => {
                                 </li>
                                 <li>
                                     {t3("healthCare")} <FontAwesomeIcon icon={faChevronDown} />
-                                </li>
+                                </li> */}
+                                {categories.length
+                                    ? categories.map((category, index) => {
+                                          return (
+                                              <div
+                                                  className="categories"
+                                                  key={index}
+                                              >
+                                                  <div
+                                                      className="categories-with-plus "
+                                                      onClick={() => handleOpenDropDown(index, category.category)}
+                                                  >
+                                                      {t3(category.category)}
+                                                      {category.clicked ? (
+                                                          <FontAwesomeIcon icon={faChevronUp} />
+                                                      ) : (
+                                                          <FontAwesomeIcon icon={faChevronDown} />
+                                                      )}
+                                                  </div>
+                                                  <div
+                                                      className={
+                                                          (category.clicked ? "clicked " : "") + "dropdown-slider"
+                                                      }
+                                                  >
+                                                      {category?.variants?.length
+                                                          ? category?.variants.map((variant, index) => {
+                                                                return (
+                                                                    <div
+                                                                        className="variant"
+                                                                        key={index}
+                                                                        onClick={() =>
+                                                                            toggleCheckCategories(category, index)
+                                                                        }
+                                                                    >
+                                                                        <div
+                                                                            className={
+                                                                                (variant.selected ? "checked " : "") +
+                                                                                "checkbox-round"
+                                                                            }
+                                                                        >
+                                                                            {variant.selected ? (
+                                                                                <FontAwesomeIcon
+                                                                                    icon={faCheckCircle}
+                                                                                ></FontAwesomeIcon>
+                                                                            ) : (
+                                                                                ""
+                                                                            )}
+                                                                        </div>
+                                                                        {t3(variant.variant)} {index}
+                                                                    </div>
+                                                                );
+                                                            })
+                                                          : ""}
+                                                  </div>
+                                              </div>
+                                          );
+                                      })
+                                    : ""}
                             </ul>
                             <p
                                 className={
-                                    (validationCheck && selectedCategoryCount === 0 ? "error " : "") + "error-text"
+                                    (validationCheck && subCategories.length === 0 ? "error " : "") + "error-text"
                                 }
                             >
                                 {t2("chooseCategoryError")}
@@ -304,7 +607,7 @@ const JoinUs = () => {
                             </div>
 
                             <button
-                                type="submit"
+                                type="button"
                                 className={"button" + (checked ? "" : " disabled")}
                                 onClick={handleSubmitJoinUs}
                             >

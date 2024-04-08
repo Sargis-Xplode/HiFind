@@ -1,40 +1,28 @@
 import { NextResponse } from "next/server";
-import { NextApiRequest, NextApiResponse } from "next";
 import Admin from "../../../(models)/Admin";
-import jwt from "jsonwebtoken";
-import crypto from "crypto";
+import { sign } from "jsonwebtoken";
+import { SECRET_KEY } from "../../../utils/auth";
+import connectDB from "../../../server/connectDB";
 
-const secretKey = crypto.randomBytes(32).toString("hex");
-const JWT_SECRET = secretKey;
+export async function POST(req: Request) {
+    await connectDB();
 
-function generateToken(userId: string) {
-    return jwt.sign({ userId }, JWT_SECRET, { expiresIn: "1h" });
-}
-
-export async function POST(req: any, res: NextApiResponse) {
     const body = await req.json();
     const { email, password } = body;
 
     try {
         const user = await Admin.findOne({ email });
 
-        if (!user) {
+        if (!user || password !== user.password) {
             return NextResponse.json({
-                message: "Invalid Email",
+                message: "You have entered incorrect email or password.",
                 success: false,
                 user: {},
             });
         }
 
-        if (password !== user.password) {
-            return NextResponse.json({
-                message: "Invalid Password",
-                success: false,
-                user: { email },
-            });
-        }
+        const token = sign({ email }, SECRET_KEY, { expiresIn: "1h" });
 
-        const token = generateToken(user._id);
         return NextResponse.json(
             {
                 message: "Login Successful",

@@ -1,16 +1,1 @@
-import axios from "axios";
-
-export const checkAuth = async (token: string) => {
-    const url = "api/protectedRoute";
-    const headers = {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-    };
-
-    try {
-        const response = await axios.get(url, { headers });
-        console.log("Data:", response.data);
-    } catch (error) {
-        console.error("Error fetching data:", error);
-    }
-};
+export const SECRET_KEY = "c8676e9436aa729f6b9dc3544ae7130a03d7d1bb1d1411866703e1a10e9f1a33";

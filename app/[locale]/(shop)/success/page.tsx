@@ -6,17 +6,19 @@ import "./page.scss";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const SuccessfulSubmition = () => {
     const t = useTranslations("success");
 
-    const router = useRouter();
+    const { push } = useRouter();
+    const localActive = useLocale();
+
     useEffect(() => {
         setTimeout(() => {
-            router.push("/");
+            push(`/${localActive}/shops`);
         }, 5000);
-    }, [router]);
+    }, []);
 
     return (
         <div>

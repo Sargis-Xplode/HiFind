@@ -7,16 +7,17 @@ import Header from "../../Components/Header/Header";
 import Shop from "../../Components/Shop/Shop";
 import "./page.scss";
 
-import { allShops, allFilteredShops } from "../../../../Assets/js/assets";
 import ReactPaginate from "react-paginate";
 import { useTranslations } from "next-intl";
+import axios from "axios";
 
 const Shops = () => {
     const t = useTranslations("shopsPage");
     const t2 = useTranslations("homePage");
 
-    const [shops, setShops] = useState(allShops);
-    const [filteredShops, setFilteredShops] = useState<any>(allFilteredShops);
+    const [shops, setShops] = useState([]);
+    const [filteredShops, setFilteredShops] = useState([]);
+    const [searchActive, setSearchActive] = useState(false);
     const [currentItems, setCurrentItems] = useState(shops);
     const [heading, setHeading] = useState("shops");
 
@@ -27,26 +28,44 @@ const Shops = () => {
     const [pageCount, setPageCount] = useState(0);
     const [atLeastOneVariantSelected, setAtLeastOneVariantSelected] = useState(false);
 
+    useEffect(() => {
+        axios
+            .get("api/shop/all")
+            .then((res) => {
+                const shops = res.data.shops;
+                setShops(shops.reverse());
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (shops.length) {
+            setEndOffSet(itemOffSet + itemsPerPage);
+            const arr =
+                filteredShops.length > 0
+                    ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage)
+                    : !searchActive
+                    ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
+                    : [];
+
+            setCurrentItems(arr);
+
+            const count =
+                filteredShops.length > 0
+                    ? Math.ceil(filteredShops.length / itemsPerPage)
+                    : !searchActive
+                    ? Math.ceil(shops.length / itemsPerPage)
+                    : 0;
+            setPageCount(count);
+        }
+    }, [shops, itemOffSet, filteredShops, searchActive]);
+
     const handlePageClick = (e: any) => {
         const newOffset = (e.selected * itemsPerPage) % shops.length;
         setItemOffSet(newOffset);
     };
-
-    useEffect(() => {
-        setEndOffSet(itemOffSet + itemsPerPage);
-        const arr =
-            filteredShops.length > 0
-                ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                : shops.slice(itemOffSet, itemOffSet + itemsPerPage);
-
-        setCurrentItems(arr);
-
-        const count =
-            filteredShops.length > 0
-                ? Math.ceil(filteredShops.length / itemsPerPage)
-                : Math.ceil(shops.length / itemsPerPage);
-        setPageCount(count);
-    }, [itemOffSet, filteredShops]);
 
     const [categories, setCategories] = useState([
         {
@@ -277,7 +296,8 @@ const Shops = () => {
         <div>
             <Header
                 setFilteredShops={setFilteredShops}
-                allShops={allShops}
+                allShops={shops}
+                setSearchActive={setSearchActive}
             ></Header>
             <section className="shops-section">
                 <h2>{t2(heading)}</h2>
@@ -446,28 +466,48 @@ const Shops = () => {
                             <FontAwesomeIcon icon={faFilter} />
                         </div>
 
-                        {currentItems.map((shop, index) => (
-                            <Shop
-                                key={index}
-                                categoryIcon={shop.categoryIcon}
-                                brandLogo={shop.brandLogo}
-                                shopName={shop.shopName}
-                                shopInstaName={shop.shopInstaName}
-                                shopDescription={shop.shopDescription}
-                            ></Shop>
-                        ))}
+                        {currentItems.length > 0 ? (
+                            currentItems.map((shop, index) => {
+                                const {
+                                    buisnessName,
+                                    descriptionArm,
+                                    descriptionEng,
+                                    instaPageLink,
+                                    instaPfpPreview,
+                                    subCategories,
+                                } = shop;
+                                return (
+                                    <Shop
+                                        key={index}
+                                        buisnessName={buisnessName}
+                                        descriptionArm={descriptionArm}
+                                        descriptionEng={descriptionEng}
+                                        instaPageLink={instaPageLink}
+                                        instaPfpPreview={""}
+                                        subCategories={subCategories}
+                                    ></Shop>
+                                );
+                            })
+                        ) : (
+                            <div>
+                                <h1>{t("noResults")}</h1>
+                                <p>{t("trySearchingSmthElse")}</p>
+                            </div>
+                        )}
                     </div>
                 </div>
-                <ReactPaginate
-                    breakLabel="..."
-                    nextLabel=">"
-                    onPageChange={(e) => handlePageClick(e)}
-                    pageRangeDisplayed={3}
-                    pageCount={pageCount}
-                    previousLabel="<"
-                    renderOnZeroPageCount={null}
-                    activeClassName={"selected-page"}
-                />
+                {pageCount >= 2 && (
+                    <ReactPaginate
+                        breakLabel="..."
+                        nextLabel=">"
+                        onPageChange={(e) => handlePageClick(e)}
+                        pageRangeDisplayed={3}
+                        pageCount={pageCount}
+                        previousLabel="<"
+                        renderOnZeroPageCount={null}
+                        activeClassName={"selected-page"}
+                    />
+                )}
             </section>
             <Footer></Footer>
         </div>

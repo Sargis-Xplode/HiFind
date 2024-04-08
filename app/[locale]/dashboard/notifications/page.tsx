@@ -11,20 +11,19 @@ import brandLogo from "../../../../Assets/brand-logo.svg";
 import sortLogo from "../../../../Assets/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import { useRouter } from "next/navigation";
-import { checkAuth } from "../../utils/auth";
 
 const Notification = () => {
     const router = useRouter();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
+    // useEffect(() => {
+    //     const token = localStorage.getItem("token");
 
-        if (!token) {
-            router.push("/");
-        } else {
-            checkAuth(token);
-        }
-    }, []);
+    //     if (!token) {
+    //         router.push("/");
+    //     } else {
+    //         console.log(checkAuth(token));
+    //     }
+    // }, []);
 
     return (
         <section>
@@ -116,6 +115,7 @@ const TableRow = (props: any) => {
         <div className={newNotification ? "new" : ""}>
             <div className="brand-logo-name">
                 <Image
+                    priority
                     src={brandLogo}
                     alt="Brand Logo"
                 ></Image>

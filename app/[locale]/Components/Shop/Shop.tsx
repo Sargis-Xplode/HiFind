@@ -5,12 +5,20 @@ import "./shop.scss";
 import ShopInteface from "../../../../types/shopBox";
 import Link from "next/link";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import brandLogo from "../../../../Assets/brand-logo.svg";
+import categoryIcon from "../../../../Assets/brush-icon.svg";
 
-const Shop = ({ categoryIcon, brandLogo, shopName, shopInstaName, shopDescription }: ShopInteface) => {
-    const link = "https://www.instagram.com/rodeni_shop/";
+const Shop = ({
+    buisnessName,
+    descriptionArm,
+    descriptionEng,
+    instaPageLink,
+    instaPfpPreview = brandLogo,
+    subCategories,
+}: ShopInteface) => {
     return (
         <Link
-            href={link}
+            href={instaPageLink}
             className="shop-link"
             target="_blank"
         >
@@ -23,19 +31,27 @@ const Shop = ({ categoryIcon, brandLogo, shopName, shopInstaName, shopDescriptio
                 </div>
                 <div className="box-image-container">
                     <Image
+                        priority
                         src={brandLogo}
                         alt="Picture of the author"
                     />
                 </div>
                 <div className="box-text-container">
-                    <p>{shopName}</p>
-                    <p>{shopDescription}</p>
+                    <p>{buisnessName}</p>
+                    <p>{descriptionArm}</p>
+                </div>
+                <div className="box-tags-container">
+                    <div>
+                        {subCategories.map((tag, index: number) => {
+                            return <p key={index}>{tag}</p>;
+                        })}
+                    </div>
                 </div>
                 <div className="hover-box">
                     <div>
                         <FontAwesomeIcon icon={faInstagram} />
                     </div>
-                    <p>{shopInstaName}</p>
+                    <p>{instaPageLink}</p>
                 </div>
             </div>
         </Link>

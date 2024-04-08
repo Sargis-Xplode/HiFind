@@ -1,44 +1,31 @@
-import { NextResponse } from "next/server";
-import { NextApiRequest, NextApiResponse } from "next";
 import jwt from "jsonwebtoken";
-import crypto from "crypto";
-
-const secretKey = crypto.randomBytes(32).toString("hex");
-const JWT_SECRET = secretKey;
-
-interface DecodedToken {
-    userId: string;
-}
-
-declare module "next" {
-    interface NextApiRequest {
-        adminId?: string;
-    }
-}
+import { SECRET_KEY } from "../utils/auth";
 
 // Middleware to check if admin is logged in
-export function requireAdminAuth(handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>) {
-    return async (req: NextApiRequest, res: NextApiResponse) => {
-        const token = req.headers.authorization?.replace("Bearer ", ""); // Get token from authorization header
+export default function checkAuth(token: string) {
+    if (!token) {
+        return {
+            message: "Unauthorized",
+            success: false,
+            user: {},
+        };
+    }
 
-        if (!token) {
-            return NextResponse.json({
-                message: "Unauthorized",
-                success: false,
-                user: {},
-            });
-        }
+    try {
+        console.log(jwt.decode(token));
 
-        try {
-            const decoded = jwt.verify(token, JWT_SECRET) as DecodedToken;
-            req.adminId = decoded.userId; // Attach adminId to request object for later use
-            return handler(req, res);
-        } catch (error) {
-            return NextResponse.json({
-                message: "Invalid token",
-                success: false,
-                user: {},
-            });
-        }
-    };
+        jwt.verify(token, SECRET_KEY);
+
+        return {
+            message: "Successfully Authorized",
+            success: true,
+            user: {},
+        };
+    } catch (error) {
+        return {
+            message: "Invalid token",
+            success: false,
+            user: {},
+        };
+    }
 }

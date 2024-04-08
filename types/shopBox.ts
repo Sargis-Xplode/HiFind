@@ -1,9 +1,10 @@
 interface Shop {
-    categoryIcon: string;
-    brandLogo: string;
-    shopName: string;
-    shopInstaName: string;
-    shopDescription: string;
-  }
-  
-  export default Shop;
+    buisnessName: string;
+    descriptionArm: string;
+    descriptionEng: string;
+    instaPageLink: string;
+    instaPfpPreview: string;
+    subCategories: Array<string>;
+}
+
+export default Shop;
