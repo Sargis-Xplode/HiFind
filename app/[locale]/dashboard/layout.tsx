@@ -4,6 +4,14 @@ import { useEffect, useState } from "react";
 import checkAuth from "../middleware/auth";
 import { useLocale } from "next-intl";
 
+import { Roboto } from "next/font/google";
+import jwt from "jsonwebtoken";
+import { SECRET_KEY } from "../utils/auth";
+
+import "../globals.scss";
+
+const roboto = Roboto({ weight: "400", subsets: ["latin"] });
+
 export default function DashboardLayout({
     children,
 }: Readonly<{
@@ -15,21 +23,29 @@ export default function DashboardLayout({
     const [isPending, setIsPending] = useState(false);
 
     useEffect(() => {
+        setIsPending(true);
         const token = localStorage.getItem("token");
         if (!token) {
             push(`/${localActive}/admin`);
         } else {
-            const res = checkAuth(token);
-            console.log(res);
-
-            if (!res.success) {
-                // push(`/${localActive}/admin`);
-            }
+            // try {
+            //     jwt.verify(token, SECRET_KEY);
+            //     console.log("Success");
+            // } catch (error) {
+            //     console.log(error);
+            // }
+            checkAuth(token, "admin@gmail.com").then((data) => {
+                if (!data.success) {
+                    push(`/${localActive}/admin`);
+                } else {
+                    setIsPending(false);
+                }
+            });
         }
     }, []);
     return (
         <html lang="en">
-            <body>
+            <body className={roboto.className}>
                 {isPending && <p>Loading</p>}
                 {!isPending && children}
             </body>

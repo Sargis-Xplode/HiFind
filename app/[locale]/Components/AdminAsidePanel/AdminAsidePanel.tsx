@@ -11,7 +11,8 @@ import Link from "next/link";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
-const AdminAsidePanel = () => {
+const AdminAsidePanel = (props: any) => {
+    const { selected } = props;
     const localActive = useLocale();
     const router = useRouter();
 
@@ -30,17 +31,17 @@ const AdminAsidePanel = () => {
                     ></Image>
                 </Link>
                 <nav>
-                    <div>
+                    <div className={selected === "notifications" ? "selected" : ""}>
                         <Link href={`/${localActive}/dashboard/notifications`}>
                             <Image
                                 src={bellIcon}
                                 alt="Bell Icon"
                             ></Image>
                             <div>Ծանուցումներ</div>
-                            <span>3</span>
+                            <span>2</span>
                         </Link>
                     </div>
-                    <div className="selected">
+                    <div className={selected === "approved" ? "selected" : ""}>
                         <Link href={`/${localActive}/dashboard/approved`}>
                             <Image
                                 src={userCheckIcon}
@@ -49,7 +50,7 @@ const AdminAsidePanel = () => {
                             <div>Հաստատված հաշիվներ</div>
                         </Link>
                     </div>
-                    <div>
+                    <div className={selected === "denied" ? "selected" : ""}>
                         <Link href={`/${localActive}/dashboard/denied`}>
                             <Image
                                 src={userMinusIcon}
@@ -58,7 +59,7 @@ const AdminAsidePanel = () => {
                             <div>Մերժված հայտեր</div>
                         </Link>
                     </div>
-                    <div>
+                    <div className={selected === "categories-list" ? "selected" : ""}>
                         <Link href={`/${localActive}/dashboard/categories-list`}>
                             <Image
                                 src={filterIcon}

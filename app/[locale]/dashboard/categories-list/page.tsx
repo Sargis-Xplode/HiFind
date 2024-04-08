@@ -26,7 +26,7 @@ const CategoriesList = () => {
 
     return (
         <section>
-            <AdminAsidePanel></AdminAsidePanel>
+            <AdminAsidePanel selected={"categories-list"}></AdminAsidePanel>
             <main>
                 <h2>Ընտրացանկ</h2>
 

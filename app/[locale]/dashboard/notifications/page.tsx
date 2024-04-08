@@ -11,6 +11,7 @@ import brandLogo from "../../../../Assets/brand-logo.svg";
 import sortLogo from "../../../../Assets/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import { useRouter } from "next/navigation";
+import TableRow from "../../Components/TableRow/page";
 
 const Notification = () => {
     const router = useRouter();
@@ -27,7 +28,7 @@ const Notification = () => {
 
     return (
         <section>
-            <AdminAsidePanel></AdminAsidePanel>
+            <AdminAsidePanel selected={"notifications"}></AdminAsidePanel>
             <main>
                 <h2>Ծանուցումներ</h2>
 
@@ -108,55 +109,3 @@ const Notification = () => {
 };
 
 export default Notification;
-
-const TableRow = (props: any) => {
-    const { newNotification, brandName, email, link, descriptionArm, descriptionEng, categories, date } = props;
-    return (
-        <div className={newNotification ? "new" : ""}>
-            <div className="brand-logo-name">
-                <Image
-                    priority
-                    src={brandLogo}
-                    alt="Brand Logo"
-                ></Image>
-                <p>{brandName}</p>
-            </div>
-            <div className="email">
-                <p>{email}</p>
-            </div>
-            <div className="link">
-                <Link href={link}>{link}</Link>
-            </div>
-            <div className="desc-arm-eng">
-                <p>{descriptionArm}</p>
-                <p>{descriptionEng}</p>
-            </div>
-            <div className="categories">
-                {categories.length &&
-                    categories.map((category: any, index: number) => {
-                        return (
-                            <div
-                                key={index}
-                                className="category"
-                            >
-                                {category}
-                            </div>
-                        );
-                    })}
-            </div>
-            <div className="date">
-                <p>{date}</p>
-            </div>
-            <div className="approve-reject-icons">
-                <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    title="Ընդունել"
-                ></FontAwesomeIcon>
-                <FontAwesomeIcon
-                    icon={faXmarkCircle}
-                    title="Մերժել"
-                ></FontAwesomeIcon>
-            </div>
-        </div>
-    );
-};

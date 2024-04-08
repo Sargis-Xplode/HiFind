@@ -29,7 +29,7 @@ const Denied = () => {
 
     return (
         <section>
-            <AdminAsidePanel></AdminAsidePanel>
+            <AdminAsidePanel selected={"denied"}></AdminAsidePanel>
             <main>
                 <h2>Մերժված հայտեր</h2>
                 <div className="search">

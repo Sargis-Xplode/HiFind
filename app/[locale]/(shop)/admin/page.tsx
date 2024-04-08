@@ -35,7 +35,7 @@ export default function Login() {
                 .post("api/admin/login", JSON.stringify(body))
                 .then((res) => {
                     const data = res.data;
-                    console.log(data);
+                    console.log(res);
 
                     if (data.success) {
                         toast(data.message, {
@@ -115,7 +115,7 @@ export default function Login() {
                             type="email"
                             name="email"
                             id="email"
-                            autoComplete="true"
+                            autoComplete="email"
                             placeholder="Էլ. հասցե"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -133,7 +133,6 @@ export default function Login() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            autoComplete="false"
                         />
                         {!passwordValid && loginClicked && <p className="error">Invalid password</p>}
 

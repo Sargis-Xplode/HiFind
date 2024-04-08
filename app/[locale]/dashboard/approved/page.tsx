@@ -29,7 +29,7 @@ const Approved = () => {
 
     return (
         <section>
-            <AdminAsidePanel></AdminAsidePanel>
+            <AdminAsidePanel selected={"approved"}></AdminAsidePanel>
             <main>
                 <h2>Հաստատված հաշիվներ</h2>
                 <div className="search">

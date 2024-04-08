@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     try {
         const admin = await Admin.findOne({ email });
 
-        if (!admin.email) {
+        if (!admin?.email) {
             await Admin.create({ email, password });
         } else {
             return NextResponse.json({

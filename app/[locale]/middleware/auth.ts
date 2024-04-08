@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../utils/auth";
 
 // Middleware to check if admin is logged in
-export default function checkAuth(token: string) {
+export default async function checkAuth(token: string, email: string) {
     if (!token) {
         return {
             message: "Unauthorized",
@@ -12,15 +12,23 @@ export default function checkAuth(token: string) {
     }
 
     try {
-        console.log(jwt.decode(token));
+        const user: any = jwt.decode(token);
 
-        jwt.verify(token, SECRET_KEY);
+        if (user.email === email) {
+            return {
+                message: "Successfully Authorized",
+                success: true,
+                user: {},
+            };
+        } else {
+            return {
+                message: "Not Authorized",
+                success: true,
+                user: {},
+            };
+        }
 
-        return {
-            message: "Successfully Authorized",
-            success: true,
-            user: {},
-        };
+        // jwt.verify(token, SECRET_KEY);
     } catch (error) {
         return {
             message: "Invalid token",

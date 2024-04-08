@@ -298,9 +298,14 @@ const JoinUs = () => {
         categ.variants.map((vari: any, ind: number) => {
             if (ind === index) {
                 vari.selected = !vari.selected;
-                const arr = [...subCategories, vari.variant];
+                let arr = subCategories;
+                if (vari.selected) {
+                    arr = [...subCategories, vari.variant];
+                } else {
+                    arr.pop();
+                }
+
                 setSubCategories(arr);
-                console.log(arr);
             }
             return vari;
         });
@@ -346,7 +351,6 @@ const JoinUs = () => {
                     subCategories,
                 };
 
-                console.log(typeof subCategories);
                 const res = await axios
                     .post("api/shop/single", JSON.stringify(body))
                     .then((res) => {

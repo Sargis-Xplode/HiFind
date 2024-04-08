@@ -1,9 +1,17 @@
-import "./page.scss"
+"use client";
+import { usePathname, useRouter } from "next/navigation";
+import "./page.scss";
+import { useEffect } from "react";
 
 const Dashboard = () => {
-    return (
-        <div>Dashboard</div>
-    )
-}
+    const { push } = useRouter();
+    const path = usePathname();
 
-export default Dashboard
+    useEffect(() => {
+        push(`${path}/notifications`);
+    }, []);
+
+    return <div>Loading</div>;
+};
+
+export default Dashboard;

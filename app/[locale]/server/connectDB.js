@@ -23,23 +23,30 @@ async function connectDB() {
             bufferCommands: false,
         };
 
+        // try {
+        //     cached.promise = mongoose.connect(DATABASE_URL, opts).then((mongoose) => {
+        //         console.log("Online Atlas");
+        //         return mongoose;
+        //     });
+        // } catch (error) {
+        //     try {
+        //         cached.promise = mongoose.connect(DATABASE_URL_LOCAL, opts).then((mongoose) => {
+        //             console.log("Local Compass");
+        //             return mongoose;
+        //         });
+        //     } catch (error) {
+        //         console.log(error);
+        //     }
+        // }
+
         try {
             cached.promise = mongoose.connect(DATABASE_URL, opts).then((mongoose) => {
+                console.log("Local Compass");
                 return mongoose;
             });
         } catch (error) {
-            try {
-                cached.promise = mongoose.connect(DATABASE_URL_LOCAL, opts).then((mongoose) => {
-                    return mongoose;
-                });
-            } catch (error) {
-                console.log(error);
-            }
+            console.log(error);
         }
-
-        // cached.promise = mongoose.connect(DATABASE_URL_LOCAL, opts).then((mongoose) => {
-        //     return mongoose;
-        // });
     }
     cached.conn = await cached.promise;
     return cached.conn;
