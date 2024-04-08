@@ -5,9 +5,8 @@ import { SECRET_KEY } from "../utils/auth";
 export default async function checkAuth(token: string, email: string) {
     if (!token) {
         return {
-            message: "Unauthorized",
+            message: "Not Authorized",
             success: false,
-            user: {},
         };
     }
 
@@ -18,12 +17,12 @@ export default async function checkAuth(token: string, email: string) {
             return {
                 message: "Successfully Authorized",
                 success: true,
-                user: {},
+                user,
             };
         } else {
             return {
                 message: "Not Authorized",
-                success: true,
+                success: false,
                 user: {},
             };
         }

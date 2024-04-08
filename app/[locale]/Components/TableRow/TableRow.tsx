@@ -2,7 +2,7 @@ import { faCheckCircle, faXmarkCircle } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import "./page.scss";
+import "./tableRow.scss";
 
 import brandLogo from "../../../../Assets/brand-logo.svg";
 

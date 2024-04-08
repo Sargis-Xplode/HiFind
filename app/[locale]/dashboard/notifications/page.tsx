@@ -11,7 +11,7 @@ import brandLogo from "../../../../Assets/brand-logo.svg";
 import sortLogo from "../../../../Assets/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import { useRouter } from "next/navigation";
-import TableRow from "../../Components/TableRow/page";
+import TableRow from "../../Components/TableRow/TableRow";
 
 const Notification = () => {
     const router = useRouter();

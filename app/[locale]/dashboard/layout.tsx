@@ -28,12 +28,6 @@ export default function DashboardLayout({
         if (!token) {
             push(`/${localActive}/admin`);
         } else {
-            // try {
-            //     jwt.verify(token, SECRET_KEY);
-            //     console.log("Success");
-            // } catch (error) {
-            //     console.log(error);
-            // }
             checkAuth(token, "admin@gmail.com").then((data) => {
                 if (!data.success) {
                     push(`/${localActive}/admin`);
