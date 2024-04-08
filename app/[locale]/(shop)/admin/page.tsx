@@ -10,8 +10,12 @@ import "react-toastify/dist/ReactToastify.css";
 
 import logo from "../../../../Assets/logo.svg";
 import { useLocale } from "next-intl";
+import checkAuth from "../../middleware/auth";
 
 export default function Login() {
+    const { push } = useRouter();
+    const localActive = useLocale();
+
     const [email, setEmail] = useState("");
     const [emailValid, setEmailValid] = useState(false);
     const [password, setPassword] = useState("");
@@ -19,8 +23,18 @@ export default function Login() {
     const [error, setError] = useState("");
     const [validation, setValidation] = useState(false);
     const [loginClicked, setLoginClicked] = useState(false);
-    const router = useRouter();
-    const localActive = useLocale();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            checkAuth(token).then((data) => {
+                console.log(data);
+                if (data.success) {
+                    push(`/${localActive}/dashboard/notifications`);
+                }
+            });
+        }
+    }, []);
 
     const handleSubmit = async (e: any) => {
         if (!validation) return;
@@ -42,7 +56,7 @@ export default function Login() {
                             type: "success",
                         });
                         localStorage.setItem("token", data.token);
-                        router.push(`/${localActive}/dashboard/notifications`);
+                        push(`/${localActive}/dashboard/notifications`);
                     } else {
                         setError(data.message);
                         toast(data.message, {
