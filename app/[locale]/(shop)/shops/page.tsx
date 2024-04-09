@@ -23,6 +23,7 @@ const override: CSSProperties = {
 const Shops = () => {
     const t = useTranslations("shopsPage");
     const t2 = useTranslations("homePage");
+    const t3 = useTranslations("shopCategories");
 
     const [shops, setShops] = useState([]);
     const [filteredShops, setFilteredShops] = useState([]);
@@ -45,27 +46,43 @@ const Shops = () => {
             clicked: false,
             variants: [
                 {
-                    variant: "shops",
+                    variant: "clothes",
                     selected: false,
                 },
                 {
-                    variant: "shops",
+                    variant: "accessories",
                     selected: false,
                 },
                 {
-                    variant: "shops",
+                    variant: "shoes",
                     selected: false,
                 },
                 {
-                    variant: "shops",
+                    variant: "homeDecor",
                     selected: false,
                 },
                 {
-                    variant: "shops",
+                    variant: "techAccessories",
                     selected: false,
                 },
                 {
-                    variant: "shops",
+                    variant: "wellness",
+                    selected: false,
+                },
+                {
+                    variant: "stationery",
+                    selected: false,
+                },
+                {
+                    variant: "kidsAndBaby",
+                    selected: false,
+                },
+                {
+                    variant: "vintageAndThrift",
+                    selected: false,
+                },
+                {
+                    variant: "plantsAndFlowers",
                     selected: false,
                 },
             ],
@@ -74,6 +91,30 @@ const Shops = () => {
             category: "services",
             clicked: false,
             variants: [
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
+                {
+                    variant: "services",
+                    selected: false,
+                },
                 {
                     variant: "services",
                     selected: false,
@@ -128,12 +169,96 @@ const Shops = () => {
                     variant: "entertainment",
                     selected: false,
                 },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
+                {
+                    variant: "entertainment",
+                    selected: false,
+                },
             ],
         },
         {
             category: "beauty",
             clicked: false,
             variants: [
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
+                {
+                    variant: "beauty",
+                    selected: false,
+                },
                 {
                     variant: "beauty",
                     selected: false,
@@ -188,6 +313,54 @@ const Shops = () => {
                     variant: "healthCare",
                     selected: false,
                 },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
+                {
+                    variant: "healthCare",
+                    selected: false,
+                },
             ],
         },
     ]);
@@ -205,6 +378,7 @@ const Shops = () => {
                 setLoading(false);
                 console.log(error);
             });
+
         console.log("NETLIFY", process.env.NETLIFY_MONGODB_URI);
         console.log("REACT_APP", process.env.REACT_APP_MONGODB_URI);
         console.log("ONLINE", process.env.MONGODB_URI);
@@ -395,7 +569,7 @@ const Shops = () => {
                                                                                 ""
                                                                             )}
                                                                         </div>
-                                                                        {t2(variant.variant)} {index}
+                                                                        {t3(variant.variant)} {index}
                                                                     </div>
                                                                 );
                                                             })
@@ -475,7 +649,7 @@ const Shops = () => {
                                                                         ""
                                                                     )}
                                                                 </div>
-                                                                {t2(variant.variant)} {index}
+                                                                {t3(variant.variant)} {index}
                                                             </div>
                                                         );
                                                     })

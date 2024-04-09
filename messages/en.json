@@ -33,6 +33,18 @@
         "noResults": "No search results found",
         "trySearchingSmthElse": "Try searching for something else"
     },
+    "shopCategories": {
+        "clothes": "Clothes",
+        "accessories": "Accessories",
+        "shoes": "Shoes",
+        "homeDecor": "Home Decor",
+        "techAccessories": "Tech Accessories",
+        "wellness": "Wellness",
+        "stationery": "Stationery",
+        "kidsAndBaby": "Kids & Baby",
+        "vintageAndThrift": "Vintage & Thrift",
+        "plantsAndFlowers": "Plants and Flowers"
+    },
     "joinUsModalPage": {
         "registration": "Registration",
         "buissnessNameLabel": "Business page name (as registered on Instagram)",
