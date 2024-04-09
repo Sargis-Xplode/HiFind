@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 
-const DATABASE_URL = process.env.MONGODB_URI;
-const DATABASE_URL_LOCAL = process.env.MONGODB_URI_LOCAL;
+const DATABASE_URL = process.env.NETLIFY_MONGODB_URI;
+const DATABASE_URL2 = process.env.REACT_APP_MONGODB_URI;
+const DATABASE_URL_LOCAL = process.env.MONGODB_URI;
 
-if (!DATABASE_URL || !DATABASE_URL_LOCAL) {
+if (!DATABASE_URL || !DATABASE_URL2 || !DATABASE_URL_LOCAL) {
     throw new Error("Please define the DATABASE_URL environment variable inside .env.local");
 }
 
@@ -29,6 +30,22 @@ async function connectDB() {
             });
         } catch (error) {
             console.log(error);
+
+            try {
+                cached.promise = mongoose.connect(DATABASE_URL2, opts).then((mongoose) => {
+                    return mongoose;
+                });
+            } catch (error) {
+                console.log(error);
+
+                try {
+                    cached.promise = mongoose.connect(DATABASE_URL_LOCAL, opts).then((mongoose) => {
+                        return mongoose;
+                    });
+                } catch (error) {
+                    console.log(error);
+                }
+            }
         }
     }
     cached.conn = await cached.promise;

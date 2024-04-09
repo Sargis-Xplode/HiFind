@@ -202,6 +202,7 @@ const Shops = () => {
                 setLoading(false);
             })
             .catch((error) => {
+                setLoading(false);
                 console.log(error);
             });
     }, []);
