@@ -386,9 +386,7 @@ const Shops = () => {
 
             const arr = shops.filter((shop: any) => {
                 selectedCategories.map((category) => {
-                    if (!shop.subCategories.includes(category)) {
-                        filtered = false;
-                    } else {
+                    if (shop.subCategories.includes(category)) {
                         filtered = true;
                     }
 
@@ -565,7 +563,8 @@ const Shops = () => {
                                                                                 ""
                                                                             )}
                                                                         </div>
-                                                                        {t3(variant.variant)} {index}
+                                                                        {variant.variant}
+                                                                        {/* {t3(variant.variant)} */}
                                                                     </div>
                                                                 );
                                                             })
@@ -645,7 +644,8 @@ const Shops = () => {
                                                                         ""
                                                                     )}
                                                                 </div>
-                                                                {t3(variant.variant)} {index}
+                                                                {/* {t3(variant.variant)} */}
+                                                                {variant.variant}
                                                             </div>
                                                         );
                                                     })
