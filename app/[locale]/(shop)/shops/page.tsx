@@ -205,6 +205,9 @@ const Shops = () => {
                 setLoading(false);
                 console.log(error);
             });
+        console.log("NETLIFY", process.env.NETLIFY_MONGODB_URI);
+        console.log("REACT_APP", process.env.NETLIFY_REACT_APP);
+        console.log("ONLINE", process.env.MONGODB_URI);
     }, []);
 
     useEffect(() => {
