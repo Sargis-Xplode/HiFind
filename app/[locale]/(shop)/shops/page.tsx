@@ -28,54 +28,12 @@ const Shops = () => {
     const [pageCount, setPageCount] = useState(0);
     const [atLeastOneVariantSelected, setAtLeastOneVariantSelected] = useState(false);
 
-    useEffect(() => {
-        axios
-            .get("api/shop/all")
-            .then((res) => {
-                const shops = res.data.shops;
-                setShops(shops.reverse());
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
-
-    useEffect(() => {
-        if (shops.length) {
-            setEndOffSet(itemOffSet + itemsPerPage);
-            const arr =
-                filteredShops.length > 0
-                    ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : !searchActive
-                    ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : [];
-
-            setCurrentItems(arr);
-
-            const count =
-                filteredShops.length > 0
-                    ? Math.ceil(filteredShops.length / itemsPerPage)
-                    : !searchActive
-                    ? Math.ceil(shops.length / itemsPerPage)
-                    : 0;
-            setPageCount(count);
-        }
-    }, [shops, itemOffSet, filteredShops, searchActive]);
-
-    const handlePageClick = (e: any) => {
-        const newOffset = (e.selected * itemsPerPage) % shops.length;
-        setItemOffSet(newOffset);
-    };
-
+    const [selectedCategories, setSelectedCategories] = useState([]);
     const [categories, setCategories] = useState([
         {
             category: "shops",
             clicked: false,
             variants: [
-                {
-                    variant: "shops",
-                    selected: false,
-                },
                 {
                     variant: "shops",
                     selected: false,
@@ -130,20 +88,12 @@ const Shops = () => {
                     variant: "services",
                     selected: false,
                 },
-                {
-                    variant: "services",
-                    selected: false,
-                },
             ],
         },
         {
             category: "entertainment",
             clicked: false,
             variants: [
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
                 {
                     variant: "entertainment",
                     selected: false,
@@ -198,10 +148,6 @@ const Shops = () => {
                     variant: "beauty",
                     selected: false,
                 },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
             ],
         },
         {
@@ -232,19 +178,83 @@ const Shops = () => {
                     variant: "healthCare",
                     selected: false,
                 },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
             ],
         },
     ]);
 
+    useEffect(() => {
+        axios
+            .get("api/shop/all")
+            .then((res) => {
+                const shops = res.data.shops;
+                setShops(shops.reverse());
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
+    useEffect(() => {
+        if (shops.length) {
+            let filtered = false;
+
+            const arr = shops.filter((shop: any) => {
+                selectedCategories.map((category) => {
+                    if (!shop.subCategories.includes(category)) {
+                        filtered = false;
+                    } else {
+                        filtered = true;
+                    }
+
+                    return category;
+                });
+
+                if (filtered) return shop;
+            });
+
+            setFilteredShops(arr);
+        }
+    }, [categories]);
+
+    useEffect(() => {
+        if (shops.length) {
+            setEndOffSet(itemOffSet + itemsPerPage);
+            const arr =
+                filteredShops.length > 0
+                    ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage)
+                    : !searchActive && selectedCategories.length === 0
+                    ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
+                    : [];
+
+            setCurrentItems(arr);
+
+            const count =
+                filteredShops.length > 0
+                    ? Math.ceil(filteredShops.length / itemsPerPage)
+                    : !searchActive && selectedCategories.length === 0
+                    ? Math.ceil(shops.length / itemsPerPage)
+                    : 0;
+            setPageCount(count);
+        }
+    }, [shops, itemOffSet, filteredShops, searchActive]);
+
+    const handlePageClick = (e: any) => {
+        const newOffset = (e.selected * itemsPerPage) % shops.length;
+        setItemOffSet(newOffset);
+    };
+
     const toggleCheck = (categ: any, index: number) => {
         setAtLeastOneVariantSelected(true);
-        const arr = categ.variants.map((vari: any, ind: number) => {
+        categ.variants.map((vari: any, ind: number) => {
             if (ind === index) {
                 vari.selected = !vari.selected;
+                let array: any = [...selectedCategories];
+                if (vari.selected) {
+                    array = [...selectedCategories, vari.variant];
+                } else {
+                    array.pop();
+                }
+                setSelectedCategories(array);
             }
             return vari;
         });
