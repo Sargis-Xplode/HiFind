@@ -1,12 +1,20 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, CSSProperties } from "react";
 import checkAuth from "../middleware/auth";
 import { useLocale } from "next-intl";
 
 import { Roboto } from "next/font/google";
 
 import "../globals.scss";
+
+import ClipLoader from "react-spinners/MoonLoader";
+
+const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+};
 
 const roboto = Roboto({ weight: "400", subsets: ["latin"] });
 
@@ -18,18 +26,21 @@ export default function DashboardLayout({
     const { push } = useRouter();
     const localActive = useLocale();
 
-    const [isPending, setIsPending] = useState(true);
+    let [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        setLoading(true);
+
         if (!token) {
             push(`/${localActive}/admin`);
         } else {
             checkAuth(token).then((data) => {
                 console.log(data);
                 if (data.success) {
-                    setIsPending(false);
+                    setLoading(false);
                 } else {
+                    setLoading(true);
                     push(`/${localActive}/admin`);
                 }
             });
@@ -37,9 +48,21 @@ export default function DashboardLayout({
     }, []);
     return (
         <html lang="en">
-            <body className={roboto.className}>
-                {isPending && <p>Loading</p>}
-                {!isPending && children}
+            <body className={`${roboto.className} loading`}>
+                {loading && (
+                    <div className="sweet-loading">
+                        <ClipLoader
+                            color={"#ec008b"}
+                            loading={loading}
+                            cssOverride={override}
+                            size={50}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                            speedMultiplier={1}
+                        />
+                    </div>
+                )}
+                {!loading && children}
             </body>
         </html>
     );

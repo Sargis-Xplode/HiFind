@@ -9,6 +9,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import logo from "../../../../Assets/logo.svg";
+import eye from "../../../../Assets/eye.svg";
+import eyeClosed from "../../../../Assets/eye-off.svg";
 import { useLocale } from "next-intl";
 import checkAuth from "../../middleware/auth";
 
@@ -23,6 +25,8 @@ export default function Login() {
     const [error, setError] = useState("");
     const [validation, setValidation] = useState(false);
     const [loginClicked, setLoginClicked] = useState(false);
+    const [eyeClicked, setEyeClicked] = useState(false);
+    const [passwordType, setPasswordType] = useState("password");
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -35,6 +39,34 @@ export default function Login() {
             });
         }
     }, []);
+
+    useEffect(() => {
+        const regex: any =
+            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if (regex.test(email)) {
+            setEmailValid(true);
+        } else {
+            setEmailValid(false);
+        }
+
+        if (Number(password.length) > 6) {
+            setPasswordValid(true);
+        } else {
+            setPasswordValid(false);
+        }
+
+        if (emailValid && passwordValid) {
+            setValidation(true);
+        } else {
+            setValidation(false);
+        }
+    }, [email, password, validation]);
+
+    const toggleEye = (val: string) => {
+        setEyeClicked(!eyeClicked);
+        setPasswordType(val);
+    };
 
     const handleSubmit = async (e: any) => {
         if (!validation) return;
@@ -75,31 +107,8 @@ export default function Login() {
         }
     };
 
-    useEffect(() => {
-        const regex: any =
-            /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-        if (regex.test(email)) {
-            setEmailValid(true);
-        } else {
-            setEmailValid(false);
-        }
-
-        if (Number(password.length) > 6) {
-            setPasswordValid(true);
-        } else {
-            setPasswordValid(false);
-        }
-
-        if (emailValid && passwordValid) {
-            setValidation(true);
-        } else {
-            setValidation(false);
-        }
-    }, [email, password, validation]);
-
     return (
-        <section>
+        <section className="login-section">
             <ToastContainer
                 position="top-right"
                 autoClose={3000}
@@ -138,16 +147,31 @@ export default function Login() {
                         {!emailValid && loginClicked && <p className="error">Invalid email</p>}
 
                         <p>Գաղտնաբառ</p>
-                        <input
-                            className={(passwordValid ? "" : "input-error ") + "input"}
-                            type="password"
-                            name="password"
-                            id="password"
-                            placeholder="Գաղտնաբառ"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                        <div className="password-container">
+                            <input
+                                className={(passwordValid ? "" : "input-error ") + "input"}
+                                type={passwordType}
+                                name="password"
+                                id="password"
+                                placeholder="Գաղտնաբառ"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            {eyeClicked ? (
+                                <Image
+                                    src={eyeClosed}
+                                    alt="Closed Eye"
+                                    onClick={() => toggleEye("password")}
+                                ></Image>
+                            ) : (
+                                <Image
+                                    src={eye}
+                                    alt="Eye"
+                                    onClick={() => toggleEye("text")}
+                                ></Image>
+                            )}
+                        </div>
                         {!passwordValid && loginClicked && <p className="error">Invalid password</p>}
 
                         {validation ? (

@@ -1,15 +1,24 @@
 "use client";
-import { useEffect, useState } from "react";
-import { faCheckCircle, faFilter, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CSSProperties, useEffect, useState } from "react";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import Shop from "../../Components/Shop/Shop";
 import "./page.scss";
+import filterIcon from "../../../../Assets/filter-icon.svg";
 
 import ReactPaginate from "react-paginate";
-import { useTranslations } from "next-intl";
+import ClipLoader from "react-spinners/MoonLoader";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+
+const override: CSSProperties = {
+    display: "flex",
+    margin: "0 auto",
+    borderColor: "red",
+};
 
 const Shops = () => {
     const t = useTranslations("shopsPage");
@@ -27,6 +36,7 @@ const Shops = () => {
     const [itemsPerPage, setItemsPerPage] = useState(12);
     const [pageCount, setPageCount] = useState(0);
     const [atLeastOneVariantSelected, setAtLeastOneVariantSelected] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const [selectedCategories, setSelectedCategories] = useState([]);
     const [categories, setCategories] = useState([
@@ -183,11 +193,13 @@ const Shops = () => {
     ]);
 
     useEffect(() => {
+        setLoading(true);
         axios
             .get("api/shop/all")
             .then((res) => {
                 const shops = res.data.shops;
                 setShops(shops.reverse());
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -218,6 +230,8 @@ const Shops = () => {
 
     useEffect(() => {
         if (shops.length) {
+            setLoading(false);
+
             setEndOffSet(itemOffSet + itemsPerPage);
             const arr =
                 filteredShops.length > 0
@@ -235,6 +249,8 @@ const Shops = () => {
                     ? Math.ceil(shops.length / itemsPerPage)
                     : 0;
             setPageCount(count);
+        } else {
+            setLoading(true);
         }
     }, [shops, itemOffSet, filteredShops, searchActive]);
 
@@ -287,6 +303,7 @@ const Shops = () => {
         });
 
         setAtLeastOneVariantSelected(false);
+        setSelectedCategories([]);
         setCategories(arr);
     };
 
@@ -318,7 +335,10 @@ const Shops = () => {
                                 <div className="filter-heading-container-mobile">
                                     <div>
                                         <h3>{t2(heading)}</h3>
-                                        <FontAwesomeIcon icon={faFilter} />
+                                        <Image
+                                            src={filterIcon}
+                                            alt={"filter"}
+                                        ></Image>
                                     </div>
                                     <FontAwesomeIcon
                                         icon={faX}
@@ -404,7 +424,10 @@ const Shops = () => {
                     <div className="filters-container">
                         <div className="filter-heading-container">
                             <h3>{t("filters")}</h3>
-                            <FontAwesomeIcon icon={faFilter} />
+                            <Image
+                                src={filterIcon}
+                                alt={"filter"}
+                            ></Image>
                         </div>
 
                         {categories.length
@@ -473,7 +496,10 @@ const Shops = () => {
                             onClick={openMobileFilter}
                         >
                             {t("filters")}
-                            <FontAwesomeIcon icon={faFilter} />
+                            <Image
+                                src={filterIcon}
+                                alt="Filter"
+                            ></Image>
                         </div>
 
                         {currentItems.length > 0 ? (
@@ -498,6 +524,18 @@ const Shops = () => {
                                     ></Shop>
                                 );
                             })
+                        ) : loading ? (
+                            <div className="sweet-loading">
+                                <ClipLoader
+                                    color={"#ec008b"}
+                                    loading={loading}
+                                    cssOverride={override}
+                                    size={50}
+                                    aria-label="Loading Spinner"
+                                    data-testid="loader"
+                                    speedMultiplier={1}
+                                />
+                            </div>
                         ) : (
                             <div>
                                 <h1>{t("noResults")}</h1>
