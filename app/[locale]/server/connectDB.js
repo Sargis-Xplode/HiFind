@@ -4,6 +4,8 @@ const DATABASE_URL = process.env.NETLIFY_MONGODB_URI;
 const DATABASE_URL2 = process.env.REACT_APP_MONGODB_URI;
 const DATABASE_URL_LOCAL = process.env.MONGODB_URI;
 
+console.log(DATABASE_URL, DATABASE_URL2, DATABASE_URL_LOCAL);
+
 if (!DATABASE_URL || !DATABASE_URL2 || !DATABASE_URL_LOCAL) {
     throw new Error("Please define the DATABASE_URL environment variable inside .env.local");
 }
