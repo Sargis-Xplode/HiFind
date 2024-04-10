@@ -12,7 +12,7 @@ import logo from "../../../../Assets/logo.svg";
 import eye from "../../../../Assets/eye.svg";
 import eyeClosed from "../../../../Assets/eye-off.svg";
 import { useLocale } from "next-intl";
-import checkAuth from "../../middleware/auth";
+// import checkAuth from "../../middleware/auth";
 
 export default function Login() {
     const { push } = useRouter();
@@ -22,23 +22,22 @@ export default function Login() {
     const [emailValid, setEmailValid] = useState(false);
     const [password, setPassword] = useState("");
     const [passwordValid, setPasswordValid] = useState(false);
-    const [error, setError] = useState("");
     const [validation, setValidation] = useState(false);
     const [loginClicked, setLoginClicked] = useState(false);
     const [eyeClicked, setEyeClicked] = useState(false);
     const [passwordType, setPasswordType] = useState("password");
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-            checkAuth(token).then((data) => {
-                console.log(data);
-                if (data.success) {
-                    push(`/${localActive}/dashboard/notifications`);
-                }
-            });
-        }
-    }, []);
+    // useEffect(() => {
+    //     const token = localStorage.getItem("token");
+    //     if (token) {
+    //         checkAuth(token).then((data) => {
+    //             console.log(data);
+    //             if (data.success) {
+    //                 push(`/${localActive}/dashboard/notifications`);
+    //             }
+    //         });
+    //     }
+    // }, []);
 
     useEffect(() => {
         const regex: any =
@@ -90,14 +89,12 @@ export default function Login() {
                         localStorage.setItem("token", data.token);
                         push(`/${localActive}/dashboard/notifications`);
                     } else {
-                        setError(data.message);
                         toast(data.message, {
                             type: "error",
                         });
                     }
                 })
                 .catch((error) => {
-                    setError(error.message);
                     toast(error.message, {
                         type: "error",
                     });
@@ -126,6 +123,7 @@ export default function Login() {
                     <Image
                         src={logo}
                         alt="Logo"
+                        priority
                     ></Image>
                     <form
                         onSubmit={handleSubmit}

@@ -21,7 +21,7 @@ export async function POST(req: Request) {
             });
         }
 
-        const token = sign({ email }, SECRET_KEY, { expiresIn: "1h" });
+        const token = sign({ email }, SECRET_KEY, { expiresIn: "8h" });
 
         return NextResponse.json(
             {

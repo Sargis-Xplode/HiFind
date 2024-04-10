@@ -1,64 +1,201 @@
 @import "../../constants.scss";
 
-section {
+.categories-list-section {
     height: 100vh;
     display: flex;
+    position: relative;
+
+    .add-new-category-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .add-new-category-modal {
+            width: 40%;
+            max-height: 80%;
+            border-radius: 25px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 60px;
+
+            .sub-categories-container {
+                overflow: auto;
+                height: 100%;
+                box-sizing: border-box;
+            }
+
+            .close-modal {
+                text-align: end;
+                margin-top: 0;
+                cursor: pointer;
+            }
+
+            h3 {
+                margin-top: 0;
+                text-align: center;
+            }
+
+            input {
+                padding: 15px;
+                width: 90%;
+                border-radius: 25px;
+                border: 1px solid #eaeaea;
+
+                margin-bottom: 10px;
+            }
+
+            .add-new-subCategory {
+                color: $btn-color;
+                cursor: pointer;
+
+                &:hover {
+                    color: $btn-color-hover;
+                }
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .error-textarea-span {
+                color: #ff0000 !important;
+            }
+
+            .error-text {
+                visibility: hidden;
+                display: none;
+                margin-top: 5px;
+                font-size: 12px;
+            }
+
+            .error {
+                color: #ff0000 !important;
+                visibility: visible;
+                display: block;
+            }
+            .error-input {
+                border-color: #ff0000 !important;
+            }
+        }
+    }
 
     main {
         width: calc(100% - 250px);
         height: 100%;
 
-        h2 {
-            font-size: 24px;
-            margin-top: 30px;
+        .categories-list-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+
+            h2 {
+                font-size: 24px;
+                margin-top: 30px;
+            }
+
+            .button {
+            }
         }
 
         .list {
             overflow-x: auto;
             padding: 20px;
 
-            .row {
-                background-color: #f4f4f4;
-                display: flex;
-                justify-content: space-between;
+            .category-item-container {
                 margin-bottom: 20px;
-                border-radius: 8px;
-                height: 50px;
 
-                .first-column {
+                .row {
+                    background-color: #f4f4f4;
                     display: flex;
-                    justify-content: space-evenly;
-                    align-items: center;
+                    justify-content: space-between;
+                    border-radius: 8px;
+                    height: 50px;
 
-                    svg {
-                        width: 20px;
-                        margin: 0 10px;
+                    .first-column {
+                        display: flex;
+                        justify-content: space-evenly;
+                        align-items: center;
+
+                        svg {
+                            width: 20px;
+                            margin: 0 10px;
+                        }
+                    }
+
+                    .edit-delete-icons {
+                        height: auto;
+                        display: flex;
+                        align-items: center;
+
+                        & > div {
+                            width: 32px;
+                            height: 32px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            border-radius: 50%;
+                            background-color: $secondary-text-color;
+                            margin: 0 10px;
+
+                            img {
+                                width: 60%;
+                                height: auto;
+                            }
+
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
                     }
                 }
 
-                .edit-delete-icons {
-                    width: 15%;
-                    display: flex;
-                    align-items: center;
+                .dropdown-slider {
+                    height: 0px;
+                    visibility: hidden;
+                    border-radius: 0 0 8px 8px;
+                    overflow: hidden;
 
-                    & > div {
-                        width: 32px;
-                        height: 32px;
+                    .variant {
+                        height: 35px;
+                        padding: 0 20px;
                         display: flex;
                         align-items: center;
-                        justify-content: center;
-                        border-radius: 50%;
-                        background-color: $secondary-text-color;
-                        margin-left: 20px;
+                        background-color: #ddd;
 
-                        img {
-                            width: 100%;
-                        }
+                        .checkbox-round {
+                            width: 20px;
+                            height: 20px;
+                            background-color: white;
+                            border: 1px solid #ddd;
+                            border-radius: 50%;
+                            margin-right: 10px;
+                            // background-color: $btn-color;
 
-                        &:hover {
-                            cursor: pointer;
+                            & > svg {
+                                width: 100%;
+                                height: 100%;
+                                color: $btn-color;
+                            }
                         }
                     }
+                }
+
+                .clicked {
+                    visibility: visible;
+                    height: auto;
+                }
+                
+                .row-clicked {
+                    border-radius: 8px 8px 0 0;
                 }
             }
         }

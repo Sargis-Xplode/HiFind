@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, CSSProperties } from "react";
 import checkAuth from "../middleware/auth";
-import { useLocale } from "next-intl";
+import { NextIntlClientProvider, useLocale, useMessages } from "next-intl";
 
 import { Roboto } from "next/font/google";
 
@@ -25,6 +25,7 @@ export default function DashboardLayout({
 }>) {
     const { push } = useRouter();
     const localActive = useLocale();
+    // const messages = useMessages();
 
     let [loading, setLoading] = useState(true);
 
@@ -36,7 +37,6 @@ export default function DashboardLayout({
             push(`/${localActive}/admin`);
         } else {
             checkAuth(token).then((data) => {
-                console.log(data);
                 if (data.success) {
                     setLoading(false);
                 } else {
@@ -46,9 +46,10 @@ export default function DashboardLayout({
             });
         }
     }, []);
+
     return (
         <html lang="en">
-            <body className={`${roboto.className} loading`}>
+            <body className={`${roboto.className} ${loading ? "loading" : ""}`}>
                 {loading && (
                     <div className="sweet-loading">
                         <ClipLoader
@@ -62,6 +63,7 @@ export default function DashboardLayout({
                         />
                     </div>
                 )}
+                {/* <NextIntlClientProvider messages={messages}>{!loading && children}</NextIntlClientProvider> */}
                 {!loading && children}
             </body>
         </html>

@@ -5,14 +5,16 @@ import Header from "../../Components/Header/Header";
 import Shop from "../../Components/Shop/Shop";
 import "./page.scss";
 import filterIcon from "../../../../Assets/filter-icon.svg";
+import Categories from "../../../../types/categories";
 
 import ReactPaginate from "react-paginate";
 import ClipLoader from "react-spinners/MoonLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 
 const override: CSSProperties = {
     display: "flex",
@@ -24,12 +26,15 @@ const Shops = () => {
     const t = useTranslations("shopsPage");
     const t2 = useTranslations("homePage");
     const t3 = useTranslations("shopCategories");
+    const localActive = useLocale();
+
+    const query = useParams();
 
     const [shops, setShops] = useState([]);
     const [filteredShops, setFilteredShops] = useState([]);
     const [searchActive, setSearchActive] = useState(false);
     const [currentItems, setCurrentItems] = useState(shops);
-    const [heading, setHeading] = useState("shops");
+    const [heading, setHeading] = useState("");
 
     const [itemOffSet, setItemOffSet] = useState(0);
     const [endOffSet, setEndOffSet] = useState(0);
@@ -40,325 +45,338 @@ const Shops = () => {
     const [loading, setLoading] = useState(true);
 
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [categories, setCategories] = useState([
+    // const [categories, setCategories] = useState<any>([
+    //     {
+    //         category: "String",
+    //         clicked: false,
+    //         variants: [
+    //             {
+    //                 variant: "clothes",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "accessories",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "shoes",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "homeDecor",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "techAccessories",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "wellness",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "stationery",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "kidsAndBaby",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "vintageAndThrift",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "plantsAndFlowers",
+    //                 selected: false,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         category: "services",
+    //         clicked: false,
+    //         variants: [
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "services",
+    //                 selected: false,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         category: "entertainment",
+    //         clicked: false,
+    //         variants: [
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "entertainment",
+    //                 selected: false,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         category: "beauty",
+    //         clicked: false,
+    //         variants: [
+    //             {
+    //                 variant: "beauty",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "beauty",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "beauty",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "beauty",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "beauty",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "beauty",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "beauty",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "beauty",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "beauty",
+    //                 selected: false,
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         category: "healthCare",
+    //         clicked: false,
+    //         variants: [
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //             {
+    //                 variant: "healthCare",
+    //                 selected: false,
+    //             },
+    //         ],
+    //     },
+    // ]);
+
+    const [categories, setCategories] = useState<any>([
         {
-            category: "shops",
+            category: "String",
             clicked: false,
             variants: [
                 {
                     variant: "clothes",
-                    selected: false,
-                },
-                {
-                    variant: "accessories",
-                    selected: false,
-                },
-                {
-                    variant: "shoes",
-                    selected: false,
-                },
-                {
-                    variant: "homeDecor",
-                    selected: false,
-                },
-                {
-                    variant: "techAccessories",
-                    selected: false,
-                },
-                {
-                    variant: "wellness",
-                    selected: false,
-                },
-                {
-                    variant: "stationery",
-                    selected: false,
-                },
-                {
-                    variant: "kidsAndBaby",
-                    selected: false,
-                },
-                {
-                    variant: "vintageAndThrift",
-                    selected: false,
-                },
-                {
-                    variant: "plantsAndFlowers",
-                    selected: false,
-                },
-            ],
-        },
-        {
-            category: "services",
-            clicked: false,
-            variants: [
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-            ],
-        },
-        {
-            category: "entertainment",
-            clicked: false,
-            variants: [
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-            ],
-        },
-        {
-            category: "beauty",
-            clicked: false,
-            variants: [
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-            ],
-        },
-        {
-            category: "healthCare",
-            clicked: false,
-            variants: [
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
                     selected: false,
                 },
             ],
@@ -372,6 +390,19 @@ const Shops = () => {
             .then((res) => {
                 const shops = res.data.shops;
                 setShops(shops.reverse());
+                setLoading(false);
+            })
+            .catch((error) => {
+                setLoading(false);
+                console.log(error);
+            });
+
+        axios
+            .get(`/${localActive}/api/categories/all`)
+            .then((res) => {
+                const categoriesDB = res.data.categories;
+                console.log(categoriesDB);
+                setCategories(categoriesDB);
                 setLoading(false);
             })
             .catch((error) => {
@@ -454,11 +485,9 @@ const Shops = () => {
         clearFilters();
         setHeading(categoryName);
 
-        const arr = categories.map((categ, ind) => {
+        const arr = categories.map((categ: any, ind: number) => {
             if (index === ind) {
-                categ.clicked = true;
-            } else {
-                categ.clicked = false;
+                categ.clicked = !categ.clicked;
             }
             return categ;
         });
@@ -466,8 +495,8 @@ const Shops = () => {
     };
 
     const clearFilters = () => {
-        const arr = categories.map((categ) => {
-            categ?.variants?.map((vari) => {
+        const arr = categories.map((categ: any) => {
+            categ?.variants?.map((vari: any) => {
                 vari.selected = false;
                 return vari;
             });
@@ -499,14 +528,14 @@ const Shops = () => {
                 setSearchActive={setSearchActive}
             ></Header>
             <section className="shops-section">
-                <h2>{t2(heading)}</h2>
+                <h2>{heading}</h2>
                 <div className="container">
                     {mobileFilterMenu && (
                         <div className="filters-container-mobile">
                             <div className="container">
                                 <div className="filter-heading-container-mobile">
                                     <div>
-                                        <h3>{t2(heading)}</h3>
+                                        <h3>{heading}</h3>
                                         <Image
                                             src={filterIcon}
                                             alt={"filter"}
@@ -519,7 +548,7 @@ const Shops = () => {
                                 </div>
 
                                 {categories.length
-                                    ? categories.map((category, index) => {
+                                    ? categories.map((category: any, index: number) => {
                                           return (
                                               <div
                                                   className="categories-mobile"
@@ -529,7 +558,7 @@ const Shops = () => {
                                                       className="categories-with-plus-mobile"
                                                       onClick={() => handleOpenDropDown(index, category.category)}
                                                   >
-                                                      {t2(category.category)}
+                                                      {category.category}
                                                       {category.clicked ? (
                                                           <FontAwesomeIcon icon={faMinus} />
                                                       ) : (
@@ -542,7 +571,7 @@ const Shops = () => {
                                                       }
                                                   >
                                                       {category.variants.length
-                                                          ? category.variants.map((variant, index) => {
+                                                          ? category.variants.map((variant: any, index: number) => {
                                                                 return (
                                                                     <div
                                                                         className="variant"
@@ -563,8 +592,9 @@ const Shops = () => {
                                                                                 ""
                                                                             )}
                                                                         </div>
-                                                                        {variant.variant}
-                                                                        {/* {t3(variant.variant)} */}
+                                                                        {localActive === "hy"
+                                                                            ? variant.subCategoryArm
+                                                                            : variant.subCategoryEng}
                                                                     </div>
                                                                 );
                                                             })
@@ -604,7 +634,7 @@ const Shops = () => {
                         </div>
 
                         {categories.length
-                            ? categories.map((category, index) => {
+                            ? categories.map((category: any, index: number) => {
                                   return (
                                       <div
                                           className="categories"
@@ -614,7 +644,7 @@ const Shops = () => {
                                               className="categories-with-plus "
                                               onClick={() => handleOpenDropDown(index, category.category)}
                                           >
-                                              {t2(category.category)}
+                                              {category.category}
                                               {category.clicked ? (
                                                   <FontAwesomeIcon icon={faMinus} />
                                               ) : (
@@ -623,7 +653,7 @@ const Shops = () => {
                                           </div>
                                           <div className={(category.clicked ? "clicked " : "") + "dropdown-slider"}>
                                               {category?.variants?.length
-                                                  ? category?.variants.map((variant, index) => {
+                                                  ? category?.variants.map((variant: any, index: number) => {
                                                         return (
                                                             <div
                                                                 className="variant"
@@ -644,8 +674,10 @@ const Shops = () => {
                                                                         ""
                                                                     )}
                                                                 </div>
-                                                                {/* {t3(variant.variant)} */}
-                                                                {variant.variant}
+
+                                                                {localActive === "hy"
+                                                                    ? variant.subCategoryArm
+                                                                    : variant.subCategoryArm}
                                                             </div>
                                                         );
                                                     })
