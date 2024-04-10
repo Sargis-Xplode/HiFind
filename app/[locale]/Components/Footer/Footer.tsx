@@ -38,6 +38,7 @@ export default function Footer() {
                     <div>
                         <div className="mail-icon-container">
                             <Image
+                                priority
                                 src={emailIcon}
                                 alt="Picture of the author"
                             />

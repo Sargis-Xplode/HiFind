@@ -16,16 +16,6 @@ import TableRow from "../../Components/TableRow/TableRow";
 const Notification = () => {
     const router = useRouter();
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem("token");
-
-    //     if (!token) {
-    //         router.push("/");
-    //     } else {
-    //         console.log(checkAuth(token));
-    //     }
-    // }, []);
-
     return (
         <section>
             <AdminAsidePanel selected={"notifications"}></AdminAsidePanel>

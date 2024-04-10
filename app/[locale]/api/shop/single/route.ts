@@ -19,7 +19,6 @@ export async function POST(req: Request) {
             subCategories,
         });
 
-        console.log(shop);
         return NextResponse.json({
             message: "Shop submitted",
             success: true,

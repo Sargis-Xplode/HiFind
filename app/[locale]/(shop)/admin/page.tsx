@@ -27,18 +27,6 @@ export default function Login() {
     const [eyeClicked, setEyeClicked] = useState(false);
     const [passwordType, setPasswordType] = useState("password");
 
-    // useEffect(() => {
-    //     const token = localStorage.getItem("token");
-    //     if (token) {
-    //         checkAuth(token).then((data) => {
-    //             console.log(data);
-    //             if (data.success) {
-    //                 push(`/${localActive}/dashboard/notifications`);
-    //             }
-    //         });
-    //     }
-    // }, []);
-
     useEffect(() => {
         const regex: any =
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

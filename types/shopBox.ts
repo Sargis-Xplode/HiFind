@@ -4,7 +4,11 @@ interface Shop {
     descriptionEng: string;
     instaPageLink: string;
     instaPfpPreview: string;
-    subCategories: Array<string>;
+    subCategories: Array<{
+        subCategoryArm: string;
+        subCategoryEng: string;
+        selected: boolean;
+    }>;
 }
 
 export default Shop;

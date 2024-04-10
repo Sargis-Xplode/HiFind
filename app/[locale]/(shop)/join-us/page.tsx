@@ -6,7 +6,7 @@ import Header from "../../Components/Header/Header";
 import "./page.scss";
 import { faCheckCircle, faChevronDown, faChevronUp, faUpload } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import uploadIcon from "../../../../Assets/upload-icon.svg";
@@ -38,180 +38,21 @@ const JoinUs = () => {
     const [validSizePfp, setValidSizePfp] = useState(false);
     const [validExtensionPfp, setValidExtensionPfp] = useState(false);
 
-    const [categories, setCategories] = useState([
-        {
-            category: "shops",
-            clicked: false,
-            variants: [
-                {
-                    variant: "shops",
-                    selected: false,
-                },
-                {
-                    variant: "shops",
-                    selected: false,
-                },
-                {
-                    variant: "shops",
-                    selected: false,
-                },
-                {
-                    variant: "shops",
-                    selected: false,
-                },
-                {
-                    variant: "shops",
-                    selected: false,
-                },
-                {
-                    variant: "shops",
-                    selected: false,
-                },
-                {
-                    variant: "shops",
-                    selected: false,
-                },
-            ],
-        },
-        {
-            category: "services",
-            clicked: false,
-            variants: [
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-                {
-                    variant: "services",
-                    selected: false,
-                },
-            ],
-        },
-        {
-            category: "entertainment",
-            clicked: false,
-            variants: [
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-                {
-                    variant: "entertainment",
-                    selected: false,
-                },
-            ],
-        },
-        {
-            category: "beauty",
-            clicked: false,
-            variants: [
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-                {
-                    variant: "beauty",
-                    selected: false,
-                },
-            ],
-        },
-        {
-            category: "healthCare",
-            clicked: false,
-            variants: [
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-                {
-                    variant: "healthCare",
-                    selected: false,
-                },
-            ],
-        },
-    ]);
+    const [categories, setCategories] = useState<any>([]);
 
     const [subCategories, setSubCategories] = useState<any>([]);
+
+    useEffect(() => {
+        axios
+            .get(`/${localActive}/api/categories/all`)
+            .then((res) => {
+                const categoriesDB = res.data.categories;
+                setCategories(categoriesDB);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
     const toggleCheck = () => {
         setChecked(!checked);
@@ -283,9 +124,9 @@ const JoinUs = () => {
 
     const handleOpenDropDown = (index: number, categoryName: string) => {
         clearFilters();
-        const arr = categories.map((categ, ind) => {
+        const arr = categories.map((categ: any, ind: number) => {
             if (index === ind) {
-                categ.clicked = true;
+                categ.clicked = !categ.clicked;
             } else {
                 categ.clicked = false;
             }
@@ -300,7 +141,13 @@ const JoinUs = () => {
                 vari.selected = !vari.selected;
                 let arr = subCategories;
                 if (vari.selected) {
-                    arr = [...subCategories, vari.variant];
+                    arr = [
+                        ...subCategories,
+                        {
+                            subCategoryArm: vari.subCategoryArm,
+                            subCategoryEng: vari.subCategoryEng,
+                        },
+                    ];
                 } else {
                     arr.pop();
                 }
@@ -313,8 +160,8 @@ const JoinUs = () => {
     };
 
     const clearFilters = () => {
-        const arr = categories.map((categ) => {
-            categ?.variants?.map((vari) => {
+        const arr = categories.map((categ: any) => {
+            categ?.variants?.map((vari: any) => {
                 vari.selected = false;
                 return vari;
             });
@@ -478,6 +325,7 @@ const JoinUs = () => {
                                         name="logo"
                                         onChange={(e) => handlePfpChange(e)}
                                         className="brand-logo"
+                                        accept="image/png, image/jpg,image/jpeg, .svg"
                                     />
                                 </div>
                             ) : (
@@ -514,23 +362,8 @@ const JoinUs = () => {
 
                             <ul>
                                 <li>{t("chooseCategory")}</li>
-                                {/* <li>
-                                    {t3("shops")} <FontAwesomeIcon icon={faChevronDown} />
-                                </li>
-                                <li>
-                                    {t3("services")} <FontAwesomeIcon icon={faChevronDown} />
-                                </li>
-                                <li>
-                                    {t3("entertainment")} <FontAwesomeIcon icon={faChevronDown} />
-                                </li>
-                                <li>
-                                    {t3("beauty")} <FontAwesomeIcon icon={faChevronDown} />
-                                </li>
-                                <li>
-                                    {t3("healthCare")} <FontAwesomeIcon icon={faChevronDown} />
-                                </li> */}
                                 {categories.length
-                                    ? categories.map((category, index) => {
+                                    ? categories.map((category: any, index: any) => {
                                           return (
                                               <div
                                                   className="categories"
@@ -540,7 +373,7 @@ const JoinUs = () => {
                                                       className="categories-with-plus "
                                                       onClick={() => handleOpenDropDown(index, category.category)}
                                                   >
-                                                      {t3(category.category)}
+                                                      {category.category}
                                                       {category.clicked ? (
                                                           <FontAwesomeIcon icon={faChevronUp} />
                                                       ) : (
@@ -553,7 +386,7 @@ const JoinUs = () => {
                                                       }
                                                   >
                                                       {category?.variants?.length
-                                                          ? category?.variants.map((variant, index) => {
+                                                          ? category?.variants.map((variant: any, index: number) => {
                                                                 return (
                                                                     <div
                                                                         className="variant"
@@ -576,7 +409,11 @@ const JoinUs = () => {
                                                                                 ""
                                                                             )}
                                                                         </div>
-                                                                        {t3(variant.variant)} {index}
+                                                                        <div className="variant-text-container">
+                                                                            {localActive === "hy"
+                                                                                ? variant.subCategoryArm
+                                                                                : variant.subCategoryEng}
+                                                                        </div>
                                                                     </div>
                                                                 );
                                                             })

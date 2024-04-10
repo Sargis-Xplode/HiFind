@@ -23,7 +23,10 @@ const CategoriesList = () => {
     const [newCategoryName, setNewCategoryName] = useState("");
     const [clicked, setClicked] = useState(false);
     const [updateCategories, setUpdateCategories] = useState(false);
+    const [currentlyEditingCategory, setCurrentlyEditingCategory] = useState<any>({});
+    const [currentlyDeletingCategory, setCurrentlyDeletingCategory] = useState<any>({});
 
+    const [variants, setVariants] = useState<any>([]);
     const [subCategories, setSubCategories] = useState<any>([
         {
             subCategoryArm: "",
@@ -43,27 +46,19 @@ const CategoriesList = () => {
             });
     }, [updateCategories]);
 
-    const openAddNewCategoryModal = () => {
-        setShowAddNewCategoryModal(true);
+    const openModal = (modal: string) => {
+        if (modal === "add") {
+            setShowAddNewCategoryModal(true);
+        } else if (modal === "edit") {
+            setShowEditCategoryModal(true);
+        } else if (modal === "delete") {
+            setShowDeleteCategoryModal(true);
+        }
     };
 
-    const closeAddNewCategoryModal = () => {
+    const closeModal = () => {
         setShowAddNewCategoryModal(false);
-    };
-
-    const openEditCategoryModal = () => {
-        setShowEditCategoryModal(true);
-    };
-
-    const closeEditCategoryModal = () => {
         setShowEditCategoryModal(false);
-    };
-
-    const openDeleteCategoryModal = () => {
-        setShowDeleteCategoryModal(true);
-    };
-
-    const closeDeleteCategoryModal = () => {
         setShowDeleteCategoryModal(false);
     };
 
@@ -75,6 +70,17 @@ const CategoriesList = () => {
             return categ;
         });
         setCategories(arr);
+    };
+
+    const handleEditButtonClick = (e: any, categ: any, method: string) => {
+        e.stopPropagation();
+        openModal(method);
+        if (method === "edit") {
+            setCurrentlyEditingCategory(categ);
+        } else if (method === "delete") {
+            setCurrentlyDeletingCategory(categ);
+        }
+        setVariants(categ.variants);
     };
 
     const handleCategoryNameChange = (e: any) => {
@@ -93,7 +99,24 @@ const CategoriesList = () => {
             return subCateg;
         });
         setSubCategories(arr);
-        setUpdateCategories(!updateCategories);
+    };
+
+    const handleSubcategoryInputEdit = (e: any, ind: number, lang: string) => {
+        const arr = variants?.map((variant: any, index: number) => {
+            if (index === ind) {
+                if (lang === "hy") {
+                    variant.subCategoryArm = e.target.value;
+                } else {
+                    variant.subCategoryEng = e.target.value;
+                }
+            }
+            return variant;
+        });
+        setVariants(arr);
+        setCurrentlyEditingCategory({
+            ...currentlyEditingCategory,
+            variants: arr,
+        });
     };
 
     const addNewSubCategory = () => {
@@ -107,6 +130,17 @@ const CategoriesList = () => {
         setSubCategories(arr);
     };
 
+    const addNewSubCategoryForEdit = () => {
+        const arr = [
+            ...variants,
+            {
+                subCategoryArm: "",
+                subCategoryEng: "",
+            },
+        ];
+        setVariants(arr);
+    };
+
     const submitNewCategory = () => {
         const body = {
             category: newCategoryName,
@@ -117,29 +151,38 @@ const CategoriesList = () => {
             .post(`/${localActive}/api/categories/single`, JSON.stringify(body))
             .then((res) => {
                 console.log(res.data);
+                setUpdateCategories(!updateCategories);
             })
             .catch((error) => {
                 console.log(error);
             });
-        closeAddNewCategoryModal();
+        closeModal();
+        setSubCategories([
+            {
+                subCategoryArm: "",
+                subCategoryEng: "",
+            },
+        ]);
     };
 
-    const handleEditCategoryItem = (categ: any) => {
+    const handleEditCategoryItem = () => {
         const body = {
-            category: newCategoryName,
+            category: currentlyEditingCategory.category,
             clicked,
-            variants: subCategories,
-            id: categ._id,
+            variants: currentlyEditingCategory.variants,
+            id: currentlyEditingCategory._id,
         };
+
         axios
             .post(`/${localActive}/api/categories/single/update`, JSON.stringify(body))
             .then((res) => {
                 console.log(res.data);
+                setUpdateCategories(!updateCategories);
             })
             .catch((error) => {
                 console.log(error);
             });
-        closeEditCategoryModal();
+        closeModal();
     };
 
     const handleDeleteCategoryItem = (categ: any) => {
@@ -147,88 +190,185 @@ const CategoriesList = () => {
             id: categ._id,
         };
 
-        console.log(body);
         axios
             .post(`/${localActive}/api/categories/single/delete`, JSON.stringify(body))
             .then((res) => {
-                console.log(res.data);
+                setUpdateCategories(!updateCategories);
             })
             .catch((error) => {
                 console.log(error);
             });
-        setUpdateCategories(!updateCategories);
-        closeDeleteCategoryModal();
+        closeModal();
     };
 
     return (
         <section className="categories-list-section">
-            {showAddNewCategoryModal ? (
+            {showAddNewCategoryModal || showEditCategoryModal || showDeleteCategoryModal ? (
                 <div
-                    className="add-new-category-wrapper"
-                    onClick={closeAddNewCategoryModal}
+                    className="category-modal-wrapper"
+                    onClick={closeModal}
                 >
-                    <div
-                        className="add-new-category-modal"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <p
-                            className="close-modal"
-                            onClick={closeAddNewCategoryModal}
+                    {showAddNewCategoryModal ? (
+                        <div
+                            className="add-new-category-modal"
+                            onClick={(e) => e.stopPropagation()}
                         >
-                            X
-                        </p>
-                        <h3>Ավելացնել նորը</h3>
+                            <div
+                                className="close-modal"
+                                onClick={closeModal}
+                            >
+                                X
+                            </div>
+                            <h3>Ավելացնել նորը</h3>
 
-                        <p>Ընտրացանկի անունը</p>
-                        <input
-                            type="text"
-                            placeholder="Ընտրացանկի անունը"
-                            onChange={(e) => handleCategoryNameChange(e)}
-                            autoFocus
-                        />
+                            <p>Ընտրացանկի անունը</p>
+                            <input
+                                type="text"
+                                placeholder="Ընտրացանկի անունը"
+                                onChange={(e) => handleCategoryNameChange(e)}
+                                autoFocus
+                            />
 
-                        <div className="sub-categories-container">
-                            {subCategories.length > 0
-                                ? subCategories.map((subCateg: any, index: number) => {
-                                      return (
-                                          <div key={index}>
-                                              <p>Ենթակատեգորիա {index > 0 ? index + 1 : ""}</p>
-                                              <input
-                                                  type="text"
-                                                  placeholder="Ենթակատեգորիա (հայերեն)"
-                                                  onChange={(e) => {
-                                                      handleSubcategoryInputChange(e, index, "hy");
-                                                  }}
-                                                  value={subCateg?.subCategoryArm}
-                                              />
-                                              <input
-                                                  type="text"
-                                                  placeholder="Ենթակատեգորիա (անգլլերեն)"
-                                                  onChange={(e) => {
-                                                      handleSubcategoryInputChange(e, index, "en");
-                                                  }}
-                                                  value={subCateg?.subCategoryEng}
-                                              />
-                                          </div>
-                                      );
-                                  })
-                                : ""}
+                            <div className="sub-categories-container">
+                                {subCategories.length > 0
+                                    ? subCategories.map((subCateg: any, index: number) => {
+                                          return (
+                                              <div key={index}>
+                                                  <p>Ենթակատեգորիա {index > 0 ? index + 1 : ""}</p>
+                                                  <input
+                                                      type="text"
+                                                      placeholder="Ենթակատեգորիա (հայերեն)"
+                                                      onChange={(e) => {
+                                                          handleSubcategoryInputChange(e, index, "hy");
+                                                      }}
+                                                      value={subCateg?.subCategoryArm}
+                                                  />
+                                                  <input
+                                                      type="text"
+                                                      placeholder="Ենթակատեգորիա (անգլլերեն)"
+                                                      onChange={(e) => {
+                                                          handleSubcategoryInputChange(e, index, "en");
+                                                      }}
+                                                      value={subCateg?.subCategoryEng}
+                                                  />
+                                              </div>
+                                          );
+                                      })
+                                    : ""}
+                            </div>
+
+                            <p
+                                className="add-new-subCategory"
+                                onClick={addNewSubCategory}
+                            >
+                                +Ավելացնել ենթակատեգորիա
+                            </p>
+
+                            <button
+                                className="button"
+                                onClick={submitNewCategory}
+                            >
+                                Ավելացնել
+                            </button>
                         </div>
-
-                        <p
-                            className="add-new-subCategory"
-                            onClick={addNewSubCategory}
+                    ) : (
+                        ""
+                    )}
+                    {showEditCategoryModal ? (
+                        <div
+                            className="edit-category-modal"
+                            onClick={(e) => e.stopPropagation()}
                         >
-                            +Ավելացնել ենթակատեգորիա
-                        </p>
+                            <div
+                                className="close-modal"
+                                onClick={closeModal}
+                            >
+                                X
+                            </div>
+                            <h3>Խմբագրել</h3>
 
-                        <button
-                            className="button"
-                            onClick={submitNewCategory}
+                            <p>Ընտրացանկի անունը</p>
+                            <input
+                                type="text"
+                                placeholder="Ընտրացանկի անունը"
+                                onChange={(e) => handleCategoryNameChange(e)}
+                                value={currentlyEditingCategory.category}
+                                autoFocus
+                            />
+
+                            <div className="sub-categories-container">
+                                {variants?.length > 0
+                                    ? variants?.map((subCateg: any, index: number) => {
+                                          return (
+                                              <div key={index}>
+                                                  <p>Ենթակատեգորիա {index > 0 ? index + 1 : ""}</p>
+                                                  <input
+                                                      type="text"
+                                                      placeholder="Ենթակատեգորիա (հայերեն)"
+                                                      onChange={(e) => {
+                                                          handleSubcategoryInputEdit(e, index, "hy");
+                                                      }}
+                                                      value={subCateg?.subCategoryArm}
+                                                  />
+                                                  <input
+                                                      type="text"
+                                                      placeholder="Ենթակատեգորիա (անգլլերեն)"
+                                                      onChange={(e) => {
+                                                          handleSubcategoryInputEdit(e, index, "en");
+                                                      }}
+                                                      value={subCateg?.subCategoryEng}
+                                                  />
+                                              </div>
+                                          );
+                                      })
+                                    : ""}
+                            </div>
+
+                            <p
+                                className="add-new-subCategory"
+                                onClick={addNewSubCategoryForEdit}
+                            >
+                                +Ավելացնել ենթակատեգորիա
+                            </p>
+
+                            <button
+                                className="button"
+                                onClick={() => handleEditCategoryItem()}
+                            >
+                                Խմբագրել
+                            </button>
+                        </div>
+                    ) : (
+                        ""
+                    )}
+                    {showDeleteCategoryModal ? (
+                        <div
+                            className="delete-category-modal"
+                            onClick={(e) => e.stopPropagation()}
                         >
-                            Ավելացնել
-                        </button>
-                    </div>
+                            <div
+                                className="close-modal"
+                                onClick={closeModal}
+                            >
+                                X
+                            </div>
+                            <h3>Ջնջել</h3>
+
+                            <h4>Ցանկանում եք ջնջել "{currentlyDeletingCategory.category}" ընտրացանկը։</h4>
+                            <p>
+                                <span>*</span> Ջնջելու դեպքում կջնջվեն նաև ենթակատեգորիաները։
+                            </p>
+
+                            <button
+                                className="button"
+                                onClick={() => handleDeleteCategoryItem(currentlyDeletingCategory)}
+                            >
+                                Ջնջել
+                            </button>
+                        </div>
+                    ) : (
+                        ""
+                    )}
                 </div>
             ) : (
                 ""
@@ -241,7 +381,7 @@ const CategoriesList = () => {
                     <div>
                         <button
                             className="button"
-                            onClick={openAddNewCategoryModal}
+                            onClick={() => openModal("add")}
                         >
                             + Ավելացնել նորը
                         </button>
@@ -270,24 +410,16 @@ const CategoriesList = () => {
                                               <p>{categ.category}</p>
                                           </div>
                                           <div className="edit-delete-icons">
-                                              <div>
+                                              <div onClick={(e) => handleEditButtonClick(e, categ, "edit")}>
                                                   <Image
                                                       src={editIcon}
                                                       alt="Edit Icon"
-                                                      //   onClick={(e) => {
-                                                      //       e.stopPropagation();
-                                                      //       handleEditCategoryItem(categ);
-                                                      //   }}
                                                   ></Image>
                                               </div>
-                                              <div>
+                                              <div onClick={(e) => handleEditButtonClick(e, categ, "delete")}>
                                                   <Image
                                                       src={deleteIcon}
-                                                      alt="Edit Icon"
-                                                      onClick={(e) => {
-                                                          e.stopPropagation();
-                                                          handleDeleteCategoryItem(categ);
-                                                      }}
+                                                      alt="Delete Icon"
                                                   ></Image>
                                               </div>
                                           </div>

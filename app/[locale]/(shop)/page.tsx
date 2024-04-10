@@ -34,6 +34,9 @@ export default function Home() {
                 const arr: any = [];
 
                 for (let i = shops.length - 1; i >= shops.length - 8; i--) {
+                    if (!shops[i]) {
+                        continue;
+                    }
                     arr.push(shops[i]);
                 }
                 setRecentShops(arr);

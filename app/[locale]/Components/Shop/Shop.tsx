@@ -7,6 +7,7 @@ import Link from "next/link";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import brandLogo from "../../../../Assets/brand-logo.svg";
 import categoryIcon from "../../../../Assets/brush-icon.svg";
+import { useLocale } from "next-intl";
 
 const Shop = ({
     buisnessName,
@@ -16,6 +17,8 @@ const Shop = ({
     instaPfpPreview = brandLogo,
     subCategories,
 }: ShopInteface) => {
+    const localActive = useLocale();
+
     return (
         <Link
             href={instaPageLink}
@@ -38,12 +41,16 @@ const Shop = ({
                 </div>
                 <div className="box-text-container">
                     <p>{buisnessName}</p>
-                    <p>{descriptionArm}</p>
+                    <p>{localActive === "hy" ? descriptionArm : descriptionEng}</p>
                 </div>
                 <div className="box-tags-container">
                     <div>
-                        {subCategories.map((tag, index: number) => {
-                            return <p key={index}>{tag}</p>;
+                        {subCategories.map((variant: any, index: number) => {
+                            return (
+                                <p key={index}>
+                                    {localActive === "hy" ? variant.subCategoryArm : variant.subCategoryEng}
+                                </p>
+                            );
                         })}
                     </div>
                 </div>

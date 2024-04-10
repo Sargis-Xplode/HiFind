@@ -44,347 +44,11 @@ const Shops = () => {
     const [atLeastOneVariantSelected, setAtLeastOneVariantSelected] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const [selectedCategories, setSelectedCategories] = useState([]);
-    // const [categories, setCategories] = useState<any>([
-    //     {
-    //         category: "String",
-    //         clicked: false,
-    //         variants: [
-    //             {
-    //                 variant: "clothes",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "accessories",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "shoes",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "homeDecor",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "techAccessories",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "wellness",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "stationery",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "kidsAndBaby",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "vintageAndThrift",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "plantsAndFlowers",
-    //                 selected: false,
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         category: "services",
-    //         clicked: false,
-    //         variants: [
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "services",
-    //                 selected: false,
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         category: "entertainment",
-    //         clicked: false,
-    //         variants: [
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "entertainment",
-    //                 selected: false,
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         category: "beauty",
-    //         clicked: false,
-    //         variants: [
-    //             {
-    //                 variant: "beauty",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "beauty",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "beauty",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "beauty",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "beauty",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "beauty",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "beauty",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "beauty",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "beauty",
-    //                 selected: false,
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         category: "healthCare",
-    //         clicked: false,
-    //         variants: [
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //             {
-    //                 variant: "healthCare",
-    //                 selected: false,
-    //             },
-    //         ],
-    //     },
-    // ]);
+    const [categories, setCategories] = useState<any>([]);
 
-    const [categories, setCategories] = useState<any>([
-        {
-            category: "String",
-            clicked: false,
-            variants: [
-                {
-                    variant: "clothes",
-                    selected: false,
-                },
-            ],
-        },
-    ]);
+    const [selectedCategories, setSelectedCategories] = useState([]);
 
     useEffect(() => {
-        setLoading(true);
         axios
             .get("api/shop/all")
             .then((res) => {
@@ -401,7 +65,6 @@ const Shops = () => {
             .get(`/${localActive}/api/categories/all`)
             .then((res) => {
                 const categoriesDB = res.data.categories;
-                console.log(categoriesDB);
                 setCategories(categoriesDB);
                 setLoading(false);
             })
@@ -452,8 +115,6 @@ const Shops = () => {
                     ? Math.ceil(shops.length / itemsPerPage)
                     : 0;
             setPageCount(count);
-        } else {
-            setLoading(true);
         }
     }, [shops, itemOffSet, filteredShops, searchActive]);
 
@@ -488,6 +149,8 @@ const Shops = () => {
         const arr = categories.map((categ: any, ind: number) => {
             if (index === ind) {
                 categ.clicked = !categ.clicked;
+            } else {
+                categ.clicked = false;
             }
             return categ;
         });
@@ -578,6 +241,7 @@ const Shops = () => {
                                                                         key={index}
                                                                         onClick={() => toggleCheck(category, index)}
                                                                     >
+                                                                        <div></div>
                                                                         <div
                                                                             className={
                                                                                 (variant.selected ? "checked " : "") +
@@ -592,9 +256,11 @@ const Shops = () => {
                                                                                 ""
                                                                             )}
                                                                         </div>
-                                                                        {localActive === "hy"
-                                                                            ? variant.subCategoryArm
-                                                                            : variant.subCategoryEng}
+                                                                        <div className="variant-text-container">
+                                                                            {localActive === "hy"
+                                                                                ? variant.subCategoryArm
+                                                                                : variant.subCategoryEng}
+                                                                        </div>
                                                                     </div>
                                                                 );
                                                             })
@@ -674,10 +340,11 @@ const Shops = () => {
                                                                         ""
                                                                     )}
                                                                 </div>
-
-                                                                {localActive === "hy"
-                                                                    ? variant.subCategoryArm
-                                                                    : variant.subCategoryArm}
+                                                                <div className="variant-text-container">
+                                                                    {localActive === "hy"
+                                                                        ? variant.subCategoryArm
+                                                                        : variant.subCategoryEng}
+                                                                </div>
                                                             </div>
                                                         );
                                                     })
@@ -697,16 +364,20 @@ const Shops = () => {
                     </div>
 
                     <div className={(mobileFilterMenu ? "display-none" : "") + " shops-container"}>
-                        <div
-                            className="filters-btn-mobile"
-                            onClick={openMobileFilter}
-                        >
-                            {t("filters")}
-                            <Image
-                                src={filterIcon}
-                                alt="Filter"
-                            ></Image>
-                        </div>
+                        {searchActive && currentItems.length === 0 ? (
+                            ""
+                        ) : (
+                            <div
+                                className="filters-btn-mobile"
+                                onClick={openMobileFilter}
+                            >
+                                {t("filters")}
+                                <Image
+                                    src={filterIcon}
+                                    alt="Filter"
+                                ></Image>
+                            </div>
+                        )}
 
                         {currentItems.length > 0 ? (
                             currentItems.map((shop, index) => {

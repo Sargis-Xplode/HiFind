@@ -1,5 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
+const variantSchema = new Schema({
+    subCategoryArm: String,
+    subCategoryEng: String,
+});
+
 const shopSchema = new Schema({
     buisnessName: String,
     email: String,
@@ -7,7 +12,7 @@ const shopSchema = new Schema({
     descriptionArm: String,
     descriptionEng: String,
     instaPfpPreview: String,
-    subCategories: Array,
+    subCategories: [variantSchema],
 });
 
 const Shop = mongoose.models.Shop || mongoose.model("Shop", shopSchema);

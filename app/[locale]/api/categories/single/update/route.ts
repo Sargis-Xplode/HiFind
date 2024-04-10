@@ -9,7 +9,13 @@ export async function POST(req: Request) {
     const { category, clicked, variants, id } = body;
 
     try {
-        const categories = await Categories.updateOne({ id }, { category, clicked, variants });
+        const categories = await Categories.findById(id);
+
+        categories.category = category;
+        categories.clicked = clicked;
+        categories.variants = variants;
+
+        await categories.save();
 
         return NextResponse.json({
             message: "Category Updated",

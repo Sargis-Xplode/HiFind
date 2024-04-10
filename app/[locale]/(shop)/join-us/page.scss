@@ -190,6 +190,16 @@
                                 height: 35px;
                                 padding: 0 5px;
                                 display: flex;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+
+                                .variant-text-container {
+                                    width: 80%;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                }
 
                                 .checkbox-round {
                                     width: 20px;
@@ -215,10 +225,8 @@
                         }
 
                         .clicked {
-                            overflow: hidden;
-                            animation: dropdownSlider 0.5s ease-in-out;
-                            animation-iteration-count: 1;
-                            animation-fill-mode: forwards;
+                            height: auto;
+                            visibility: visible;
                         }
                     }
                 }
@@ -276,17 +284,17 @@
     }
 }
 
-@keyframes dropdownSlider {
-    from {
-        height: 0;
-        visibility: hidden;
-    }
+// @keyframes dropdownSlider {
+//     from {
+//         height: 0;
+//         visibility: hidden;
+//     }
 
-    to {
-        height: 250px;
-        visibility: visible;
-    }
-}
+//     to {
+//         height: 250px;
+//         visibility: visible;
+//     }
+// }
 
 @media only screen and (max-width: 1200px) {
     .join-us-section {

@@ -72,6 +72,9 @@
                         padding: 0 5px;
                         display: flex;
                         cursor: pointer;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
 
                         &:hover {
                             background-color: $bg-grey;
@@ -181,6 +184,13 @@
                         padding: 0 5px;
                         display: flex;
                         align-items: center;
+
+                        .variant-text-container {
+                            width: 80%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                        }
 
                         .checkbox-round {
                             width: 20px;

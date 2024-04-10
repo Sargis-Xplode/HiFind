@@ -3,8 +3,9 @@ import mongoose from "mongoose";
 const DATABASE_URL = process.env.NETLIFY_MONGODB_URI;
 const DATABASE_URL2 = process.env.REACT_APP_MONGODB_URI;
 const DATABASE_URL_LOCAL = process.env.MONGODB_URI;
+const DATABASE_URL_LOCAL_DB = process.env.MONGODB_URI_LOCAL;
 
-if (!DATABASE_URL || !DATABASE_URL2 || !DATABASE_URL_LOCAL) {
+if (!DATABASE_URL || !DATABASE_URL2 || !DATABASE_URL_LOCAL || !DATABASE_URL_LOCAL_DB) {
     throw new Error("Please define the DATABASE_URL environment variable inside .env.local");
 }
 
