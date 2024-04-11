@@ -135,19 +135,22 @@ export default function Home() {
                                 instaPageLink,
                                 instaPfpPreview,
                                 subCategories,
+                                approved,
                             } = shop;
 
-                            return (
-                                <Shop
-                                    key={index}
-                                    buisnessName={buisnessName}
-                                    descriptionArm={descriptionArm}
-                                    descriptionEng={descriptionEng}
-                                    instaPageLink={instaPageLink}
-                                    instaPfpPreview={""}
-                                    subCategories={subCategories}
-                                ></Shop>
-                            );
+                            if (approved) {
+                                return (
+                                    <Shop
+                                        key={index}
+                                        buisnessName={buisnessName}
+                                        descriptionArm={descriptionArm}
+                                        descriptionEng={descriptionEng}
+                                        instaPageLink={instaPageLink}
+                                        instaPfpPreview={""}
+                                        subCategories={subCategories}
+                                    ></Shop>
+                                );
+                            }
                         })}
                     </div>
                 </section>
