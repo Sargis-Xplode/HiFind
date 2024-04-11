@@ -6,11 +6,14 @@ import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { faCheckCircle, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faChevronDown, faChevronUp, faX, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import editIcon from "../../../../Assets/edit-icon.svg";
 import deleteIcon from "../../../../Assets/delete-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import { useLocale } from "next-intl";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CategoriesList = () => {
     const localActive = useLocale();
@@ -43,6 +46,9 @@ const CategoriesList = () => {
             })
             .catch((error) => {
                 console.log(error);
+                toast("Couldn't get categories", {
+                    type: "error",
+                });
             });
     }, [updateCategories]);
 
@@ -119,6 +125,19 @@ const CategoriesList = () => {
         });
     };
 
+    const handleSubcategoryInputRemove = (ind: number) => {
+        const arr = variants?.filter((variant: any, index: number) => {
+            if (index !== ind) {
+                return variant;
+            }
+        });
+        setVariants(arr);
+        setCurrentlyEditingCategory({
+            ...currentlyEditingCategory,
+            variants: arr,
+        });
+    };
+
     const addNewSubCategory = () => {
         const arr = [
             ...subCategories,
@@ -152,9 +171,15 @@ const CategoriesList = () => {
             .then((res) => {
                 console.log(res.data);
                 setUpdateCategories(!updateCategories);
+                toast("New Category submitted successfully", {
+                    type: "success",
+                });
             })
             .catch((error) => {
                 console.log(error);
+                toast(error, {
+                    type: "error",
+                });
             });
         closeModal();
         setSubCategories([
@@ -178,9 +203,15 @@ const CategoriesList = () => {
             .then((res) => {
                 console.log(res.data);
                 setUpdateCategories(!updateCategories);
+                toast("Categories updated", {
+                    type: "success",
+                });
             })
             .catch((error) => {
                 console.log(error);
+                toast(error, {
+                    type: "error",
+                });
             });
         closeModal();
     };
@@ -194,15 +225,33 @@ const CategoriesList = () => {
             .post(`/${localActive}/api/categories/single/delete`, JSON.stringify(body))
             .then((res) => {
                 setUpdateCategories(!updateCategories);
+                toast("Category successfully removed", {
+                    type: "success",
+                });
             })
             .catch((error) => {
                 console.log(error);
+                toast(error, {
+                    type: "error",
+                });
             });
         closeModal();
     };
 
     return (
         <section className="categories-list-section">
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             {showAddNewCategoryModal || showEditCategoryModal || showDeleteCategoryModal ? (
                 <div
                     className="category-modal-wrapper"
@@ -294,30 +343,43 @@ const CategoriesList = () => {
                                 onChange={(e) => handleCategoryNameChange(e)}
                                 value={currentlyEditingCategory.category}
                                 autoFocus
+                                className="category-name"
                             />
 
                             <div className="sub-categories-container">
                                 {variants?.length > 0
                                     ? variants?.map((subCateg: any, index: number) => {
                                           return (
-                                              <div key={index}>
+                                              <div
+                                                  key={index}
+                                                  className="input-group-container"
+                                              >
                                                   <p>Ենթակատեգորիա {index > 0 ? index + 1 : ""}</p>
-                                                  <input
-                                                      type="text"
-                                                      placeholder="Ենթակատեգորիա (հայերեն)"
-                                                      onChange={(e) => {
-                                                          handleSubcategoryInputEdit(e, index, "hy");
-                                                      }}
-                                                      value={subCateg?.subCategoryArm}
-                                                  />
-                                                  <input
-                                                      type="text"
-                                                      placeholder="Ենթակատեգորիա (անգլլերեն)"
-                                                      onChange={(e) => {
-                                                          handleSubcategoryInputEdit(e, index, "en");
-                                                      }}
-                                                      value={subCateg?.subCategoryEng}
-                                                  />
+                                                  <div className="input-group">
+                                                      <input
+                                                          type="text"
+                                                          placeholder="Ենթակատեգորիա (հայերեն)"
+                                                          onChange={(e) => {
+                                                              handleSubcategoryInputEdit(e, index, "hy");
+                                                          }}
+                                                          value={subCateg?.subCategoryArm}
+                                                      />
+                                                      <input
+                                                          type="text"
+                                                          placeholder="Ենթակատեգորիա (անգլլերեն)"
+                                                          onChange={(e) => {
+                                                              handleSubcategoryInputEdit(e, index, "en");
+                                                          }}
+                                                          value={subCateg?.subCategoryEng}
+                                                      />
+
+                                                      <div
+                                                          className="remove-input-group"
+                                                          onClick={() => handleSubcategoryInputRemove(index)}
+                                                      >
+                                                          <FontAwesomeIcon icon={faXmarkCircle}></FontAwesomeIcon>
+                                                      </div>
+                                                  </div>
                                               </div>
                                           );
                                       })

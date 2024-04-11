@@ -48,6 +48,14 @@ async function connectDB() {
                 }
             }
         }
+
+        // try {
+        //     cached.promise = mongoose.connect(DATABASE_URL_LOCAL_DB, opts).then((mongoose) => {
+        //         return mongoose;
+        //     });
+        // } catch (error) {
+        //     console.log(error);
+        // }
     }
     cached.conn = await cached.promise;
     return cached.conn;

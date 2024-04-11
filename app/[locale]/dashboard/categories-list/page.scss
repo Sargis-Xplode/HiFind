@@ -34,9 +34,32 @@
             padding: 20px 40px;
 
             .sub-categories-container {
-                overflow: auto;
+                overflow-y: auto;
                 height: 100%;
                 box-sizing: border-box;
+
+                .input-group-container {
+                    .input-group {
+                        height: 100%;
+                        position: relative;
+
+                        .remove-input-group {
+                            position: absolute;
+                            top: 50%;
+                            right: 0;
+                            transform: translate(0, -50%);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            cursor: pointer;
+                            font-size: 16px;
+
+                            svg {
+                                color: grey;
+                            }
+                        }
+                    }
+                }
             }
 
             .close-modal {
@@ -52,10 +75,12 @@
 
             input {
                 padding: 15px;
-                width: 90%;
+                width: 85%;
                 border-radius: 25px;
                 border: 1px solid #eaeaea;
+            }
 
+            .category-name {
                 margin-bottom: 10px;
             }
 
@@ -138,8 +163,9 @@
         }
 
         .list {
-            overflow-x: auto;
+            overflow: auto;
             padding: 20px;
+            height: 80%;
 
             .category-item-container {
                 margin-bottom: 20px;
