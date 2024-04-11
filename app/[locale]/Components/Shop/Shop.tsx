@@ -14,7 +14,7 @@ const Shop = ({
     descriptionArm,
     descriptionEng,
     instaPageLink,
-    instaPfpPreview = brandLogo,
+    instaPfpPreview,
     subCategories,
 }: ShopInteface) => {
     const localActive = useLocale();
@@ -33,11 +33,22 @@ const Shop = ({
                     />
                 </div>
                 <div className="box-image-container">
-                    <Image
-                        priority
-                        src={brandLogo}
-                        alt="Picture of the author"
-                    />
+                    <div className="image-container">
+                        {instaPfpPreview ? (
+                            <Image
+                                priority
+                                src={instaPfpPreview}
+                                alt="Brang Logo"
+                                fill
+                            />
+                        ) : (
+                            <Image
+                                priority
+                                src={brandLogo}
+                                alt="Brand Logo"
+                            />
+                        )}
+                    </div>
                 </div>
                 <div className="box-text-container">
                     <p>{buisnessName}</p>

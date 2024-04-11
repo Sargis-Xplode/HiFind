@@ -79,10 +79,18 @@ const Shops = () => {
             let filtered = false;
 
             const arr = shops.filter((shop: any) => {
-                selectedCategories.map((category) => {
-                    if (shop.subCategories.includes(category)) {
-                        filtered = true;
-                    }
+                filtered = false;
+
+                selectedCategories.map((category: any) => {
+                    shop.subCategories.map((shopCateg: any, index: number) => {
+                        if (
+                            shopCateg.subCategoryArm === category.subCategoryArm ||
+                            shopCateg.subCategoryEng === category.subCategoryEng
+                        ) {
+                            filtered = true;
+                        }
+                        return shopCateg;
+                    });
 
                     return category;
                 });
@@ -130,7 +138,13 @@ const Shops = () => {
                 vari.selected = !vari.selected;
                 let array: any = [...selectedCategories];
                 if (vari.selected) {
-                    array = [...selectedCategories, vari.variant];
+                    array = [
+                        ...selectedCategories,
+                        {
+                            subCategoryArm: vari.subCategoryArm,
+                            subcategoryEng: vari.subCategoryEng,
+                        },
+                    ];
                 } else {
                     array.pop();
                 }
@@ -396,6 +410,7 @@ const Shops = () => {
                                         descriptionArm={descriptionArm}
                                         descriptionEng={descriptionEng}
                                         instaPageLink={instaPageLink}
+                                        // instaPfpPreview={instaPfpPreview}
                                         instaPfpPreview={""}
                                         subCategories={subCategories}
                                     ></Shop>

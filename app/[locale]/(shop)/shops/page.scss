@@ -4,6 +4,7 @@
     background-color: $bg-grey;
     padding: 40px 0;
     position: relative;
+    min-height: 60vh;
 
     h2 {
         text-align: center;
@@ -259,6 +260,8 @@
             }
 
             a.shop-link {
+                height: max-content;
+
                 .suggested-pages-box {
                     width: 100%;
                     background-color: $bg-white;
