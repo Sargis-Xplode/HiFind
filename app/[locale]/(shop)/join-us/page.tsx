@@ -395,20 +395,24 @@ const JoinUs = () => {
                                                                             toggleCheckCategories(category, index)
                                                                         }
                                                                     >
-                                                                        <div
-                                                                            className={
-                                                                                (variant.selected ? "checked " : "") +
-                                                                                "checkbox-round"
-                                                                            }
-                                                                        >
-                                                                            {variant.selected ? (
-                                                                                <FontAwesomeIcon
-                                                                                    icon={faCheckCircle}
-                                                                                ></FontAwesomeIcon>
-                                                                            ) : (
-                                                                                ""
-                                                                            )}
+                                                                        <div>
+                                                                            <div
+                                                                                className={
+                                                                                    (variant.selected
+                                                                                        ? "checked "
+                                                                                        : "") + "checkbox-round"
+                                                                                }
+                                                                            >
+                                                                                {variant.selected ? (
+                                                                                    <FontAwesomeIcon
+                                                                                        icon={faCheckCircle}
+                                                                                    ></FontAwesomeIcon>
+                                                                                ) : (
+                                                                                    ""
+                                                                                )}
+                                                                            </div>
                                                                         </div>
+
                                                                         <div className="variant-text-container">
                                                                             {localActive === "hy"
                                                                                 ? variant.subCategoryArm

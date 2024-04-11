@@ -185,17 +185,25 @@
                         .dropdown-slider {
                             height: 0px;
                             visibility: hidden;
+                            display: flex;
+                            flex-wrap: wrap;
 
                             .variant {
-                                height: 35px;
                                 padding: 0 5px;
                                 display: flex;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
                                 white-space: nowrap;
+                                border: 1px solid #eaeaea;
+                                border-radius: 25px;
+                                align-items: center;
+                                color: $secondary-text-color;
+                                margin-right: 12px;
+                                margin-bottom: 12px;
+                                padding: 10px 20px;
 
                                 .variant-text-container {
-                                    width: 80%;
+                                    width: 90%;
                                     overflow: hidden;
                                     text-overflow: ellipsis;
                                     white-space: nowrap;
