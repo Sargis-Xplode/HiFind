@@ -196,10 +196,14 @@ const JoinUs = () => {
                     descriptionEng,
                     instaPfpPreview,
                     subCategories,
+                    approved: false,
+                    denied: false,
+                    newRequest: true,
+                    date: "01/01/2001",
                 };
 
                 const res = await axios
-                    .post("api/shop/single", JSON.stringify(body))
+                    .post("api/shop/request", JSON.stringify(body))
                     .then((res) => {
                         const data = res.data;
                         console.log(data);

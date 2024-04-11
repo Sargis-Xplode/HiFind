@@ -13,6 +13,10 @@ const shopSchema = new Schema({
     descriptionEng: String,
     instaPfpPreview: String,
     subCategories: [variantSchema],
+    approved: Boolean,
+    denied: Boolean,
+    newRequest: Boolean,
+    date: String,
 });
 
 const Shop = mongoose.models.Shop || mongoose.model("Shop", shopSchema);

@@ -436,7 +436,10 @@ const CategoriesList = () => {
                 ""
             )}
 
-            <AdminAsidePanel selected={"categories-list"}></AdminAsidePanel>
+            <AdminAsidePanel
+                selected={"categories-list"}
+                notificationCounter={0}
+            ></AdminAsidePanel>
             <main>
                 <div className="categories-list-header">
                     <h2>Ընտրացանկ</h2>

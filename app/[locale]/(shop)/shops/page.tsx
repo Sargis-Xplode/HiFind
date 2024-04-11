@@ -402,19 +402,22 @@ const Shops = () => {
                                     instaPageLink,
                                     instaPfpPreview,
                                     subCategories,
+                                    approved,
                                 } = shop;
-                                return (
-                                    <Shop
-                                        key={index}
-                                        buisnessName={buisnessName}
-                                        descriptionArm={descriptionArm}
-                                        descriptionEng={descriptionEng}
-                                        instaPageLink={instaPageLink}
-                                        // instaPfpPreview={instaPfpPreview}
-                                        instaPfpPreview={""}
-                                        subCategories={subCategories}
-                                    ></Shop>
-                                );
+                                if (approved) {
+                                    return (
+                                        <Shop
+                                            key={index}
+                                            buisnessName={buisnessName}
+                                            descriptionArm={descriptionArm}
+                                            descriptionEng={descriptionEng}
+                                            instaPageLink={instaPageLink}
+                                            // instaPfpPreview={instaPfpPreview}
+                                            instaPfpPreview={""}
+                                            subCategories={subCategories}
+                                        ></Shop>
+                                    );
+                                }
                             })
                         ) : loading ? (
                             <div className="sweet-loading">

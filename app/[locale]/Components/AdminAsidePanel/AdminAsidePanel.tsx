@@ -12,7 +12,7 @@ import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 
 const AdminAsidePanel = (props: any) => {
-    const { selected } = props;
+    const { selected, notificationCounter } = props;
     const localActive = useLocale();
     const router = useRouter();
 
@@ -38,7 +38,7 @@ const AdminAsidePanel = (props: any) => {
                                 alt="Bell Icon"
                             ></Image>
                             <div>Ծանուցումներ</div>
-                            <span>2</span>
+                            {notificationCounter !== 0 ? <span>{notificationCounter}</span> : ""}
                         </Link>
                     </div>
                     <div className={selected === "approved" ? "selected" : ""}>

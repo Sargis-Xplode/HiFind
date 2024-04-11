@@ -5,38 +5,82 @@ import Link from "next/link";
 import "./tableRow.scss";
 
 import brandLogo from "../../../../Assets/brand-logo.svg";
+import { useLocale } from "next-intl";
+import axios from "axios";
 
 const TableRow = (props: any) => {
-    const { newNotification, brandName, email, link, descriptionArm, descriptionEng, categories, date } = props;
+    const localActive = useLocale();
+
+    const {
+        newRequest,
+        instaPfpPreview,
+        buisnessName,
+        email,
+        instaPageLink,
+        descriptionArm,
+        descriptionEng,
+        subCategories,
+        date,
+        id,
+    } = props;
+
+    const handleApprove = () => {
+        const body = {
+            id,
+        };
+        axios
+            .post(`/${localActive}/api/shop/approved`, JSON.stringify(body))
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const handleDeny = () => {
+        const body = {
+            id,
+        };
+        axios
+            .post(`/${localActive}/api/shop/denied`, JSON.stringify(body))
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
-        <div className={(newNotification ? "new" : "") + " table-row-container"}>
+        <div className={(newRequest ? "new" : "") + " table-row-container"}>
             <div className="brand-logo-name">
                 <Image
                     priority
                     src={brandLogo}
                     alt="Brand Logo"
                 ></Image>
-                <p>{brandName}</p>
+                <p>{buisnessName}</p>
             </div>
             <div className="email">
                 <p>{email}</p>
             </div>
             <div className="link">
-                <Link href={link}>{link}</Link>
+                <Link href={instaPageLink}>{instaPageLink}</Link>
             </div>
             <div className="desc-arm-eng">
                 <p>{descriptionArm}</p>
                 <p>{descriptionEng}</p>
             </div>
             <div className="categories">
-                {categories.length &&
-                    categories.map((category: any, index: number) => {
+                {subCategories.length &&
+                    subCategories.map((category: any, index: number) => {
                         return (
                             <div
                                 key={index}
                                 className="category"
                             >
-                                {category}
+                                {localActive === "hy" ? category.subCategoryArm : category.subcategoryEng}
                             </div>
                         );
                     })}
@@ -45,8 +89,14 @@ const TableRow = (props: any) => {
                 <p>{date}</p>
             </div>
             <div className="approve-reject-icons">
-                <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>
-                <FontAwesomeIcon icon={faXmarkCircle}></FontAwesomeIcon>
+                <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    onClick={handleApprove}
+                ></FontAwesomeIcon>
+                <FontAwesomeIcon
+                    icon={faXmarkCircle}
+                    onClick={handleDeny}
+                ></FontAwesomeIcon>
             </div>
         </div>
     );
