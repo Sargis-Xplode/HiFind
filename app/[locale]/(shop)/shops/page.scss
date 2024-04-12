@@ -247,6 +247,18 @@
                 align-items: center;
             }
 
+            .shop-box-skeleton {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+
+                span {
+                    width: 95%;
+                    height: 400px;
+                    border-radius: 25px;
+                }
+            }
+
             .filters-btn-mobile {
                 border: 1px solid #eaeaea;
                 background-color: white;

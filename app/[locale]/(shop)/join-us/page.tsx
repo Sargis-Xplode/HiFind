@@ -14,6 +14,11 @@ import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import axios from "axios";
 
+import dynamic from "next/dynamic";
+import "react-loading-skeleton/dist/skeleton.css";
+
+const Skeleton = dynamic(() => import("react-loading-skeleton"));
+
 const JoinUs = () => {
     const { push } = useRouter();
 
@@ -372,79 +377,83 @@ const JoinUs = () => {
 
                             <ul>
                                 <li>{t("chooseCategory")}</li>
-                                {categories.length
-                                    ? categories.map((category: any, index: any) => {
-                                          return (
-                                              <div
-                                                  className="categories"
-                                                  key={index}
-                                              >
-                                                  <div
-                                                      className={
-                                                          (!category.clicked && atLeastOneClicked ? "inactive " : "") +
-                                                          "categories-with-plus"
-                                                      }
-                                                      onClick={() => handleOpenDropDown(index, category.category)}
-                                                  >
-                                                      {category.category}
-                                                      {category.clicked ? (
-                                                          <FontAwesomeIcon icon={faChevronUp} />
-                                                      ) : (
-                                                          <FontAwesomeIcon icon={faChevronDown} />
-                                                      )}
-                                                  </div>
-                                                  <div
-                                                      className={
-                                                          (category.clicked ? "clicked " : "") + "dropdown-slider"
-                                                      }
-                                                  >
-                                                      {category?.variants?.length
-                                                          ? category?.variants.map((variant: any, index: number) => {
-                                                                return (
-                                                                    <div
-                                                                        className="variant"
-                                                                        key={index}
-                                                                        onClick={() =>
-                                                                            toggleCheckCategories(category, index)
-                                                                        }
-                                                                    >
-                                                                        <div>
-                                                                            <div
-                                                                                className={
-                                                                                    (variant.selected
-                                                                                        ? "checked "
-                                                                                        : "") + "checkbox-round"
-                                                                                }
-                                                                            >
-                                                                                {variant.selected ? (
-                                                                                    <FontAwesomeIcon
-                                                                                        icon={faCheckCircle}
-                                                                                    ></FontAwesomeIcon>
-                                                                                ) : (
-                                                                                    ""
-                                                                                )}
-                                                                            </div>
-                                                                        </div>
+                                {categories.length ? (
+                                    categories.map((category: any, index: any) => {
+                                        return (
+                                            <div
+                                                className="categories"
+                                                key={index}
+                                            >
+                                                <div
+                                                    className={
+                                                        (!category.clicked && atLeastOneClicked ? "inactive " : "") +
+                                                        "categories-with-plus"
+                                                    }
+                                                    onClick={() => handleOpenDropDown(index, category.category)}
+                                                >
+                                                    {category.category}
+                                                    {category.clicked ? (
+                                                        <FontAwesomeIcon icon={faChevronUp} />
+                                                    ) : (
+                                                        <FontAwesomeIcon icon={faChevronDown} />
+                                                    )}
+                                                </div>
+                                                <div
+                                                    className={(category.clicked ? "clicked " : "") + "dropdown-slider"}
+                                                >
+                                                    {category?.variants?.length
+                                                        ? category?.variants.map((variant: any, index: number) => {
+                                                              return (
+                                                                  <div
+                                                                      className="variant"
+                                                                      key={index}
+                                                                      onClick={() =>
+                                                                          toggleCheckCategories(category, index)
+                                                                      }
+                                                                  >
+                                                                      <div>
+                                                                          <div
+                                                                              className={
+                                                                                  (variant.selected ? "checked " : "") +
+                                                                                  "checkbox-round"
+                                                                              }
+                                                                          >
+                                                                              {variant.selected ? (
+                                                                                  <FontAwesomeIcon
+                                                                                      icon={faCheckCircle}
+                                                                                  ></FontAwesomeIcon>
+                                                                              ) : (
+                                                                                  ""
+                                                                              )}
+                                                                          </div>
+                                                                      </div>
 
-                                                                        <div
-                                                                            className={
-                                                                                (!category.clicked ? "inactive" : "") +
-                                                                                " variant-text-container"
-                                                                            }
-                                                                        >
-                                                                            {localActive === "hy"
-                                                                                ? variant.subCategoryArm
-                                                                                : variant.subCategoryEng}
-                                                                        </div>
-                                                                    </div>
-                                                                );
-                                                            })
-                                                          : ""}
-                                                  </div>
-                                              </div>
-                                          );
-                                      })
-                                    : ""}
+                                                                      <div
+                                                                          className={
+                                                                              (!category.clicked ? "inactive" : "") +
+                                                                              " variant-text-container"
+                                                                          }
+                                                                      >
+                                                                          {localActive === "hy"
+                                                                              ? variant.subCategoryArm
+                                                                              : variant.subCategoryEng}
+                                                                      </div>
+                                                                  </div>
+                                                              );
+                                                          })
+                                                        : ""}
+                                                </div>
+                                            </div>
+                                        );
+                                    })
+                                ) : (
+                                    <Skeleton
+                                        count={5}
+                                        height={40}
+                                        highlightColor="#e0e0e0"
+                                        className="margin-bottom-5"
+                                    />
+                                )}
                             </ul>
                             <p
                                 className={

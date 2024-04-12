@@ -19,6 +19,10 @@ import heartPlusIcon from "../../../Assets/heart-plus.svg";
 import aboutUsImg from "../../../Assets/about-us-img.svg";
 import { useLocale, useTranslations } from "next-intl";
 import axios from "axios";
+import dynamic from "next/dynamic";
+import "react-loading-skeleton/dist/skeleton.css";
+
+const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
 export default function Home() {
     const t = useTranslations("homePage");
@@ -151,31 +155,50 @@ export default function Home() {
                 <section className="second-section">
                     <h3>{t("recommendedPages")}</h3>
                     <div className="boxes-container">
-                        {recentShops.map((shop, index) => {
-                            const {
-                                buisnessName,
-                                descriptionArm,
-                                descriptionEng,
-                                instaPageLink,
-                                instaPfpPreview,
-                                subCategories,
-                                approved,
-                            } = shop;
+                        {recentShops.length > 0 ? (
+                            recentShops.map((shop: any, index) => {
+                                let {
+                                    buisnessName,
+                                    descriptionArm,
+                                    descriptionEng,
+                                    instaPageLink,
+                                    instaPfpPreview,
+                                    subCategories,
+                                    approved,
+                                } = shop;
 
-                            if (approved) {
-                                return (
-                                    <Shop
-                                        key={index}
-                                        buisnessName={buisnessName}
-                                        descriptionArm={descriptionArm}
-                                        descriptionEng={descriptionEng}
-                                        instaPageLink={instaPageLink}
-                                        instaPfpPreview={""}
-                                        subCategories={subCategories}
-                                    ></Shop>
-                                );
-                            }
-                        })}
+                                instaPageLink = instaPageLink.split("https://www.instagram.com");
+
+                                if (approved) {
+                                    return (
+                                        <Shop
+                                            key={index}
+                                            buisnessName={buisnessName}
+                                            descriptionArm={descriptionArm}
+                                            descriptionEng={descriptionEng}
+                                            instaPageLink={instaPageLink}
+                                            instaPfpPreview={""}
+                                            subCategories={subCategories}
+                                        ></Shop>
+                                    );
+                                }
+                            })
+                        ) : (
+                            <div style={{ width: "100%", display: "flex" }}>
+                                <Skeleton
+                                    highlightColor="#e0e0e0"
+                                    containerClassName="shop-box-skeleton"
+                                />
+                                <Skeleton
+                                    highlightColor="#e0e0e0"
+                                    containerClassName="shop-box-skeleton"
+                                />
+                                <Skeleton
+                                    highlightColor="#e0e0e0"
+                                    containerClassName="shop-box-skeleton"
+                                />
+                            </div>
+                        )}
                     </div>
                 </section>
 

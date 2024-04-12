@@ -22,6 +22,8 @@ const TableRow = (props: any) => {
         subCategories,
         date,
         id,
+        approved,
+        denied,
     } = props;
 
     const handleApprove = () => {
@@ -88,16 +90,20 @@ const TableRow = (props: any) => {
             <div className="date">
                 <p>{date}</p>
             </div>
-            <div className="approve-reject-icons">
-                <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    onClick={handleApprove}
-                ></FontAwesomeIcon>
-                <FontAwesomeIcon
-                    icon={faXmarkCircle}
-                    onClick={handleDeny}
-                ></FontAwesomeIcon>
-            </div>
+            {approved || denied ? (
+                " "
+            ) : (
+                <div className="approve-reject-icons">
+                    <FontAwesomeIcon
+                        icon={faCheckCircle}
+                        onClick={handleApprove}
+                    ></FontAwesomeIcon>
+                    <FontAwesomeIcon
+                        icon={faXmarkCircle}
+                        onClick={handleDeny}
+                    ></FontAwesomeIcon>
+                </div>
+            )}
         </div>
     );
 };

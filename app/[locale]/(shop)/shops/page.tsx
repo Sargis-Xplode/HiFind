@@ -390,7 +390,30 @@ const Shops = () => {
                                 );
                             })
                         ) : (
-                            <Skeleton count={5} />
+                            <div>
+                                <Skeleton
+                                    height={40}
+                                    highlightColor="#e0e0e0"
+                                    className="margin-bottom-10"
+                                />
+                                <Skeleton
+                                    count={5}
+                                    height={20}
+                                    highlightColor="#e0e0e0"
+                                    className="margin-bottom-5"
+                                />
+                                <Skeleton
+                                    height={40}
+                                    highlightColor="#e0e0e0"
+                                    className="margin-bottom-10 margin-top-10"
+                                />
+                                <Skeleton
+                                    count={5}
+                                    height={20}
+                                    highlightColor="#e0e0e0"
+                                    className="margin-bottom-5"
+                                />
+                            </div>
                         )}
 
                         <div
@@ -418,8 +441,8 @@ const Shops = () => {
                         )}
 
                         {currentItems.length > 0 ? (
-                            currentItems.map((shop, index) => {
-                                const {
+                            currentItems.map((shop: any, index) => {
+                                let {
                                     buisnessName,
                                     descriptionArm,
                                     descriptionEng,
@@ -428,6 +451,8 @@ const Shops = () => {
                                     subCategories,
                                     approved,
                                 } = shop;
+
+                                instaPageLink = instaPageLink.split("https://www.instagram.com");
                                 if (approved) {
                                     return (
                                         <Shop
@@ -444,15 +469,14 @@ const Shops = () => {
                                 }
                             })
                         ) : loading ? (
-                            <div className="sweet-loading">
-                                <ClipLoader
-                                    color={"#ec008b"}
-                                    loading={loading}
-                                    cssOverride={override}
-                                    size={50}
-                                    aria-label="Loading Spinner"
-                                    data-testid="loader"
-                                    speedMultiplier={1}
+                            <div style={{ width: "100%", display: "flex" }}>
+                                <Skeleton
+                                    highlightColor="#e0e0e0"
+                                    containerClassName="shop-box-skeleton"
+                                />
+                                <Skeleton
+                                    highlightColor="#e0e0e0"
+                                    containerClassName="shop-box-skeleton"
                                 />
                             </div>
                         ) : (

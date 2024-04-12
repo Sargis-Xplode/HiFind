@@ -113,6 +113,18 @@
             .boxes-container {
                 display: flex;
                 flex-wrap: wrap;
+
+                .shop-box-skeleton {
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-between;
+
+                    span {
+                        width: 95%;
+                        height: 400px;
+                        border-radius: 25px;
+                    }
+                }
             }
         }
 
@@ -148,14 +160,6 @@
                     white-space: pre-wrap;
                 }
             }
-        }
-    }
-}
-
-@media only screen and (max-width: 1200px) {
-    .second-section {
-        .boxes-container {
-            justify-content: space-between;
         }
     }
 }

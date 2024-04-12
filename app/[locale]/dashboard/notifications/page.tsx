@@ -8,14 +8,12 @@ import sortLogo from "../../../../Assets/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import TableRow from "../../Components/TableRow/TableRow";
 import ReactPaginate from "react-paginate";
-import ClipLoader from "react-spinners/MoonLoader";
 import { useLocale } from "next-intl";
 
-const override: CSSProperties = {
-    display: "flex",
-    margin: "0 auto",
-    borderColor: "red",
-};
+import dynamic from "next/dynamic";
+import "react-loading-skeleton/dist/skeleton.css";
+
+const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
 const Notification = () => {
     const localActive = useLocale();
@@ -27,7 +25,7 @@ const Notification = () => {
     const [currentItems, setCurrentItems] = useState(shops);
     const [itemOffSet, setItemOffSet] = useState(0);
     const [endOffSet, setEndOffSet] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(12);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
     const [pageCount, setPageCount] = useState(0);
     const [searchActive, setSearchActive] = useState(false);
     const [notificationCounter, setNotificationCounter] = useState(0);
@@ -120,22 +118,19 @@ const Notification = () => {
                                     descriptionEng={shop.descriptionArm}
                                     subCategories={shop.subCategories}
                                     date={"05.07.2023"}
+                                    approved={shop.approved}
+                                    denied={shop.denied}
                                     id={shop._id}
                                 ></TableRow>
                             );
                         })
                     ) : loading ? (
-                        <div className="sweet-loading">
-                            <ClipLoader
-                                color={"#ec008b"}
-                                loading={loading}
-                                cssOverride={override}
-                                size={50}
-                                aria-label="Loading Spinner"
-                                data-testid="loader"
-                                speedMultiplier={1}
-                            />
-                        </div>
+                        <Skeleton
+                            height={100}
+                            count={5}
+                            highlightColor="#e0e0e0"
+                            className="margin-bottom-10"
+                        />
                     ) : (
                         <p>Nothing here yet</p>
                     )}

@@ -9,15 +9,13 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import sortLogo from "../../../../Assets/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import ReactPaginate from "react-paginate";
-import ClipLoader from "react-spinners/MoonLoader";
 import TableRow from "../../Components/TableRow/TableRow";
 import { useLocale } from "next-intl";
 
-const override: CSSProperties = {
-    display: "flex",
-    margin: "0 auto",
-    borderColor: "red",
-};
+import dynamic from "next/dynamic";
+import "react-loading-skeleton/dist/skeleton.css";
+
+const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
 const Approved = () => {
     const localActive = useLocale();
@@ -132,17 +130,12 @@ const Approved = () => {
                             }
                         })
                     ) : loading ? (
-                        <div className="sweet-loading">
-                            <ClipLoader
-                                color={"#ec008b"}
-                                loading={loading}
-                                cssOverride={override}
-                                size={50}
-                                aria-label="Loading Spinner"
-                                data-testid="loader"
-                                speedMultiplier={1}
-                            />
-                        </div>
+                        <Skeleton
+                            height={100}
+                            count={5}
+                            highlightColor="#e0e0e0"
+                            className="margin-bottom-10"
+                        />
                     ) : (
                         <p>Nothing here yet</p>
                     )}
