@@ -1,7 +1,7 @@
 .table-row-container {
     display: flex;
     height: 100px;
-    width: 2590px;
+    width: max-content;
 
     &:hover {
         background-color: eff2f5;
@@ -17,9 +17,6 @@
         }
     }
 
-    .email {
-    }
-
     .link {
         a {
             text-decoration: none;
@@ -32,26 +29,82 @@
     }
 
     .categories {
+        flex-wrap: wrap;
+        overflow: hidden;
+
         .category {
             height: 25px;
             border-radius: 25px;
             padding: 2px 10px;
             background-color: #edeef0;
-            margin: 0 8px 8px 0;
+            margin: 0 8px 12px 0;
             display: flex;
             align-items: center;
         }
     }
 
     .date {
+        width: 100px;
     }
 
     .approve-reject-icons {
+        width: 120px;
+
         svg {
             width: 32px;
             height: 32px;
             font-size: 32px;
-            margin-left: 20px;
+            margin-right: 20px;
+
+            &:first-child {
+                color: #1cad93;
+            }
+
+            &:last-child {
+                color: #666c89;
+            }
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .approved-denied {
+        width: 100px;
+
+        p {
+            padding: 5px 10px;
+            border-radius: 20px;
+            height: max-content;
+        }
+    }
+
+    .approved-denied.approved {
+        color: #1cad93;
+
+        p {
+            background-color: rgba(0, 196, 140, 0.08);
+        }
+    }
+
+    .approved-denied.denied {
+        color: #ff0000;
+
+        p {
+            background-color: rgba(255, 0, 0, 0.08);
+        }
+    }
+
+    .edit-delete-activate-icons {
+        width: 120px;
+        background-color: black;
+
+        svg {
+            width: 32px;
+            height: 32px;
+            font-size: 32px;
+            margin-right: 20px;
 
             &:first-child {
                 color: #1cad93;
@@ -73,7 +126,7 @@
         font-size: 14px;
         padding-top: 20px;
         padding-left: 20px;
-        min-width: 350px;
+        width: 350px;
 
         p {
             white-space: nowrap;
@@ -86,5 +139,14 @@
 
 .table-row-container.new {
     background-color: #eff2f5;
-    font-weight: bold;
+
+    & > div {
+        font-weight: bolder;
+    }
+
+    .categories {
+        .category {
+            background-color: #d1d1d1;
+        }
+    }
 }

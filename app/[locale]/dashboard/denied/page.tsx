@@ -101,7 +101,7 @@ const Denied = () => {
                         <p>Ինստագրամ</p>
                         <p>Նկարագրություն</p>
                         <p>Ընտրացանկ</p>
-                        <p>
+                        <p className="date-tile">
                             Օրը{" "}
                             <Image
                                 src={sortLogo}
@@ -125,6 +125,7 @@ const Denied = () => {
                                         subCategories={shop.subCategories}
                                         date={"05.07.2023"}
                                         id={shop._id}
+                                        page={"denied"}
                                     ></TableRow>
                                 );
                             }
@@ -158,59 +159,3 @@ const Denied = () => {
 };
 
 export default Denied;
-
-// const TableRow = (props: any) => {
-//     const { newNotification, brandName, email, link, descriptionArm, descriptionEng, categories, date } = props;
-//     return (
-//         <div className={newNotification ? "new" : ""}>
-//             <div className="brand-logo-name">
-//                 <Image
-//                     priority
-//                     src={brandLogo}
-//                     alt="Brand Logo"
-//                 ></Image>
-//                 <p>{brandName}</p>
-//             </div>
-//             <div className="email">
-//                 <p>{email}</p>
-//             </div>
-//             <div className="link">
-//                 <Link href={link}>{link}</Link>
-//             </div>
-//             <div className="desc-arm-eng">
-//                 <p>{descriptionArm}</p>
-//                 <p>{descriptionEng}</p>
-//             </div>
-//             <div className="categories">
-//                 {categories.length &&
-//                     categories.map((category: any, index: number) => {
-//                         return (
-//                             <div
-//                                 key={index}
-//                                 className="category"
-//                             >
-//                                 {category}
-//                             </div>
-//                         );
-//                     })}
-//             </div>
-//             <div className="date">
-//                 <p>{date}</p>
-//             </div>
-//             <div className="approve-reject-icons">
-//                 <div>
-//                     <Image
-//                         src={sendIcon}
-//                         alt="Edit Icon"
-//                     ></Image>
-//                 </div>
-//                 <div>
-//                     <Image
-//                         src={deleteIcon}
-//                         alt="Edit Icon"
-//                     ></Image>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// };

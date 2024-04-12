@@ -95,7 +95,7 @@ const Notification = () => {
                         <p>Ինստագրամ</p>
                         <p>Նկարագրություն</p>
                         <p>Ընտրացանկ</p>
-                        <p>
+                        <p className="date-tile">
                             Օրը{" "}
                             <Image
                                 src={sortLogo}
@@ -121,6 +121,7 @@ const Notification = () => {
                                     approved={shop.approved}
                                     denied={shop.denied}
                                     id={shop._id}
+                                    page={"notifications"}
                                 ></TableRow>
                             );
                         })

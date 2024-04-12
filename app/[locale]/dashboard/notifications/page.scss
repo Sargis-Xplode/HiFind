@@ -19,15 +19,19 @@ section {
 
             .table-titles {
                 display: flex;
-                min-width: 1500px;
                 height: auto;
                 font-weight: bold;
+                width: max-content;
 
                 p {
                     padding-left: 20px;
-                    min-width: 350px;
+                    width: 350px;
                     display: flex;
                     align-items: center;
+                }
+
+                .date-tile {
+                    width: 100px;
                 }
             }
         }

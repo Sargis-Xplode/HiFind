@@ -101,7 +101,7 @@ const Approved = () => {
                         <p>Ինստագրամ</p>
                         <p>Նկարագրություն</p>
                         <p>Ընտրացանկ</p>
-                        <p>
+                        <p className="date-tile">
                             Օրը{" "}
                             <Image
                                 src={sortLogo}
@@ -125,6 +125,7 @@ const Approved = () => {
                                         subCategories={shop.subCategories}
                                         date={"05.07.2023"}
                                         id={shop._id}
+                                        page={"approved"}
                                     ></TableRow>
                                 );
                             }
@@ -158,68 +159,3 @@ const Approved = () => {
 };
 
 export default Approved;
-
-// const TableRow = (props: any) => {
-//     const { newNotification, brandName, email, link, descriptionArm, descriptionEng, categories, date, active } = props;
-//     return (
-//         <div className={newNotification ? "new" : ""}>
-//             <div className="brand-logo-name">
-//                 <Image
-//                     priority
-//                     src={brandLogo}
-//                     alt="Brand Logo"
-//                 ></Image>
-//                 <p>{brandName}</p>
-//             </div>
-//             <div className="email">
-//                 <p>{email}</p>
-//             </div>
-//             <div className="link">
-//                 <Link href={link}>{link}</Link>
-//             </div>
-//             <div className="desc-arm-eng">
-//                 <p>{descriptionArm}</p>
-//                 <p>{descriptionEng}</p>
-//             </div>
-//             <div className="categories">
-//                 {categories.length &&
-//                     categories.map((category: any, index: number) => {
-//                         return (
-//                             <div
-//                                 key={index}
-//                                 className="category"
-//                             >
-//                                 {category}
-//                             </div>
-//                         );
-//                     })}
-//             </div>
-//             <div className="date">
-//                 <p>{date}</p>
-//             </div>
-//             <div className="approve-reject-icons">
-//                 <div>
-//                     <Image
-//                         src={editIcon}
-//                         alt="Edit Icon"
-//                     ></Image>
-//                 </div>
-//                 <div>
-//                     <Image
-//                         src={deleteIcon}
-//                         alt="Edit Icon"
-//                     ></Image>
-//                 </div>
-//                 {active ? (
-//                     <div className="activate-btn">
-//                         <div className="active-indicator"></div>
-//                     </div>
-//                 ) : (
-//                     <div className="activate-btn inactive">
-//                         <div className="active-indicator"></div>
-//                     </div>
-//                 )}
-//             </div>
-//         </div>
-//     );
-// };

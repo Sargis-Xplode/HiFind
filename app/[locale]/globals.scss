@@ -1,8 +1,14 @@
-// @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 @import "./constants.scss";
 
 body {
     margin: 0;
+}
+
+.roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
 }
 
 body.loading {
@@ -49,6 +55,9 @@ body.loading {
 
 .margin-top-10 {
     margin-top: 10px;
+}
+.text-align-center {
+    text-align: center;
 }
 
 @media only screen and (max-width: 769px) {
