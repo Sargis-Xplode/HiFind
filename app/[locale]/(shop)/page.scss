@@ -112,7 +112,6 @@
         .second-section {
             .boxes-container {
                 display: flex;
-                justify-content: space-around;
                 flex-wrap: wrap;
             }
         }
@@ -154,6 +153,11 @@
 }
 
 @media only screen and (max-width: 1200px) {
+    .second-section {
+        .boxes-container {
+            justify-content: space-between;
+        }
+    }
 }
 
 @media only screen and (max-width: 1024px) {

@@ -20,6 +20,7 @@
 
         .container {
             display: block;
+            justify-content: space-between;
 
             .filter-heading-container-mobile {
                 display: flex;
@@ -232,7 +233,7 @@
 
         .shops-container {
             position: relative;
-            width: 100%;
+            width: 70%;
             display: flex;
             flex-wrap: wrap;
 
@@ -256,105 +257,6 @@
 
                 img {
                     margin-left: 30px;
-                }
-            }
-
-            a.shop-link {
-                height: max-content;
-
-                .suggested-pages-box {
-                    width: 100%;
-                    background-color: $bg-white;
-                    position: relative;
-
-                    &:hover .hover-box {
-                        opacity: 1;
-                        transition: 0.3s;
-                    }
-
-                    &:hover .box-image-container img {
-                        transform: scale(1.2);
-                        transition: 0.5s;
-                    }
-
-                    .hover-box {
-                        opacity: 0;
-                        position: absolute;
-                        height: 90px;
-                        bottom: 0;
-                        padding: 10px 0;
-                        border-radius: 0 0 25px 25px;
-                        background-color: #ff3aae;
-                        color: white;
-                        cursor: pointer;
-                        width: 100%;
-
-                        a {
-                            width: 100%;
-                            height: 100%;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            align-items: center;
-                            text-decoration: none;
-                            color: white;
-
-                            p {
-                                text-align: center;
-                                font-weight: bold;
-                            }
-
-                            div {
-                                width: 100%;
-                                text-align: center;
-
-                                svg {
-                                    width: 1.5em;
-                                    height: 1.5em;
-                                }
-                            }
-                        }
-                    }
-
-                    .box-little-icon {
-                        position: absolute;
-                        top: 10px;
-                        right: 10px;
-                        width: 3vw;
-                        height: 3vw;
-                        border-radius: 50%;
-                        background-color: rgb(225, 225, 225);
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        svg {
-                            width: 50%;
-                        }
-                    }
-
-                    .box-image-container {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 200px;
-                        border-bottom: 1px solid rgb(231, 231, 231);
-
-                        img {
-                            border-radius: 50%;
-                            border: 2px solid red;
-                        }
-                    }
-
-                    .box-text-container {
-                        p {
-                            padding: 0 10px;
-
-                            &:first-child {
-                                font-weight: bold;
-                            }
-                        }
-                    }
                 }
             }
         }
@@ -411,53 +313,24 @@
 //     }
 // }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 1024px) {
     .shops-section {
         .container {
             .shops-container {
                 a.shop-link {
-                    width: 30vw;
+                    width: 100%;
+                    margin-right: 0;
                 }
             }
         }
     }
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 1024px) {
     .shops-section {
         .container {
             .shops-container {
-                a.shop-link {
-                    width: 28.5vw;
-                }
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-    .shops-section {
-        .container {
-            .shops-container {
-                a.shop-link {
-                    width: 65%;
-
-                    .suggested-pages-box {
-                        width: 100%;
-
-                        .box-little-icon {
-                            width: 50px;
-                            height: 50px;
-
-                            img {
-                                width: 30px;
-                                height: 30px;
-                                top: 30px;
-                                right: 30px;
-                            }
-                        }
-                    }
-                }
+                width: 65%;
             }
         }
     }
@@ -472,31 +345,12 @@
             }
 
             .shops-container {
+                width: 100%;
+
                 .filters-btn-mobile {
                     visibility: visible;
                     display: flex;
                     margin-bottom: 20px;
-                }
-
-                a.shop-link {
-                    width: 100%;
-                    .suggested-pages-box {
-                        width: 100%;
-                        .hover-box {
-                            flex-direction: row;
-                            position: static;
-                            opacity: 1;
-                            height: 50px;
-
-                            &:hover {
-                                background-color: $btn-color-hover;
-                            }
-
-                            & > div {
-                                width: 10%;
-                            }
-                        }
-                    }
                 }
             }
         }

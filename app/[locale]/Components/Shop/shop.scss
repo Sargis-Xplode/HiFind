@@ -1,7 +1,8 @@
 @import "../../constants.scss";
 
 a.shop-link {
-    width: 20vw;
+    width: 315px;
+    height: max-content;
     text-decoration: none;
     color: black;
     margin-bottom: 40px;
@@ -138,17 +139,22 @@ a.shop-link {
     }
 }
 
-@media only screen and (max-width: 1200px) {
-    a.shop-link {
-        width: 40vw;
-    }
-}
-
 @media only screen and (max-width: 1024px) {
     a.shop-link {
-        width: 40vw;
+        width: 500px;
+
         .suggested-pages-box {
             width: 100%;
+
+            .box-little-icon {
+                width: 50px;
+                height: 50px;
+
+                svg {
+                    width: 80%;
+                }
+            }
+
             .hover-box {
                 flex-direction: row;
                 position: static;
