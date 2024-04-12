@@ -16,7 +16,8 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import "react-loading-skeleton/dist/skeleton.css";
-import Skeleton from "react-loading-skeleton";
+import dynamic from "next/dynamic";
+const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
 const override: CSSProperties = {
     display: "flex",
@@ -31,7 +32,10 @@ const Shops = () => {
 
     const { push } = useRouter();
 
-    const query = history?.state;
+    // const query = history ? history?.state : "";
+    const query = {
+        filter: "shops",
+    };
 
     const [shops, setShops] = useState([]);
     const [filteredShops, setFilteredShops] = useState([]);
