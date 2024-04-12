@@ -30,7 +30,7 @@
                     align-items: center;
                     width: 12vw;
                     height: 12vw;
-                    background-color: rgb(200, 200, 200);
+                    background-color: #d4d4d8;
 
                     &:hover {
                         background-color: $btn-color-hover;
@@ -75,8 +75,8 @@
     .terms-section {
         .container {
             .users-container {
-                & > div {
-                    font-size: 2vw;
+                .user-circle {
+                    font-size: 1.5vw;
                 }
             }
         }

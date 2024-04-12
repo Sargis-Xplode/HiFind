@@ -100,7 +100,10 @@ const Terms = () => {
                         {users.length
                             ? users.map((user, index) => {
                                   return (
-                                      <div className="user-container">
+                                      <div
+                                          className="user-container"
+                                          key={index}
+                                      >
                                           <div
                                               className={(user.selected ? "selected" : "") + " user-circle"}
                                               key={index}

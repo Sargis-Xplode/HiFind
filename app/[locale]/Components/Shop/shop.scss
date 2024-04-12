@@ -1,7 +1,7 @@
 @import "../../constants.scss";
 
 a.shop-link {
-    width: 315px;
+    width: 310px;
     height: max-content;
     text-decoration: none;
     color: black;
@@ -96,7 +96,7 @@ a.shop-link {
                     width: 90%;
                     height: 90%;
                     border-radius: 50%;
-                    border: 2px solid red;
+                    border: 2px solid #ec008b;
                 }
             }
         }
@@ -133,6 +133,9 @@ a.shop-link {
                     margin-bottom: 20px;
                     margin-right: 5px;
                     border-radius: 16px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
             }
         }

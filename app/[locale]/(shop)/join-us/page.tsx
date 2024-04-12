@@ -37,6 +37,7 @@ const JoinUs = () => {
     const [instaPfpPreview, setInstaPfpPreview] = useState("");
     const [validSizePfp, setValidSizePfp] = useState(false);
     const [validExtensionPfp, setValidExtensionPfp] = useState(false);
+    const [atLeastOneClicked, setAtLeastOneClicked] = useState(false);
 
     const [categories, setCategories] = useState<any>([]);
 
@@ -127,6 +128,11 @@ const JoinUs = () => {
         const arr = categories.map((categ: any, ind: number) => {
             if (index === ind) {
                 categ.clicked = !categ.clicked;
+                if (categ.clicked) {
+                    setAtLeastOneClicked(true);
+                } else {
+                    setAtLeastOneClicked(false);
+                }
             } else {
                 categ.clicked = false;
             }
@@ -374,7 +380,10 @@ const JoinUs = () => {
                                                   key={index}
                                               >
                                                   <div
-                                                      className="categories-with-plus "
+                                                      className={
+                                                          (!category.clicked && atLeastOneClicked ? "inactive " : "") +
+                                                          "categories-with-plus"
+                                                      }
                                                       onClick={() => handleOpenDropDown(index, category.category)}
                                                   >
                                                       {category.category}
@@ -417,7 +426,12 @@ const JoinUs = () => {
                                                                             </div>
                                                                         </div>
 
-                                                                        <div className="variant-text-container">
+                                                                        <div
+                                                                            className={
+                                                                                (!category.clicked ? "inactive" : "") +
+                                                                                " variant-text-container"
+                                                                            }
+                                                                        >
                                                                             {localActive === "hy"
                                                                                 ? variant.subCategoryArm
                                                                                 : variant.subCategoryEng}

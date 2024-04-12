@@ -14,7 +14,9 @@ import { faCheckCircle, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg
 import axios from "axios";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import "react-loading-skeleton/dist/skeleton.css";
+import Skeleton from "react-loading-skeleton";
 
 const override: CSSProperties = {
     display: "flex",
@@ -25,10 +27,11 @@ const override: CSSProperties = {
 const Shops = () => {
     const t = useTranslations("shopsPage");
     const t2 = useTranslations("homePage");
-    const t3 = useTranslations("shopCategories");
     const localActive = useLocale();
 
-    const query = useParams();
+    const { push } = useRouter();
+
+    const query = history?.state;
 
     const [shops, setShops] = useState([]);
     const [filteredShops, setFilteredShops] = useState([]);
@@ -49,6 +52,8 @@ const Shops = () => {
     const [selectedCategories, setSelectedCategories] = useState([]);
 
     useEffect(() => {
+        setHeading(query?.filter ? t2(query.filter) : t2("shops"));
+
         axios
             .get("api/shop/all")
             .then((res) => {
@@ -65,7 +70,15 @@ const Shops = () => {
             .get(`/${localActive}/api/categories/all`)
             .then((res) => {
                 const categoriesDB = res.data.categories;
+                categoriesDB.map((categ: any) => {
+                    const filter = query.filter ? t2(query.filter) : t2("shops");
+                    if (categ.category === filter) {
+                        categ.clicked = true;
+                    }
+                    return categ;
+                });
                 setCategories(categoriesDB);
+
                 setLoading(false);
             })
             .catch((error) => {
@@ -313,61 +326,68 @@ const Shops = () => {
                             ></Image>
                         </div>
 
-                        {categories.length
-                            ? categories.map((category: any, index: number) => {
-                                  return (
-                                      <div
-                                          className="categories"
-                                          key={index}
-                                      >
-                                          <div
-                                              className="categories-with-plus "
-                                              onClick={() => handleOpenDropDown(index, category.category)}
-                                          >
-                                              {category.category}
-                                              {category.clicked ? (
-                                                  <FontAwesomeIcon icon={faMinus} />
-                                              ) : (
-                                                  <FontAwesomeIcon icon={faPlus} />
-                                              )}
-                                          </div>
-                                          <div className={(category.clicked ? "clicked " : "") + "dropdown-slider"}>
-                                              {category?.variants?.length
-                                                  ? category?.variants.map((variant: any, index: number) => {
-                                                        return (
-                                                            <div
-                                                                className="variant"
-                                                                key={index}
-                                                                onClick={() => toggleCheck(category, index)}
-                                                            >
-                                                                <div
-                                                                    className={
-                                                                        (variant.selected ? "checked " : "") +
-                                                                        "checkbox-round"
-                                                                    }
-                                                                >
-                                                                    {variant.selected ? (
-                                                                        <FontAwesomeIcon
-                                                                            icon={faCheckCircle}
-                                                                        ></FontAwesomeIcon>
-                                                                    ) : (
-                                                                        ""
-                                                                    )}
-                                                                </div>
-                                                                <div className="variant-text-container">
-                                                                    {localActive === "hy"
-                                                                        ? variant.subCategoryArm
-                                                                        : variant.subCategoryEng}
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })
-                                                  : ""}
-                                          </div>
-                                      </div>
-                                  );
-                              })
-                            : ""}
+                        {categories.length ? (
+                            categories.map((category: any, index: number) => {
+                                return (
+                                    <div
+                                        className="categories"
+                                        key={index}
+                                    >
+                                        <div
+                                            className="categories-with-plus "
+                                            onClick={() => handleOpenDropDown(index, category.category)}
+                                        >
+                                            {category.category}
+                                            {category.clicked ? (
+                                                <FontAwesomeIcon icon={faMinus} />
+                                            ) : (
+                                                <FontAwesomeIcon icon={faPlus} />
+                                            )}
+                                        </div>
+                                        <div className={(category.clicked ? "clicked " : "") + "dropdown-slider"}>
+                                            {category?.variants?.length
+                                                ? category?.variants.map((variant: any, index: number) => {
+                                                      return (
+                                                          <div
+                                                              className="variant"
+                                                              key={index}
+                                                              onClick={() => toggleCheck(category, index)}
+                                                              title={
+                                                                  localActive === "hy"
+                                                                      ? variant.subCategoryArm
+                                                                      : variant.subCategoryEng
+                                                              }
+                                                          >
+                                                              <div
+                                                                  className={
+                                                                      (variant.selected ? "checked " : "") +
+                                                                      "checkbox-round"
+                                                                  }
+                                                              >
+                                                                  {variant.selected ? (
+                                                                      <FontAwesomeIcon
+                                                                          icon={faCheckCircle}
+                                                                      ></FontAwesomeIcon>
+                                                                  ) : (
+                                                                      ""
+                                                                  )}
+                                                              </div>
+                                                              <div className="variant-text-container">
+                                                                  {localActive === "hy"
+                                                                      ? variant.subCategoryArm
+                                                                      : variant.subCategoryEng}
+                                                              </div>
+                                                          </div>
+                                                      );
+                                                  })
+                                                : ""}
+                                        </div>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <Skeleton count={5} />
+                        )}
 
                         <div
                             className={(atLeastOneVariantSelected ? "" : "display-none") + " clear-filters"}

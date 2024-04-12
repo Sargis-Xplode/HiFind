@@ -345,6 +345,14 @@ const CategoriesList = () => {
                                 autoFocus
                                 className="category-name"
                             />
+                            <input
+                                type="text"
+                                placeholder="Ընտրացանկի անունը"
+                                onChange={(e) => handleCategoryNameChange(e)}
+                                value={currentlyEditingCategory.category}
+                                autoFocus
+                                className="category-name"
+                            />
 
                             <div className="sub-categories-container">
                                 {variants?.length > 0

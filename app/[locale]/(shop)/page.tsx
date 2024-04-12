@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 
 import "./page.scss";
 import shopBox from "../../../types/shopBox";
@@ -23,6 +24,8 @@ export default function Home() {
     const t = useTranslations("homePage");
     const t2 = useTranslations("homepageBanner");
     const localActive = useLocale();
+    const router = useRouter();
+    const pathname = usePathname();
 
     const [recentShops, setRecentShops] = useState([]);
 
@@ -46,6 +49,12 @@ export default function Home() {
             });
     }, []);
 
+    const goToShopsPage = (filter: string) => {
+        // history.pushState({ filter }, "", pathname + `/shops?filter=${filter}`);
+        history.pushState({ filter }, "", pathname + `/shops`);
+        router.push(`/${localActive}/shops`);
+    };
+
     return (
         <main className="main">
             <Header></Header>
@@ -68,7 +77,10 @@ export default function Home() {
                     <h3>{t("discover")}</h3>
                     <div className="instagram-boxes-container">
                         <div className="first-box">
-                            <Link href={`/${localActive}/shops`}>
+                            <Link
+                                href={`#`}
+                                onClick={() => goToShopsPage("shops")}
+                            >
                                 <div>
                                     <Image
                                         src={shoppingBagIcon}
@@ -78,7 +90,10 @@ export default function Home() {
                                 </div>
                             </Link>
 
-                            <Link href={`/${localActive}/shops`}>
+                            <Link
+                                href={"#"}
+                                onClick={() => goToShopsPage("services")}
+                            >
                                 <div>
                                     <Image
                                         src={gearsIcon}
@@ -89,7 +104,10 @@ export default function Home() {
                             </Link>
                         </div>
 
-                        <Link href={`/${localActive}/shops`}>
+                        <Link
+                            href={"#"}
+                            onClick={() => goToShopsPage("entertainment")}
+                        >
                             <div className="second-box">
                                 <Image
                                     src={dishesIcon}
@@ -100,7 +118,10 @@ export default function Home() {
                         </Link>
 
                         <div className="third-box">
-                            <Link href={`/${localActive}/shops`}>
+                            <Link
+                                href={"#"}
+                                onClick={() => goToShopsPage("beauty")}
+                            >
                                 <div>
                                     <Image
                                         src={brushIcon}
@@ -110,7 +131,10 @@ export default function Home() {
                                 </div>
                             </Link>
 
-                            <Link href={`/${localActive}/shops`}>
+                            <Link
+                                href={"#"}
+                                onClick={() => goToShopsPage("healthCare")}
+                            >
                                 <div>
                                     <Image
                                         src={heartPlusIcon}

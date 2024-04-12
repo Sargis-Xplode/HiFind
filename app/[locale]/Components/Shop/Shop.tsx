@@ -58,7 +58,9 @@ const Shop = ({
                     <div>
                         {subCategories.map((variant: any, index: number) => {
                             return (
-                                <p key={index}>
+                                <p
+                                    key={index}
+                                >
                                     {localActive === "hy" ? variant.subCategoryArm : variant.subCategoryEng}
                                 </p>
                             );

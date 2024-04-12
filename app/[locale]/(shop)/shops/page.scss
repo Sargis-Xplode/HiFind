@@ -8,6 +8,7 @@
 
     h2 {
         text-align: center;
+        font-size: 32px;
     }
 
     .filters-container-mobile {
@@ -130,10 +131,10 @@
         display: flex;
 
         .filters-container {
-            width: 25%;
+            width: 20%;
             height: 100%;
             min-width: 200px;
-            padding: 25px 15px;
+            padding: 0 15px;
             margin-right: 45px;
             border: 1px solid $bg-grey;
             border-radius: 25px;
@@ -186,6 +187,7 @@
                         padding: 0 5px;
                         display: flex;
                         align-items: center;
+                        cursor: pointer;
 
                         .variant-text-container {
                             width: 80%;
@@ -226,6 +228,7 @@
             .clear-filters {
                 cursor: pointer;
                 padding-top: 40px;
+                padding-bottom: 10px;
                 text-align: center;
                 text-decoration: underline;
             }
@@ -233,7 +236,7 @@
 
         .shops-container {
             position: relative;
-            width: 70%;
+            width: 80%;
             display: flex;
             flex-wrap: wrap;
 
