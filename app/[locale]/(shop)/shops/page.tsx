@@ -216,11 +216,6 @@ const Shops = () => {
 
     return (
         <div>
-            <Header
-                setFilteredShops={setFilteredShops}
-                allShops={shops}
-                setSearchActive={setSearchActive}
-            ></Header>
             <section className="shops-section">
                 <h2>{heading}</h2>
                 <div className="container">
@@ -500,7 +495,6 @@ const Shops = () => {
                     />
                 )}
             </section>
-            <Footer></Footer>
         </div>
     );
 };

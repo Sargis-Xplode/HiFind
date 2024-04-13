@@ -61,7 +61,6 @@ export default function Home() {
 
     return (
         <main className="main">
-            <Header></Header>
             <div className="homepage-banner">
                 <div className="container">
                     <p>{t2("homepage_banner_heading")}</p>
@@ -217,7 +216,6 @@ export default function Home() {
                     </div>
                 </section>
             </div>
-            <Footer></Footer>
         </main>
     );
 }

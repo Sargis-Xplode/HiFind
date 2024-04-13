@@ -176,7 +176,6 @@ const Terms = () => {
 
     return (
         <div>
-            <Header></Header>
             <section className="privacy-section">
                 <div className="container">
                     <h2>{t("privacy")}</h2>
@@ -207,7 +206,6 @@ const Terms = () => {
                     </div>
                 </div>
             </section>
-            <Footer></Footer>
         </div>
     );
 };

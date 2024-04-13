@@ -22,7 +22,6 @@ const SuccessfulSubmition = () => {
 
     return (
         <div>
-            <Header></Header>
             <section className="success-submition-modal-container">
                 <div className="container">
                     <div className="modal">
@@ -32,7 +31,6 @@ const SuccessfulSubmition = () => {
                     </div>
                 </div>
             </section>
-            <Footer></Footer>
         </div>
     );
 };

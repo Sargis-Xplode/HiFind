@@ -1,32 +1,22 @@
-import type { Metadata } from "next";
-import { Inter, Roboto } from "next/font/google";
+"use client";
 import "../globals.scss";
-import { NextIntlClientProvider, useMessages } from "next-intl";
-
-const roboto = Roboto({ weight: "400", subsets: ["latin"] });
-
-export const metadata: Metadata = {
-    title: "HiFind",
-    description: "Developed By Xplode LLC",
-};
+import Header from "../Components/Header/Header";
+import Footer from "../Components/Footer/Footer";
 
 export default function RootLayout({
     children,
-    params: { locale },
 }: Readonly<{
     children: React.ReactNode;
-    params: { locale: string };
 }>) {
-    const messages = useMessages();
-
     return (
-        <html
-            lang={locale}
-            suppressHydrationWarning={true}
-        >
-            <body className={roboto.className}>
-                <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
-            </body>
-        </html>
+        <>
+            <Header
+            // setFilteredShops={setFilteredShops}
+            // allShops={shops}
+            // setSearchActive={setSearchActive}
+            ></Header>
+            {children}
+            <Footer></Footer>
+        </>
     );
 }

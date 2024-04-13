@@ -234,7 +234,6 @@ const JoinUs = () => {
 
     return (
         <div>
-            <Header></Header>
             <section className="join-us-section">
                 <div className="container">
                     <div className="join-us-modal-container">
@@ -489,7 +488,6 @@ const JoinUs = () => {
                     </div>
                 </div>
             </section>
-            <Footer></Footer>
         </div>
     );
 };
