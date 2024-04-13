@@ -1,14 +1,11 @@
 "use client";
-import { CSSProperties, useEffect, useState } from "react";
-import Footer from "../../Components/Footer/Footer";
-import Header from "../../Components/Header/Header";
+import { useEffect, useState, useContext } from "react";
 import Shop from "../../Components/Shop/Shop";
 import "./page.scss";
 import filterIcon from "../../../../Assets/filter-icon.svg";
 import Categories from "../../../../types/categories";
 
 import ReactPaginate from "react-paginate";
-import ClipLoader from "react-spinners/MoonLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
@@ -17,29 +14,18 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import "react-loading-skeleton/dist/skeleton.css";
 import dynamic from "next/dynamic";
+import { SearchContext } from "../layout";
 const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
-const override: CSSProperties = {
-    display: "flex",
-    margin: "0 auto",
-    borderColor: "red",
-};
-
-const Shops = () => {
+const Shops = (props: any) => {
+    const { filter } = props.searchParams;
+    const { submittedSearchText, searchActive } = useContext(SearchContext);
     const t = useTranslations("shopsPage");
     const t2 = useTranslations("homePage");
     const localActive = useLocale();
 
-    const { push } = useRouter();
-
-    // const query = history ? history?.state : "";
-    const query = {
-        filter: "shops",
-    };
-
     const [shops, setShops] = useState([]);
     const [filteredShops, setFilteredShops] = useState([]);
-    const [searchActive, setSearchActive] = useState(false);
     const [currentItems, setCurrentItems] = useState(shops);
     const [heading, setHeading] = useState("");
 
@@ -56,12 +42,20 @@ const Shops = () => {
     const [selectedCategories, setSelectedCategories] = useState([]);
 
     useEffect(() => {
-        setHeading(query?.filter ? t2(query.filter) : t2("shops"));
+        setHeading(filter ? t2(filter) : t2("shops"));
 
         axios
             .get("api/shop/all")
             .then((res) => {
-                const shops = res.data.shops;
+                let shops = res.data.shops;
+                if (filter) {
+                    shops = shops.filter((shop: any) => {
+                        if (shop.categoryName) {
+                            if (shop.categoryName === t2(filter)) return shop;
+                        }
+                    });
+                }
+
                 setShops(shops.reverse());
                 setLoading(false);
             })
@@ -75,8 +69,7 @@ const Shops = () => {
             .then((res) => {
                 const categoriesDB = res.data.categories;
                 categoriesDB.map((categ: any) => {
-                    const filter = query.filter ? t2(query.filter) : t2("shops");
-                    if (categ.category === filter) {
+                    if (categ.category === t2(filter)) {
                         categ.clicked = true;
                     }
                     return categ;
@@ -115,14 +108,38 @@ const Shops = () => {
                 if (filtered) return shop;
             });
 
-            setFilteredShops(arr);
+            if (arr.length && searchActive && submittedSearchText.length) {
+                const filteredShops = arr.filter((shop: any) => {
+                    if (
+                        shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                        shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                        shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
+                    ) {
+                        return shop;
+                    }
+                });
+                setFilteredShops(filteredShops);
+            } else if (!arr.length && searchActive && submittedSearchText.length) {
+                const filteredShops = shops.filter((shop: any) => {
+                    if (
+                        shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                        shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                        shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
+                    ) {
+                        return shop;
+                    }
+                });
+                setFilteredShops(filteredShops);
+            } else if (arr.length && !searchActive && !submittedSearchText.length) {
+                setFilteredShops(arr);
+            } else if (!arr.length && !searchActive && !submittedSearchText.length) {
+                setFilteredShops([]);
+            }
         }
-    }, [categories]);
+    }, [categories, submittedSearchText, searchActive]);
 
     useEffect(() => {
         if (shops.length) {
-            setLoading(false);
-
             setEndOffSet(itemOffSet + itemsPerPage);
             const arr =
                 filteredShops.length > 0
@@ -140,8 +157,9 @@ const Shops = () => {
                     ? Math.ceil(shops.length / itemsPerPage)
                     : 0;
             setPageCount(count);
+            setLoading(false);
         }
-    }, [shops, itemOffSet, filteredShops, searchActive]);
+    }, [shops, itemOffSet, filteredShops, searchActive, submittedSearchText]);
 
     const handlePageClick = (e: any) => {
         const newOffset = (e.selected * itemsPerPage) % shops.length;
@@ -202,7 +220,7 @@ const Shops = () => {
         setCategories(arr);
     };
 
-    const filter = () => {
+    const filterMobile = () => {
         closeMobileFilter();
     };
 
@@ -308,7 +326,7 @@ const Shops = () => {
                                     </div>
                                     <button
                                         className="filter-check-mobile button"
-                                        onClick={filter}
+                                        onClick={filterMobile}
                                     >
                                         {t("filter")}
                                     </button>

@@ -30,7 +30,7 @@
                     align-items: center;
                     width: 12vw;
                     height: 12vw;
-                    background-color: #d4d4d8;
+                    background-color: $btn-disabled-text;
 
                     &:hover {
                         background-color: $btn-color-hover;

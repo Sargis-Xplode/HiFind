@@ -12,6 +12,7 @@ const shopSchema = new Schema({
     descriptionArm: String,
     descriptionEng: String,
     instaPfpPreview: String,
+    categoryName: String,
     subCategories: [variantSchema],
     approved: Boolean,
     denied: Boolean,

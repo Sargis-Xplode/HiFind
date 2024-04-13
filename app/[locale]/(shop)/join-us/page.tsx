@@ -46,6 +46,7 @@ const JoinUs = () => {
 
     const [categories, setCategories] = useState<any>([]);
 
+    const [categoryName, setCategoryName] = useState<any>([]);
     const [subCategories, setSubCategories] = useState<any>([]);
 
     useEffect(() => {
@@ -134,6 +135,7 @@ const JoinUs = () => {
             if (index === ind) {
                 categ.clicked = !categ.clicked;
                 if (categ.clicked) {
+                    setCategoryName(categ.category);
                     setAtLeastOneClicked(true);
                 } else {
                     setAtLeastOneClicked(false);
@@ -206,6 +208,7 @@ const JoinUs = () => {
                     descriptionArm,
                     descriptionEng,
                     instaPfpPreview,
+                    categoryName,
                     subCategories,
                     approved: false,
                     denied: false,

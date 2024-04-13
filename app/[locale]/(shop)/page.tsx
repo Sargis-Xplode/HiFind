@@ -53,12 +53,6 @@ export default function Home() {
             });
     }, []);
 
-    const goToShopsPage = (filter: string) => {
-        // history.pushState({ filter }, "", pathname + `/shops?filter=${filter}`);
-        history.pushState({ filter }, "", pathname + `/shops`);
-        router.push(`/${localActive}/shops`);
-    };
-
     return (
         <main className="main">
             <div className="homepage-banner">
@@ -80,10 +74,7 @@ export default function Home() {
                     <h3>{t("discover")}</h3>
                     <div className="instagram-boxes-container">
                         <div className="first-box">
-                            <Link
-                                href={`#`}
-                                onClick={() => goToShopsPage("shops")}
-                            >
+                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "shops" } }}>
                                 <div>
                                     <Image
                                         src={shoppingBagIcon}
@@ -93,10 +84,7 @@ export default function Home() {
                                 </div>
                             </Link>
 
-                            <Link
-                                href={"#"}
-                                onClick={() => goToShopsPage("services")}
-                            >
+                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "services" } }}>
                                 <div>
                                     <Image
                                         src={gearsIcon}
@@ -107,10 +95,7 @@ export default function Home() {
                             </Link>
                         </div>
 
-                        <Link
-                            href={"#"}
-                            onClick={() => goToShopsPage("entertainment")}
-                        >
+                        <Link href={{ pathname: `${localActive}/shops`, query: { filter: "entertainment" } }}>
                             <div className="second-box">
                                 <Image
                                     src={dishesIcon}
@@ -121,10 +106,7 @@ export default function Home() {
                         </Link>
 
                         <div className="third-box">
-                            <Link
-                                href={"#"}
-                                onClick={() => goToShopsPage("beauty")}
-                            >
+                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "beauty" } }}>
                                 <div>
                                     <Image
                                         src={brushIcon}
@@ -134,10 +116,7 @@ export default function Home() {
                                 </div>
                             </Link>
 
-                            <Link
-                                href={"#"}
-                                onClick={() => goToShopsPage("healthCare")}
-                            >
+                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "healthCare" } }}>
                                 <div>
                                     <Image
                                         src={heartPlusIcon}

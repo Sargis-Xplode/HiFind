@@ -1,8 +1,7 @@
 @import "../../constants.scss";
 
 .join-us-section {
-    // background-color: $bg-grey;
-    background-color: #f4f4f4;
+    background-color: $bg-grey;
     padding: 60px;
 
     .container {
@@ -171,7 +170,7 @@
                             padding: 8px;
 
                             &:hover {
-                                background-color: #f4f4f4;
+                                background-color: $bg-grey;
                             }
 
                             svg {
@@ -182,7 +181,7 @@
                         }
 
                         .categories-with-plus.inactive {
-                            color: #d4d4d8;
+                            color: $btn-disabled-text;
                         }
 
                         .dropdown-slider {

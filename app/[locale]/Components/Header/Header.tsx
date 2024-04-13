@@ -10,10 +10,11 @@ import { useRouter, usePathname, useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
 export default function Header(props: any) {
+    const { searchText, setSearchText, setSearchActive, setSubmittedSearchText } = props;
+
     const { push } = useRouter();
     const path = usePathname();
 
-    const { allShops, setFilteredShops, setSearchActive } = props;
     const [selectedLanguage, setSelectedLanguage] = useState("Հայ");
     const [languages, setLanguages] = useState([
         {
@@ -33,25 +34,21 @@ export default function Header(props: any) {
     const [isPending, startTransition] = useTransition();
     const localActive = useLocale();
 
-    const [searchText, setSearchText] = useState("");
-
     const changeSearchText = (e: any) => {
         setSearchText(e.target.value);
-        if (!e.target.value.length) setSearchActive(false);
+        if (!e.target.value.length) {
+            setSearchActive(false);
+            setSubmittedSearchText("");
+        }
     };
 
     const searchShops = () => {
+        if (!searchText.length) return;
         if (path !== `/${localActive}/shops`) {
             push(`/${localActive}/shops`);
-            return;
         }
-        const filteredShops = allShops.filter((shop: any, index: number) => {
-            if (shop.buisnessName.includes(searchText) || shop.descriptionArm.includes(searchText)) {
-                return shop;
-            }
-        });
-        setFilteredShops(filteredShops);
         setSearchActive(true);
+        setSubmittedSearchText(searchText);
     };
 
     const changeLanguage = (ind: number) => {
@@ -108,6 +105,11 @@ export default function Header(props: any) {
                             value={searchText}
                             name="search"
                             onChange={(e) => changeSearchText(e)}
+                            onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                    searchShops();
+                                }
+                            }}
                         />
                     </div>
                     <div
