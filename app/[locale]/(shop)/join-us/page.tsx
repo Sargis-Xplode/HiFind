@@ -208,7 +208,7 @@ const JoinUs = () => {
                     descriptionArm,
                     descriptionEng,
                     instaPfpPreview,
-                    categoryName,
+                    categoryName: t3(categoryName),
                     subCategories,
                     approved: false,
                     denied: false,
@@ -393,7 +393,7 @@ const JoinUs = () => {
                                                     }
                                                     onClick={() => handleOpenDropDown(index, category.category)}
                                                 >
-                                                    {category.category}
+                                                    {t3(category.category)}
                                                     {category.clicked ? (
                                                         <FontAwesomeIcon icon={faChevronUp} />
                                                     ) : (

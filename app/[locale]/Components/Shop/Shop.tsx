@@ -6,8 +6,12 @@ import ShopInteface from "../../../../types/shopBox";
 import Link from "next/link";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import brandLogo from "../../../../Assets/brand-logo.svg";
-import categoryIcon from "../../../../Assets/brush-icon.svg";
-import { useLocale } from "next-intl";
+import shopCategoryIcon from "../../../../Assets/shopping-bag-icon.svg";
+import servicesCategoryIcon from "../../../../Assets/gears-icon.svg";
+import entertainmentCategoryIcon from "../../../../Assets/dishes-icon.svg";
+import beautyCategoryIcon from "../../../../Assets/brush-icon.svg";
+import healthCareCategoryIcon from "../../../../Assets/healthcare-icon.svg";
+import { useLocale, useTranslations } from "next-intl";
 
 const Shop = ({
     buisnessName,
@@ -16,8 +20,24 @@ const Shop = ({
     instaPageLink,
     instaPfpPreview,
     subCategories,
+    categoryName,
 }: ShopInteface) => {
     const localActive = useLocale();
+    const t = useTranslations("homePage");
+    let categoryIcon = "";
+    console.log(categoryName, t("services"));
+
+    if (categoryName === t("shops")) {
+        categoryIcon = shopCategoryIcon;
+    } else if (categoryName === t("services")) {
+        categoryIcon = servicesCategoryIcon;
+    } else if (categoryName === t("entertainment")) {
+        categoryIcon = entertainmentCategoryIcon;
+    } else if (categoryName === t("beauty")) {
+        categoryIcon = beautyCategoryIcon;
+    } else if (categoryName === t("healthCare")) {
+        categoryIcon = healthCareCategoryIcon;
+    }
 
     return (
         <Link
@@ -29,7 +49,7 @@ const Shop = ({
                 <div className="box-little-icon">
                     <Image
                         src={categoryIcon}
-                        alt="Picture of the author"
+                        alt={categoryName}
                     />
                 </div>
                 <div className="box-image-container">
@@ -58,9 +78,7 @@ const Shop = ({
                     <div>
                         {subCategories.map((variant: any, index: number) => {
                             return (
-                                <p
-                                    key={index}
-                                >
+                                <p key={index}>
                                     {localActive === "hy" ? variant.subCategoryArm : variant.subCategoryEng}
                                 </p>
                             );

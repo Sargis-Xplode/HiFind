@@ -4,6 +4,7 @@ interface Shop {
     descriptionEng: string;
     instaPageLink: string;
     instaPfpPreview: string;
+    categoryName: string;
     subCategories: Array<{
         subCategoryArm: string;
         subCategoryEng: string;

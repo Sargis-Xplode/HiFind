@@ -141,6 +141,7 @@ export default function Home() {
                                     descriptionEng,
                                     instaPageLink,
                                     instaPfpPreview,
+                                    categoryName,
                                     subCategories,
                                     approved,
                                 } = shop;
@@ -156,6 +157,7 @@ export default function Home() {
                                             descriptionEng={descriptionEng}
                                             instaPageLink={instaPageLink}
                                             instaPfpPreview={""}
+                                            categoryName={categoryName}
                                             subCategories={subCategories}
                                         ></Shop>
                                     );

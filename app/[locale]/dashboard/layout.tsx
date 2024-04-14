@@ -48,24 +48,22 @@ export default function DashboardLayout({
     }, []);
 
     return (
-        <html lang="en">
-            <body className={`${roboto.className} ${loading ? "loading" : ""}`}>
-                {loading && (
-                    <div className="sweet-loading">
-                        <ClipLoader
-                            color={"#ec008b"}
-                            loading={loading}
-                            cssOverride={override}
-                            size={50}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                            speedMultiplier={1}
-                        />
-                    </div>
-                )}
-                {/* <NextIntlClientProvider messages={messages}>{!loading && children}</NextIntlClientProvider> */}
-                {!loading && children}
-            </body>
-        </html>
+        <>
+            {loading && (
+                <div className="sweet-loading">
+                    <ClipLoader
+                        color={"#ec008b"}
+                        loading={loading}
+                        cssOverride={override}
+                        size={50}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                        speedMultiplier={1}
+                    />
+                </div>
+            )}
+            {/* <NextIntlClientProvider messages={messages}>{!loading && children}</NextIntlClientProvider> */}
+            {!loading && children}
+        </>
     );
 }

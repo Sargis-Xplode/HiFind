@@ -54,6 +54,7 @@ const Shops = (props: any) => {
                 if (filter) {
                     shops = shops.filter((shop: any) => {
                         if (shop.categoryName) {
+                            console.log(shop.categoryName, t2(filter));
                             if (shop.categoryName === t2(filter)) return shop;
                         }
                     });
@@ -172,21 +173,11 @@ const Shops = (props: any) => {
     useEffect(() => {
         if (shops.length || filteredShops.length) {
             setEndOffSet(itemOffSet + itemsPerPage);
-            const arr =
-                filteredShops.length > 0
-                    ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : !searchActive && selectedCategories.length === 0
-                    ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : [];
+            const arr = filteredShops.length > 0 ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage) : [];
 
             setCurrentItems(arr);
 
-            const count =
-                filteredShops.length > 0
-                    ? Math.ceil(filteredShops.length / itemsPerPage)
-                    : !searchActive && selectedCategories.length === 0
-                    ? Math.ceil(shops.length / itemsPerPage)
-                    : 0;
+            const count = filteredShops.length > 0 ? Math.ceil(filteredShops.length / itemsPerPage) : 0;
             setPageCount(count);
             setLoading(false);
         }
@@ -500,6 +491,7 @@ const Shops = (props: any) => {
                                     descriptionEng,
                                     instaPageLink,
                                     instaPfpPreview,
+                                    categoryName,
                                     subCategories,
                                     approved,
                                 } = shop;
@@ -515,6 +507,7 @@ const Shops = (props: any) => {
                                             instaPageLink={instaPageLink}
                                             // instaPfpPreview={instaPfpPreview}
                                             instaPfpPreview={""}
+                                            categoryName={categoryName}
                                             subCategories={subCategories}
                                         ></Shop>
                                     );

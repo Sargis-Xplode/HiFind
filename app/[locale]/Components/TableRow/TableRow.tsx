@@ -31,6 +31,8 @@ const TableRow = (props: any) => {
         approved,
         denied,
         page,
+        updateShops,
+        setUpdateShops,
     } = props;
 
     const handleApprove = () => {
@@ -41,6 +43,7 @@ const TableRow = (props: any) => {
             .post(`/${localActive}/api/shop/approved`, JSON.stringify(body))
             .then((res) => {
                 console.log(res.data);
+                setUpdateShops(!updateShops);
             })
             .catch((error) => {
                 console.log(error);
@@ -55,6 +58,7 @@ const TableRow = (props: any) => {
             .post(`/${localActive}/api/shop/denied`, JSON.stringify(body))
             .then((res) => {
                 console.log(res.data);
+                setUpdateShops(!updateShops);
             })
             .catch((error) => {
                 console.log(error);
