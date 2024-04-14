@@ -2,12 +2,8 @@
 import "../globals.scss";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
-import { createContext, useState } from "react";
-
-export const SearchContext = createContext({
-    submittedSearchText: "",
-    searchActive: false,
-});
+import { useState } from "react";
+import ThemeProvider from "../provider";
 
 export default function RootLayout({
     children,
@@ -20,7 +16,10 @@ export default function RootLayout({
 
     return (
         <>
-            <SearchContext.Provider value={{ submittedSearchText, searchActive }}>
+            <ThemeProvider
+                submittedSearchText={submittedSearchText}
+                searchActive={searchActive}
+            >
                 <Header
                     searchText={searchText}
                     setSearchText={setSearchText}
@@ -29,7 +28,7 @@ export default function RootLayout({
                 ></Header>
                 {children}
                 <Footer></Footer>
-            </SearchContext.Provider>
+            </ThemeProvider>
         </>
     );
 }

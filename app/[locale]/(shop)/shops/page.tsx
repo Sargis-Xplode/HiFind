@@ -13,7 +13,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import "react-loading-skeleton/dist/skeleton.css";
 import dynamic from "next/dynamic";
-import { SearchContext } from "../layout";
+import { SearchContext } from "../../provider";
 import { useRouter } from "next/navigation";
 const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
