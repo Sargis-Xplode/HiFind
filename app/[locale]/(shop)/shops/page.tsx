@@ -11,13 +11,14 @@ import { faCheckCircle, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg
 import axios from "axios";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import "react-loading-skeleton/dist/skeleton.css";
 import dynamic from "next/dynamic";
 import { SearchContext } from "../layout";
+import { useRouter } from "next/navigation";
 const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
 const Shops = (props: any) => {
+    const { push } = useRouter();
     const { filter } = props.searchParams;
     const { submittedSearchText, searchActive } = useContext(SearchContext);
     const t = useTranslations("shopsPage");
@@ -48,15 +49,24 @@ const Shops = (props: any) => {
             .get("api/shop/all")
             .then((res) => {
                 let shops = res.data.shops;
+                setShops(shops.reverse());
+
                 if (filter) {
                     shops = shops.filter((shop: any) => {
                         if (shop.categoryName) {
                             if (shop.categoryName === t2(filter)) return shop;
                         }
                     });
+                    setFilteredShops(shops.reverse());
+                } else {
+                    shops = shops.filter((shop: any) => {
+                        if (shop.categoryName) {
+                            if (shop.categoryName === t2("shops")) return shop;
+                        }
+                    });
+                    setFilteredShops(shops.reverse());
                 }
 
-                setShops(shops.reverse());
                 setLoading(false);
             })
             .catch((error) => {
@@ -69,9 +79,16 @@ const Shops = (props: any) => {
             .then((res) => {
                 const categoriesDB = res.data.categories;
                 categoriesDB.map((categ: any) => {
-                    if (categ.category === t2(filter)) {
-                        categ.clicked = true;
+                    if (filter) {
+                        if (categ.category === filter) {
+                            categ.clicked = true;
+                        }
+                    } else {
+                        if (categ.category === "shops") {
+                            categ.clicked = true;
+                        }
                     }
+
                     return categ;
                 });
                 setCategories(categoriesDB);
@@ -85,7 +102,7 @@ const Shops = (props: any) => {
     }, []);
 
     useEffect(() => {
-        if (shops.length) {
+        if (shops.length || filteredShops.length) {
             let filtered = false;
 
             const arr = shops.filter((shop: any) => {
@@ -133,13 +150,27 @@ const Shops = (props: any) => {
             } else if (arr.length && !searchActive && !submittedSearchText.length) {
                 setFilteredShops(arr);
             } else if (!arr.length && !searchActive && !submittedSearchText.length) {
-                setFilteredShops([]);
+                if (filter) {
+                    const array = shops.filter((shop: any) => {
+                        if (shop.categoryName) {
+                            if (shop.categoryName === t2(filter)) return shop;
+                        }
+                    });
+                    setFilteredShops(array.reverse());
+                } else {
+                    const array = shops.filter((shop: any) => {
+                        if (shop.categoryName) {
+                            if (shop.categoryName === t2("shops")) return shop;
+                        }
+                    });
+                    setFilteredShops(array);
+                }
             }
         }
-    }, [categories, submittedSearchText, searchActive]);
+    }, [submittedSearchText, searchActive]);
 
     useEffect(() => {
-        if (shops.length) {
+        if (shops.length || filteredShops.length) {
             setEndOffSet(itemOffSet + itemsPerPage);
             const arr =
                 filteredShops.length > 0
@@ -159,7 +190,7 @@ const Shops = (props: any) => {
             setPageCount(count);
             setLoading(false);
         }
-    }, [shops, itemOffSet, filteredShops, searchActive, submittedSearchText]);
+    }, [itemOffSet, filteredShops, searchActive, submittedSearchText]);
 
     const handlePageClick = (e: any) => {
         const newOffset = (e.selected * itemsPerPage) % shops.length;
@@ -193,11 +224,19 @@ const Shops = (props: any) => {
 
     const handleOpenDropDown = (index: number, categoryName: string) => {
         clearFilters();
-        setHeading(categoryName);
+        setHeading(t2(categoryName));
 
         const arr = categories.map((categ: any, ind: number) => {
             if (index === ind) {
                 categ.clicked = !categ.clicked;
+
+                if (categ.clicked) {
+                    const arr = shops.filter((shop: any) => {
+                        if (shop.categoryName === t2(categ.category)) return shop;
+                    });
+                    setFilteredShops(arr);
+                    push(`?filter=${categ.category}`);
+                }
             } else {
                 categ.clicked = false;
             }
@@ -265,7 +304,7 @@ const Shops = (props: any) => {
                                                       className="categories-with-plus-mobile"
                                                       onClick={() => handleOpenDropDown(index, category.category)}
                                                   >
-                                                      {category.category}
+                                                      {t2(category.category)}
                                                       {category.clicked ? (
                                                           <FontAwesomeIcon icon={faMinus} />
                                                       ) : (
@@ -354,7 +393,7 @@ const Shops = (props: any) => {
                                             className="categories-with-plus "
                                             onClick={() => handleOpenDropDown(index, category.category)}
                                         >
-                                            {category.category}
+                                            {t2(category.category)}
                                             {category.clicked ? (
                                                 <FontAwesomeIcon icon={faMinus} />
                                             ) : (
