@@ -101,41 +101,50 @@ const Shops = (props: any) => {
     }, []);
 
     useEffect(() => {
-        if (shops.length || filteredShops.length) {
+        if (filteredShops.length) {
             let filtered = false;
-            let renderingArray = [];
+            let renderingArray = filteredShops;
+
+            // -----------------------------------------------------
+            // Filters the shops which contain the searched text
+            // -----------------------------------------------------
+            if (searchActive && submittedSearchText.length) {
+                // User searched for something?
+                renderingArray = filteredShops.filter((shop: any) => {
+                    if (
+                        shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                        shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                        shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
+                    ) {
+                        return true;
+                    }
+                });
+            }
+
+            console.log("After Search: ", renderingArray);
 
             // -----------------------------------------------------
             // Filters the shops which contain the selected variants
             // -----------------------------------------------------
-            const filteredByVariants = filteredShops?.filter((shop: any) => {
-                filtered = false;
-                shop?.subCategories?.map((shopCateg: any) => {
-                    selectedCategories?.map((categ: any) => {
-                        if (categ.subCategoryArm === shopCateg.subCategoryArm) {
-                            filtered = true;
-                        }
-                        return categ;
+
+            if (selectedCategories.length) {
+                renderingArray = renderingArray?.filter((shop: any) => {
+                    const filtered = shop?.subCategories?.some((shopCateg: any) => {
+                        // Check if any category in selectedCategories matches shopCateg
+                        return selectedCategories.some(
+                            (categ: any) => categ.subCategoryArm === shopCateg.subCategoryArm
+                        );
                     });
-                    return shopCateg;
+
+                    return filtered;
                 });
-
-                return filtered;
-            });
-
-            if (!filteredByVariants.length) {
-                if (selectedCategories.length) {
-                    renderingArray = [];
-                } else {
-                    renderingArray = filteredShops;
-                }
-            } else {
-                renderingArray = filteredByVariants;
             }
+
+            console.log("After Variant Filter: ", renderingArray);
 
             renderCurrentItems(renderingArray);
         }
-    }, [itemOffSet, filteredShops, selectedCategories]);
+    }, [itemOffSet, filteredShops, selectedCategories, submittedSearchText]);
 
     const renderCurrentItems = (currentArray: any) => {
         console.log(currentArray);
