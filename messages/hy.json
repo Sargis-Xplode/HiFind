@@ -73,7 +73,7 @@
         "instaPageLinkEmptyError": "Մուտքագրեք Ձեր էջի հղումը",
         "imageExceedsLimitError": "Դուք կարող եք վերբեռնել առնվազն 2 mb",
         "imageEmptyError": "Վերբեռնեք ձեր էջի նկարը",
-        "onlyJPGorPNG": "Դուք կարող եք վերբեռնել միայն jpg, png, svg ֆայլեր",
+        "onlyJPGorPNG": "Դուք կարող եք վերբեռնել միայն jpg, jpeg, png կամ svg ֆայլեր",
         "chooseCategoryError": "Ընտրեք որևէ կատեգորիա, որ հաճախորդները կարողանան Ձեզ ավելի հեշտ գտնել"
     }
 }

@@ -73,7 +73,7 @@
         "instaPageLinkEmptyError": "Enter your Instagram Page Link",
         "imageExceedsLimitError": "You can upload maximum 2 mb",
         "imageEmptyError": "Upload an Image",
-        "onlyJPGorPNG": "You can upload only jpg, png, svg files",
+        "onlyJPGorPNG": "You can upload only jpg, jpeg, png or svg files",
         "chooseCategoryError": "Choose a category, so that customers can find you more easily"
     }
 }

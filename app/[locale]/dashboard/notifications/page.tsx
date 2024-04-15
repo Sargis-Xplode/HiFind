@@ -73,7 +73,7 @@ const Notification = () => {
                     : 0;
             setPageCount(count);
         }
-    }, [shops, itemOffSet, filteredShops, searchActive]);
+    }, [shops, itemOffSet, filteredShops, searchActive, notificationCounter]);
 
     const handlePageClick = (e: any) => {
         const newOffset = (e.selected * itemsPerPage) % shops.length;

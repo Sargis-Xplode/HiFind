@@ -14,26 +14,27 @@ import Image from "next/image";
 import "react-loading-skeleton/dist/skeleton.css";
 import dynamic from "next/dynamic";
 import { SearchContext } from "../../provider";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
 const Shops = (props: any) => {
     const { push } = useRouter();
-    const { filter } = props.searchParams;
+    const { filter, page } = props.searchParams;
     const { submittedSearchText, searchActive } = useContext(SearchContext);
+
     const t = useTranslations("shopsPage");
     const t2 = useTranslations("homePage");
     const localActive = useLocale();
 
     const [shops, setShops] = useState([]);
-    const [filteredShops, setFilteredShops] = useState([]);
+    const [filteredShops, setFilteredShops] = useState<any>([]);
     const [currentItems, setCurrentItems] = useState(shops);
     const [heading, setHeading] = useState("");
 
-    const [itemOffSet, setItemOffSet] = useState(0);
-    const [endOffSet, setEndOffSet] = useState(0);
-    const [mobileFilterMenu, setMobileFilterMenu] = useState(false);
     const [itemsPerPage, setItemsPerPage] = useState(12);
+    const [itemOffSet, setItemOffSet] = useState(0);
+    // const [itemOffSet, setItemOffSet] = useState((page - 1) * itemsPerPage);
+    const [mobileFilterMenu, setMobileFilterMenu] = useState(false);
     const [pageCount, setPageCount] = useState(0);
     const [atLeastOneVariantSelected, setAtLeastOneVariantSelected] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -44,30 +45,30 @@ const Shops = (props: any) => {
 
     useEffect(() => {
         setHeading(filter ? t2(filter) : t2("shops"));
+        // if (page) autoChangePage(page - 1);
+        // else autoChangePage(0);
 
         axios
             .get("api/shop/all")
             .then((res) => {
                 let shops = res.data.shops;
-                setShops(shops.reverse());
+                setShops(shops);
 
                 if (filter) {
-                    shops = shops.filter((shop: any) => {
-                        if (shop.categoryName) {
-                            if (t2(shop.categoryName) === t2(filter)) return shop;
+                    const arr = shops.filter((shop: any) => {
+                        if (shop.categoryName && shop.approved) {
+                            if (shop.categoryName === filter) return shop;
                         }
                     });
-                    setFilteredShops(shops.reverse());
+                    setFilteredShops(arr.reverse());
                 } else {
-                    shops = shops.filter((shop: any) => {
-                        if (shop.categoryName) {
-                            if (t2(shop.categoryName) === t2("shops")) return shop;
+                    const arr = shops.filter((shop: any) => {
+                        if (shop.categoryName && shop.approved) {
+                            if (shop.categoryName === "shops") return shop;
                         }
                     });
-                    setFilteredShops(shops.reverse());
+                    setFilteredShops(arr.reverse());
                 }
-
-                setLoading(false);
             })
             .catch((error) => {
                 setLoading(false);
@@ -92,8 +93,6 @@ const Shops = (props: any) => {
                     return categ;
                 });
                 setCategories(categoriesDB);
-
-                setLoading(false);
             })
             .catch((error) => {
                 setLoading(false);
@@ -104,112 +103,88 @@ const Shops = (props: any) => {
     useEffect(() => {
         if (shops.length || filteredShops.length) {
             let filtered = false;
+            let renderingArray = [];
 
-            const arr = shops.filter((shop: any) => {
+            // -----------------------------------------------------
+            // Filters the shops which contain the selected variants
+            // -----------------------------------------------------
+            const filteredByVariants = filteredShops?.filter((shop: any) => {
                 filtered = false;
-
-                selectedCategories.map((category: any) => {
-                    shop.subCategories.map((shopCateg: any, index: number) => {
-                        if (
-                            shopCateg.subCategoryArm === category.subCategoryArm ||
-                            shopCateg.subCategoryEng === category.subCategoryEng
-                        ) {
+                shop?.subCategories?.map((shopCateg: any) => {
+                    selectedCategories?.map((categ: any) => {
+                        if (categ.subCategoryArm === shopCateg.subCategoryArm) {
                             filtered = true;
                         }
-                        return shopCateg;
+                        return categ;
                     });
-
-                    return category;
+                    return shopCateg;
                 });
 
-                if (filtered) return shop;
+                return filtered;
             });
 
-            if (arr.length && searchActive && submittedSearchText.length) {
-                const filteredShops = arr.filter((shop: any) => {
-                    if (
-                        shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                        shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                        shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
-                    ) {
-                        return shop;
-                    }
-                });
-                setFilteredShops(filteredShops);
-            } else if (!arr.length && searchActive && submittedSearchText.length) {
-                const filteredShops = shops.filter((shop: any) => {
-                    if (
-                        shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                        shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                        shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
-                    ) {
-                        return shop;
-                    }
-                });
-                setFilteredShops(filteredShops);
-            } else if (arr.length && !searchActive && !submittedSearchText.length) {
-                setFilteredShops(arr);
-            } else if (!arr.length && !searchActive && !submittedSearchText.length) {
-                if (filter) {
-                    const array = shops.filter((shop: any) => {
-                        if (shop.categoryName) {
-                            if (t2(shop.categoryName) === t2(filter)) return shop;
-                        }
-                    });
-                    setFilteredShops(array.reverse());
+            if (!filteredByVariants.length) {
+                if (selectedCategories.length) {
+                    renderingArray = [];
                 } else {
-                    const array = shops.filter((shop: any) => {
-                        if (shop.categoryName) {
-                            if (t2(shop.categoryName) === t2("shops")) return shop;
-                        }
-                    });
-                    setFilteredShops(array);
+                    renderingArray = filteredShops;
                 }
+            } else {
+                renderingArray = filteredByVariants;
             }
+
+            renderCurrentItems(renderingArray);
         }
-    }, [submittedSearchText, searchActive]);
+    }, [itemOffSet, filteredShops, selectedCategories]);
 
-    useEffect(() => {
-        if (shops.length || filteredShops.length) {
-            setEndOffSet(itemOffSet + itemsPerPage);
-            const arr = filteredShops.length > 0 ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage) : [];
+    const renderCurrentItems = (currentArray: any) => {
+        console.log(currentArray);
+        // Render current page shops ( max 12 )
+        const arr = currentArray.length > 0 ? currentArray.slice(itemOffSet, itemOffSet + itemsPerPage) : [];
+        setCurrentItems(arr);
 
-            setCurrentItems(arr);
-
-            const count = filteredShops.length > 0 ? Math.ceil(filteredShops.length / itemsPerPage) : 0;
-            setPageCount(count);
-            setLoading(false);
-        }
-    }, [itemOffSet, filteredShops, searchActive, submittedSearchText]);
+        // Decide the pagination page count
+        const count = currentArray.length > 0 ? Math.ceil(currentArray.length / itemsPerPage) : 0;
+        setPageCount(count);
+        setLoading(false);
+    };
 
     const handlePageClick = (e: any) => {
-        const newOffset = (e.selected * itemsPerPage) % shops.length;
+        const newOffset = (e.selected * itemsPerPage) % filteredShops.length;
+        // push(`?filter=${filter}&page=${e.selected + 1}`);
         setItemOffSet(newOffset);
     };
+
+    // const autoChangePage = (val: number) => {
+    //     const newOffset = (val * itemsPerPage) % shops.length;
+    //     if (newOffset) setItemOffSet(newOffset);
+    // };
 
     const toggleCheck = (categ: any, index: number) => {
         setAtLeastOneVariantSelected(true);
         categ.variants.map((vari: any, ind: number) => {
             if (ind === index) {
                 vari.selected = !vari.selected;
+
                 let array: any = [...selectedCategories];
                 if (vari.selected) {
                     array = [
                         ...selectedCategories,
                         {
                             subCategoryArm: vari.subCategoryArm,
-                            subcategoryEng: vari.subCategoryEng,
+                            subCategoryEng: vari.subCategoryEng,
                         },
                     ];
                 } else {
                     array.pop();
                 }
+                if (!array.length) {
+                    setAtLeastOneVariantSelected(false);
+                }
                 setSelectedCategories(array);
             }
             return vari;
         });
-
-        setCategories([...categories]);
     };
 
     const handleOpenDropDown = (index: number, categoryName: string) => {
@@ -222,9 +197,10 @@ const Shops = (props: any) => {
 
                 if (categ.clicked) {
                     const arr = shops.filter((shop: any) => {
-                        if (t2(shop.categoryName) === t2(categ.category)) return shop;
+                        if (shop.categoryName === categ.category) return shop;
                     });
                     setFilteredShops(arr);
+                    // push(`?filter=${categ.category}&page=${page}`);
                     push(`?filter=${categ.category}`);
                 }
             } else {
@@ -482,9 +458,9 @@ const Shops = (props: any) => {
                             </div>
                         )}
 
-                        {currentItems.length > 0 ? (
-                            currentItems.map((shop: any, index) => {
-                                let {
+                        {currentItems && currentItems.length > 0 ? (
+                            currentItems?.map((shop: any, index) => {
+                                const {
                                     buisnessName,
                                     descriptionArm,
                                     descriptionEng,
@@ -495,20 +471,18 @@ const Shops = (props: any) => {
                                     approved,
                                 } = shop;
 
-                                if (approved) {
-                                    return (
-                                        <Shop
-                                            key={index}
-                                            buisnessName={buisnessName}
-                                            descriptionArm={descriptionArm}
-                                            descriptionEng={descriptionEng}
-                                            instaPageLink={instaPageLink}
-                                            instaPfpPreview={instaPfpPreview}
-                                            categoryName={categoryName}
-                                            subCategories={subCategories}
-                                        ></Shop>
-                                    );
-                                }
+                                return (
+                                    <Shop
+                                        key={index}
+                                        buisnessName={buisnessName}
+                                        descriptionArm={descriptionArm}
+                                        descriptionEng={descriptionEng}
+                                        instaPageLink={instaPageLink}
+                                        instaPfpPreview={instaPfpPreview}
+                                        categoryName={categoryName}
+                                        subCategories={subCategories}
+                                    ></Shop>
+                                );
                             })
                         ) : loading ? (
                             <div style={{ width: "100%", display: "flex" }}>
@@ -539,6 +513,7 @@ const Shops = (props: any) => {
                         previousLabel="<"
                         renderOnZeroPageCount={null}
                         activeClassName={"selected-page"}
+                        forcePage={page - 1}
                     />
                 )}
             </section>
@@ -547,3 +522,74 @@ const Shops = (props: any) => {
 };
 
 export default Shops;
+
+// useEffect(() => {
+//     if (shops.length || filteredShops.length) {
+//         let filtered = false;
+
+//         console.log(filteredShops, selectedCategories, "SKJadbhajkd");
+//         const arr = filteredShops.map((shop: any) => {
+//             shop.subCategories.map((shopCateg: any) => {
+//                 selectedCategories.map((categ: any) => {
+//                     if (categ.subCategoryArm === shopCateg.subCategories) {
+//                         filtered = true;
+//                     }
+//                     return categ;
+//                 });
+//                 return shopCateg;
+//             });
+
+//             if (filtered) {
+//                 return shop;
+//             }
+//         });
+
+//         setFilteredShops(arr);
+
+//         console.log("Filtered By Variants: ", arr);
+
+//         if (arr.length && searchActive && submittedSearchText.length) {
+//             const filteredShops = arr.filter((shop: any) => {
+//                 if (
+//                     shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+//                     shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+//                     shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
+//                 ) {
+//                     return shop;
+//                 }
+//             });
+//             setFilteredShops(filteredShops);
+//         } else if (!arr.length && searchActive && submittedSearchText.length) {
+//             const array = filteredShops.filter((shop: any) => {
+//                 if (
+//                     shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+//                     shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+//                     shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
+//                 ) {
+//                     return shop;
+//                 }
+//             });
+//             setFilteredShops(array);
+//         } else if (arr.length && !searchActive && !submittedSearchText.length) {
+//             setFilteredShops(arr);
+//         } else if (!arr.length && !searchActive && !submittedSearchText.length && selectedCategories.length) {
+//             setFilteredShops([]);
+//         } else if (!arr.length && !searchActive && !submittedSearchText.length && !selectedCategories.length) {
+//             if (filter) {
+//                 const array = filteredShops.filter((shop: any) => {
+//                     if (shop.categoryName) {
+//                         if (shop.categoryName === filter) return shop;
+//                     }
+//                 });
+//                 setFilteredShops(array.reverse());
+//             } else {
+//                 const array = filteredShops.filter((shop: any) => {
+//                     if (shop.categoryName) {
+//                         if (shop.categoryName === "shops") return shop;
+//                     }
+//                 });
+//                 setFilteredShops(array);
+//             }
+//         }
+//     }
+// }, [submittedSearchText, searchActive, selectedCategories]);

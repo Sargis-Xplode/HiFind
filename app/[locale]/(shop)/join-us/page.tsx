@@ -128,7 +128,7 @@ const JoinUs = () => {
             setValidSizePfp(false);
         }
 
-        if (extension === "jpg" || extension === "png" || extension === "svg") {
+        if (extension === "jpg" || extension === "png" || extension === "svg" || extension === "jpeg") {
             setValidExtensionPfp(true);
         } else {
             setValidExtensionPfp(false);
@@ -141,7 +141,7 @@ const JoinUs = () => {
             if (index === ind) {
                 categ.clicked = !categ.clicked;
                 if (categ.clicked) {
-                    setCategoryName(t3(categ.category));
+                    setCategoryName(categ.category);
                     setAtLeastOneClicked(true);
                 } else {
                     setAtLeastOneClicked(false);
@@ -340,7 +340,7 @@ const JoinUs = () => {
                                         alt="Upload Icon"
                                     ></Image>
                                     <p>
-                                        {t("addImage")} <br /> (jpg,png,svg)
+                                        {t("addImage")} <br /> (jpg,jpeg,png,svg)
                                     </p>
                                     <input
                                         type="file"
