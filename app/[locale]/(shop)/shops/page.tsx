@@ -54,15 +54,14 @@ const Shops = (props: any) => {
                 if (filter) {
                     shops = shops.filter((shop: any) => {
                         if (shop.categoryName) {
-                            console.log(shop.categoryName, t2(filter));
-                            if (shop.categoryName === t2(filter)) return shop;
+                            if (t2(shop.categoryName) === t2(filter)) return shop;
                         }
                     });
                     setFilteredShops(shops.reverse());
                 } else {
                     shops = shops.filter((shop: any) => {
                         if (shop.categoryName) {
-                            if (shop.categoryName === t2("shops")) return shop;
+                            if (t2(shop.categoryName) === t2("shops")) return shop;
                         }
                     });
                     setFilteredShops(shops.reverse());
@@ -154,14 +153,14 @@ const Shops = (props: any) => {
                 if (filter) {
                     const array = shops.filter((shop: any) => {
                         if (shop.categoryName) {
-                            if (shop.categoryName === t2(filter)) return shop;
+                            if (t2(shop.categoryName) === t2(filter)) return shop;
                         }
                     });
                     setFilteredShops(array.reverse());
                 } else {
                     const array = shops.filter((shop: any) => {
                         if (shop.categoryName) {
-                            if (shop.categoryName === t2("shops")) return shop;
+                            if (t2(shop.categoryName) === t2("shops")) return shop;
                         }
                     });
                     setFilteredShops(array);
@@ -223,7 +222,7 @@ const Shops = (props: any) => {
 
                 if (categ.clicked) {
                     const arr = shops.filter((shop: any) => {
-                        if (shop.categoryName === t2(categ.category)) return shop;
+                        if (t2(shop.categoryName) === t2(categ.category)) return shop;
                     });
                     setFilteredShops(arr);
                     push(`?filter=${categ.category}`);

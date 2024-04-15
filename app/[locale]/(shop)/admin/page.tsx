@@ -68,7 +68,6 @@ export default function Login() {
                 .post("api/admin/login", JSON.stringify(body))
                 .then((res) => {
                     const data = res.data;
-                    console.log(res);
 
                     if (data.success) {
                         toast(data.message, {

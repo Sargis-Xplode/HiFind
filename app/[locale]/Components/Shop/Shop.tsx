@@ -26,15 +26,15 @@ const Shop = ({
     const t = useTranslations("homePage");
     let categoryIcon = "";
 
-    if (categoryName === t("shops")) {
+    if (t(categoryName) === t("shops")) {
         categoryIcon = shopCategoryIcon;
-    } else if (categoryName === t("services")) {
+    } else if (t(categoryName) === t("services")) {
         categoryIcon = servicesCategoryIcon;
-    } else if (categoryName === t("entertainment")) {
+    } else if (t(categoryName) === t("entertainment")) {
         categoryIcon = entertainmentCategoryIcon;
-    } else if (categoryName === t("beauty")) {
+    } else if (t(categoryName) === t("beauty")) {
         categoryIcon = beautyCategoryIcon;
-    } else if (categoryName === t("healthCare")) {
+    } else if (t(categoryName) === t("healthCare")) {
         categoryIcon = healthCareCategoryIcon;
     }
 

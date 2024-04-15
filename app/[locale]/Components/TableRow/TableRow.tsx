@@ -42,7 +42,6 @@ const TableRow = (props: any) => {
         axios
             .post(`/${localActive}/api/shop/approved`, JSON.stringify(body))
             .then((res) => {
-                console.log(res.data);
                 setUpdateShops(!updateShops);
             })
             .catch((error) => {
@@ -57,7 +56,6 @@ const TableRow = (props: any) => {
         axios
             .post(`/${localActive}/api/shop/denied`, JSON.stringify(body))
             .then((res) => {
-                console.log(res.data);
                 setUpdateShops(!updateShops);
             })
             .catch((error) => {

@@ -169,7 +169,6 @@ const CategoriesList = () => {
         axios
             .post(`/${localActive}/api/categories/single`, JSON.stringify(body))
             .then((res) => {
-                console.log(res.data);
                 setUpdateCategories(!updateCategories);
                 toast("New Category submitted successfully", {
                     type: "success",
@@ -201,7 +200,6 @@ const CategoriesList = () => {
         axios
             .post(`/${localActive}/api/categories/single/update`, JSON.stringify(body))
             .then((res) => {
-                console.log(res.data);
                 setUpdateCategories(!updateCategories);
                 toast("Categories updated", {
                     type: "success",

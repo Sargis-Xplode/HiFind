@@ -226,7 +226,6 @@ const JoinUs = () => {
                     .post("api/shop/request", JSON.stringify(body))
                     .then((res) => {
                         const data = res.data;
-                        console.log(data);
 
                         if (data.success) {
                             push("success");
