@@ -70,7 +70,9 @@ const TableRow = (props: any) => {
             <div className="brand-logo-name">
                 <Image
                     priority
-                    src={brandLogo}
+                    src={instaPfpPreview}
+                    width={60}
+                    height={60}
                     alt="Brand Logo"
                 ></Image>
                 <p>{buisnessName}</p>

@@ -156,7 +156,7 @@ export default function Home() {
                                             descriptionArm={descriptionArm}
                                             descriptionEng={descriptionEng}
                                             instaPageLink={instaPageLink}
-                                            instaPfpPreview={""}
+                                            instaPfpPreview={instaPfpPreview}
                                             categoryName={categoryName}
                                             subCategories={subCategories}
                                         ></Shop>

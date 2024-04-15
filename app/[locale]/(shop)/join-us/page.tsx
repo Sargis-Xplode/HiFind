@@ -39,7 +39,7 @@ const JoinUs = () => {
     const [descriptionArm, setDescriptionArm] = useState("");
     const [descriptionEng, setDescriptionEng] = useState("");
     const [instaPfp, setInstaPfp] = useState("");
-    const [instaPfpPreview, setInstaPfpPreview] = useState("");
+    const [instaPfpPreview, setInstaPfpPreview] = useState<any>();
     const [validSizePfp, setValidSizePfp] = useState(false);
     const [validExtensionPfp, setValidExtensionPfp] = useState(false);
     const [atLeastOneClicked, setAtLeastOneClicked] = useState(false);
@@ -114,8 +114,14 @@ const JoinUs = () => {
     const handlePfpChange = (e: any) => {
         const fileName = e.target.value;
         const extension = fileName.split(".").pop();
+
+        const fs = new FileReader();
+        fs.readAsDataURL(e.target.files[0]);
+        fs.onload = () => {
+            setInstaPfpPreview(fs.result);
+        };
+
         setInstaPfp(e.target.value);
-        setInstaPfpPreview(URL.createObjectURL(e.target.files[0]));
         if (e.target.files[0].size / 1024000 <= 2) {
             setValidSizePfp(true);
         } else {

@@ -505,8 +505,7 @@ const Shops = (props: any) => {
                                             descriptionArm={descriptionArm}
                                             descriptionEng={descriptionEng}
                                             instaPageLink={instaPageLink}
-                                            // instaPfpPreview={instaPfpPreview}
-                                            instaPfpPreview={""}
+                                            instaPfpPreview={instaPfpPreview}
                                             categoryName={categoryName}
                                             subCategories={subCategories}
                                         ></Shop>

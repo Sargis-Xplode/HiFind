@@ -25,7 +25,6 @@ const Shop = ({
     const localActive = useLocale();
     const t = useTranslations("homePage");
     let categoryIcon = "";
-    console.log(categoryName, t("services"));
 
     if (categoryName === t("shops")) {
         categoryIcon = shopCategoryIcon;
