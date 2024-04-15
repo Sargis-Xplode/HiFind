@@ -90,7 +90,7 @@ const JoinUs = () => {
             setValidInstaPageLink(false);
             return;
         }
-        const regex = /^\s*(https\:\/\/)?www\.instagram\.com\/[a-z\A-Z\d\-_.\/]{1,255}\s*$/;
+        const regex = /^\s*(https\:\/\/)?www\.instagram\.com\/[a-z\A-Z\d\-_.?=\/]{1,255}\s*$/;
         if (regex.test(e.target.value)) {
             setValidInstaPageLink(true);
         } else {
