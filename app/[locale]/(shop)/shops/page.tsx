@@ -103,9 +103,9 @@ const Shops = (props: any) => {
         if (filteredShops.length) {
             let renderingArray = filteredShops;
 
-            // -----------------------------------------------------
+            // -------------------------------------------------
             // Filters the shops which contain the searched text
-            // -----------------------------------------------------
+            // -------------------------------------------------
             if (searchActive && submittedSearchText.length) {
                 // User searched for something?
                 renderingArray = filteredShops.filter((shop: any) => {
@@ -122,7 +122,6 @@ const Shops = (props: any) => {
             // -----------------------------------------------------
             // Filters the shops which contain the selected variants
             // -----------------------------------------------------
-
             if (selectedCategories.length) {
                 renderingArray = renderingArray?.filter((shop: any) => {
                     const filtered = shop?.subCategories?.some((shopCateg: any) => {
@@ -181,7 +180,7 @@ const Shops = (props: any) => {
                         },
                     ];
                 } else {
-                    array.pop();
+                    array = array.filter((variant: any) => variant.subCategoryArm !== vari.subCategoryArm);
                 }
                 if (!array.length) {
                     setAtLeastOneVariantSelected(false);
@@ -528,74 +527,3 @@ const Shops = (props: any) => {
 };
 
 export default Shops;
-
-// useEffect(() => {
-//     if (shops.length || filteredShops.length) {
-//         let filtered = false;
-
-//         console.log(filteredShops, selectedCategories, "SKJadbhajkd");
-//         const arr = filteredShops.map((shop: any) => {
-//             shop.subCategories.map((shopCateg: any) => {
-//                 selectedCategories.map((categ: any) => {
-//                     if (categ.subCategoryArm === shopCateg.subCategories) {
-//                         filtered = true;
-//                     }
-//                     return categ;
-//                 });
-//                 return shopCateg;
-//             });
-
-//             if (filtered) {
-//                 return shop;
-//             }
-//         });
-
-//         setFilteredShops(arr);
-
-//         console.log("Filtered By Variants: ", arr);
-
-//         if (arr.length && searchActive && submittedSearchText.length) {
-//             const filteredShops = arr.filter((shop: any) => {
-//                 if (
-//                     shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-//                     shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-//                     shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
-//                 ) {
-//                     return shop;
-//                 }
-//             });
-//             setFilteredShops(filteredShops);
-//         } else if (!arr.length && searchActive && submittedSearchText.length) {
-//             const array = filteredShops.filter((shop: any) => {
-//                 if (
-//                     shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-//                     shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-//                     shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
-//                 ) {
-//                     return shop;
-//                 }
-//             });
-//             setFilteredShops(array);
-//         } else if (arr.length && !searchActive && !submittedSearchText.length) {
-//             setFilteredShops(arr);
-//         } else if (!arr.length && !searchActive && !submittedSearchText.length && selectedCategories.length) {
-//             setFilteredShops([]);
-//         } else if (!arr.length && !searchActive && !submittedSearchText.length && !selectedCategories.length) {
-//             if (filter) {
-//                 const array = filteredShops.filter((shop: any) => {
-//                     if (shop.categoryName) {
-//                         if (shop.categoryName === filter) return shop;
-//                     }
-//                 });
-//                 setFilteredShops(array.reverse());
-//             } else {
-//                 const array = filteredShops.filter((shop: any) => {
-//                     if (shop.categoryName) {
-//                         if (shop.categoryName === "shops") return shop;
-//                     }
-//                 });
-//                 setFilteredShops(array);
-//             }
-//         }
-//     }
-// }, [submittedSearchText, searchActive, selectedCategories]);
