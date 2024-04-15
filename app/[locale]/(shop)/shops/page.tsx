@@ -45,8 +45,7 @@ const Shops = (props: any) => {
 
     useEffect(() => {
         setHeading(filter ? t2(filter) : t2("shops"));
-        // if (page) autoChangePage(page - 1);
-        // else autoChangePage(0);
+        // autoChangePage(page - 1);
 
         axios
             .get("api/shop/all")
@@ -102,7 +101,6 @@ const Shops = (props: any) => {
 
     useEffect(() => {
         if (filteredShops.length) {
-            let filtered = false;
             let renderingArray = filteredShops;
 
             // -----------------------------------------------------
@@ -121,8 +119,6 @@ const Shops = (props: any) => {
                 });
             }
 
-            console.log("After Search: ", renderingArray);
-
             // -----------------------------------------------------
             // Filters the shops which contain the selected variants
             // -----------------------------------------------------
@@ -140,14 +136,11 @@ const Shops = (props: any) => {
                 });
             }
 
-            console.log("After Variant Filter: ", renderingArray);
-
             renderCurrentItems(renderingArray);
         }
     }, [itemOffSet, filteredShops, selectedCategories, submittedSearchText]);
 
     const renderCurrentItems = (currentArray: any) => {
-        console.log(currentArray);
         // Render current page shops ( max 12 )
         const arr = currentArray.length > 0 ? currentArray.slice(itemOffSet, itemOffSet + itemsPerPage) : [];
         setCurrentItems(arr);
@@ -160,7 +153,7 @@ const Shops = (props: any) => {
 
     const handlePageClick = (e: any) => {
         const newOffset = (e.selected * itemsPerPage) % filteredShops.length;
-        // push(`?filter=${filter}&page=${e.selected + 1}`);
+        push(`?filter=${filter}&page=${e.selected + 1}`);
         setItemOffSet(newOffset);
     };
 
@@ -171,6 +164,9 @@ const Shops = (props: any) => {
 
     const toggleCheck = (categ: any, index: number) => {
         setAtLeastOneVariantSelected(true);
+        // push(`?filter=${categ.category}&page=${1}`);
+        // autoChangePage(0);
+
         categ.variants.map((vari: any, ind: number) => {
             if (ind === index) {
                 vari.selected = !vari.selected;
@@ -209,8 +205,9 @@ const Shops = (props: any) => {
                         if (shop.categoryName === categ.category) return shop;
                     });
                     setFilteredShops(arr);
-                    // push(`?filter=${categ.category}&page=${page}`);
-                    push(`?filter=${categ.category}`);
+                    push(`?filter=${categ.category}`); // Replace this with line below
+                    // push(`?filter=${categ.category}&page=${1}`);
+                    // autoChangePage(0);
                 }
             } else {
                 categ.clicked = false;
