@@ -121,7 +121,7 @@ const Denied = () => {
                                         email={shop.email}
                                         instaPageLink={shop.instaPageLink}
                                         descriptionArm={shop.descriptionArm}
-                                        descriptionEng={shop.descriptionArm}
+                                        descriptionEng={shop.descriptionEng}
                                         subCategories={shop.subCategories}
                                         date={"05.07.2023"}
                                         id={shop._id}

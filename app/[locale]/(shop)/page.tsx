@@ -146,8 +146,6 @@ export default function Home() {
                                     approved,
                                 } = shop;
 
-                                instaPageLink = instaPageLink.split("https://www.instagram.com");
-
                                 if (approved) {
                                     return (
                                         <Shop

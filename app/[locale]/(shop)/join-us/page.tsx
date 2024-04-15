@@ -141,7 +141,7 @@ const JoinUs = () => {
             if (index === ind) {
                 categ.clicked = !categ.clicked;
                 if (categ.clicked) {
-                    setCategoryName(categ.category);
+                    setCategoryName(t3(categ.category));
                     setAtLeastOneClicked(true);
                 } else {
                     setAtLeastOneClicked(false);
@@ -214,7 +214,7 @@ const JoinUs = () => {
                     descriptionArm,
                     descriptionEng,
                     instaPfpPreview,
-                    categoryName: t3(categoryName),
+                    categoryName,
                     subCategories,
                     approved: false,
                     denied: false,

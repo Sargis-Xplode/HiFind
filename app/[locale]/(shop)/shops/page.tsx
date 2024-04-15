@@ -495,7 +495,6 @@ const Shops = (props: any) => {
                                     approved,
                                 } = shop;
 
-                                instaPageLink = instaPageLink.split("https://www.instagram.com");
                                 if (approved) {
                                     return (
                                         <Shop
