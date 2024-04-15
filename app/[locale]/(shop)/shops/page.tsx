@@ -519,7 +519,7 @@ const Shops = (props: any) => {
                         previousLabel="<"
                         renderOnZeroPageCount={null}
                         activeClassName={"selected-page"}
-                        forcePage={page - 1}
+                        // forcePage={page - 1}
                     />
                 )}
             </section>
