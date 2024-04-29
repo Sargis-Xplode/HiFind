@@ -93,7 +93,11 @@ const TableRow = (props: any) => {
                                 key={index}
                                 className="category"
                             >
-                                {localActive === "hy" ? category.subCategoryArm : category.subcategoryEng}
+                                {localActive === "hy"
+                                    ? category.subCategoryArm
+                                    : localActive === "en"
+                                    ? category.subCategoryEng
+                                    : ""}
                             </div>
                         );
                     })}

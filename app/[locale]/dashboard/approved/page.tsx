@@ -26,7 +26,6 @@ const Approved = () => {
 
     const [currentItems, setCurrentItems] = useState(shops);
     const [itemOffSet, setItemOffSet] = useState(0);
-    const [endOffSet, setEndOffSet] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(12);
     const [pageCount, setPageCount] = useState(0);
     const [searchActive, setSearchActive] = useState(false);
@@ -49,7 +48,6 @@ const Approved = () => {
         if (shops.length) {
             setLoading(false);
 
-            setEndOffSet(itemOffSet + itemsPerPage);
             const arr =
                 filteredShops.length > 0
                     ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage)

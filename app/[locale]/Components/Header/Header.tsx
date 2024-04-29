@@ -4,6 +4,7 @@ import "./header.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import logo from "../../../../Assets/logo.svg";
 import { useRouter, usePathname, useParams } from "next/navigation";
@@ -11,6 +12,10 @@ import { useLocale, useTranslations } from "next-intl";
 
 export default function Header(props: any) {
     const { searchText, setSearchText, setSearchActive, setSubmittedSearchText } = props;
+
+    const searchParams = useSearchParams();
+
+    const filter = searchParams.get("filter");
 
     const { push } = useRouter();
     const path = usePathname();
@@ -58,10 +63,15 @@ export default function Header(props: any) {
                 lang.selected = true;
                 setSelectedLanguage(lang.text);
                 nextLocale = lang.value;
+                const query = `?filter=${filter}`;
                 const newPath = path.replace(`/${localActive}`, `/${nextLocale}`);
 
                 startTransition(() => {
-                    push(newPath);
+                    if (newPath === "/en/shops" || newPath === "/hy/shops") {
+                        push(newPath + query);
+                    } else {
+                        push(newPath);
+                    }
                 });
             } else {
                 lang.selected = false;
