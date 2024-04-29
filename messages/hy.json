@@ -13,18 +13,19 @@
     },
     "homepageBanner": {
         "join_us_btn": "Միացիր մեզ",
-        "homepage_banner_heading": "Ընդլայնեք Ձեր Instagram-յան բիզնեսը, ապահովեք ավելի բարձր տեսանելիություն, ձեռք բերեք նոր հաճախորդներ, բացահայտեք նոր հնարավորություններ"
+        "homepage_banner_heading": "Ընդլայնիր Instagram-յան բիզնեսդ և բացահայտիր նոր հնարավորություններ՝ ձեռք բերելով ավելի շատ տեսանելիություն և նոր հաճախորդներ:"
     },
     "homePage": {
         "discover": "Բացահայտեք Instagram-ի բիզնես հաշիվների աշխարհը",
         "shops": "Խանութ",
         "services": "Ծառայություններ",
+        "service": "Ծառայություն",
         "entertainment": "ժամանց",
         "beauty": "Գեղեցկություն",
         "healthCare": "Առողջություն",
         "recommendedPages": "Առաջարկվող Էջեր",
         "aboutUs": "Մեր մասին",
-        "welcome": "Բարի գալուստ .....:\nՄենք նվիրված ենք Instagram-ի պրոֆիլների ձեր որոնումը պարզեցնելուն, որոնք առաջարկում են եզակի ծառայություններ և ապրանքներ:\nՄեր առաքելությունն է ձեզ կապել տարբեր կատեգորիաների համապատասխան պրոֆիլների հետ՝ հեշտացնելով ոգեշնչում գտնելը և նոր ընտրյալներ հայտնաբերելը: Միացե՛ք մեզ, երբ մենք աջակցում ենք ստեղծողներին և բիզնեսներին՝ միաժամանակ զարգացնելով բովանդակալից կապերը օգտատերերի և բովանդակության միջև: Շնորհակալություն մեզ ընտրել որպես ձեր նպատակակետ Instagram-ի լավագույնը բացահայտելու համար:"
+        "welcome": "HiFind առցանց հարթակը միտված է խթանելու այն անհատների և ընկերությունների առցանց ներկայությունը Instagram-ում, ովքեր ունեն բիզնես հաշիվներ: HiFind-ն առաջարկում է օգտագործողի համար հարմար ինտերֆեյս, որը նախատեսված է Instagram-ում բիզնես հաշիվների հեշտությամբ հայտնաբերման և առաջխաղացման համար: Հարթակի ընդլայնված որոնման շնորհիվ օգտատերերը կարող են փնտրել և գտնել կոնկրետ բիզնես հաշիվներ Instagram-ում՝ առանց նրանց անունների նախնական իմացության կամ հեշթեգերի կիրառման անհրաժեշտության: Գտնելուց հետո ընդամենը մեկ սեղմումով կարող են HiFind-ից անցնել Instagram-ի համապատասխան բիզնես հաշիվ: Բիզնես հաշիվներին HiFind-ը հնարավորություն է ընձեռում ընդլայնել տեսանելիությունը և մեծացնել իրենց հաճախորդների բազան: "
     },
     "shopsPage": {
         "filters": "Ֆիլտրեր",
@@ -64,6 +65,31 @@
     "success": {
         "requestSuccessful": "Ձեր գրանցման հայտը հաջողությամբ կատարված է։",
         "approvalOrRejection": "Համակարգում Ձեր էջի հաստատման կամ մերժման մասին կստանաք նամակ Ձեր էլ.հասցեին:"
+    },
+    "privacy": {
+        "informationCollectionAndUseTitle": "Տեղեկությունների հավաքագրում և օգտագործում",
+        "dataSecurityTitle": "Տվյալների անվտանգություն",
+        "informationSharingTitle": "Տեղեկատվության փոխանակում",
+        "dataRetentionTitle": "Տվյալների պահպանում",
+        "userRightsTitle": "Օգտագործողի իրավունքները",
+        "informationCollectionAndUse": "Մենք հավաքագրում ենք անձնական տվյալներ Ձեր ընկերության անունը, էլ. հասցեն և Instagram հաշվի հղումը, երբ գրանցվում եք մեր հարթակում: Ձեր տեղեկությունները օգտագործվում են բացառապես HiFind-ի հետ Ձեր փոխհարաբերությունները հեշտացնելու նպատակով, ներառյալ Instagram-ում բիզնես հաշիվների հայտնաբերումն ու առաջմղումը: Մենք կարող ենք նաև հավաքագրել ոչ անձնական տեղեկություններ, ինչպիսիք են զննարկման (browsing) վարքագիծը և սարքի մասին տեղեկությունները, օգտատիրոջ փորձը և մեր հարթակի ֆունկցիոնալությունը բարելավելու համար:",
+        "dataSecurity": "Մենք օգտագործում ենք արդյունաբերության ստանդարտ (industry-standard) անվտանգության միջոցներ՝ ձեր անձնական տեղեկությունները չթույլատրված մուտքից, փոփոխությունից, բացահայտումից կամ ոչնչացումից պաշտպանելու համար: Ձեր հաշվի տվյալները պաշտպանված են գաղտնաբառով, և մենք օգտագործում ենք գաղտնագրման տեխնոլոգիաներ՝ պաշտպանելու տվյալների փոխանցումը համացանցով:",
+        "informationSharing": "Մենք չենք վաճառում կամ այլ կերպ փոխանցում Ձեր անձնական տվյալները երրորդ անձանց՝ առանց ՁԵր համաձայնության, բացառությամբ օրենքով նախատեսված դեպքերի: Ձեր անձնական տվյալները կարող են հասանելի դառնալ միայն վստահելի երրորդ կողմի ծառայություններ մատուցողների համար, որոնք օգնում են մեզ մեր հարթակը գործարկելու, բիզնես գործունեություն իրականացնելու կամ Ձեզ սպասարկելու հարցում:",
+        "dataRetention": "Մենք պահպանում ենք Ձեր անձնական տվյալները միայն այնքան ժամանակ, որքան անհրաժեշտ է այն նպատակների իրականացման համար, որոնց համար դրանք հավաքվել են կամ ինչպես պահանջվում է օրենքով: Դուք իրավունք ունեք ցանկացած պահի պահանջել ջնջել Ձեր անձնական տվյալները մեր տվյալների բազայից՝ հաշվի առնելով իրավական պարտավորությունները կամ օրինական շահերը, որոնք կարող են պահանջել պահպանում:",
+        "userRights": "Դուք իրավունք ունեք մուտք գործելու, ուղղելու կամ ջնջելու Ձեր անձնական տվյալները, որոնք պահվում են HiFind-ում: Դուք կարող եք նաև հրաժարվել մեր կողմից գովազդային հաղորդագրություններ կամ որևէ ծանուցում ստանալուց: Եթե ունեք հարցեր կամ մտահոգություններ մեր Գաղտնիության քաղաքականության կամ Ձեր անձնական տվյալների հետ կապված, խնդրում ենք կապվել մեզ հետ info@xplode.am հասցեով: Օգտագործելով HiFind-ը՝ Դուք համաձայնում եք սույն Գաղտնիության քաղաքականության մեջ նշված պայմաններին: Մենք իրավունք ենք վերապահում ցանկացած պահի թարմացնել կամ փոփոխել այս Քաղաքականությունը, և ցանկացած փոփոխություն ուժի մեջ կմտնի անմիջապես մեր հարթակում տեղադրվելուց հետո:"
+    },
+    "terms": {
+        "termsOfUseTitle": "Welcome",
+        "accaptanceOfTermsTitle": "Guidelines",
+        "useOfHiFIndTitle": "User integrity",
+        "websiteUseGuidelinesTitle": "Abuse & governing laws",
+        "registrationAndAccountSecurityTitle": "Modifications",
+
+        "termsOfUse": "Welcome to HiFind, the online platform changing the way businesses connect on Instagram. By accessing or using our platform, you agree to comply with and be bound by the following Terms of Use. Please read these terms carefully before accessing or using HiFind. By accessing or using HiFind, you agree to these Terms of Use and our Privacy Policy. If you do not agree with any part of these terms, you may not access or use our platform.",
+        "accaptanceOfTerms": "HiFind is intended for individuals and companies seeking to discover and promote business profiles on Instagram. You may use our platform solely for lawful purposes and in accordance with these Terms of Use. You agree not to use HiFind for any unlawful, abusive, or fraudulent activities, or in any way that could damage, disable, or impair the platform or interfere with other users' enjoyment of the platform. HiFind's user-friendly interface simplifies navigation, allowing you to explore categorized business profiles to discover new opportunities and expand your online network. By utilizing HiFind's advanced filtering options for efficient searches across various categories, will enable you to find specific businesses quickly and effectively without the need for prior knowledge of their names or reliance on hashtags. Business profile owners are encouraged to register on HiFind and provide essential details such as business name, email address, Instagram profile URL, and description, ensuring their presence on HiFind and leveraging our platform to increase visibility and expand their customer base. Rest assured, HiFind's careful review process maintains the integrity and reliability of the platform's content, ensuring that only profiles meeting our quality standards are approved for inclusion. Profiles lacking essential information or with fewer than 100 followers may be subject to rejection, upholding the quality assurance of the platform.",
+        "useOfHiFInd": "To access certain features of HiFind, you may be required to register and create an account (if you owe a business profile in Instagram, users don't have to register in the platform). You are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate, current, and complete information during the registration process and to update your information promptly if it changes. Business profile owners are solely responsible for the accuracy, legality, and quality of the information provided on their profiles. HiFind reserves the right to remove or reject any profiles that do not meet our quality standards or violate these Terms of Use. By registering your business profile on HiFind, you grant us the right to display and promote your profile on our platform. Intellectual property and limitation of liability The content, features, and functionality of HiFind, including but not limited to text, graphics, logos, images, and software, are owned by HiFind and protected by copyright, trademark, and other intellectual property laws. In no event shall HiFind be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with your use of our platform, whether based on contract, tort, strict liability, or otherwise.",
+        "websiteUseGuidelines": "Abuse on HiFind refers to any action or behavior that violates the platform's guidelines or undermines the integrity of our community. This includes but is not limited to posting misleading or fraudulent information, engaging in harassment or bullying towards other users, attempting to manipulate search results or artificially inflate profile metrics, or any other activity that may compromise the user experience or reputation of HiFind. We take abuse seriously and have systems in place to review and address reports of abusive behavior, with consequences such as account suspension or removal for offenders. HiFind's goal is to maintain a safe, respectful, and trustworthy environment for all users, promoting positive interactions and meaningful connections. These Terms of Use shall be governed by and construed in accordance with the laws of the Republic of Armenia, without regard to its conflict of law provisions. By accessing or using HiFind, you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and our Privacy Policy. If you do not agree with any part of these terms, you may not access or use our platform.",
+        "registrationAndAccountSecurity": "HiFind reserves the right to modify or update these Terms of Use at any time without prior notice. Your continued use of our platform after any such changes constitutes acceptance of the modified terms"
     },
     "errors": {
         "buisnessNameError": "Մուտքագրեք Ձեր բիզնեսի անունը",

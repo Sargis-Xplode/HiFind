@@ -34,7 +34,7 @@ export default function Footer() {
                         </Link>
                     </div>
 
-                    <p>{t("contactUs")}</p>
+                    <span>{t("contactUs")}</span>
                     <div>
                         <div className="mail-icon-container">
                             <Image

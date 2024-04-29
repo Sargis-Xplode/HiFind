@@ -90,7 +90,7 @@ export default function Home() {
                                         src={gearsIcon}
                                         alt="Picture of the author"
                                     />
-                                    <p>{t("services")}</p>
+                                    <p>{t("service")}</p>
                                 </div>
                             </Link>
                         </div>

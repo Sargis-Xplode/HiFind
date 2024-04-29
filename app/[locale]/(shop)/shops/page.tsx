@@ -243,7 +243,7 @@ const Shops = (props: any) => {
     };
 
     return (
-        <div>
+        <>
             <section className="shops-section">
                 <h2>{heading}</h2>
                 <div className="container">
@@ -476,18 +476,20 @@ const Shops = (props: any) => {
                                     approved,
                                 } = shop;
 
-                                return (
-                                    <Shop
-                                        key={index}
-                                        buisnessName={buisnessName}
-                                        descriptionArm={descriptionArm}
-                                        descriptionEng={descriptionEng}
-                                        instaPageLink={instaPageLink}
-                                        instaPfpPreview={instaPfpPreview}
-                                        categoryName={categoryName}
-                                        subCategories={subCategories}
-                                    ></Shop>
-                                );
+                                if (approved) {
+                                    return (
+                                        <Shop
+                                            key={index}
+                                            buisnessName={buisnessName}
+                                            descriptionArm={descriptionArm}
+                                            descriptionEng={descriptionEng}
+                                            instaPageLink={instaPageLink}
+                                            instaPfpPreview={instaPfpPreview}
+                                            categoryName={categoryName}
+                                            subCategories={subCategories}
+                                        ></Shop>
+                                    );
+                                }
                             })
                         ) : loading ? (
                             <div style={{ width: "100%", display: "flex" }}>
@@ -522,7 +524,7 @@ const Shops = (props: any) => {
                     />
                 )}
             </section>
-        </div>
+        </>
     );
 };
 

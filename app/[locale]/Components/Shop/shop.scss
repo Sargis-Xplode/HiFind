@@ -42,11 +42,6 @@ a.shop-link {
             text-decoration: none;
             color: white;
 
-            p {
-                text-align: center;
-                font-weight: bold;
-            }
-
             div {
                 width: 100%;
                 text-align: center;
@@ -55,6 +50,12 @@ a.shop-link {
                     width: 1.5em;
                     height: 1.5em;
                 }
+            }
+
+            .insta-link {
+                font-weight: bold;
+                text-align: center;
+                word-wrap: break-word;
             }
         }
 

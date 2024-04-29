@@ -88,7 +88,8 @@ const Shop = ({
                     <div>
                         <FontAwesomeIcon icon={faInstagram} />
                     </div>
-                    <p>{instaPageLink}</p>
+                    <div className="insta-link">{instaPageLink}</div>
+                    {/* {instaPageLink} */}
                 </div>
             </div>
         </Link>
