@@ -24,6 +24,7 @@ const TableRow = (props: any) => {
         instaPageLink,
         descriptionArm,
         descriptionEng,
+        categoryName,
         subCategories,
         date,
         id,
@@ -33,6 +34,8 @@ const TableRow = (props: any) => {
         updateShops,
         setUpdateShops,
         shopActive,
+        setOpenEditModal,
+        setBody,
     } = props;
 
     const localActive = useLocale();
@@ -67,7 +70,21 @@ const TableRow = (props: any) => {
             });
     };
 
-    const handleEditShop = () => {};
+    const handleEditShop = () => {
+        const body = {
+            buisnessNameProp: buisnessName,
+            emailProp: email,
+            instaPageLinkProp: instaPageLink,
+            descriptionArmProp: descriptionArm,
+            descriptionEngProp: descriptionEng,
+            instaPfpProp: instaPfpPreview,
+            categoryNameProp: categoryName,
+            subCategoriesProp: subCategories,
+            id,
+        };
+
+        setBody(body);
+    };
 
     const deleteShop = () => {
         setOpenDeleteModal(false);
@@ -214,7 +231,13 @@ const TableRow = (props: any) => {
                     )
                 ) : page === "approved" ? (
                     <div className="edit-delete-activate-icons">
-                        <div className="edit-and-delete">
+                        <div
+                            className="edit-and-delete"
+                            onClick={() => {
+                                setOpenEditModal(true);
+                                handleEditShop();
+                            }}
+                        >
                             <Image
                                 src={editIcon}
                                 alt="Edit Icon"
@@ -222,7 +245,9 @@ const TableRow = (props: any) => {
                         </div>
                         <div
                             className="edit-and-delete"
-                            onClick={() => setOpenDeleteModal(true)}
+                            onClick={() => {
+                                setOpenDeleteModal(true);
+                            }}
                         >
                             <Image
                                 src={deleteIcon}
@@ -244,13 +269,13 @@ const TableRow = (props: any) => {
                         <div>
                             <Image
                                 src={sendIcon}
-                                alt="Edit Icon"
+                                alt="Send Icon"
                             ></Image>
                         </div>
                         <div onClick={() => setOpenDeleteModal(true)}>
                             <Image
                                 src={deleteIcon}
-                                alt="Edit Icon"
+                                alt="Delete Icon"
                             ></Image>
                         </div>
                     </div>

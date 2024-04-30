@@ -1,8 +1,6 @@
 "use client";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Footer from "../../Components/Footer/Footer";
-import Header from "../../Components/Header/Header";
 import "./page.scss";
 import { faCheckCircle, faChevronDown, faChevronUp, faUpload } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -223,7 +221,6 @@ const JoinUs = () => {
                     active: false,
                     denied: false,
                     newRequest: true,
-                    date: "01/01/2001",
                 };
 
                 const res = await axios

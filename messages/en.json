@@ -61,7 +61,8 @@
         "chooseCategory": "Choose the category, that best describes your business",
         "agreed": "I agree to the",
         "and": "and",
-        "register": "Register"
+        "register": "Register",
+        "save": "Save"
     },
     "success": {
         "requestSuccessful": "Your registration request has been successfully completed.",

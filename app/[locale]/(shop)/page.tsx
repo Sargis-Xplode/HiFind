@@ -35,7 +35,7 @@ export default function Home() {
 
     useEffect(() => {
         axios
-            .get(`${localActive}/api/shop/all`)
+            .get(`${localActive}/api/shop/all/approved`)
             .then((res) => {
                 const shops = res.data.shops;
                 const arr: any = [];

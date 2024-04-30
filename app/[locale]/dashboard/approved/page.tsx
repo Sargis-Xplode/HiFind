@@ -14,6 +14,7 @@ import { useLocale } from "next-intl";
 
 import dynamic from "next/dynamic";
 import "react-loading-skeleton/dist/skeleton.css";
+import EditShopModal from "../../Components/EditShopModal/EditShopModal";
 
 const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
@@ -30,6 +31,18 @@ const Approved = () => {
     const [pageCount, setPageCount] = useState(0);
     const [searchActive, setSearchActive] = useState(false);
     const [updateShops, setUpdateShops] = useState(false);
+    const [openEditModal, setOpenEditModal] = useState(false);
+    const [body, setBody] = useState({
+        buisnessNameProp: "",
+        emailProp: "",
+        instaPageLinkProp: "",
+        descriptionArmProp: "",
+        descriptionEngProp: "",
+        instaPfpProp: "",
+        categoryNameProp: "",
+        subCategoriesProp: [],
+        id: "",
+    });
 
     useEffect(() => {
         axios
@@ -69,7 +82,7 @@ const Approved = () => {
     }, [itemOffSet, shops, submittedSearchText]);
 
     const renderCurrentItems = (currentArray: any) => {
-        // Render current page shops ( max 12 )
+        // Render current page shops ( max 5 )
         const arr = currentArray.length > 0 ? currentArray.slice(itemOffSet, itemOffSet + itemsPerPage) : [];
         setCurrentItems(arr);
 
@@ -86,6 +99,15 @@ const Approved = () => {
 
     return (
         <section>
+            {openEditModal ? (
+                <EditShopModal
+                    setOpenEditModal={setOpenEditModal}
+                    body={body}
+                ></EditShopModal>
+            ) : (
+                ""
+            )}
+
             <AdminAsidePanel
                 selected={"approved"}
                 notificationCounter={0}
@@ -136,6 +158,7 @@ const Approved = () => {
                                         instaPageLink={shop.instaPageLink}
                                         descriptionArm={shop.descriptionArm}
                                         descriptionEng={shop.descriptionEng}
+                                        categoryName={shop.categoryName}
                                         subCategories={shop.subCategories}
                                         date={shop.date}
                                         id={shop._id}
@@ -143,6 +166,8 @@ const Approved = () => {
                                         shopActive={shop.active}
                                         updateShops={updateShops}
                                         setUpdateShops={setUpdateShops}
+                                        setOpenEditModal={setOpenEditModal}
+                                        setBody={setBody}
                                     ></TableRow>
                                 );
                             }
