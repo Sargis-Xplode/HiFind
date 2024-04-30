@@ -43,6 +43,7 @@ const JoinUs = () => {
     const [validSizePfp, setValidSizePfp] = useState(false);
     const [validExtensionPfp, setValidExtensionPfp] = useState(false);
     const [atLeastOneClicked, setAtLeastOneClicked] = useState(false);
+    const [pending, setPending] = useState(false);
 
     const [categories, setCategories] = useState<any>([]);
 
@@ -90,7 +91,7 @@ const JoinUs = () => {
             setValidInstaPageLink(false);
             return;
         }
-        const regex = /^\s*(https\:\/\/)?www\.instagram\.com\/[a-z\A-Z\d\-_.?=\/]{1,255}\s*$/;
+        const regex = /^\s*(https\:\/\/)?www\.instagram\.com\/[a-zA-Z\d\-_.?=\/]{1,255}\s*$/;
         if (regex.test(e.target.value)) {
             setValidInstaPageLink(true);
         } else {
@@ -192,6 +193,7 @@ const JoinUs = () => {
     };
 
     const handleSubmitJoinUs = async () => {
+        setPending(true);
         setValidationCheck(true);
         if (
             buisnessName.length < 3 ||
@@ -217,6 +219,7 @@ const JoinUs = () => {
                     categoryName,
                     subCategories,
                     approved: false,
+                    active: false,
                     denied: false,
                     newRequest: true,
                     date: "01/01/2001",
@@ -487,7 +490,8 @@ const JoinUs = () => {
 
                             <button
                                 type="button"
-                                className={"button" + (checked ? "" : " disabled")}
+                                disabled={pending}
+                                className={"button" + (checked && !pending ? "" : " disabled")}
                                 onClick={handleSubmitJoinUs}
                             >
                                 {t("register")}

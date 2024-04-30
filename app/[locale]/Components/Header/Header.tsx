@@ -49,8 +49,8 @@ export default function Header(props: any) {
 
     const searchShops = () => {
         if (!searchText.length) return;
-        if (path !== `/${localActive}/search`) {
-            push(`/${localActive}/search`);
+        if (path !== `/${localActive}/shops`) {
+            push(`/${localActive}/shops`);
         }
         setSearchActive(true);
         setSubmittedSearchText(searchText);

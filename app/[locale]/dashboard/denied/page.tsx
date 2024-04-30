@@ -20,20 +20,17 @@ const Skeleton = dynamic(() => import("react-loading-skeleton"));
 const Denied = () => {
     const localActive = useLocale();
     const [loading, setLoading] = useState(true);
-
     const [shops, setShops] = useState<any>([]);
-    const [filteredShops, setFilteredShops] = useState([]);
-
     const [currentItems, setCurrentItems] = useState(shops);
     const [itemOffSet, setItemOffSet] = useState(0);
-    const [endOffSet, setEndOffSet] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(12);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
     const [pageCount, setPageCount] = useState(0);
     const [searchActive, setSearchActive] = useState(false);
+    const [updateShops, setUpdateShops] = useState(false);
 
     useEffect(() => {
         axios
-            .get(`/${localActive}/api/shop/all`)
+            .get(`/${localActive}/api/shop/all/denied`)
             .then((res) => {
                 const shops = res.data.shops;
                 setShops(shops.reverse());
@@ -49,25 +46,14 @@ const Denied = () => {
         if (shops.length) {
             setLoading(false);
 
-            setEndOffSet(itemOffSet + itemsPerPage);
-            const arr =
-                filteredShops.length > 0
-                    ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : !searchActive
-                    ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : [];
+            const arr = shops.length > 0 ? shops.slice(itemOffSet, itemOffSet + itemsPerPage) : [];
 
             setCurrentItems(arr);
 
-            const count =
-                filteredShops.length > 0
-                    ? Math.ceil(filteredShops.length / itemsPerPage)
-                    : !searchActive
-                    ? Math.ceil(shops.length / itemsPerPage)
-                    : 0;
+            const count = shops.length > 0 ? Math.ceil(shops.length / itemsPerPage) : 0;
             setPageCount(count);
         }
-    }, [shops, itemOffSet, filteredShops, searchActive]);
+    }, [shops, itemOffSet]);
 
     const handlePageClick = (e: any) => {
         const newOffset = (e.selected * itemsPerPage) % shops.length;
@@ -126,6 +112,8 @@ const Denied = () => {
                                         date={"05.07.2023"}
                                         id={shop._id}
                                         page={"denied"}
+                                        updateShops={updateShops}
+                                        setUpdateShops={setUpdateShops}
                                     ></TableRow>
                                 );
                             }

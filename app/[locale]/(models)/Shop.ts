@@ -15,6 +15,7 @@ const shopSchema = new Schema({
     categoryName: String,
     subCategories: [variantSchema],
     approved: Boolean,
+    active: Boolean,
     denied: Boolean,
     newRequest: Boolean,
     date: String,

@@ -1,5 +1,5 @@
 "use client";
-import { CSSProperties, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./page.scss";
 import axios from "axios";
 import Image from "next/image";
@@ -22,17 +22,17 @@ const Approved = () => {
     const [loading, setLoading] = useState(true);
 
     const [shops, setShops] = useState<any>([]);
-    const [filteredShops, setFilteredShops] = useState([]);
 
     const [currentItems, setCurrentItems] = useState(shops);
     const [itemOffSet, setItemOffSet] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(12);
+    const [itemsPerPage, setItemsPerPage] = useState(5);
     const [pageCount, setPageCount] = useState(0);
     const [searchActive, setSearchActive] = useState(false);
+    const [updateShops, setUpdateShops] = useState(false);
 
     useEffect(() => {
         axios
-            .get(`/${localActive}/api/shop/all`)
+            .get(`/${localActive}/api/shop/all/approved`)
             .then((res) => {
                 const shops = res.data.shops;
                 setShops(shops.reverse());
@@ -49,8 +49,8 @@ const Approved = () => {
             setLoading(false);
 
             const arr =
-                filteredShops.length > 0
-                    ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage)
+                shops.length > 0
+                    ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
                     : !searchActive
                     ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
                     : [];
@@ -58,14 +58,14 @@ const Approved = () => {
             setCurrentItems(arr);
 
             const count =
-                filteredShops.length > 0
-                    ? Math.ceil(filteredShops.length / itemsPerPage)
+                shops.length > 0
+                    ? Math.ceil(shops.length / itemsPerPage)
                     : !searchActive
                     ? Math.ceil(shops.length / itemsPerPage)
                     : 0;
             setPageCount(count);
         }
-    }, [shops, itemOffSet, filteredShops, searchActive]);
+    }, [shops, itemOffSet, shops, searchActive]);
 
     const handlePageClick = (e: any) => {
         const newOffset = (e.selected * itemsPerPage) % shops.length;
@@ -124,6 +124,9 @@ const Approved = () => {
                                         date={"05.07.2023"}
                                         id={shop._id}
                                         page={"approved"}
+                                        shopActive={shop.active}
+                                        updateShops={updateShops}
+                                        setUpdateShops={setUpdateShops}
                                     ></TableRow>
                                 );
                             }

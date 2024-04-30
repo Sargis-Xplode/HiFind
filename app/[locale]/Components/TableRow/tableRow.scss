@@ -1,3 +1,5 @@
+@import "../../constants.scss";
+
 .table-row-container {
     display: flex;
     height: 100px;
@@ -7,12 +9,48 @@
         background-color: eff2f5;
     }
 
+    .delete-modal-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .delete-modal {
+            width: 40%;
+            max-height: 80%;
+            border-radius: 25px;
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 40px;
+
+            .close-modal {
+                text-align: end;
+                cursor: pointer;
+            }
+
+            h2 {
+                text-align: center;
+            }
+
+            p {
+                text-align: center;
+            }
+        }
+    }
+
     .brand-logo-name {
         img {
             width: 60px;
             height: 60px;
             margin-right: 10px;
-            border: 2px solid #ec008b;
+            border: 2px solid $btn-color;
             border-radius: 50%;
         }
     }
@@ -78,44 +116,83 @@
             border-radius: 20px;
             height: max-content;
         }
-    }
 
-    .approved-denied.approved {
-        color: #1cad93;
+        &.approved {
+            color: #1cad93;
 
-        p {
-            background-color: rgba(0, 196, 140, 0.08);
+            p {
+                background-color: rgba(0, 196, 140, 0.08);
+            }
         }
-    }
 
-    .approved-denied.denied {
-        color: #ff0000;
+        &.denied {
+            color: #ff0000;
 
-        p {
-            background-color: rgba(255, 0, 0, 0.08);
+            p {
+                background-color: rgba(255, 0, 0, 0.08);
+            }
         }
     }
 
     .edit-delete-activate-icons {
-        width: 120px;
-        background-color: black;
+        width: max-content;
 
-        svg {
+        .edit-and-delete {
+            background-color: $secondary-text-color;
             width: 32px;
             height: 32px;
-            font-size: 32px;
-            margin-right: 20px;
-
-            &:first-child {
-                color: #1cad93;
-            }
-
-            &:last-child {
-                color: #666c89;
-            }
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-right: 15px;
 
             &:hover {
-                cursor: pointer;
+                background-color: rgb(25, 25, 25);
+            }
+        }
+
+        .activate-btn {
+            width: 54px;
+            height: 24px;
+            padding: 3px;
+            display: flex;
+            align-items: center;
+            background-color: $btn-disabled-text;
+            border-radius: 25px;
+            cursor: pointer;
+
+            &.active {
+                background-color: $btn-color;
+                justify-content: flex-end;
+            }
+
+            .active-indicator {
+                width: 24px;
+                height: 24px;
+                border-radius: 50px;
+                background-color: white;
+            }
+        }
+    }
+
+    .send-delete-icons {
+        width: max-content;
+
+        & > div {
+            background-color: $secondary-text-color;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-right: 15px;
+
+            &:hover {
+                background-color: rgb(25, 25, 25);
             }
         }
     }

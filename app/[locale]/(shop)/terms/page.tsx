@@ -9,29 +9,34 @@ const Terms = () => {
     const t2 = useTranslations("terms");
 
     const [users, setUsers] = useState([
+        // {
+        //     name: t2("welocmeTitle"),
+        //     text: t2("welocme"),
+        //     selected: true,
+        // },
         {
-            name: t2("termsOfUseTitle"),
-            text: t2("termsOfUse"),
+            name: t2("guideLinesTitle"),
+            text: t2("guideLines"),
             selected: true,
         },
         {
-            name: t2("accaptanceOfTermsTitle"),
-            text: t2("accaptanceOfTerms"),
+            name: t2("userIntegrityTitle"),
+            text: t2("userIntegrity"),
             selected: false,
         },
         {
-            name: t2("useOfHiFIndTitle"),
-            text: t2("useOfHiFInd"),
+            name: t2("propertyAndLiabilityTitle"),
+            text: t2("propertyAndLiability"),
             selected: false,
         },
         {
-            name: t2("websiteUseGuidelinesTitle"),
-            text: t2("websiteUseGuidelines"),
+            name: t2("abuseAndGoverningLawsTitle"),
+            text: t2("abuseAndGoverningLaws"),
             selected: false,
         },
         {
-            name: t2("registrationAndAccountSecurityTitle"),
-            text: t2("registrationAndAccountSecurity"),
+            name: t2("modificationsTitle"),
+            text: t2("modifications"),
             selected: false,
         },
     ]);

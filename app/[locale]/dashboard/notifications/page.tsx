@@ -37,12 +37,16 @@ const Notification = () => {
             .then((res) => {
                 const shops = res.data.shops;
                 setShops(shops.reverse());
+                let count = 0;
                 shops.map((shop: any) => {
                     if (shop.newRequest) {
-                        setNotificationCounter(notificationCounter + 1);
+                        count++;
                     }
                     return shop;
                 });
+                localStorage.setItem("notification_counter", count.toString());
+                setNotificationCounter(count);
+
                 setLoading(false);
             })
             .catch((error) => {

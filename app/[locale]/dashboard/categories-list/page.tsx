@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle, faChevronDown, faChevronUp, faX, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import editIcon from "../../../../Assets/edit-icon.svg";
 import deleteIcon from "../../../../Assets/delete-icon.svg";
+import xIcon from "../../../../Assets/x.svg";
+
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import { useLocale } from "next-intl";
 
@@ -264,7 +266,10 @@ const CategoriesList = () => {
                                 className="close-modal"
                                 onClick={closeModal}
                             >
-                                X
+                                <Image
+                                    src={xIcon}
+                                    alt="X Icon"
+                                />
                             </div>
                             <h3>Ավելացնել նորը</h3>
 
@@ -330,7 +335,10 @@ const CategoriesList = () => {
                                 className="close-modal"
                                 onClick={closeModal}
                             >
-                                X
+                                <Image
+                                    src={xIcon}
+                                    alt="X Icon"
+                                />
                             </div>
                             <h3>Խմբագրել</h3>
 
@@ -418,7 +426,10 @@ const CategoriesList = () => {
                                 className="close-modal"
                                 onClick={closeModal}
                             >
-                                X
+                                <Image
+                                    src={xIcon}
+                                    alt="X Icon"
+                                />
                             </div>
                             <h3>Ջնջել</h3>
 

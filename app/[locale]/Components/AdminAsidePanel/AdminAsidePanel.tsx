@@ -8,10 +8,11 @@ import bellIcon from "../../../../Assets/bell-icon.svg";
 import userCheckIcon from "../../../../Assets/user-check-icon.svg";
 import userMinusIcon from "../../../../Assets/user-minus-icon.svg";
 import filterIcon from "../../../../Assets/filter-icon.svg";
+import xIcon from "../../../../Assets/x.svg";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const AdminAsidePanel = (props: any) => {
     const { selected, notificationCounter } = props;
@@ -19,6 +20,14 @@ const AdminAsidePanel = (props: any) => {
     const router = useRouter();
 
     const [logOutModalOpen, setLogOutModalOpen] = useState(false);
+    const [notifCounter, setNotifCounter] = useState("");
+
+    useEffect(() => {
+        if (!notificationCounter) {
+            const counter: any = localStorage.getItem("notification_counter");
+            setNotifCounter(counter);
+        }
+    }, [notifCounter]);
 
     const logOut = () => {
         localStorage.removeItem("token");
@@ -49,7 +58,10 @@ const AdminAsidePanel = (props: any) => {
                             className="close-modal"
                             onClick={closeLogOutModal}
                         >
-                            X
+                            <Image
+                                src={xIcon}
+                                alt="Bell Icon"
+                            ></Image>
                         </div>
                         <h2>Դուրս գալ</h2>
 
@@ -82,7 +94,13 @@ const AdminAsidePanel = (props: any) => {
                                     alt="Bell Icon"
                                 ></Image>
                                 <div>Ծանուցումներ</div>
-                                {notificationCounter !== 0 ? <span>{notificationCounter}</span> : ""}
+                                {notificationCounter !== 0 ? (
+                                    <span>{notificationCounter}</span>
+                                ) : notifCounter !== "0" ? (
+                                    <span>{notifCounter}</span>
+                                ) : (
+                                    ""
+                                )}
                             </Link>
                         </div>
                         <div className={selected === "approved" ? "selected" : ""}>

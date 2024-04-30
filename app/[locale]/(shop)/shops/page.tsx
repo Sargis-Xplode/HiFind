@@ -44,7 +44,7 @@ const Shops = (props: any) => {
     const [selectedCategories, setSelectedCategories] = useState([]);
 
     useEffect(() => {
-        setHeading(filter ? t2(filter) : t2("shops"));
+        setHeading(filter ? t2(filter) : t2("all"));
         // autoChangePage(page - 1);
 
         axios
@@ -63,7 +63,7 @@ const Shops = (props: any) => {
                 } else {
                     const arr = shops.filter((shop: any) => {
                         if (shop.categoryName && shop.approved) {
-                            if (shop.categoryName === "shops") return shop;
+                            return shop;
                         }
                     });
                     setFilteredShops(arr.reverse());
@@ -81,10 +81,6 @@ const Shops = (props: any) => {
                 categoriesDB.map((categ: any) => {
                     if (filter) {
                         if (categ.category === filter) {
-                            categ.clicked = true;
-                        }
-                    } else {
-                        if (categ.category === "shops") {
                             categ.clicked = true;
                         }
                     }
@@ -110,9 +106,11 @@ const Shops = (props: any) => {
                 // User searched for something?
                 renderingArray = filteredShops.filter((shop: any) => {
                     if (
-                        shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                        shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                        shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
+                        (shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                            shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                            shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())) &&
+                        shop.approved &&
+                        shop.active
                     ) {
                         return true;
                     }
@@ -207,6 +205,9 @@ const Shops = (props: any) => {
                     push(`?filter=${categ.category}`); // Replace this with line below
                     // push(`?filter=${categ.category}&page=${1}`);
                     // autoChangePage(0);
+                } else {
+                    setFilteredShops(shops);
+                    setHeading(t2("all"));
                 }
             } else {
                 categ.clicked = false;
@@ -474,9 +475,10 @@ const Shops = (props: any) => {
                                     categoryName,
                                     subCategories,
                                     approved,
+                                    active,
                                 } = shop;
 
-                                if (approved) {
+                                if (approved && active) {
                                     return (
                                         <Shop
                                             key={index}
