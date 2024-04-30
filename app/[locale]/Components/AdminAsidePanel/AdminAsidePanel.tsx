@@ -96,7 +96,7 @@ const AdminAsidePanel = (props: any) => {
                                 <div>Ծանուցումներ</div>
                                 {notificationCounter !== 0 ? (
                                     <span>{notificationCounter}</span>
-                                ) : notifCounter !== "0" ? (
+                                ) : notifCounter !== "0" && notifCounter ? (
                                     <span>{notifCounter}</span>
                                 ) : (
                                     ""

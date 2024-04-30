@@ -206,6 +206,7 @@ const JoinUs = () => {
             subCategories.length === 0 ||
             !checked
         ) {
+            setPending(false);
             return;
         } else {
             try {

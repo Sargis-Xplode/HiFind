@@ -64,33 +64,30 @@ const Terms = () => {
             <section className="terms-section">
                 <div className="container">
                     <h2>{t("terms")}</h2>
-                    <div className="users-container">
-                        {users.length
-                            ? users.map((user, index) => {
-                                  return (
-                                      <div
-                                          className="user-container"
-                                          key={index}
-                                      >
+                    <div className="section-container">
+                        <div className="users-name-container">
+                            {users.length
+                                ? users.map((user, index) => {
+                                      return (
                                           <div
-                                              className={(user.selected ? "selected" : "") + " user-circle"}
                                               key={index}
                                               onClick={() => handleChangeText(user, index)}
                                           >
-                                              {user.name}
-                                          </div>
-                                          <div className={(user.selected ? "selected" : "") + " users-text-mobile"}>
-                                              {userText}
-                                          </div>
-                                      </div>
-                                  );
-                              })
-                            : ""}
-                    </div>
+                                              <p className={user.selected ? "selected" : ""}>{user.name}</p>
 
-                    <div className="users-text-container mobile-display-none">
-                        <div className="users-name">{userName}</div>
-                        <div className="users-text">{userText}</div>
+                                              <div className={(user.selected ? "selected" : "") + " users-text-mobile"}>
+                                                  {userText}
+                                              </div>
+                                          </div>
+                                      );
+                                  })
+                                : ""}
+                        </div>
+
+                        <div className="users-text-container">
+                            <div className="users-name">{userName}</div>
+                            <div className="users-text">{userText}</div>
+                        </div>
                     </div>
                 </div>
             </section>
