@@ -66,17 +66,11 @@ const Denied = () => {
             if (submittedSearchText.length) {
                 // User searched for something?
                 renderingArray = shops.filter((shop: any) => {
-                    if (
-                        shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                        shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                        shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())
-                    ) {
+                    if (shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase())) {
                         return true;
                     }
                 });
             }
-
-            console.log(renderingArray);
 
             setFilteredShops(renderingArray);
 

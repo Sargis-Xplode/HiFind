@@ -56,12 +56,7 @@ const Approved = () => {
             if (searchActive && submittedSearchText.length) {
                 // User searched for something?
                 renderingArray = shops.filter((shop: any) => {
-                    if (
-                        (shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                            shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                            shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())) &&
-                        shop.approved
-                    ) {
+                    if (shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) && shop.approved) {
                         return true;
                     }
                 });

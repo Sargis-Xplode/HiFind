@@ -106,9 +106,7 @@ const Shops = (props: any) => {
                 // User searched for something?
                 renderingArray = filteredShops.filter((shop: any) => {
                     if (
-                        (shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                            shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
-                            shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())) &&
+                        shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) &&
                         shop.approved &&
                         shop.active
                     ) {
