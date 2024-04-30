@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import "./page.scss";
+import "../page.scss";
 import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -346,17 +347,8 @@ const CategoriesList = () => {
                             <input
                                 type="text"
                                 placeholder="Ընտրացանկի անունը"
-                                onChange={(e) => handleCategoryNameChange(e)}
+                                readOnly
                                 value={currentlyEditingCategory.category}
-                                autoFocus
-                                className="category-name"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Ընտրացանկի անունը"
-                                onChange={(e) => handleCategoryNameChange(e)}
-                                value={currentlyEditingCategory.category}
-                                autoFocus
                                 className="category-name"
                             />
 

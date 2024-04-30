@@ -1,6 +1,6 @@
 "use client";
 import { CSSProperties, useEffect, useState } from "react";
-import "./page.scss";
+import "../page.scss";
 import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -95,7 +95,7 @@ const Denied = () => {
     };
 
     return (
-        <section>
+        <section className="admin-shops-section">
             <AdminAsidePanel
                 selected={"denied"}
                 notificationCounter={0}

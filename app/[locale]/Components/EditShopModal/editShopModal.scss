@@ -14,9 +14,10 @@
 
     .join-us-modal {
         overflow: auto;
+        min-width: 400px;
         width: 40%;
         max-height: 70%;
-        padding: 40px;
+        padding: 20px 40px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -72,7 +73,7 @@
                 border: 1px solid #eaeaea;
                 box-sizing: border-box;
                 resize: none;
-                min-height: 80px;
+                min-height: 100px;
                 font-family: inherit;
             }
 
@@ -193,7 +194,7 @@
                 .dropdown-slider {
                     height: 0px;
                     visibility: hidden;
-                    display: flex;
+                    display: none;
                     flex-wrap: wrap;
 
                     .variant {
@@ -244,6 +245,7 @@
                 .clicked {
                     height: auto;
                     visibility: visible;
+                    display: flex;
                 }
             }
         }

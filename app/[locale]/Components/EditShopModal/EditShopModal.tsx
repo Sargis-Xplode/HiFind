@@ -238,7 +238,7 @@ const EditShopModal = ({ setOpenEditModal, body }: any) => {
 
     return (
         <div
-            className={`join-us-modal-wrapper`}
+            className="join-us-modal-wrapper"
             onClick={() => {
                 setOpenEditModal(false);
             }}

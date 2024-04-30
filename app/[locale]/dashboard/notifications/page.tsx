@@ -1,6 +1,6 @@
 "use client";
 import { CSSProperties, useEffect, useState } from "react";
-import "./page.scss";
+import "../page.scss";
 import axios from "axios";
 import Image from "next/image";
 
@@ -85,7 +85,7 @@ const Notification = () => {
     };
 
     return (
-        <section>
+        <section className="admin-shops-section">
             <AdminAsidePanel
                 selected={"notifications"}
                 notificationCounter={notificationCounter}

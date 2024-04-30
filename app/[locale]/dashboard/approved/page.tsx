@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import "./page.scss";
+import "../page.scss";
 import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -98,7 +98,7 @@ const Approved = () => {
     };
 
     return (
-        <section>
+        <>
             {openEditModal ? (
                 <EditShopModal
                     setOpenEditModal={setOpenEditModal}
@@ -107,96 +107,97 @@ const Approved = () => {
             ) : (
                 ""
             )}
-
-            <AdminAsidePanel
-                selected={"approved"}
-                notificationCounter={0}
-            ></AdminAsidePanel>
-            <main>
-                <h2>Հաստատված հաշիվներ</h2>
-                <div className="search">
-                    <div className="search-input-container">
-                        <input
-                            name="searchApproved"
-                            type="text"
-                            placeholder="Որոնել"
-                            onChange={(e) => {
-                                setSearchActive(true);
-                                setSubmittedSearchText(e.target.value);
-                            }}
+            <section className="admin-shops-section">
+                <AdminAsidePanel
+                    selected={"approved"}
+                    notificationCounter={0}
+                ></AdminAsidePanel>
+                <main>
+                    <h2>Հաստատված հաշիվներ</h2>
+                    <div className="search">
+                        <div className="search-input-container">
+                            <input
+                                name="searchApproved"
+                                type="text"
+                                placeholder="Որոնել"
+                                onChange={(e) => {
+                                    setSearchActive(true);
+                                    setSubmittedSearchText(e.target.value);
+                                }}
+                            />
+                        </div>
+                        <div className="search-icon-container">
+                            <FontAwesomeIcon icon={faSearch} />
+                        </div>
+                    </div>
+                    <div className="table">
+                        <div className="table-titles">
+                            <p>Անուն</p>
+                            <p>Էլ. հասցե</p>
+                            <p>Ինստագրամ</p>
+                            <p>Նկարագրություն</p>
+                            <p>Ընտրացանկ</p>
+                            <p className="date-tile">
+                                Օրը{" "}
+                                <Image
+                                    src={sortLogo}
+                                    alt="Sort"
+                                ></Image>
+                            </p>
+                        </div>
+                        {currentItems.length ? (
+                            currentItems.map((shop: any, index: number) => {
+                                if (shop.approved) {
+                                    return (
+                                        <TableRow
+                                            key={index}
+                                            newRequest={shop.newRequest}
+                                            instaPfpPreview={shop.instaPfpPreview}
+                                            buisnessName={shop.buisnessName}
+                                            email={shop.email}
+                                            instaPageLink={shop.instaPageLink}
+                                            descriptionArm={shop.descriptionArm}
+                                            descriptionEng={shop.descriptionEng}
+                                            categoryName={shop.categoryName}
+                                            subCategories={shop.subCategories}
+                                            date={shop.date}
+                                            id={shop._id}
+                                            page={"approved"}
+                                            shopActive={shop.active}
+                                            updateShops={updateShops}
+                                            setUpdateShops={setUpdateShops}
+                                            setOpenEditModal={setOpenEditModal}
+                                            setBody={setBody}
+                                        ></TableRow>
+                                    );
+                                }
+                            })
+                        ) : loading ? (
+                            <Skeleton
+                                height={100}
+                                count={5}
+                                highlightColor="#e0e0e0"
+                                className="margin-bottom-10"
+                            />
+                        ) : (
+                            <p>Nothing here yet</p>
+                        )}
+                    </div>
+                    {pageCount >= 2 && (
+                        <ReactPaginate
+                            breakLabel="..."
+                            nextLabel=">"
+                            onPageChange={(e) => handlePageClick(e)}
+                            pageRangeDisplayed={3}
+                            pageCount={pageCount}
+                            previousLabel="<"
+                            renderOnZeroPageCount={null}
+                            activeClassName={"selected-page"}
                         />
-                    </div>
-                    <div className="search-icon-container">
-                        <FontAwesomeIcon icon={faSearch} />
-                    </div>
-                </div>
-                <div className="table">
-                    <div className="table-titles">
-                        <p>Անուն</p>
-                        <p>Էլ. հասցե</p>
-                        <p>Ինստագրամ</p>
-                        <p>Նկարագրություն</p>
-                        <p>Ընտրացանկ</p>
-                        <p className="date-tile">
-                            Օրը{" "}
-                            <Image
-                                src={sortLogo}
-                                alt="Sort"
-                            ></Image>
-                        </p>
-                    </div>
-                    {currentItems.length ? (
-                        currentItems.map((shop: any, index: number) => {
-                            if (shop.approved) {
-                                return (
-                                    <TableRow
-                                        key={index}
-                                        newRequest={shop.newRequest}
-                                        instaPfpPreview={shop.instaPfpPreview}
-                                        buisnessName={shop.buisnessName}
-                                        email={shop.email}
-                                        instaPageLink={shop.instaPageLink}
-                                        descriptionArm={shop.descriptionArm}
-                                        descriptionEng={shop.descriptionEng}
-                                        categoryName={shop.categoryName}
-                                        subCategories={shop.subCategories}
-                                        date={shop.date}
-                                        id={shop._id}
-                                        page={"approved"}
-                                        shopActive={shop.active}
-                                        updateShops={updateShops}
-                                        setUpdateShops={setUpdateShops}
-                                        setOpenEditModal={setOpenEditModal}
-                                        setBody={setBody}
-                                    ></TableRow>
-                                );
-                            }
-                        })
-                    ) : loading ? (
-                        <Skeleton
-                            height={100}
-                            count={5}
-                            highlightColor="#e0e0e0"
-                            className="margin-bottom-10"
-                        />
-                    ) : (
-                        <p>Nothing here yet</p>
                     )}
-                </div>
-                {pageCount >= 2 && (
-                    <ReactPaginate
-                        breakLabel="..."
-                        nextLabel=">"
-                        onPageChange={(e) => handlePageClick(e)}
-                        pageRangeDisplayed={3}
-                        pageCount={pageCount}
-                        previousLabel="<"
-                        renderOnZeroPageCount={null}
-                        activeClassName={"selected-page"}
-                    />
-                )}
-            </main>
-        </section>
+                </main>
+            </section>
+        </>
     );
 };
 

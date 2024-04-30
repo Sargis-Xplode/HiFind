@@ -8,7 +8,7 @@ import bellIcon from "../../../../Assets/bell-icon.svg";
 import userCheckIcon from "../../../../Assets/user-check-icon.svg";
 import userMinusIcon from "../../../../Assets/user-minus-icon.svg";
 import filterIcon from "../../../../Assets/filter-icon.svg";
-import xIcon from "../../../../Assets/x.svg";
+import xIcon from "../../../../Assets/x.svg";   
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
