@@ -34,7 +34,7 @@ const Denied = () => {
             .get(`/${localActive}/api/shop/all/denied`)
             .then((res) => {
                 const shops = res.data.shops;
-                setShops(shops.reverse());
+                setShops(shops);
                 setLoading(false);
             })
             .catch((error) => {

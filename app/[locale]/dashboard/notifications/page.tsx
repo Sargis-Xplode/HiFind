@@ -36,7 +36,7 @@ const Notification = () => {
             .get(`/${localActive}/api/shop/all`)
             .then((res) => {
                 const shops = res.data.shops;
-                setShops(shops.reverse());
+                setShops(shops);
                 let count = 0;
                 shops.map((shop: any) => {
                     if (shop.newRequest) {

@@ -5,7 +5,7 @@ import connectDB from "../../../server/connectDB";
 export async function GET() {
     await connectDB();
     try {
-        const shops = await Shop.find();
+        const shops = (await Shop.find()).reverse();
         return NextResponse.json({
             message: "All shops returned",
             success: true,

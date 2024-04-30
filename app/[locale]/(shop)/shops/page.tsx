@@ -3,7 +3,6 @@ import { useEffect, useState, useContext } from "react";
 import Shop from "../../Components/Shop/Shop";
 import "./page.scss";
 import filterIcon from "../../../../Assets/filter-icon.svg";
-import Categories from "../../../../types/categories";
 
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,13 +13,19 @@ import Image from "next/image";
 import "react-loading-skeleton/dist/skeleton.css";
 import dynamic from "next/dynamic";
 import { SearchContext } from "../../provider";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
 const Shops = (props: any) => {
     const { push } = useRouter();
-    const { filter, page } = props.searchParams;
+
+    let { filter, page } = props.searchParams;
+    if (!filter && !page) {
+        filter = "";
+        page = 1;
+    }
     const { submittedSearchText, searchActive } = useContext(SearchContext);
+    const itemsPerPage = 6;
 
     const t = useTranslations("shopsPage");
     const t2 = useTranslations("homePage");
@@ -30,10 +35,7 @@ const Shops = (props: any) => {
     const [filteredShops, setFilteredShops] = useState<any>([]);
     const [currentItems, setCurrentItems] = useState(shops);
     const [heading, setHeading] = useState("");
-
-    const [itemsPerPage, setItemsPerPage] = useState(12);
-    const [itemOffSet, setItemOffSet] = useState(0);
-    // const [itemOffSet, setItemOffSet] = useState((page - 1) * itemsPerPage);
+    const [itemOffSet, setItemOffSet] = useState(page ? (page - 1) * itemsPerPage : 0);
     const [mobileFilterMenu, setMobileFilterMenu] = useState(false);
     const [pageCount, setPageCount] = useState(0);
     const [atLeastOneVariantSelected, setAtLeastOneVariantSelected] = useState(false);
@@ -45,7 +47,6 @@ const Shops = (props: any) => {
 
     useEffect(() => {
         setHeading(filter ? t2(filter) : t2("all"));
-        // autoChangePage(page - 1);
 
         axios
             .get("api/shop/all")
@@ -59,14 +60,15 @@ const Shops = (props: any) => {
                             if (shop.categoryName === filter) return shop;
                         }
                     });
-                    setFilteredShops(arr.reverse());
+
+                    setFilteredShops(arr);
                 } else {
                     const arr = shops.filter((shop: any) => {
                         if (shop.categoryName && shop.approved) {
                             return shop;
                         }
                     });
-                    setFilteredShops(arr.reverse());
+                    setFilteredShops(arr);
                 }
             })
             .catch((error) => {
@@ -143,6 +145,9 @@ const Shops = (props: any) => {
         // Decide the pagination page count
         const count = currentArray.length > 0 ? Math.ceil(currentArray.length / itemsPerPage) : 0;
         setPageCount(count);
+        if (page - 1 >= count) {
+            autoChangePage(0);
+        }
         setLoading(false);
     };
 
@@ -152,15 +157,15 @@ const Shops = (props: any) => {
         setItemOffSet(newOffset);
     };
 
-    // const autoChangePage = (val: number) => {
-    //     const newOffset = (val * itemsPerPage) % shops.length;
-    //     if (newOffset) setItemOffSet(newOffset);
-    // };
+    const autoChangePage = (val: number) => {
+        console.log(val * itemsPerPage);
+        setItemOffSet(val * itemsPerPage);
+    };
 
     const toggleCheck = (categ: any, index: number) => {
         setAtLeastOneVariantSelected(true);
-        // push(`?filter=${categ.category}&page=${1}`);
-        // autoChangePage(0);
+        push(`?filter=${categ.category}&page=${1}`);
+        autoChangePage(0);
 
         categ.variants.map((vari: any, ind: number) => {
             if (ind === index) {
@@ -200,12 +205,13 @@ const Shops = (props: any) => {
                         if (shop.categoryName === categ.category) return shop;
                     });
                     setFilteredShops(arr);
-                    push(`?filter=${categ.category}`); // Replace this with line below
-                    // push(`?filter=${categ.category}&page=${1}`);
-                    // autoChangePage(0);
+                    push(`?filter=${categ.category}&page=${1}`);
+                    autoChangePage(0);
                 } else {
                     setFilteredShops(shops);
                     setHeading(t2("all"));
+                    push(`?filter=${categ.category}&page=${1}`);
+                    autoChangePage(0);
                 }
             } else {
                 categ.clicked = false;
@@ -520,7 +526,7 @@ const Shops = (props: any) => {
                         previousLabel="<"
                         renderOnZeroPageCount={null}
                         activeClassName={"selected-page"}
-                        // forcePage={page - 1}
+                        forcePage={page - 1 > pageCount ? 0 : page - 1}
                     />
                 )}
             </section>

@@ -49,7 +49,7 @@ const Approved = () => {
             .get(`/${localActive}/api/shop/all/approved`)
             .then((res) => {
                 const shops = res.data.shops;
-                setShops(shops.reverse());
+                setShops(shops);
                 setLoading(false);
             })
             .catch((error) => {
