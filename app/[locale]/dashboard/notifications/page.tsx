@@ -122,7 +122,7 @@ const Notification = () => {
                                     descriptionArm={shop.descriptionArm}
                                     descriptionEng={shop.descriptionEng}
                                     subCategories={shop.subCategories}
-                                    date={"05.07.2023"}
+                                    date={shop.date}
                                     approved={shop.approved}
                                     denied={shop.denied}
                                     id={shop._id}

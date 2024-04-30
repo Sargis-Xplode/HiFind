@@ -22,7 +22,8 @@ const Approved = () => {
     const [loading, setLoading] = useState(true);
 
     const [shops, setShops] = useState<any>([]);
-
+    const [filteredShops, setFilteredShops] = useState<any>([]);
+    const [submittedSearchText, setSubmittedSearchText] = useState("");
     const [currentItems, setCurrentItems] = useState(shops);
     const [itemOffSet, setItemOffSet] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -46,29 +47,45 @@ const Approved = () => {
 
     useEffect(() => {
         if (shops.length) {
-            setLoading(false);
+            let renderingArray = shops;
 
-            const arr =
-                shops.length > 0
-                    ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : !searchActive
-                    ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : [];
+            // -------------------------------------------------
+            // Filters the shops which contain the searched text
+            // -------------------------------------------------
 
-            setCurrentItems(arr);
+            if (searchActive && submittedSearchText.length) {
+                // User searched for something?
+                renderingArray = shops.filter((shop: any) => {
+                    if (
+                        (shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                            shop.descriptionArm.toLowerCase().includes(submittedSearchText.toLowerCase()) ||
+                            shop.descriptionEng.toLowerCase().includes(submittedSearchText.toLowerCase())) &&
+                        shop.approved
+                    ) {
+                        return true;
+                    }
+                });
+            }
 
-            const count =
-                shops.length > 0
-                    ? Math.ceil(shops.length / itemsPerPage)
-                    : !searchActive
-                    ? Math.ceil(shops.length / itemsPerPage)
-                    : 0;
-            setPageCount(count);
+            setFilteredShops(renderingArray);
+
+            renderCurrentItems(renderingArray);
         }
-    }, [shops, itemOffSet, shops, searchActive]);
+    }, [itemOffSet, shops, submittedSearchText]);
+
+    const renderCurrentItems = (currentArray: any) => {
+        // Render current page shops ( max 12 )
+        const arr = currentArray.length > 0 ? currentArray.slice(itemOffSet, itemOffSet + itemsPerPage) : [];
+        setCurrentItems(arr);
+
+        // Decide the pagination page count
+        const count = currentArray.length > 0 ? Math.ceil(currentArray.length / itemsPerPage) : 0;
+        setPageCount(count);
+        setLoading(false);
+    };
 
     const handlePageClick = (e: any) => {
-        const newOffset = (e.selected * itemsPerPage) % shops.length;
+        const newOffset = (e.selected * itemsPerPage) % filteredShops.length;
         setItemOffSet(newOffset);
     };
 
@@ -86,6 +103,10 @@ const Approved = () => {
                             name="searchApproved"
                             type="text"
                             placeholder="Որոնել"
+                            onChange={(e) => {
+                                setSearchActive(true);
+                                setSubmittedSearchText(e.target.value);
+                            }}
                         />
                     </div>
                     <div className="search-icon-container">
@@ -121,7 +142,7 @@ const Approved = () => {
                                         descriptionArm={shop.descriptionArm}
                                         descriptionEng={shop.descriptionEng}
                                         subCategories={shop.subCategories}
-                                        date={"05.07.2023"}
+                                        date={shop.date}
                                         id={shop._id}
                                         page={"approved"}
                                         shopActive={shop.active}

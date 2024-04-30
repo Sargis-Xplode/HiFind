@@ -19,10 +19,12 @@ export async function POST(req: Request) {
         active,
         denied,
         newRequest,
-        date,
     } = body;
 
     try {
+        const newDate = new Date();
+        const date = `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`;
+
         const shop = await Shop.create({
             buisnessName,
             email,

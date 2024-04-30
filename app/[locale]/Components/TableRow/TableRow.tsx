@@ -135,7 +135,7 @@ const TableRow = (props: any) => {
                             <h2>Ջնջել</h2>
 
                             <p>
-                                Ցանկանում եք ջնջել <strong>{buisnessName}</strong> հաշիվը։։
+                                Ցանկանում եք ջնջել <strong>{buisnessName}</strong> հաշիվը։
                             </p>
 
                             <button
