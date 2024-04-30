@@ -19,7 +19,8 @@
         background-color: white;
         display: flex;
         flex-direction: column;
-        padding: 20px 40px;
+        padding: 40px 30px;
+        padding-top: 20px;
 
         .close-modal {
             text-align: end;
@@ -28,10 +29,12 @@
 
         h2 {
             text-align: center;
+            margin: 0;
         }
 
         p {
             text-align: center;
+            margin: 20px 0;
         }
     }
 }
