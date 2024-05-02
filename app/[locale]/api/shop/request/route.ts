@@ -25,26 +25,34 @@ export async function POST(req: Request) {
         const newDate = new Date();
         const date = `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`;
 
-        const shop = await Shop.create({
-            buisnessName,
-            email,
-            instaPageLink,
-            descriptionArm,
-            descriptionEng,
-            instaPfpPreview,
-            subCategories,
-            categoryName,
-            approved,
-            active,
-            denied,
-            newRequest,
-            date,
-        });
+        const availableShop = await Shop.findOne({ buisnessName });
+
+        if (!availableShop) {
+            const shop = await Shop.create({
+                buisnessName,
+                email,
+                instaPageLink,
+                descriptionArm,
+                descriptionEng,
+                instaPfpPreview,
+                subCategories,
+                categoryName,
+                approved,
+                active,
+                denied,
+                newRequest,
+                date,
+            });
+            return NextResponse.json({
+                message: "Shop submitted",
+                success: true,
+                shop,
+            });
+        }
 
         return NextResponse.json({
-            message: "Shop submitted",
-            success: true,
-            shop,
+            message: "Shop already exists",
+            success: false,
         });
     } catch (error) {
         return NextResponse.json({

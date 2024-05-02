@@ -298,7 +298,7 @@ const CategoriesList = () => {
                                                   />
                                                   <input
                                                       type="text"
-                                                      placeholder="Ենթակատեգորիա (անգլլերեն)"
+                                                      placeholder="Ենթակատեգորիա (անգլերեն)"
                                                       onChange={(e) => {
                                                           handleSubcategoryInputChange(e, index, "en");
                                                       }}
@@ -372,7 +372,7 @@ const CategoriesList = () => {
                                                       />
                                                       <input
                                                           type="text"
-                                                          placeholder="Ենթակատեգորիա (անգլլերեն)"
+                                                          placeholder="Ենթակատեգորիա (անգլերեն)"
                                                           onChange={(e) => {
                                                               handleSubcategoryInputEdit(e, index, "en");
                                                           }}

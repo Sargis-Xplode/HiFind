@@ -14,6 +14,8 @@ import axios from "axios";
 
 import dynamic from "next/dynamic";
 import "react-loading-skeleton/dist/skeleton.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
@@ -242,7 +244,17 @@ const JoinUs = () => {
 
                         if (data.success) {
                             sendMail();
+                            toast(data.message, {
+                                type: "success",
+                                className: "join-us-toast",
+                            });
                             push("success");
+                        } else {
+                            setPending(false);
+                            toast(data.message, {
+                                type: "error",
+                                className: "join-us-toast",
+                            });
                         }
                     })
                     .catch((error) => {
@@ -256,6 +268,18 @@ const JoinUs = () => {
 
     return (
         <div>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <section className="join-us-section">
                 <div className="container">
                     <div className="join-us-modal-container">
