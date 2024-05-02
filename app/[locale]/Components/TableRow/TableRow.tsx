@@ -60,10 +60,9 @@ const TableRow = (props: any) => {
         };
         axios
             .post(`/${localActive}/api/shop/denied`, JSON.stringify(body))
-            .then((res) => {
-                setUpdateShops(!updateShops);
-            })
+            .then((res) => {})
             .catch((error) => {
+                setUpdateShops(!updateShops);
                 console.log(error);
             });
     };

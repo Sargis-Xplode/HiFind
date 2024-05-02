@@ -19,16 +19,15 @@ const Notification = () => {
     const localActive = useLocale();
     const [loading, setLoading] = useState(true);
     const [updateShops, setUpdateShops] = useState(false);
+    const [rerender, setRerender] = useState(false);
+    const [order, setOrder] = useState("desc");
 
     const [shops, setShops] = useState<any>([]);
-    const [filteredShops, setFilteredShops] = useState([]);
 
     const [currentItems, setCurrentItems] = useState(shops);
     const [itemOffSet, setItemOffSet] = useState(0);
-    const [endOffSet, setEndOffSet] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
     const [pageCount, setPageCount] = useState(0);
-    const [searchActive, setSearchActive] = useState(false);
     const [notificationCounter, setNotificationCounter] = useState(0);
 
     useEffect(() => {
@@ -59,29 +58,43 @@ const Notification = () => {
         if (shops.length) {
             setLoading(false);
 
-            setEndOffSet(itemOffSet + itemsPerPage);
-            const arr =
-                filteredShops.length > 0
-                    ? filteredShops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : !searchActive
-                    ? shops.slice(itemOffSet, itemOffSet + itemsPerPage)
-                    : [];
+            const arr = shops.slice(itemOffSet, itemOffSet + itemsPerPage);
 
             setCurrentItems(arr);
 
-            const count =
-                filteredShops.length > 0
-                    ? Math.ceil(filteredShops.length / itemsPerPage)
-                    : !searchActive
-                    ? Math.ceil(shops.length / itemsPerPage)
-                    : 0;
+            const count = Math.ceil(shops.length / itemsPerPage);
             setPageCount(count);
         }
-    }, [shops, itemOffSet, filteredShops, searchActive, notificationCounter]);
+    }, [shops, rerender, itemOffSet, notificationCounter]);
 
     const handlePageClick = (e: any) => {
         const newOffset = (e.selected * itemsPerPage) % shops.length;
         setItemOffSet(newOffset);
+    };
+
+    const sortByDateAscending = () => {
+        setOrder("asc");
+        const arr = shops.sort((a: any, b: any) => {
+            const dateA: any = new Date(a.date.split("/")[2], a.date.split("/")[1] - 1, a.date.split("/")[0]);
+            const dateB: any = new Date(b.date.split("/")[2], b.date.split("/")[1] - 1, b.date.split("/")[0]);
+            return dateA - dateB;
+        });
+
+        setShops(arr);
+        setRerender(!rerender);
+    };
+
+    const sortByDateDescending = () => {
+        setOrder("desc");
+
+        const arr = shops.sort((a: any, b: any) => {
+            const dateA: any = new Date(a.date.split("/")[2], a.date.split("/")[1] - 1, a.date.split("/")[0]);
+            const dateB: any = new Date(b.date.split("/")[2], b.date.split("/")[1] - 1, b.date.split("/")[0]);
+            return dateB - dateA;
+        });
+
+        setShops(arr);
+        setRerender(!rerender);
     };
 
     return (
@@ -95,14 +108,21 @@ const Notification = () => {
 
                 <div className="table">
                     <div className="table-titles">
-                        <p>Անուն</p>
-                        <p>Էլ. հասցե</p>
+                        <p className="name-title">Անուն</p>
+                        <p className="email-title">Էլ. հասցե</p>
                         <p>Ինստագրամ</p>
                         <p>Նկարագրություն</p>
                         <p>Ընտրացանկ</p>
                         <p className="date-tile">
                             Օրը{" "}
                             <Image
+                                onClick={() => {
+                                    if (order === "asc") {
+                                        sortByDateDescending();
+                                    } else if (order === "desc") {
+                                        sortByDateAscending();
+                                    }
+                                }}
                                 src={sortLogo}
                                 alt="Sort"
                             ></Image>

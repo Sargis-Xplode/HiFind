@@ -158,7 +158,6 @@ const Shops = (props: any) => {
     };
 
     const autoChangePage = (val: number) => {
-        console.log(val * itemsPerPage);
         setItemOffSet(val * itemsPerPage);
     };
 

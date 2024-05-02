@@ -79,8 +79,20 @@
                     }
                 }
 
+                .name-title {
+                    width: 250px;
+                }
+
+                .email-title {
+                    width: 250px;
+                }
+
                 .date-tile {
                     width: 100px;
+
+                    img {
+                        cursor: pointer;
+                    }
                 }
             }
         }

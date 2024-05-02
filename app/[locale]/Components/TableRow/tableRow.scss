@@ -49,6 +49,8 @@
     }
 
     .brand-logo-name {
+        width: 250px;
+
         img {
             width: 60px;
             height: 60px;
@@ -56,6 +58,10 @@
             border: 2px solid $btn-color;
             border-radius: 50%;
         }
+    }
+
+    .email {
+        width: 250px;
     }
 
     .link {
