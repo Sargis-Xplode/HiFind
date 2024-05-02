@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./page.scss";
-import { faCheckCircle, faChevronDown, faChevronUp, faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -190,8 +190,27 @@ const JoinUs = () => {
         setSubCategories([]);
     };
 
+    const sendMail = () => {
+        axios
+            .post("api/mail", {
+                to: email,
+                subject: "Shop request submitted",
+            })
+            .then((res) => {
+                if (res.data.success) {
+                    console.log(res.data.message);
+                } else {
+                    console.log(res.data.error);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     const handleSubmitJoinUs = async () => {
         setPending(true);
+        sendMail();
         setValidationCheck(true);
         if (
             buisnessName.length < 3 ||
@@ -488,7 +507,7 @@ const JoinUs = () => {
 
                             <button
                                 type="button"
-                                disabled={pending}
+                                // disabled={pending}
                                 className={"button" + (checked && !pending ? "" : " disabled")}
                                 onClick={handleSubmitJoinUs}
                             >
