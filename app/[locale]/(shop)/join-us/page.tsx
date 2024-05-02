@@ -192,17 +192,11 @@ const JoinUs = () => {
 
     const sendMail = () => {
         axios
-            .post("api/mail", {
+            .post("api/mail/request", {
                 to: email,
                 subject: "Shop request submitted",
             })
-            .then((res) => {
-                if (res.data.success) {
-                    console.log(res.data.message);
-                } else {
-                    console.log(res.data.error);
-                }
-            })
+            .then((res) => {})
             .catch((error) => {
                 console.log(error);
             });
@@ -210,7 +204,6 @@ const JoinUs = () => {
 
     const handleSubmitJoinUs = async () => {
         setPending(true);
-        sendMail();
         setValidationCheck(true);
         if (
             buisnessName.length < 3 ||
@@ -248,6 +241,7 @@ const JoinUs = () => {
                         const data = res.data;
 
                         if (data.success) {
+                            sendMail();
                             push("success");
                         }
                     })
@@ -507,7 +501,7 @@ const JoinUs = () => {
 
                             <button
                                 type="button"
-                                // disabled={pending}
+                                disabled={pending}
                                 className={"button" + (checked && !pending ? "" : " disabled")}
                                 onClick={handleSubmitJoinUs}
                             >

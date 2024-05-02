@@ -18,14 +18,11 @@ export async function POST(req: Request) {
     });
 
     try {
-        // const testResult = await transport.verify();
-        // console.log(testResult);
-
         const info = await transport.sendMail({
             from: `"Xplode LLC 🩷" <${SMTP_EMAIL}>`,
             to,
             subject,
-            html: "<b>Your shop has been submitted, please wait untill our admin approves or denies your request</b>",
+            html: "<b>Your shop has been resubmitted, please wait untill our admin approves or denies your request</b>",
         });
 
         return NextResponse.json({
@@ -38,6 +35,5 @@ export async function POST(req: Request) {
             error: error,
             success: false,
         });
-        console.log(error);
     }
 }

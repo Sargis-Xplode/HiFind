@@ -107,6 +107,20 @@ const TableRow = (props: any) => {
             .catch((error) => {});
     };
 
+    const sendMail = () => {
+        axios
+            .post(`/${localActive}/api/mail/resend`, {
+                to: email,
+                subject: "Shop request resent",
+            })
+            .then((res) => {
+                console.log(res.data.message);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     return (
         <div className={(newRequest ? "new roboto-medium" : "") + " table-row-container"}>
             {openDeleteModal ? (
@@ -246,6 +260,7 @@ const TableRow = (props: any) => {
                 <div className="send-delete-icons">
                     <div>
                         <Image
+                            onClick={sendMail}
                             src={sendIcon}
                             alt="Send Icon"
                         ></Image>
