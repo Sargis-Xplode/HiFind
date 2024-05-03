@@ -35,6 +35,7 @@ const TableRow = (props: any) => {
         shopActive,
         setOpenEditModal,
         setBody,
+        toast,
     } = props;
 
     const localActive = useLocale();
@@ -49,9 +50,14 @@ const TableRow = (props: any) => {
             .post(`/${localActive}/api/shop/approved`, JSON.stringify(body))
             .then((res) => {
                 setUpdateShops(!updateShops);
+                toast(res.data.message, {
+                    type: "success",
+                });
             })
             .catch((error) => {
-                console.log(error);
+                toast(error, {
+                    type: "error",
+                });
             });
     };
 
@@ -61,9 +67,16 @@ const TableRow = (props: any) => {
         };
         axios
             .post(`/${localActive}/api/shop/denied`, JSON.stringify(body))
-            .then((res) => {})
+            .then((res) => {
+                toast(res.data.message, {
+                    type: "success",
+                });
+            })
             .catch((error) => {
                 setUpdateShops(!updateShops);
+                toast(error, {
+                    type: "error",
+                });
                 console.log(error);
             });
     };
@@ -93,9 +106,15 @@ const TableRow = (props: any) => {
             .post(`/${localActive}/api/shop/delete`, JSON.stringify(body))
             .then((res) => {
                 setUpdateShops(!updateShops);
-                const data = res.data;
+                toast(res.data.message, {
+                    type: "success",
+                });
             })
-            .catch((error) => {});
+            .catch((error) => {
+                toast(error, {
+                    type: "error",
+                });
+            });
     };
 
     const toggleActivateShop = () => {
@@ -104,8 +123,16 @@ const TableRow = (props: any) => {
         };
         axios
             .post(`/${localActive}/api/shop/activate`, JSON.stringify(body))
-            .then((res: any) => {})
-            .catch((error) => {});
+            .then((res: any) => {
+                toast(res.data.message, {
+                    type: "success",
+                });
+            })
+            .catch((error) => {
+                toast(error, {
+                    type: "error",
+                });
+            });
     };
 
     const sendMail = () => {
@@ -116,9 +143,14 @@ const TableRow = (props: any) => {
             })
             .then((res) => {
                 console.log(res.data.message);
+                toast(res.data.message, {
+                    type: "success",
+                });
             })
             .catch((error) => {
-                console.log(error);
+                toast(error, {
+                    type: "error",
+                });
             });
     };
 
@@ -251,22 +283,25 @@ const TableRow = (props: any) => {
                             alt="Delete Icon"
                         ></Image>
                     </div>
+
                     <div
                         onClick={() => {
                             setActive(!active);
                             toggleActivateShop();
                         }}
                         className={(active ? "active " : "") + "activate-btn"}
-                        data-tooltip-id={active ? "activate" : "deactivate"}
+                        data-tooltip-id={"activate"}
                     >
                         <div className="active-indicator"></div>
                     </div>
                 </div>
             ) : page === "denied" ? (
                 <div className="send-delete-icons">
-                    <div data-tooltip-id="send">
+                    <div
+                        data-tooltip-id="send"
+                        onClick={sendMail}
+                    >
                         <Image
-                            onClick={sendMail}
                             src={sendIcon}
                             alt="Send Icon"
                         ></Image>
@@ -307,12 +342,7 @@ const TableRow = (props: any) => {
             <ReactTooltip
                 id="activate"
                 variant="light"
-                content="Ակտիվացնել"
-            />
-            <ReactTooltip
-                id="deactivate"
-                variant="light"
-                content="Ապաակտիվացնել"
+                content={"Ակտիվացնել"}
             />
             <ReactTooltip
                 id="send"

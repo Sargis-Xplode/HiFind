@@ -5,6 +5,8 @@ import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import sortLogo from "../../../../Assets/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
@@ -202,6 +204,7 @@ const Approved = () => {
                                             setUpdateShops={setUpdateShops}
                                             setOpenEditModal={setOpenEditModal}
                                             setBody={setBody}
+                                            toast={toast}
                                         ></TableRow>
                                     );
                                 }
@@ -230,6 +233,18 @@ const Approved = () => {
                         />
                     )}
                 </main>
+                <ToastContainer
+                    position="top-right"
+                    autoClose={3000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
             </section>
         </>
     );

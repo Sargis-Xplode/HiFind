@@ -59,7 +59,25 @@ const EditShopModal = ({ setOpenEditModal, body }: any) => {
             .get(`/${localActive}/api/categories/all`)
             .then((res) => {
                 const categoriesDB = res.data.categories;
-                setCategories(categoriesDB);
+                const arr = categoriesDB.map((category: any) => {
+                    if (categoryName === category.category) {
+                        category.clicked = true;
+                        category.variants.map((variant: any) => {
+                            subCategories.map((subCateg: any) => {
+                                if (
+                                    subCateg.subCategoryArm === variant.subCategoryArm ||
+                                    subCateg.subCategoryEng === variant.subCategoryEng
+                                ) {
+                                    variant.selected = true;
+                                }
+                            });
+
+                            return variant;
+                        });
+                    }
+                    return category;
+                });
+                setCategories(arr);
             })
             .catch((error) => {
                 console.log(error);
@@ -135,7 +153,7 @@ const EditShopModal = ({ setOpenEditModal, body }: any) => {
         }
     };
 
-    const handleOpenDropDown = (index: number, categoryName: string) => {
+    const handleOpenDropDown = (index: number) => {
         clearFilters();
         const arr = categories.map((categ: any, ind: number) => {
             if (index === ind) {
@@ -385,10 +403,13 @@ const EditShopModal = ({ setOpenEditModal, body }: any) => {
                                 >
                                     <div
                                         className={
-                                            (!category.clicked && atLeastOneClicked ? "inactive " : "") +
-                                            "categories-with-plus"
+                                            (!category.clicked &&
+                                            atLeastOneClicked &&
+                                            categoryName !== category.category
+                                                ? "inactive "
+                                                : "") + "categories-with-plus"
                                         }
-                                        onClick={() => handleOpenDropDown(index, category.category)}
+                                        onClick={() => handleOpenDropDown(index)}
                                     >
                                         {t3(category.category)}
                                         {category.clicked ? (

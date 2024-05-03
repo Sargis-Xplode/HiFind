@@ -22,7 +22,16 @@ export async function POST(req: Request) {
             from: `"Xplode LLC 🩷" <${SMTP_EMAIL}>`,
             to,
             subject,
-            html: "<b>Your shop has been resubmitted, please wait untill our admin approves or denies your request</b>",
+            html: `<div style="width: 456px; height: 298px; background-color: white; border-radius: 25px">
+                        <div>
+                            <img style="width: 150px; height: auto; margin: 0 150px" src="https://hi-find.vercel.app/logo.svg" />
+                        </div>
+
+                        <h2>Հարգելի ${to},</h2>
+                        <p>
+                            Ձեզ հրավիրում ենք գրանցվելու մեր համակարգ, որպեսզի էլ ավելի հասանելի և տեսանելի դառնաք թվային աշխարհում:
+                        </p>
+                    </div>`,
         });
 
         return NextResponse.json({

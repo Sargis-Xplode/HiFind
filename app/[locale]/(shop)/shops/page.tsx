@@ -125,7 +125,8 @@ const Shops = (props: any) => {
                     const filtered = shop?.subCategories?.some((shopCateg: any) => {
                         // Check if any category in selectedCategories matches shopCateg
                         return selectedCategories.some(
-                            (categ: any) => categ.subCategoryArm === shopCateg.subCategoryArm
+                            (categ: any) =>
+                                categ.subCategoryArm === shopCateg.subCategoryArm && shop.approved && shop.active
                         );
                     });
 

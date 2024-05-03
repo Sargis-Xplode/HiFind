@@ -3,6 +3,8 @@ import { CSSProperties, useEffect, useState } from "react";
 import "../page.scss";
 import axios from "axios";
 import Image from "next/image";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import sortLogo from "../../../../Assets/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
@@ -149,6 +151,7 @@ const Notification = () => {
                                     page={"notifications"}
                                     updateShops={updateShops}
                                     setUpdateShops={setUpdateShops}
+                                    toast={toast}
                                 ></TableRow>
                             );
                         })
@@ -176,6 +179,18 @@ const Notification = () => {
                     />
                 )}
             </main>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </section>
     );
 };
