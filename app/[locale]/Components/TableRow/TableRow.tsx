@@ -142,7 +142,6 @@ const TableRow = (props: any) => {
                 subject: "Shop request resent",
             })
             .then((res) => {
-                console.log(res.data.message);
                 toast(res.data.message, {
                     type: "success",
                 });
