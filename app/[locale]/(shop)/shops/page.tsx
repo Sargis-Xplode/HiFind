@@ -106,15 +106,17 @@ const Shops = (props: any) => {
             // -------------------------------------------------
             if (searchActive && submittedSearchText.length) {
                 // User searched for something?
-                renderingArray = filteredShops.filter((shop: any) => {
-                    if (
-                        shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) &&
-                        shop.approved &&
-                        shop.active
-                    ) {
-                        return true;
-                    }
-                });
+                renderingArray = filteredShops
+                    .filter((shop: any) => {
+                        if (
+                            shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) &&
+                            shop.approved &&
+                            shop.active
+                        ) {
+                            return true;
+                        }
+                    })
+                    .sort((a: any, b: any) => a.buisnessName.localeCompare(b.buisnessName));
             }
 
             // -----------------------------------------------------

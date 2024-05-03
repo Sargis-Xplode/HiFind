@@ -72,11 +72,16 @@ const Approved = () => {
 
             if (searchActive && submittedSearchText.length) {
                 // User searched for something?
-                renderingArray = shops.filter((shop: any) => {
-                    if (shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) && shop.approved) {
-                        return true;
-                    }
-                });
+                renderingArray = shops
+                    .filter((shop: any) => {
+                        if (
+                            shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase()) &&
+                            shop.approved
+                        ) {
+                            return true;
+                        }
+                    })
+                    .sort((a: any, b: any) => a.buisnessName.localeCompare(b.buisnessName));
             }
 
             setFilteredShops(renderingArray);

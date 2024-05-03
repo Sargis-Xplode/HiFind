@@ -56,11 +56,13 @@ const Denied = () => {
             // -------------------------------------------------
             if (submittedSearchText.length) {
                 // User searched for something?
-                renderingArray = shops.filter((shop: any) => {
-                    if (shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase())) {
-                        return true;
-                    }
-                });
+                renderingArray = shops
+                    .filter((shop: any) => {
+                        if (shop.buisnessName.toLowerCase().includes(submittedSearchText.toLowerCase())) {
+                            return true;
+                        }
+                    })
+                    .sort((a: any, b: any) => a.buisnessName.localeCompare(b.buisnessName));
             }
 
             setFilteredShops(renderingArray);
