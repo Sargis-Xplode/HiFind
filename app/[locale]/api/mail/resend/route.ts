@@ -24,7 +24,7 @@ export async function POST(req: Request) {
             subject,
             html: `<div style="width: 456px; height: 298px; background-color: white; border-radius: 25px">
                         <div>
-                            <img style="width: 150px; height: auto; margin: 0 150px" src="https://hi-find.vercel.app/logo.png" />
+                            <img style="width: 150px; height: auto; margin: 0 150px" src="https://hi-find.vercel.app/Logo.png" />
                         </div>
 
                         <h2>Հարգելի ${to},</h2>
