@@ -31,7 +31,6 @@ const Denied = () => {
     const [itemOffSet, setItemOffSet] = useState(0);
     const [itemsPerPage, setItemsPerPage] = useState(5);
     const [pageCount, setPageCount] = useState(0);
-    const [updateShops, setUpdateShops] = useState(false);
 
     useEffect(() => {
         axios
@@ -187,9 +186,9 @@ const Denied = () => {
                                             date={shop.date}
                                             id={shop._id}
                                             page={"denied"}
-                                            updateShops={updateShops}
-                                            setUpdateShops={setUpdateShops}
                                             toast={toast}
+                                            currentItems={currentItems}
+                                            setCurrentItems={setCurrentItems}
                                         ></TableRow>
                                     );
                                 }

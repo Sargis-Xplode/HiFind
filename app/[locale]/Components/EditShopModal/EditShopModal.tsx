@@ -16,7 +16,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const Skeleton = dynamic(() => import("react-loading-skeleton"));
 
-const EditShopModal = ({ setOpenEditModal, body }: any) => {
+const EditShopModal = ({ setOpenEditModal, body, currentItems, setCurrentItems, toast }: any) => {
     const {
         buisnessNameProp,
         emailProp,
@@ -243,7 +243,22 @@ const EditShopModal = ({ setOpenEditModal, body }: any) => {
                 const res = await axios
                     .post(`/${localActive}/api/shop/update`, JSON.stringify(body))
                     .then((res) => {
-                        console.log(res.data.message);
+                        const arr = currentItems.map((item: any) => {
+                            if (item._id === id) {
+                                item = {
+                                    ...item,
+                                    ...body,
+                                };
+                            }
+
+                            return item;
+                        });
+
+                        setCurrentItems(arr);
+
+                        toast(res.data.message, {
+                            type: "success",
+                        });
                     })
                     .catch((error) => {
                         console.log(error);

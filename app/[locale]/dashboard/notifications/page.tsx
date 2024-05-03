@@ -20,7 +20,6 @@ const Skeleton = dynamic(() => import("react-loading-skeleton"));
 const Notification = () => {
     const localActive = useLocale();
     const [loading, setLoading] = useState(true);
-    const [updateShops, setUpdateShops] = useState(false);
     const [rerender, setRerender] = useState(false);
     const [order, setOrder] = useState("desc");
 
@@ -54,7 +53,7 @@ const Notification = () => {
                 setLoading(false);
                 console.log(error);
             });
-    }, [updateShops]);
+    }, []);
 
     useEffect(() => {
         if (shops.length) {
@@ -149,9 +148,9 @@ const Notification = () => {
                                     denied={shop.denied}
                                     id={shop._id}
                                     page={"notifications"}
-                                    updateShops={updateShops}
-                                    setUpdateShops={setUpdateShops}
                                     toast={toast}
+                                    currentItems={currentItems}
+                                    setCurrentItems={setCurrentItems}
                                 ></TableRow>
                             );
                         })

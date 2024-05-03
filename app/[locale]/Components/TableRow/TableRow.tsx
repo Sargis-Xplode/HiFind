@@ -30,12 +30,12 @@ const TableRow = (props: any) => {
         approved,
         denied,
         page,
-        updateShops,
-        setUpdateShops,
         shopActive,
         setOpenEditModal,
         setBody,
         toast,
+        currentItems,
+        setCurrentItems,
     } = props;
 
     const localActive = useLocale();
@@ -49,7 +49,15 @@ const TableRow = (props: any) => {
         axios
             .post(`/${localActive}/api/shop/approved`, JSON.stringify(body))
             .then((res) => {
-                setUpdateShops(!updateShops);
+                const arr = currentItems.map((item: any) => {
+                    if (item._id === id) {
+                        item.approved = true;
+                        item.denied = false;
+                        item.newRequest = false;
+                    }
+                    return item;
+                });
+                setCurrentItems(arr);
                 toast(res.data.message, {
                     type: "success",
                 });
@@ -71,9 +79,18 @@ const TableRow = (props: any) => {
                 toast(res.data.message, {
                     type: "success",
                 });
+
+                const arr = currentItems.map((item: any) => {
+                    if (item._id === id) {
+                        item.approved = false;
+                        item.denied = true;
+                        item.newRequest = false;
+                    }
+                    return item;
+                });
+                setCurrentItems(arr);
             })
             .catch((error) => {
-                setUpdateShops(!updateShops);
                 toast(error, {
                     type: "error",
                 });
@@ -105,7 +122,8 @@ const TableRow = (props: any) => {
         axios
             .post(`/${localActive}/api/shop/delete`, JSON.stringify(body))
             .then((res) => {
-                setUpdateShops(!updateShops);
+                const arr = currentItems.filter((item: any) => item._id !== id);
+                setCurrentItems(arr);
                 toast(res.data.message, {
                     type: "success",
                 });

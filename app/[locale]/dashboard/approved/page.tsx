@@ -34,8 +34,8 @@ const Approved = () => {
     const [itemsPerPage, setItemsPerPage] = useState(5);
     const [pageCount, setPageCount] = useState(0);
     const [searchActive, setSearchActive] = useState(false);
-    const [updateShops, setUpdateShops] = useState(false);
     const [openEditModal, setOpenEditModal] = useState(false);
+
     const [body, setBody] = useState({
         buisnessNameProp: "",
         emailProp: "",
@@ -60,7 +60,7 @@ const Approved = () => {
                 setLoading(false);
                 console.log(error);
             });
-    }, [updateShops]);
+    }, []);
 
     useEffect(() => {
         if (shops.length) {
@@ -137,6 +137,9 @@ const Approved = () => {
                 <EditShopModal
                     setOpenEditModal={setOpenEditModal}
                     body={body}
+                    currentItems={currentItems}
+                    setCurrentItems={setCurrentItems}
+                    toast={toast}
                 ></EditShopModal>
             ) : (
                 ""
@@ -205,11 +208,11 @@ const Approved = () => {
                                             id={shop._id}
                                             page={"approved"}
                                             shopActive={shop.active}
-                                            updateShops={updateShops}
-                                            setUpdateShops={setUpdateShops}
                                             setOpenEditModal={setOpenEditModal}
                                             setBody={setBody}
                                             toast={toast}
+                                            currentItems={currentItems}
+                                            setCurrentItems={setCurrentItems}
                                         ></TableRow>
                                     );
                                 }
