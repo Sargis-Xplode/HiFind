@@ -140,6 +140,7 @@ const TableRow = (props: any) => {
             .post(`/${localActive}/api/mail/resend`, {
                 to: email,
                 subject: "Shop request resent",
+                name: buisnessName,
             })
             .then((res) => {
                 toast(res.data.message, {

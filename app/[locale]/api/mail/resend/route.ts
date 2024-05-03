@@ -5,7 +5,7 @@ const { SMTP_EMAIL, SMTP_PASSWORD } = process.env;
 
 export async function POST(req: Request) {
     const body = await req.json();
-    const { to, subject } = body;
+    const { to, subject, name } = body;
 
     const transport = nodemailer.createTransport({
         service: "gmail",
@@ -27,7 +27,7 @@ export async function POST(req: Request) {
                             <img style="width: 150px; height: auto; margin: 0 150px" src="https://hi-find.vercel.app/Logo.png" />
                         </div>
 
-                        <h2>Հարգելի ${to},</h2>
+                        <h2>Հարգելի ${name},</h2>
                         <p>
                             Ձեզ հրավիրում ենք գրանցվելու մեր համակարգ, որպեսզի էլ ավելի հասանելի և տեսանելի դառնաք թվային աշխարհում:
                         </p>
