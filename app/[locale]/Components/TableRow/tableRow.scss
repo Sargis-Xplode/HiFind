@@ -5,8 +5,14 @@
     height: 100px;
     width: max-content;
 
-    &:hover {
-        background-color: eff2f5;
+    .react-tooltip {
+        width: max-content;
+        border-radius: 20px;
+        box-shadow: 0 0 5px rgb(198, 198, 198);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
     }
 
     .delete-modal-wrapper {

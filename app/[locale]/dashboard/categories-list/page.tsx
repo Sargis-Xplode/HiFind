@@ -6,8 +6,9 @@ import "../page.scss";
 import axios from "axios";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
-import { faCheckCircle, faChevronDown, faChevronUp, faX, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import editIcon from "../../../../Assets/edit-icon.svg";
 import deleteIcon from "../../../../Assets/delete-icon.svg";
 import xIcon from "../../../../Assets/x.svg";
@@ -484,13 +485,19 @@ const CategoriesList = () => {
                                               <p>{categ.category}</p>
                                           </div>
                                           <div className="edit-delete-icons">
-                                              <div onClick={(e) => handleEditButtonClick(e, categ, "edit")}>
+                                              <div
+                                                  onClick={(e) => handleEditButtonClick(e, categ, "edit")}
+                                                  data-tooltip-id="edit"
+                                              >
                                                   <Image
                                                       src={editIcon}
                                                       alt="Edit Icon"
                                                   ></Image>
                                               </div>
-                                              <div onClick={(e) => handleEditButtonClick(e, categ, "delete")}>
+                                              <div
+                                                  onClick={(e) => handleEditButtonClick(e, categ, "delete")}
+                                                  data-tooltip-id="delete"
+                                              >
                                                   <Image
                                                       src={deleteIcon}
                                                       alt="Delete Icon"
@@ -521,6 +528,16 @@ const CategoriesList = () => {
                         : ""}
                 </div>
             </main>
+            <ReactTooltip
+                id="edit"
+                variant="light"
+                content="Խմբագրել"
+            />
+            <ReactTooltip
+                id="delete"
+                variant="light"
+                content="Ջնջել"
+            />
         </section>
     );
 };

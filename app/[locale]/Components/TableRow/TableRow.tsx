@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import "./tableRow.scss";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 
 import editIcon from "../../../../Assets/edit-icon.svg";
 import deleteIcon from "../../../../Assets/delete-icon.svg";
@@ -202,10 +203,12 @@ const TableRow = (props: any) => {
                 !(approved || denied) ? (
                     <div className="approve-reject-icons">
                         <FontAwesomeIcon
+                            data-tooltip-id="approve"
                             icon={faCheckCircle}
                             onClick={handleApprove}
                         ></FontAwesomeIcon>
                         <FontAwesomeIcon
+                            data-tooltip-id="deny"
                             icon={faXmarkCircle}
                             onClick={handleDeny}
                         ></FontAwesomeIcon>
@@ -229,6 +232,7 @@ const TableRow = (props: any) => {
                             setOpenEditModal(true);
                             handleEditShop();
                         }}
+                        data-tooltip-id="edit"
                     >
                         <Image
                             src={editIcon}
@@ -240,6 +244,7 @@ const TableRow = (props: any) => {
                         onClick={() => {
                             setOpenDeleteModal(true);
                         }}
+                        data-tooltip-id="delete"
                     >
                         <Image
                             src={deleteIcon}
@@ -252,20 +257,24 @@ const TableRow = (props: any) => {
                             toggleActivateShop();
                         }}
                         className={(active ? "active " : "") + "activate-btn"}
+                        data-tooltip-id={active ? "activate" : "deactivate"}
                     >
                         <div className="active-indicator"></div>
                     </div>
                 </div>
             ) : page === "denied" ? (
                 <div className="send-delete-icons">
-                    <div>
+                    <div data-tooltip-id="send">
                         <Image
                             onClick={sendMail}
                             src={sendIcon}
                             alt="Send Icon"
                         ></Image>
                     </div>
-                    <div onClick={() => setOpenDeleteModal(true)}>
+                    <div
+                        onClick={() => setOpenDeleteModal(true)}
+                        data-tooltip-id="delete"
+                    >
                         <Image
                             src={deleteIcon}
                             alt="Delete Icon"
@@ -275,6 +284,41 @@ const TableRow = (props: any) => {
             ) : (
                 ""
             )}
+            <ReactTooltip
+                id="approve"
+                content="Ընդունել"
+                variant="light"
+            />
+            <ReactTooltip
+                id="deny"
+                variant="light"
+                content="Մերժել"
+            />
+            <ReactTooltip
+                id="edit"
+                variant="light"
+                content="Խմբագրել"
+            />
+            <ReactTooltip
+                id="delete"
+                variant="light"
+                content="Ջնջել"
+            />
+            <ReactTooltip
+                id="activate"
+                variant="light"
+                content="Ակտիվացնել"
+            />
+            <ReactTooltip
+                id="deactivate"
+                variant="light"
+                content="Ապաակտիվացնել"
+            />
+            <ReactTooltip
+                id="send"
+                variant="light"
+                content="Ուղարկել հայտ"
+            />
         </div>
     );
 };

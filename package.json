@@ -33,6 +33,7 @@
         "react-paginate": "^8.2.0",
         "react-spinners": "^0.13.8",
         "react-toastify": "^10.0.5",
+        "react-tooltip": "^5.26.4",
         "sass": "^1.72.0"
     },
     "devDependencies": {

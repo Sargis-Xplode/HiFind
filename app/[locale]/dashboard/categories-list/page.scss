@@ -5,6 +5,16 @@
     display: flex;
     position: relative;
 
+    .react-tooltip {
+        width: max-content;
+        border-radius: 20px;
+        box-shadow: 0 0 5px rgb(198, 198, 198);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+    }
+
     .category-modal-wrapper {
         position: absolute;
         left: 0;
