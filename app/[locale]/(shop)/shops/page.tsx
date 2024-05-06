@@ -54,22 +54,15 @@ const Shops = (props: any) => {
                 let shops = res.data.shops;
                 setShops(shops);
 
-                if (filter) {
-                    const arr = shops.filter((shop: any) => {
-                        if (shop.categoryName && shop.approved) {
-                            if (shop.categoryName === filter) return shop;
-                        }
-                    });
+                const filteredShops = shops.filter((shop: any) => {
+                    return (
+                        shop.categoryName && shop.approved && shop.active && (!filter || shop.categoryName === filter)
+                    );
+                });
 
-                    setFilteredShops(arr);
-                } else {
-                    const arr = shops.filter((shop: any) => {
-                        if (shop.categoryName && shop.approved) {
-                            return shop;
-                        }
-                    });
-                    setFilteredShops(arr);
-                }
+                console.log(filteredShops);
+
+                setFilteredShops(filteredShops);
             })
             .catch((error) => {
                 setLoading(false);
@@ -141,8 +134,10 @@ const Shops = (props: any) => {
     }, [itemOffSet, filteredShops, selectedCategories, submittedSearchText]);
 
     const renderCurrentItems = (currentArray: any) => {
-        // Render current page shops ( max 12 )
+        // Render current page shops ( max 6 )
         const arr = currentArray.length > 0 ? currentArray.slice(itemOffSet, itemOffSet + itemsPerPage) : [];
+        console.log(arr);
+        console.log(itemOffSet);
         setCurrentItems(arr);
 
         // Decide the pagination page count
@@ -204,7 +199,7 @@ const Shops = (props: any) => {
 
                 if (categ.clicked) {
                     const arr = shops.filter((shop: any) => {
-                        if (shop.categoryName === categ.category) return shop;
+                        if (shop.categoryName === categ.category && shop.approved && shop.active) return shop;
                     });
                     setFilteredShops(arr);
                     push(`?filter=${categ.category}&page=${1}`);
