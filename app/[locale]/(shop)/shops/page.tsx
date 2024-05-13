@@ -6,7 +6,7 @@ import filterIcon from "../../../../Assets/filter-icon.svg";
 
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faCheckSquare, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -56,13 +56,17 @@ const Shops = (props: any) => {
 
                 const filteredShops = shops.filter((shop: any) => {
                     return (
-                        shop.categoryName && shop.approved && shop.active && (!filter || shop.categoryName === filter)
+                        shop.categoryName &&
+                        shop.approved &&
+                        shop.active &&
+                        (filter === "null" || shop.categoryName === filter)
                     );
                 });
 
                 console.log(filteredShops);
 
                 setFilteredShops(filteredShops);
+                setLoading(false);
             })
             .catch((error) => {
                 setLoading(false);
@@ -306,7 +310,7 @@ const Shops = (props: any) => {
                                                                         >
                                                                             {variant.selected ? (
                                                                                 <FontAwesomeIcon
-                                                                                    icon={faCheckCircle}
+                                                                                    icon={faCheckSquare}
                                                                                 ></FontAwesomeIcon>
                                                                             ) : (
                                                                                 ""
@@ -395,7 +399,7 @@ const Shops = (props: any) => {
                                                               >
                                                                   {variant.selected ? (
                                                                       <FontAwesomeIcon
-                                                                          icon={faCheckCircle}
+                                                                          icon={faCheckSquare}
                                                                       ></FontAwesomeIcon>
                                                                   ) : (
                                                                       ""

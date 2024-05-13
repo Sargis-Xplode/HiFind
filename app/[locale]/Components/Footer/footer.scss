@@ -19,9 +19,14 @@
             align-items: center;
             box-sizing: border-box;
 
-            img {
+            a {
                 width: 70%;
                 height: 25%;
+
+                img {
+                    width: 100%;
+                    height: auto;
+                }
             }
         }
 
@@ -115,7 +120,7 @@
     .footer {
         .container {
             .footer-logo-container {
-                width: 20%;
+                width: 30%;
             }
 
             .footer-links-container.english-format {
@@ -142,7 +147,7 @@
             .footer-logo-container {
                 justify-content: center;
 
-                img {
+                a {
                     width: 120px;
                 }
             }

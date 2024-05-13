@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./page.scss";
-import { faCheckCircle, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faCheckSquare, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
@@ -465,7 +465,7 @@ const JoinUs = () => {
                                                                           >
                                                                               {variant.selected ? (
                                                                                   <FontAwesomeIcon
-                                                                                      icon={faCheckCircle}
+                                                                                      icon={faCheckSquare}
                                                                                   ></FontAwesomeIcon>
                                                                               ) : (
                                                                                   ""

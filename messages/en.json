@@ -17,6 +17,7 @@
     },
     "homePage": {
         "all": "All",
+        "null": "All",
         "discover": "Explore the world of Instagram business accounts",
         "shops": "Shops",
         "services": "Services",

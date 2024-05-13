@@ -15,10 +15,13 @@ export default function Footer() {
         <footer className="footer">
             <div className="container">
                 <div className="footer-logo-container">
-                    <Image
-                        src={logo}
-                        alt="Picture of the author"
-                    />
+                    <Link href={"/"}>
+                        <Image
+                            priority
+                            src={logo}
+                            alt="Logo"
+                        />
+                    </Link>
                 </div>
                 <div className={(localActive === "en" ? "english-format" : "") + " footer-links-container"}>
                     <div className="something">
