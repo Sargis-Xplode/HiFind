@@ -55,7 +55,7 @@ export default function Home() {
 
     return (
         <main className="main">
-            <div className="homepage-banner">
+            <div className={`homepage-banner`}>
                 <div className="container">
                     <p>{t2("homepage_banner_heading")}</p>
                     <Link href={`/${localActive}/join-us`}>

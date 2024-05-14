@@ -4,10 +4,9 @@
     background-color: $bg-grey;
 
     .homepage-banner {
-        height: 25vw;
+        height: 21vw;
         background-image: url("../../../Assets/banner.svg");
-        background-size: auto 100%;
-        background-position: -100px;
+        background-size: 100% 100%;
         color: white;
         font-weight: bold;
 
@@ -27,6 +26,13 @@
                 font-weight: bold;
                 padding: 10px 30px;
                 font-size: 1.5vw;
+                background-color: white;
+                color: $btn-color;
+
+                &:hover {
+                    background-color: $btn-color;
+                    color: white;
+                }
             }
         }
     }
@@ -221,7 +227,9 @@
     .main {
         .homepage-banner {
             height: 40vw;
-            background-position: -200px;
+            background-image: url("../../../Assets/banner-mobile.svg");
+            background-size: 100% auto;
+            background-position-y: 100%;
 
             .container {
                 p {
@@ -294,7 +302,6 @@
     .main {
         .homepage-banner {
             height: 50vw;
-            background-position: -200px;
 
             .container {
                 p {
