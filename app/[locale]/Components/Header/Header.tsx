@@ -112,6 +112,7 @@ export default function Header(props: any) {
                 <div className="logo-container">
                     <Link href={"/"}>
                         <Image
+                            priority
                             src={logo}
                             alt="Logo"
                             quality={100}

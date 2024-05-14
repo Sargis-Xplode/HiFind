@@ -190,8 +190,10 @@ export default function Home() {
                     <div className="img-container">
                         <Image
                             quality={100}
+                            priority
                             src={aboutUsImg}
                             alt="Picture of the author"
+                            unoptimized={true}
                         />
                     </div>
                     <div className="about-us-container">
