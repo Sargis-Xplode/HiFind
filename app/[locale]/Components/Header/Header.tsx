@@ -20,17 +20,19 @@ export default function Header(props: any) {
     const { push } = useRouter();
     const path = usePathname();
 
+    console.log(path);
+
     const [selectedLanguage, setSelectedLanguage] = useState("Հայ");
     const [languages, setLanguages] = useState([
         {
             text: "Հայ",
             value: "hy",
-            selected: true,
+            selected: path.split("/")[1] === "hy" ? true : false,
         },
         {
             text: "Eng",
             value: "en",
-            selected: false,
+            selected: path.split("/")[1] === "en" ? true : false,
         },
     ]);
 
