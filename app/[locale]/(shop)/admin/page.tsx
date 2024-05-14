@@ -111,7 +111,6 @@ export default function Login() {
                         quality={100}
                         src={logo}
                         alt="Logo"
-                        priority
                     ></Image>
                     <form
                         onSubmit={handleSubmit}

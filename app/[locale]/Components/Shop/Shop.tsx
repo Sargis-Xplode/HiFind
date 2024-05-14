@@ -56,7 +56,6 @@ const Shop = ({
                     <div className="image-container">
                         {instaPfpPreview ? (
                             <Image
-                                priority
                                 src={instaPfpPreview}
                                 alt="Brang Logo"
                                 fill
@@ -64,7 +63,6 @@ const Shop = ({
                             />
                         ) : (
                             <Image
-                                priority
                                 src={brandLogo}
                                 alt="Brand Logo"
                                 quality={100}

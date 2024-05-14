@@ -17,7 +17,6 @@ export default function Footer() {
                 <div className="footer-logo-container">
                     <Link href={"/"}>
                         <Image
-                            priority
                             src={logo}
                             alt="Logo"
                             quality={100}
@@ -42,7 +41,6 @@ export default function Footer() {
                     <div>
                         <div className="mail-icon-container">
                             <Image
-                                priority
                                 src={emailIcon}
                                 alt="Picture of the author"
                                 quality={100}
