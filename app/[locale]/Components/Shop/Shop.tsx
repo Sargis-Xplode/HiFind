@@ -49,6 +49,7 @@ const Shop = ({
                     <Image
                         src={categoryIcon}
                         alt={categoryName}
+                        quality={100}
                     />
                 </div>
                 <div className="box-image-container">
@@ -59,12 +60,14 @@ const Shop = ({
                                 src={instaPfpPreview}
                                 alt="Brang Logo"
                                 fill
+                                quality={100}
                             />
                         ) : (
                             <Image
                                 priority
                                 src={brandLogo}
                                 alt="Brand Logo"
+                                quality={100}
                             />
                         )}
                     </div>

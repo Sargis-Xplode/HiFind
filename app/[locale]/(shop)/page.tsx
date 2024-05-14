@@ -77,6 +77,7 @@ export default function Home() {
                             <Link href={{ pathname: `${localActive}/shops`, query: { filter: "shops" } }}>
                                 <div>
                                     <Image
+                                        quality={100}
                                         src={shoppingBagIcon}
                                         alt="Picture of the author"
                                     />
@@ -87,6 +88,7 @@ export default function Home() {
                             <Link href={{ pathname: `${localActive}/shops`, query: { filter: "services" } }}>
                                 <div>
                                     <Image
+                                        quality={100}
                                         src={gearsIcon}
                                         alt="Picture of the author"
                                     />
@@ -98,6 +100,7 @@ export default function Home() {
                         <Link href={{ pathname: `${localActive}/shops`, query: { filter: "entertainment" } }}>
                             <div className="second-box">
                                 <Image
+                                    quality={100}
                                     src={dishesIcon}
                                     alt="Picture of the author"
                                 />
@@ -109,6 +112,7 @@ export default function Home() {
                             <Link href={{ pathname: `${localActive}/shops`, query: { filter: "beauty" } }}>
                                 <div>
                                     <Image
+                                        quality={100}
                                         src={brushIcon}
                                         alt="Picture of the author"
                                     />
@@ -119,6 +123,7 @@ export default function Home() {
                             <Link href={{ pathname: `${localActive}/shops`, query: { filter: "healthCare" } }}>
                                 <div>
                                     <Image
+                                        quality={100}
                                         src={heartPlusIcon}
                                         alt="Picture of the author"
                                     />
@@ -184,6 +189,7 @@ export default function Home() {
                 <section className="third-section">
                     <div className="img-container">
                         <Image
+                            quality={100}
                             priority
                             src={aboutUsImg}
                             alt="Picture of the author"

@@ -374,6 +374,7 @@ const JoinUs = () => {
                             {instaPfp.length === 0 ? (
                                 <div className="add-photo">
                                     <Image
+                                        quality={100}
                                         src={uploadIcon}
                                         alt="Upload Icon"
                                     ></Image>

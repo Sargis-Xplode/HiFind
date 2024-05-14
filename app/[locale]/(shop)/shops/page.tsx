@@ -255,6 +255,7 @@ const Shops = (props: any) => {
                                     <div>
                                         <h3>{heading}</h3>
                                         <Image
+                                            quality={100}
                                             src={filterIcon}
                                             alt={"filter"}
                                         ></Image>
@@ -349,6 +350,7 @@ const Shops = (props: any) => {
                         <div className="filter-heading-container">
                             <h3>{t("filters")}</h3>
                             <Image
+                                quality={100}
                                 src={filterIcon}
                                 alt={"filter"}
                             ></Image>
@@ -458,6 +460,7 @@ const Shops = (props: any) => {
                             >
                                 {t("filters")}
                                 <Image
+                                    quality={100}
                                     src={filterIcon}
                                     alt="Filter"
                                 ></Image>

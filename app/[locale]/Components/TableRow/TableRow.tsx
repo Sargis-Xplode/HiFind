@@ -188,6 +188,7 @@ const TableRow = (props: any) => {
                             onClick={() => setOpenDeleteModal(false)}
                         >
                             <Image
+                                quality={100}
                                 src={xIcon}
                                 alt="X Icon"
                             />
@@ -211,6 +212,7 @@ const TableRow = (props: any) => {
             )}
             <div className="brand-logo-name">
                 <Image
+                    quality={100}
                     priority
                     src={instaPfpPreview}
                     width={60}
@@ -285,6 +287,7 @@ const TableRow = (props: any) => {
                         data-tooltip-id="edit"
                     >
                         <Image
+                            quality={100}
                             src={editIcon}
                             alt="Edit Icon"
                         ></Image>
@@ -297,6 +300,7 @@ const TableRow = (props: any) => {
                         data-tooltip-id="delete"
                     >
                         <Image
+                            quality={100}
                             src={deleteIcon}
                             alt="Delete Icon"
                         ></Image>
@@ -320,6 +324,7 @@ const TableRow = (props: any) => {
                         onClick={sendMail}
                     >
                         <Image
+                            quality={100}
                             src={sendIcon}
                             alt="Send Icon"
                         ></Image>
@@ -329,6 +334,7 @@ const TableRow = (props: any) => {
                         data-tooltip-id="delete"
                     >
                         <Image
+                            quality={100}
                             src={deleteIcon}
                             alt="Delete Icon"
                         ></Image>

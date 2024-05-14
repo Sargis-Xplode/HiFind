@@ -271,6 +271,7 @@ const CategoriesList = () => {
                                 <Image
                                     src={xIcon}
                                     alt="X Icon"
+                                    quality={100}
                                 />
                             </div>
                             <h3>Ավելացնել նորը</h3>
@@ -340,6 +341,7 @@ const CategoriesList = () => {
                                 <Image
                                     src={xIcon}
                                     alt="X Icon"
+                                    quality={100}
                                 />
                             </div>
                             <h3>Խմբագրել</h3>
@@ -422,6 +424,7 @@ const CategoriesList = () => {
                                 <Image
                                     src={xIcon}
                                     alt="X Icon"
+                                    quality={100}
                                 />
                             </div>
                             <h3>Ջնջել</h3>
@@ -492,6 +495,7 @@ const CategoriesList = () => {
                                                   <Image
                                                       src={editIcon}
                                                       alt="Edit Icon"
+                                                      quality={100}
                                                   ></Image>
                                               </div>
                                               <div
@@ -501,6 +505,7 @@ const CategoriesList = () => {
                                                   <Image
                                                       src={deleteIcon}
                                                       alt="Delete Icon"
+                                                      quality={100}
                                                   ></Image>
                                               </div>
                                           </div>

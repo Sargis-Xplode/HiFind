@@ -288,6 +288,7 @@ const EditShopModal = ({ setOpenEditModal, body, currentItems, setCurrentItems, 
                             setOpenEditModal(false);
                         }}
                         src={xIcon}
+                        quality={100}
                         alt="X Icon"
                     />
                 </p>

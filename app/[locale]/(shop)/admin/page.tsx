@@ -108,6 +108,7 @@ export default function Login() {
             <div className="container">
                 <div className="modal">
                     <Image
+                        quality={100}
                         src={logo}
                         alt="Logo"
                         priority
@@ -145,12 +146,14 @@ export default function Login() {
                             />
                             {eyeClicked ? (
                                 <Image
+                                    quality={100}
                                     src={eyeClosed}
                                     alt="Closed Eye"
                                     onClick={() => toggleEye("password")}
                                 ></Image>
                             ) : (
                                 <Image
+                                    quality={100}
                                     src={eye}
                                     alt="Eye"
                                     onClick={() => toggleEye("text")}

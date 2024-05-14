@@ -59,6 +59,7 @@ const AdminAsidePanel = (props: any) => {
                             onClick={closeLogOutModal}
                         >
                             <Image
+                                quality={100}
                                 src={xIcon}
                                 alt="Bell Icon"
                             ></Image>
@@ -82,6 +83,7 @@ const AdminAsidePanel = (props: any) => {
                 <div className="top-part">
                     <Link href={"/"}>
                         <Image
+                            quality={100}
                             src={logo}
                             alt="logo"
                         ></Image>
@@ -90,6 +92,7 @@ const AdminAsidePanel = (props: any) => {
                         <div className={selected === "notifications" ? "selected" : ""}>
                             <Link href={`/${localActive}/dashboard/notifications`}>
                                 <Image
+                                    quality={100}
                                     src={bellIcon}
                                     alt="Bell Icon"
                                 ></Image>
@@ -106,6 +109,7 @@ const AdminAsidePanel = (props: any) => {
                         <div className={selected === "approved" ? "selected" : ""}>
                             <Link href={`/${localActive}/dashboard/approved`}>
                                 <Image
+                                    quality={100}
                                     src={userCheckIcon}
                                     alt="Bell Icon"
                                 ></Image>
@@ -115,6 +119,7 @@ const AdminAsidePanel = (props: any) => {
                         <div className={selected === "denied" ? "selected" : ""}>
                             <Link href={`/${localActive}/dashboard/denied`}>
                                 <Image
+                                    quality={100}
                                     src={userMinusIcon}
                                     alt="Bell Icon"
                                 ></Image>
@@ -124,6 +129,7 @@ const AdminAsidePanel = (props: any) => {
                         <div className={selected === "categories-list" ? "selected" : ""}>
                             <Link href={`/${localActive}/dashboard/categories-list`}>
                                 <Image
+                                    quality={100}
                                     src={filterIcon}
                                     alt="Bell Icon"
                                 ></Image>
@@ -134,6 +140,7 @@ const AdminAsidePanel = (props: any) => {
                 </div>
                 <div onClick={openLogOutModal}>
                     <Image
+                        quality={100}
                         src={signOutIcon}
                         alt="Sign Out Icon"
                     ></Image>

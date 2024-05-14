@@ -115,6 +115,7 @@ export default function Header(props: any) {
                             priority
                             src={logo}
                             alt="Logo"
+                            quality={100}
                         />
                     </Link>
                 </div>

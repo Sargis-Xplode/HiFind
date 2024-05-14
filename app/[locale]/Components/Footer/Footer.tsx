@@ -20,6 +20,7 @@ export default function Footer() {
                             priority
                             src={logo}
                             alt="Logo"
+                            quality={100}
                         />
                     </Link>
                 </div>
@@ -44,6 +45,7 @@ export default function Footer() {
                                 priority
                                 src={emailIcon}
                                 alt="Picture of the author"
+                                quality={100}
                             />
                         </div>{" "}
                         info@xplode.am

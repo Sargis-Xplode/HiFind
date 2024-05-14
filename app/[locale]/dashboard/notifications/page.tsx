@@ -126,6 +126,7 @@ const Notification = () => {
                                 }}
                                 src={sortLogo}
                                 alt="Sort"
+                                quality={100}
                             ></Image>
                         </p>
                     </div>
