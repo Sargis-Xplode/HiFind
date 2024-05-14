@@ -6,11 +6,11 @@ import ShopInteface from "../../../../types/shopBox";
 import Link from "next/link";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import brandLogo from "../../../../public/brand-logo.svg";
-import shopCategoryIcon from "../../../../public/shopping-bag-icon.svg";
-import servicesCategoryIcon from "../../../../public/gears-icon.svg";
-import entertainmentCategoryIcon from "../../../../public/dishes-icon.svg";
-import beautyCategoryIcon from "../../../../public/brush-icon.svg";
-import healthCareCategoryIcon from "../../../../public/healthcare-icon.svg";
+import shopCategoryIcon from "../../../../public/shopping-bag.svg";
+import servicesCategoryIcon from "../../../../public/gears.svg";
+import entertainmentCategoryIcon from "../../../../public/dishes.svg";
+import beautyCategoryIcon from "../../../../public/brush.svg";
+import healthCareCategoryIcon from "../../../../public/heart-plus.svg";
 import { useLocale, useTranslations } from "next-intl";
 
 const Shop = ({
