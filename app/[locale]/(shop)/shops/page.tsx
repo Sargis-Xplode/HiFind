@@ -56,14 +56,11 @@ const Shops = (props: any) => {
 
                 const filteredShops = shops.filter((shop: any) => {
                     return (
-                        shop.categoryName &&
                         shop.approved &&
                         shop.active &&
-                        (filter === "null" || shop.categoryName === filter)
+                        (filter === "null" || filter === "" || shop.categoryName === filter)
                     );
                 });
-
-                console.log(filteredShops);
 
                 setFilteredShops(filteredShops);
                 setLoading(false);
@@ -140,8 +137,6 @@ const Shops = (props: any) => {
     const renderCurrentItems = (currentArray: any) => {
         // Render current page shops ( max 6 )
         const arr = currentArray.length > 0 ? currentArray.slice(itemOffSet, itemOffSet + itemsPerPage) : [];
-        console.log(arr);
-        console.log(itemOffSet);
         setCurrentItems(arr);
 
         // Decide the pagination page count
