@@ -17,6 +17,7 @@ import dishesIcon from "../../../public/dishes.svg";
 import brushIcon from "../../../public/brush.svg";
 import heartPlusIcon from "../../../public/heart-plus.svg";
 import aboutUsImg from "../../../public/about-us-img.svg";
+import test from "../../../public/test.jpeg";
 import { useLocale, useTranslations } from "next-intl";
 import axios from "axios";
 import dynamic from "next/dynamic";
@@ -188,13 +189,12 @@ export default function Home() {
                 {/* About Us Section */}
                 <section className="third-section">
                     <div className="img-container">
-                        <img src="/about-us-img.svg" />
-                        {/* <Image
+                        <Image
                             quality={100}
                             priority
-                            src={aboutUsImg}
+                            src={test}
                             alt="Picture of the author"
-                        /> */}
+                        />
                     </div>
                     <div className="about-us-container">
                         <h3>{t("aboutUs")}</h3>
