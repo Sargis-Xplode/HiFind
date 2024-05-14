@@ -17,6 +17,7 @@ import dishesIcon from "../../../public/dishes.svg";
 import brushIcon from "../../../public/brush.svg";
 import heartPlusIcon from "../../../public/heart-plus.svg";
 import aboutUsImg from "../../../public/about-us-img.svg";
+import aboutUsImgPng from "../../../public/about-us-img.png";
 import { useLocale, useTranslations } from "next-intl";
 import axios from "axios";
 import dynamic from "next/dynamic";
@@ -191,9 +192,8 @@ export default function Home() {
                         <Image
                             quality={100}
                             priority
-                            src={aboutUsImg}
+                            src={aboutUsImgPng}
                             alt="Picture of the author"
-                            unoptimized={true}
                         />
                     </div>
                     <div className="about-us-container">
