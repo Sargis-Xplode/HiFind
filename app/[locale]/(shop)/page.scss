@@ -163,7 +163,7 @@
                 }
 
                 .about-us-text {
-                    border-left: 3px solid #ec008b;
+                    border-left: 3px solid $btn-color;
                     font-size: 18px;
                     padding: 10px;
                     line-height: 1.8;
@@ -234,6 +234,7 @@
             .container {
                 p {
                     font-size: 3vw;
+                    text-align: left;
                 }
 
                 button {

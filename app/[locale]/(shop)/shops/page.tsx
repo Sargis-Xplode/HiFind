@@ -206,7 +206,7 @@ const Shops = (props: any) => {
                 } else {
                     setFilteredShops(shops);
                     setHeading(t2("all"));
-                    push(`?filter=${categ.category}&page=${1}`);
+                    push(`?filter=null&page=${1}`);
                     autoChangePage(0);
                 }
             } else {

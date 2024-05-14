@@ -95,12 +95,13 @@
 
             p {
                 margin-top: 0;
+                margin-bottom: 5px;
             }
 
             span {
                 a {
                     text-decoration: none;
-                    color: #e10084;
+                    color: $btn-color;
                     font-weight: bold;
 
                     &:hover {
