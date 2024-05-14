@@ -1,48 +1,64 @@
 "use client";
 
-import { useState } from "react";
-import Footer from "../../Components/Footer/Footer";
-import Header from "../../Components/Header/Header";
+import { useEffect, useState } from "react";
 import "./page.scss";
 import { useTranslations } from "next-intl";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Terms = () => {
+    const { push } = useRouter();
     const t = useTranslations("footer");
     const t2 = useTranslations("privacy");
+
+    const searchParams = useSearchParams();
+    const tab = searchParams.get("tab") ?? "0";
 
     const [users, setUsers] = useState([
         {
             name: t2("informationCollectionAndUseTitle"),
             text: t2("informationCollectionAndUse"),
-            selected: true,
+            selected: tab === "0" || tab === "null" || tab === "" ? true : false,
+            id: 0,
         },
         {
             name: t2("dataSecurityTitle"),
             text: t2("dataSecurity"),
-            selected: false,
+            selected: tab === "1" ? true : false,
+            id: 1,
         },
         {
             name: t2("informationSharingTitle"),
             text: t2("informationSharing"),
-            selected: false,
+            selected: tab === "2" ? true : false,
+            id: 2,
         },
         {
             name: t2("dataRetentionTitle"),
             text: t2("dataRetention"),
-            selected: false,
+            selected: tab === "3" ? true : false,
+            id: 3,
         },
         {
             name: t2("userRightsTitle"),
             text: t2("userRights"),
-            selected: false,
+            selected: tab === "4" ? true : false,
+            id: 4,
         },
     ]);
-    const [userName, setUserName] = useState(users[0].name);
-    const [userText, setUserText] = useState(users[0].text);
+    const [userName, setUserName] = useState("");
+    const [userText, setUserText] = useState("");
+
+    useEffect(() => {
+        const activeTab: any = users.filter((user) => user.selected);
+        setUserName(activeTab[0]?.name);
+        setUserText(activeTab[0]?.text);
+    }, [tab]);
 
     const handleChangeText = (user: any, index: number) => {
         setUserName(user.name);
         setUserText(user.text);
+
+        push(`?tab=${index}`);
 
         const arr: any = users.map((user, ind) => {
             if (index === ind) {

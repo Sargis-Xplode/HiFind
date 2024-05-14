@@ -16,6 +16,7 @@ export default function Header(props: any) {
     const searchParams = useSearchParams();
 
     const filter = searchParams.get("filter");
+    const tab = searchParams.get("tab");
 
     const { push } = useRouter();
     const path = usePathname();
@@ -63,13 +64,23 @@ export default function Header(props: any) {
                 lang.selected = true;
                 setSelectedLanguage(lang.text);
                 nextLocale = lang.value;
-                const query = `?filter=${filter}`;
+                const filterQuery = `?filter=${filter}`;
+                const privacyTermQuery = `?tab=${tab}`;
+
                 const newPath = path.replace(`/${localActive}`, `/${nextLocale}`);
 
                 startTransition(() => {
                     if (newPath === "/en/shops" || newPath === "/hy/shops") {
-                        push(newPath + query);
+                        push(newPath + filterQuery);
+                    } else if (
+                        newPath === "/en/privacy" ||
+                        newPath === "/hy/privacy" ||
+                        newPath === "/en/terms" ||
+                        newPath === "/hy/terms"
+                    ) {
+                        push(newPath + privacyTermQuery);
                     } else {
+                        privacyTermQuery;
                         push(newPath);
                     }
                 });
