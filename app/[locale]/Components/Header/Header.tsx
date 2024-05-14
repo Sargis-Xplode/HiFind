@@ -20,8 +20,6 @@ export default function Header(props: any) {
     const { push } = useRouter();
     const path = usePathname();
 
-    console.log(path);
-
     const [selectedLanguage, setSelectedLanguage] = useState("Հայ");
     const [languages, setLanguages] = useState([
         {

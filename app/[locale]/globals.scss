@@ -5,6 +5,15 @@ body {
     content-visibility: auto;
 }
 
+@font-face {
+    font-family: "Montserrat arm";
+    src: url("../../public/fonts/fonter.am_montserrat-armenian/Montserratarm-Regular.otf");
+}
+
+* {
+    font-family: "Montserrat arm";
+}
+
 body.loading {
     display: flex;
     align-items: center;

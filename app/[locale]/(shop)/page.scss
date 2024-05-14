@@ -1,14 +1,5 @@
 @import "../constants.scss";
 
-@font-face {
-    font-family: "Montserrat arm";
-    src: url("../../../public/fonts/fonter.am_montserrat-armenian/Montserratarm-Regular.otf");
-}
-
-* {
-    font-family: "Montserrat arm";
-}
-
 .main {
     background-color: $bg-grey;
 

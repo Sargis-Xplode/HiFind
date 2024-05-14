@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { NextIntlClientProvider, useMessages } from "next-intl";
+import "./globals.scss";
 
 const roboto = Montserrat({ weight: "400", subsets: ["latin"] });
 
