@@ -5,10 +5,6 @@ import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 
 import "./page.scss";
-import shopBox from "../../../types/shopBox";
-
-import Header from "../Components/Header/Header";
-import Footer from "../Components/Footer/Footer";
 import Shop from "../Components/Shop/Shop";
 
 import shoppingBagIcon from "../../../public/shopping-bag.svg";
@@ -16,8 +12,7 @@ import gearsIcon from "../../../public/gears.svg";
 import dishesIcon from "../../../public/dishes.svg";
 import brushIcon from "../../../public/brush.svg";
 import heartPlusIcon from "../../../public/heart-plus.svg";
-import aboutUsImg from "../../../public/about-us-img.svg";
-import test from "../../../public/test.jpeg";
+import aboutUsImg from "../../../public/about-us-img.jpg";
 import { useLocale, useTranslations } from "next-intl";
 import axios from "axios";
 import dynamic from "next/dynamic";
@@ -192,7 +187,7 @@ export default function Home() {
                         <Image
                             quality={100}
                             priority
-                            src={test}
+                            src={aboutUsImg}
                             alt="Picture of the author"
                         />
                     </div>
