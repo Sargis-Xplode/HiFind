@@ -23,7 +23,7 @@ export default function RootLayout({
             lang={locale}
             suppressHydrationWarning={true}
         >
-            <body className={roboto.className}>
+            <body>
                 <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
             </body>
         </html>

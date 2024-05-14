@@ -1,15 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 @import "./constants.scss";
 
 body {
     margin: 0;
     content-visibility: auto;
-}
-
-.roboto-medium {
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
-    font-style: normal;
 }
 
 body.loading {
