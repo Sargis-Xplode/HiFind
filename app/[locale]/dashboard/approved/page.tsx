@@ -8,7 +8,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import sortLogo from "../../../../Assets/sort-icon.svg";
+import sortLogo from "../../../../public/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import ReactPaginate from "react-paginate";
 import TableRow from "../../Components/TableRow/TableRow";

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-import sortLogo from "../../../../Assets/sort-icon.svg";
+import sortLogo from "../../../../public/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import ReactPaginate from "react-paginate";
 import TableRow from "../../Components/TableRow/TableRow";

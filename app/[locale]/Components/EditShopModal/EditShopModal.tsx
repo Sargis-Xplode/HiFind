@@ -6,8 +6,8 @@ import { faCheckCircle, faCheckSquare, faChevronDown, faChevronUp } from "@forta
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import brandLogo from "../../../../Assets/brand-logo.svg";
-import xIcon from "../../../../Assets/x.svg";
+import brandLogo from "../../../../public/brand-logo.svg";
+import xIcon from "../../../../public/x.svg";
 import { useLocale, useTranslations } from "next-intl";
 import axios from "axios";
 

@@ -9,9 +9,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
 import { faChevronDown, faChevronUp, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
-import editIcon from "../../../../Assets/edit-icon.svg";
-import deleteIcon from "../../../../Assets/delete-icon.svg";
-import xIcon from "../../../../Assets/x.svg";
+import editIcon from "../../../../public/edit-icon.svg";
+import deleteIcon from "../../../../public/delete-icon.svg";
+import xIcon from "../../../../public/x.svg";
 
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import { useLocale } from "next-intl";

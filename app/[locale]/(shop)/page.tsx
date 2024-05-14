@@ -11,12 +11,12 @@ import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import Shop from "../Components/Shop/Shop";
 
-import shoppingBagIcon from "../../../Assets/shopping-bag.svg";
-import gearsIcon from "../../../Assets/gears.svg";
-import dishesIcon from "../../../Assets/dishes.svg";
-import brushIcon from "../../../Assets/brush.svg";
-import heartPlusIcon from "../../../Assets/heart-plus.svg";
-import aboutUsImg from "../../../Assets/about-us-img.svg";
+import shoppingBagIcon from "../../../public/shopping-bag.svg";
+import gearsIcon from "../../../public/gears.svg";
+import dishesIcon from "../../../public/dishes.svg";
+import brushIcon from "../../../public/brush.svg";
+import heartPlusIcon from "../../../public/heart-plus.svg";
+import aboutUsImg from "../../../public/about-us-img.svg";
 import { useLocale, useTranslations } from "next-intl";
 import axios from "axios";
 import dynamic from "next/dynamic";

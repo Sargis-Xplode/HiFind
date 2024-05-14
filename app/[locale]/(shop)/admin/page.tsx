@@ -8,9 +8,9 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import logo from "../../../../Assets/logo.svg";
-import eye from "../../../../Assets/eye.svg";
-import eyeClosed from "../../../../Assets/eye-off.svg";
+import logo from "../../../../public/logo.svg";
+import eye from "../../../../public/eye.svg";
+import eyeClosed from "../../../../public/eye-off.svg";
 import { useLocale } from "next-intl";
 // import checkAuth from "../../middleware/auth";
 

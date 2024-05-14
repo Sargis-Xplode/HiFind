@@ -2,7 +2,7 @@
 import { useEffect, useState, useContext } from "react";
 import Shop from "../../Components/Shop/Shop";
 import "./page.scss";
-import filterIcon from "../../../../Assets/filter-icon.svg";
+import filterIcon from "../../../../public/filter-icon.svg";
 
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

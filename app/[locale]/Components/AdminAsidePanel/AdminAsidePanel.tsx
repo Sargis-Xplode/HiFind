@@ -2,13 +2,13 @@
 import Image from "next/image";
 import "./adminAsidePanel.scss";
 
-import logo from "../../../../Assets/logo.svg";
-import signOutIcon from "../../../../Assets/sign-out-icon.svg";
-import bellIcon from "../../../../Assets/bell-icon.svg";
-import userCheckIcon from "../../../../Assets/user-check-icon.svg";
-import userMinusIcon from "../../../../Assets/user-minus-icon.svg";
-import filterIcon from "../../../../Assets/filter-icon.svg";
-import xIcon from "../../../../Assets/x.svg";   
+import logo from "../../../../public/logo.svg";
+import signOutIcon from "../../../../public/sign-out-icon.svg";
+import bellIcon from "../../../../public/bell-icon.svg";
+import userCheckIcon from "../../../../public/user-check-icon.svg";
+import userMinusIcon from "../../../../public/user-minus-icon.svg";
+import filterIcon from "../../../../public/filter-icon.svg";
+import xIcon from "../../../../public/x.svg";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";

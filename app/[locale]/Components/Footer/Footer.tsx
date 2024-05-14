@@ -2,8 +2,8 @@ import Image from "next/image";
 import "./footer.scss";
 import Link from "next/link";
 
-import logo from "../../../../Assets/logo.svg";
-import emailIcon from "../../../../Assets/mail.svg";
+import logo from "../../../../public/logo.svg";
+import emailIcon from "../../../../public/mail.svg";
 import { useLocale, useTranslations } from "next-intl";
 
 export default function Footer() {

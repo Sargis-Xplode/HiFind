@@ -6,7 +6,7 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import sortLogo from "../../../../Assets/sort-icon.svg";
+import sortLogo from "../../../../public/sort-icon.svg";
 import AdminAsidePanel from "../../Components/AdminAsidePanel/AdminAsidePanel";
 import TableRow from "../../Components/TableRow/TableRow";
 import ReactPaginate from "react-paginate";

@@ -14,7 +14,7 @@
 
     .homepage-banner {
         height: 21vw;
-        background-image: url("../../../Assets/banner.svg");
+        background-image: url("../../../public/banner.svg");
         background-size: 100% 100%;
         color: white;
         font-weight: bold;
@@ -237,7 +237,7 @@
     .main {
         .homepage-banner {
             height: 40vw;
-            background-image: url("../../../Assets/banner-mobile.svg");
+            background-image: url("../../../public/banner-mobile.svg");
             background-size: 100% auto;
             background-position-y: 100%;
 

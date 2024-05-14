@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import uploadIcon from "../../../../Assets/upload-icon.svg";
+import uploadIcon from "../../../../public/upload-icon.svg";
 import { useRouter } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import axios from "axios";

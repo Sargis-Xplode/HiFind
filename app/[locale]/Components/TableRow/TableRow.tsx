@@ -5,10 +5,10 @@ import Link from "next/link";
 import "./tableRow.scss";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 
-import editIcon from "../../../../Assets/edit-icon.svg";
-import deleteIcon from "../../../../Assets/delete-icon.svg";
-import sendIcon from "../../../../Assets/send-icon.svg";
-import xIcon from "../../../../Assets/x.svg";
+import editIcon from "../../../../public/edit-icon.svg";
+import deleteIcon from "../../../../public/delete-icon.svg";
+import sendIcon from "../../../../public/send-icon.svg";
+import xIcon from "../../../../public/x.svg";
 
 import { useLocale } from "next-intl";
 import axios from "axios";

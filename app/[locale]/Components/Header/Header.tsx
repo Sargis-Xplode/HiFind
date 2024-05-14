@@ -6,7 +6,7 @@ import { faChevronDown, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-import logo from "../../../../Assets/logo.svg";
+import logo from "../../../../public/logo.svg";
 import { useRouter, usePathname, useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 
