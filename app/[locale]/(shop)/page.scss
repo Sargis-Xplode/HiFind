@@ -58,7 +58,7 @@
             .instagram-boxes-container {
                 display: flex;
                 justify-content: center;
-                height: 700px;
+                height: 440px;
                 font-weight: bold;
 
                 .first-box,
@@ -191,6 +191,7 @@
             .first-section {
                 .instagram-boxes-container {
                     flex-direction: column;
+                    height: 700px;
 
                     .first-box,
                     .third-box {
