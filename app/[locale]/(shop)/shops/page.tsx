@@ -52,8 +52,6 @@ const Shops = (props: any) => {
             .get("api/shop/all")
             .then((res) => {
                 let shops = res.data.shops;
-                setShops(shops);
-
                 const filteredShops = shops.filter((shop: any) => {
                     return (
                         shop.approved &&
@@ -62,6 +60,7 @@ const Shops = (props: any) => {
                     );
                 });
 
+                setShops(filteredShops);
                 setFilteredShops(filteredShops);
                 setLoading(false);
             })
