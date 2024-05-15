@@ -312,7 +312,7 @@ const TableRow = (props: any) => {
                             toggleActivateShop();
                         }}
                         className={(active ? "active " : "") + "activate-btn"}
-                        data-tooltip-id={"activate"}
+                        data-tooltip-id={active ? "deactivate" : "activate"}
                     >
                         <div className="active-indicator"></div>
                     </div>
@@ -367,6 +367,13 @@ const TableRow = (props: any) => {
                 id="activate"
                 variant="light"
                 content={"Ակտիվացնել"}
+                className={active ? "display-none" : ""}
+            />
+            <ReactTooltip
+                id="deactivate"
+                variant="light"
+                content={"Ապաակտիվացնել"}
+                className={active ? "" : "display-none"}
             />
             <ReactTooltip
                 id="send"
