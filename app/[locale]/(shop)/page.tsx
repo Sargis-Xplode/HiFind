@@ -12,7 +12,7 @@ import gearsIcon from "../../../public/gears.svg";
 import dishesIcon from "../../../public/dishes.svg";
 import brushIcon from "../../../public/brush.svg";
 import heartPlusIcon from "../../../public/heart-plus.svg";
-import aboutUsImg from "../../../public/about-us-img.jpg";
+import aboutUsImg from "../../../public/about-us-img.png";
 import { useLocale, useTranslations } from "next-intl";
 import axios from "axios";
 import dynamic from "next/dynamic";
