@@ -24,13 +24,6 @@ export default function RootLayout({
             lang={locale}
             suppressHydrationWarning={true}
         >
-            <head>
-                <link
-                    rel="icon"
-                    href="/favicon.ico"
-                    sizes="any"
-                />
-            </head>
             <body>
                 <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
             </body>
