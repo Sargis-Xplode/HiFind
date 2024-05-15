@@ -70,7 +70,7 @@ export default function Home() {
                     <h3>{t("discover")}</h3>
                     <div className="instagram-boxes-container">
                         <div className="first-box">
-                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "shops" } }}>
+                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "shops", page: 1 } }}>
                                 <div>
                                     <Image
                                         quality={100}
@@ -81,7 +81,7 @@ export default function Home() {
                                 </div>
                             </Link>
 
-                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "services" } }}>
+                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "services", page: 1 } }}>
                                 <div>
                                     <Image
                                         quality={100}
@@ -93,7 +93,7 @@ export default function Home() {
                             </Link>
                         </div>
 
-                        <Link href={{ pathname: `${localActive}/shops`, query: { filter: "entertainment" } }}>
+                        <Link href={{ pathname: `${localActive}/shops`, query: { filter: "entertainment", page: 1 } }}>
                             <div className="second-box">
                                 <Image
                                     quality={100}
@@ -105,7 +105,7 @@ export default function Home() {
                         </Link>
 
                         <div className="third-box">
-                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "beauty" } }}>
+                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "beauty", page: 1 } }}>
                                 <div>
                                     <Image
                                         quality={100}
@@ -116,14 +116,14 @@ export default function Home() {
                                 </div>
                             </Link>
 
-                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "healthCare" } }}>
+                            <Link href={{ pathname: `${localActive}/shops`, query: { filter: "healthCare", page: 1 } }}>
                                 <div>
                                     <Image
                                         quality={100}
                                         src={heartPlusIcon}
                                         alt="Picture of the author"
                                     />
-                                    <p>{t("healthCare")}</p>
+                                    <p>{t("healthCareHome")}</p>
                                 </div>
                             </Link>
                         </div>

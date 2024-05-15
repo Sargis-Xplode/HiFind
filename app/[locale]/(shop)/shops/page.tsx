@@ -52,7 +52,9 @@ const Shops = (props: any) => {
             .get("api/shop/all")
             .then((res) => {
                 let shops = res.data.shops;
-                const filteredShops = shops.filter((shop: any) => {
+                setShops(shops);
+
+                const arr = shops.filter((shop: any) => {
                     return (
                         shop.approved &&
                         shop.active &&
@@ -60,8 +62,7 @@ const Shops = (props: any) => {
                     );
                 });
 
-                setShops(filteredShops);
-                setFilteredShops(filteredShops);
+                setFilteredShops(arr);
                 setLoading(false);
             })
             .catch((error) => {
@@ -91,7 +92,7 @@ const Shops = (props: any) => {
     }, []);
 
     useEffect(() => {
-        if (filteredShops.length) {
+        if (filteredShops?.length) {
             let renderingArray = filteredShops;
 
             // -------------------------------------------------
@@ -203,7 +204,10 @@ const Shops = (props: any) => {
                     push(`?filter=${categ.category}&page=${1}`);
                     autoChangePage(0);
                 } else {
-                    setFilteredShops(shops);
+                    const arr = shops.filter((shop: any) => {
+                        return shop.approved && shop.active;
+                    });
+                    setFilteredShops(arr);
                     setHeading(t2("all"));
                     push(`?filter=null&page=${1}`);
                     autoChangePage(0);

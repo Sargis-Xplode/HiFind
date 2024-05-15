@@ -2,7 +2,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useState, CSSProperties } from "react";
 import checkAuth from "../middleware/auth";
-import { NextIntlClientProvider, useLocale, useMessages } from "next-intl";
+import { useLocale } from "next-intl";
 
 import { Roboto } from "next/font/google";
 
@@ -27,7 +27,7 @@ export default function DashboardLayout({
     const localActive = useLocale();
     // const messages = useMessages();
 
-    let [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");

@@ -14,12 +14,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-around;
+            justify-content: center;
             height: 100%;
 
             p {
                 font-size: 2vw;
-                width: 80%;
+                width: 70%;
                 align-self: self-start;
             }
 
@@ -112,6 +112,11 @@
                         flex-direction: column;
                         align-items: center;
                         justify-content: center;
+
+                        img {
+                            height: 60%;
+                            width: auto;
+                        }
 
                         p {
                             font-size: 20px;
@@ -318,8 +323,17 @@
 
         .container {
             .first-section {
-                h3 {
-                    margin-top: 30px;
+                .instagram-boxes-container {
+                    .first-box,
+                    .third-box {
+                        a {
+                            & > div {
+                                p {
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
