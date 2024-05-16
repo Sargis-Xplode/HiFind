@@ -514,7 +514,7 @@ const JoinUs = () => {
                                     onClick={toggleCheck}
                                     className={(checked ? "checked " : "") + "checkbox-round"}
                                 >
-                                    {checked ? <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon> : ""}
+                                    {checked ? <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon> : ""}
                                 </div>
                                 <span>
                                     {t("agreed")} &nbsp;
