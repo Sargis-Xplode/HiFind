@@ -6,7 +6,7 @@ import filterIcon from "../../../../public/filter-icon.svg";
 
 import ReactPaginate from "react-paginate";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faCheckSquare, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCheckCircle, faCheckSquare, faMinus, faPlus, faX } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -309,7 +309,7 @@ const Shops = (props: any) => {
                                                                         >
                                                                             {variant.selected ? (
                                                                                 <FontAwesomeIcon
-                                                                                    icon={faCheckSquare}
+                                                                                    icon={faCheck}
                                                                                 ></FontAwesomeIcon>
                                                                             ) : (
                                                                                 ""
@@ -399,7 +399,7 @@ const Shops = (props: any) => {
                                                               >
                                                                   {variant.selected ? (
                                                                       <FontAwesomeIcon
-                                                                          icon={faCheckSquare}
+                                                                          icon={faCheck}
                                                                       ></FontAwesomeIcon>
                                                                   ) : (
                                                                       ""

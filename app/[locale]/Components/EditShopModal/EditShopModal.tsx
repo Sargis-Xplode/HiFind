@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./editShopModal.scss";
-import { faCheckCircle, faCheckSquare, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faCheckCircle, faCheckSquare, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
@@ -451,9 +451,7 @@ const EditShopModal = ({ setOpenEditModal, body, currentItems, setCurrentItems, 
                                                                   }
                                                               >
                                                                   {variant.selected ? (
-                                                                      <FontAwesomeIcon
-                                                                          icon={faCheckSquare}
-                                                                      ></FontAwesomeIcon>
+                                                                      <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
                                                                   ) : (
                                                                       ""
                                                                   )}

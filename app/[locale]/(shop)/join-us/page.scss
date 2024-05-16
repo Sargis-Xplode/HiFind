@@ -219,7 +219,6 @@
                                 .checkbox-round {
                                     width: 20px;
                                     height: 20px;
-                                    background-color: white;
                                     border: 1px solid #ddd;
                                     cursor: pointer;
                                     border-radius: 3px;
@@ -230,14 +229,15 @@
                                     align-items: center;
 
                                     & > svg {
-                                        width: 100%;
+                                        width: 60%;
                                         height: auto;
-                                        color: $btn-color;
+                                        color: white;
                                     }
                                 }
 
                                 .checked {
                                     border: none;
+                                    background-color: $btn-color;
                                 }
                             }
                         }
@@ -253,12 +253,11 @@
                     display: flex;
 
                     .checkbox-round {
-                        width: 27px;
-                        height: 25px;
-                        background-color: white;
+                        width: 20px;
+                        height: 20px;
                         border: 1px solid #ddd;
                         cursor: pointer;
-                        border-radius: 50%;
+                        border-radius: 3px;
                         margin-right: 10px;
                         box-sizing: border-box;
                         display: flex;
@@ -266,14 +265,15 @@
                         align-items: center;
 
                         & > svg {
-                            width: 100%;
+                            width: 60%;
                             height: auto;
-                            color: $btn-color;
+                            color: white;
                         }
                     }
 
                     .checked {
                         border: none;
+                        background-color: $btn-color;
                     }
 
                     a {
