@@ -9,7 +9,7 @@ import Shop from "../Components/Shop/Shop";
 
 import shoppingBagIcon from "../../../public/shopping-bag.svg";
 import gearsIcon from "../../../public/gears.svg";
-import dishesIcon from "../../../public/dishes.png";
+import dishesIcon from "../../../public/dishes.svg";
 import brushIcon from "../../../public/brush.svg";
 import heartPlusIcon from "../../../public/heart-plus.svg";
 import aboutUsImg from "../../../public/about-us-img.png";
