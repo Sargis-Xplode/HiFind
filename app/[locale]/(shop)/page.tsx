@@ -163,7 +163,7 @@ export default function Home() {
                                 }
                             })
                         ) : (
-                            <div style={{ width: "100%", display: "flex" }}>
+                            <div className="skeleton-container">
                                 <Skeleton
                                     highlightColor="#e0e0e0"
                                     containerClassName="shop-box-skeleton"
