@@ -136,3 +136,18 @@
         }
     }
 }
+
+@media only screen and (max-width: 769px) {
+    .admin-shops-section {
+        flex-direction: column;
+
+        main {
+            width: 100%;
+            box-sizing: border-box;
+
+            ul {
+                padding: 10px 0;
+            }
+        }
+    }
+}
