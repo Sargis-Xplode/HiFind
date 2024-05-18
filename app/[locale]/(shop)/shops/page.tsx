@@ -398,9 +398,7 @@ const Shops = (props: any) => {
                                                                   }
                                                               >
                                                                   {variant.selected ? (
-                                                                      <FontAwesomeIcon
-                                                                          icon={faCheck}
-                                                                      ></FontAwesomeIcon>
+                                                                      <FontAwesomeIcon icon={faCheck}></FontAwesomeIcon>
                                                                   ) : (
                                                                       ""
                                                                   )}
@@ -453,7 +451,7 @@ const Shops = (props: any) => {
                         </div>
                     </div>
 
-                    <div className={(mobileFilterMenu ? "display-none" : "") + " shops-container"}>
+                    <div className={"shops-container"}>
                         {searchActive && currentItems.length === 0 ? (
                             ""
                         ) : (
@@ -500,7 +498,7 @@ const Shops = (props: any) => {
                                 }
                             })
                         ) : loading ? (
-                            <div style={{ width: "100%", display: "flex" }}>
+                            <div className="skeletons-container">
                                 <Skeleton
                                     highlightColor="#e0e0e0"
                                     containerClassName="shop-box-skeleton"

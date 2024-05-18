@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 import "./globals.scss";
+import Script from "next/script";
+import GoogleAnalytics from "./Components/GoogleAnalytics";
 
 const roboto = Montserrat({ weight: "400", subsets: ["latin"] });
 
@@ -25,6 +27,7 @@ export default function RootLayout({
             suppressHydrationWarning={true}
         >
             <body>
+                <GoogleAnalytics />
                 <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
             </body>
         </html>

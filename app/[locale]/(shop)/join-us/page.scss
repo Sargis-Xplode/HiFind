@@ -191,7 +191,7 @@
                         .dropdown-slider {
                             height: 0px;
                             visibility: hidden;
-                            display: flex;
+                            display: none;
                             flex-wrap: wrap;
 
                             .variant {
@@ -245,6 +245,7 @@
                         .clicked {
                             height: auto;
                             visibility: visible;
+                            display: flex;
                         }
                     }
                 }
